@@ -5,6 +5,6 @@ var indexCtrl = function($scope){
 indexCtrl.$inject = ['$scope'];
 
 angular
-    .module('spicyapp')
+    .module('sis')
     .controller('indexCtrl', indexCtrl);
 })();

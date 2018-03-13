@@ -1,14 +1,20 @@
-// content of index.js
-var app = require('./app/app.module');
-const http = require('http')
-const port = 3000
+// load required packages
+var express = require('express');
+var path = require('path');
 
-const server = http.createServer(app)
+// initialize express
+var app = express();
 
-server.listen(port, (err) => {
-  if (err) {
-    return console.log('something bad happened', err)
-  }
+// serve files from "public" folder and "app" folder
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app')));
 
-  console.log(`server is listening on ${port}`)
-})
+// serve index.html from app or what?????
+app.use(function(req, res) {
+  res.sendFile(path.join(__dirname, 'app', 'index.html'));
+});
+
+module.exports = app;
+
+// start server on port 3000
+app.listen(3000, () => console.log('Example app listening on port 3000!'))

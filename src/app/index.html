@@ -6,12 +6,20 @@
     <base href="/">
   </head>
   <body>
-    <div ng-app="">
-        {{ msg }}
-      </div>
-      
+        <content ng-view></content>
+        
+    <noscript>
+    <p>This site needs javascript.</p>
+    </noscript>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+      <!-- angularJs and angular-route module -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    
+    <!-- (probal bi cim manj jquery uporablat ce mamo eNgJuLar? also obstaja novejša verzija jquerya mislm da) -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    <!-- app.js v app folderju, ki vsebuje inicializacijo angular appa ? -->
+    <script type="text/javascript" src="app.js"></script>
   </body>
 </html>
