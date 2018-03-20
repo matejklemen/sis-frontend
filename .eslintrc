@@ -1,0 +1,21 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 8,
+    },
+    "env": {
+        "browser": true,
+        "jquery": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-unused-vars": ["warn", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
+        "semi": ["error", "always", { "omitLastInOneLineBlock": true }],
+        "semi-spacing": ["warn", {"before": false, "after": true}],
+        "no-empty": ["warn", {"allowEmptyCatch": true}],
+        "no-console": ["warn", "allow": ["log", "warn", "error"]]
+    },
+    "globals": {
+        "angular"
+    }
+} 

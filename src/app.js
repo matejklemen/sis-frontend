@@ -17,4 +17,4 @@ app.use((req, res) => {
 module.exports = app;
 
 // start server on port 3000
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3000, () => console.log('sis-frontend app listening on port 3000!'));
