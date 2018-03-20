@@ -1,3 +1,13 @@
- {{ vm.msg }}
+<div class="main-content">
 
- haha
+	<!-- Student data import (#4)-->
+	<div ng-controller="mainCtrl" class="container">
+		<h1>Uvozi podatke o dijakih</h1>
+			<input type="file" on-read-file="processData($fileContent)" />
+			<div ng-if="content">
+				<h2>File content is:</h2>
+				<pre>{{ content }}</pre>
+			</div>
+	</div>
+
+</div>
