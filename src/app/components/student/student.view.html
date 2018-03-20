@@ -1,0 +1,21 @@
+<ul>
+  <li>Vpisna številka: {{ vm.student.vpisna }}</li>
+  <li>Priimek in ime: {{ vm.student.priimek }}, {{ vm.student.ime }}</li>
+  <li>Naslov stalnega bivališča: {{ vm.student.naslov1 }}</li>
+  <li>naslov za prejemanje pošte: {{ vm.student.naslov2 }}</li>
+  <li>telefonska številka: {{ vm.student.telefon }}</li>
+  <li>e-poštni naslov: {{ vm.student.eposta }}</li>
+  <li>
+    Vpisi:
+    <ul ng-repeat="vpis in vm.student.vpisi">
+      <li>Študijsko leto: {{ vpis.leto }}</li>
+      <ul>
+        <li>Letnik: {{ vpis.letnik }}</li>
+        <li>Študijski program: {{ vpis.program }}</li>
+        <li>Vrsta vpisa: {{ vpis.vrsta }}</li>
+        <li>Način študija: {{ vpis.nacin }}</li>
+      </ul>
+    </ul>
+
+  </li>
+</ul>

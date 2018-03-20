@@ -15,6 +15,16 @@
         controller: 'loginCtrl',
         controllerAs: 'vm'
       })
+      .when('/student', {
+        templateUrl: 'components/student/student.view.html',
+        controller: 'studentCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/student/:studentId', {
+        templateUrl: 'components/student/student.view.html',
+        controller: 'studentCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({redirectTo: '/'});
 
     $locationProvider.html5Mode(true);
