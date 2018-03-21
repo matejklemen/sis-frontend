@@ -1,8 +1,21 @@
 <!DOCTYPE html>
 <html ng-app="sis">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>Sis</title>
+    
     <base href="/">
+
+    <!-- Latest compiled and minified CSS -->
+    <!-- link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Each view's custom CSS (if needed) -->
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+
   </head>
   <body>
     <content ng-view></content>
@@ -15,16 +28,10 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
-    <!-- (probal bi cim manj jquery uporablat ce mamo eNgJuLar? also obstaja novejša verzija jquerya mislm da) -->
-    <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script-->
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
+    <!-- Latest compiled Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- app.js v app folderju, ki vsebuje inicializacijo angular appa ? -->
@@ -40,12 +47,13 @@
 
     <!-- directives -->
     <script type="text/javascript" src="shared/directives/upload.directive.js"></script>
+    <script type="text/javascript" src="shared/directives/navbar/navbar.directive.js"></script>
 
     <!-- controllers -->
     <script type="text/javascript" src="components/main/main.ctrl.js"></script>
     <script type="text/javascript" src="components/login/login.ctrl.js"></script>
     <script type="text/javascript" src="components/student/student.ctrl.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <script type="text/javascript" src="shared/directives/navbar/navbar.ctrl.js"></script>
+  
   </body>
 </html>
