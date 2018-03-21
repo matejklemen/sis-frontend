@@ -1,7 +1,11 @@
 (function() {
-  var loginCtrl = function($scope) {
+  var loginCtrl = function($scope, authenticationService) {
     var vm = this;
-    vm.msg = "i am login";
+    vm.submitLogin = function() {
+      console.log("nice try fam"+ vm.login.username)
+    }
+
+
   };
 
   angular

@@ -6,7 +6,7 @@
   </head>
   <body>
     <content ng-view></content>
-        
+
     <noscript>
       <p>This site needs javascript.</p>
     </noscript>
@@ -14,10 +14,19 @@
     <!-- angularJs and angular-route module -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-    
+
     <!-- (probal bi cim manj jquery uporablat ce mamo eNgJuLar? also obstaja novejša verzija jquerya mislm da) -->
     <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script-->
-    
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <!-- app.js v app folderju, ki vsebuje inicializacijo angular appa ? -->
     <script type="text/javascript" src="app.routes.js"></script>
 
@@ -28,7 +37,7 @@
 
     <!-- filters -->
     <script type="text/javascript" src="shared/filters/example.filter.js"></script>
-    
+
     <!-- directives -->
     <script type="text/javascript" src="shared/directives/upload.directive.js"></script>
 
@@ -36,5 +45,7 @@
     <script type="text/javascript" src="components/main/main.ctrl.js"></script>
     <script type="text/javascript" src="components/login/login.ctrl.js"></script>
     <script type="text/javascript" src="components/student/student.ctrl.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/login.css">
   </body>
 </html>

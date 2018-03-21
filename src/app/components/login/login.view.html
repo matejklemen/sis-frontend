@@ -1,3 +1,16 @@
- {{ vm.msg }}
+<div class="login-content">
+	<div ng-controller="loginCtrl" class="container">
+      <h2>Prijava v študijski informacijski sistem</h2>
+      <form onsubmit="false" id="login-form" name="login-form" role="form" ng-submit="vm.submitLogin()">
+          <input type="text" name="username" tabindex="1" placeholder="Username" class="form-control" ng-model="vm.login.username"/>
 
- haha
+          <input type="password" name="password" tabindex="2" placeholder="Password" class="form-control" ng-model="vm.login.password"/>
+
+          <button type="submit">Login</button>
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+      </form>
+	</div>
+
+</div>
