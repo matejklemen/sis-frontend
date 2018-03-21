@@ -15,6 +15,22 @@
        - vrsta vpisa
        - način študija
      */
+
+    var searchStudents = function(searchValue) {
+      return [
+        {
+          "vpisna": "12345",
+          "ime": "AAA",
+          "priimek": "BBB"
+        },
+        {
+          "vpisna": "6789",
+          "ime": "CCC",
+          "priimek": "DDD"
+        },
+      ];
+    };
+
     var getByStudentVpisna = function(vpisna) {
       return {
         "vpisna": "12345",
@@ -44,6 +60,7 @@
     };
 
     return {
+      searchStudents: searchStudents,
       getByStudentVpisna: getByStudentVpisna,
     };
   };

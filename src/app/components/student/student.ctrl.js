@@ -2,6 +2,13 @@
   var studentCtrl = function($scope, $routeParams, studentService) {
     var vm = this;
 
+    vm.performSearch = function() {
+      console.log("Seaching...");
+
+      vm.searchResult = studentService.searchStudents(vm.searchValue);
+
+    };
+
     /*studentService.getByStudentVpisna("12345").then(
         function success(response) {
             vm.student = response.data;
