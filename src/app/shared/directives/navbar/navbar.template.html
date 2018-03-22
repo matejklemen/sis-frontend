@@ -1,16 +1,16 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    
+
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Budget Studis®</a>
     </div>
 
     <ul class="nav navbar-nav">
-      <p class="navbar-text">Prijavljen kot {{ navvm.user.name }} {{ navvm.user.surname }}. <a href="#" class="navbar-link">Odjava</a></p>
+      <p ng-show="vm.loggedIn" class="navbar-text">Prijavljen kot {{ vm.user }}. <a ng-click="vm.logout()" href="#" class="navbar-link">Odjava</a></p>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="/login">Login</a></li>
+      <li ng-hide="vm.loggedIn"><a href="/login">Login</a></li>
       <li><a href="/">Main</a></li>
       <li><a href="/student">Student</a></li>
     </ul>

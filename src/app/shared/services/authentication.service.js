@@ -23,11 +23,15 @@
           username: username,
           password: password
       };
-      return $http.post(apiBaseRoute+'/api/login', user).then(
+      return $http.post(apiBaseRoute+'/api/login', user, {headers:{'Content-Type': 'application/json'}}).then(
         function success(res) {
-          shraniZeton(res.data.zeton);
-          return res.data.uporabnik._id;
-        });
+          saveToken(res.data.token);
+          return res.data.username;
+        },
+        function error(res) {
+          throw res;
+        }
+      );
     };
 
     var logout = function() {
@@ -38,7 +42,27 @@
       var token = returnToken();
       if (token) {
         var data = JSON.parse(b64Utf8(token.split('.')[1]));
-        return data.datumPoteka > Date.now() / 1000;
+        return data.exp > Date.now() / 1000;
+      } else {
+        return false;
+      }
+    };
+
+    var getUsername = function() {
+      var token = returnToken();
+      if (token) {
+        var data = JSON.parse(b64Utf8(token.split('.')[1]));
+        return data.sub;
+      } else {
+        return false;
+      }
+    };
+
+    var getRole = function() {
+      var token = returnToken();
+      if (token) {
+        var data = JSON.parse(b64Utf8(token.split('.')[1]));
+        return data.role;
       } else {
         return false;
       }
@@ -49,7 +73,8 @@
       saveToken: saveToken,
       returnToken: returnToken,
       logout: logout,
-      isLoggedIn: isLoggedIn
+      isLoggedIn: isLoggedIn,
+      getUsername: getUsername
     };
   }
 

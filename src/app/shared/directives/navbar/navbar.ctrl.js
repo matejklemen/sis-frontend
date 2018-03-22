@@ -1,16 +1,20 @@
 (function() {
 
-  var navbarCtrl = function($location,$route,$scope) {
-    var navvm = this;
+  var navbarCtrl = function($window, $location, $route, $scope, authenticationService) {
+    var vm = this;
 
-    navvm.user = {
-      name: "Miša",
-      surname: "Novak"
-    };
-    
+    vm.loggedIn = authenticationService.isLoggedIn();
+    if(vm.loggedIn) {
+      vm.user = authenticationService.getUsername();
+    }
+
+    vm.logout = function() {
+      authenticationService.logout();
+      vm.loggedIn = false;
+    }
   };
 
   angular
     .module('sis')
     .controller('navbarCtrl', navbarCtrl);
-})(); 
+})();
