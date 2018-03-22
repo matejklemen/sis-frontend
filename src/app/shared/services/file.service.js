@@ -7,7 +7,7 @@
       var params = {
         fileData: uploadedFile
       };
-      return $http.put(apiBaseRoute+'/api/file', params);
+      return $http.put(apiBaseRoute+'/api/files', params);
     };
 
     return {
