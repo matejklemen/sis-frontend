@@ -5,26 +5,31 @@
     vm.performSearch = function() {
       console.log("Seaching...");
 
-      vm.searchResult = studentService.searchStudents(vm.searchValue);
+      studentService.searchStudents(vm.searchValue).then(
+        function success(response) {
+          vm.searchResult = response.data;
+          //console.log(vm.searchResult[0]);
+        },
+        function error(response) {
+          console.error("Oh no... ", response);
+        }
+      );
 
     };
 
-    /*studentService.getByStudentVpisna("12345").then(
-        function success(response) {
-            vm.student = response.data;
-        },
-        function error(response) {
-            console.log(response.e);
-        }
-    );*/
     if($routeParams.studentId != null) {
       // pridobi in prikazi podatke o studentu
-      vm.student = studentService.getByStudentVpisna($routeParams.studentId);
-    } else {
-      // student ni izbran, prikazi search ? preusmeri ? 404 ?
+      vm.student = studentService.getByStudentId($routeParams.studentId).then(
+        function success(response) {
+          vm.student = response.data;
+          console.log(response.data);
+        },
+        function error(response) {
+          console.error("Oh no... ", response);
+        }
+      );
     }
 
-    vm.msg = "i am student";
   };
 
   angular

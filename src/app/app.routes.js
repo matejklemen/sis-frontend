@@ -16,7 +16,7 @@
         controllerAs: 'vm'
       })
       .when('/student', {
-        templateUrl: 'components/student/student.view.html',
+        templateUrl: 'components/student/studentlist.view.html',
         controller: 'studentCtrl',
         controllerAs: 'vm'
       })

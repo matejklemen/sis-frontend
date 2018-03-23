@@ -1,5 +1,7 @@
 (function() {
 
+  var apiBaseRoute = "http://localhost:8080";
+
   var studentService = function($http) {
     /*
      - vpisna številka
@@ -17,21 +19,12 @@
      */
 
     var searchStudents = function(searchValue) {
-      return [
-        {
-          "vpisna": "12345",
-          "ime": "AAA",
-          "priimek": "BBB"
-        },
-        {
-          "vpisna": "6789",
-          "ime": "CCC",
-          "priimek": "DDD"
-        },
-      ];
+      return $http.get(apiBaseRoute+'/api/students/search/' + searchValue);
     };
 
-    var getByStudentVpisna = function(vpisna) {
+    var getByStudentId = function(studentId) {
+      return $http.get(apiBaseRoute+'/api/students/s/' + studentId);
+      /*
       return {
         "vpisna": "12345",
         "ime": "AAA",
@@ -57,11 +50,12 @@
           },
         ]
       };
+      */
     };
 
     return {
       searchStudents: searchStudents,
-      getByStudentVpisna: getByStudentVpisna,
+      getByStudentId: getByStudentId,
     };
   };
 
