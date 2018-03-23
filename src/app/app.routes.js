@@ -20,6 +20,11 @@
         controller: 'studentCtrl',
         controllerAs: 'vm'
       })
+      .when('/control', {
+        templateUrl: 'components/control/control.view.html',
+        controller: 'controlCtrl',
+        controllerAs: 'vm'
+      })
       .when('/student/:studentId', {
         templateUrl: 'components/student/student.view.html',
         controller: 'studentCtrl',

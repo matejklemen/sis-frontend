@@ -1,0 +1,51 @@
+<sis-navbar></sis-navbar>
+
+<div class="container controll-content">
+
+	<!-- Student data import (#4)-->
+	<div ng-controller="controlCtrl" class="container">
+			<div class="panel panel-default">
+					<div class="panel-heading">
+							<div>
+									<div style="font-size:30px; display: inline;">Import student data:</div>
+									<label for="file-input" class="btn btn-default pull-right" flow-btn>
+											Browse
+										<input id="file-input" type="file" on-read-file="processData($fileContent)" style="visibility: hidden; position: absolute;">
+									</label>
+							</div>
+					</div>
+					<div class="panel-body" ng-if="content">
+							<div >
+									<h4>Imported data:</h4>
+					
+									<table class="table table-striped">
+										<thead>
+											<tr class="success">
+												<th scope="col">#</th>
+												<th scope="col">Name</th>
+												<th scope="col">Surname</th>
+												<th scope="col">Email</th>
+												<th scope="col">Student program</th>
+												<th scope="col">StudentId</th>
+												<th scope="col">Username</th>
+												<th scope="col">Password</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="student in content">
+												<th scope="row">{{ $index }}</th>
+												<td>{{ student.name }}</td>
+												<td>{{ student.surname }}</td>
+												<td>{{ student.email }}</td>
+												<td>{{ student.course }}</td>
+												<td>{{ student.studentId }}</td>
+												<td>{{ student.username }}</td>
+												<td>{{ student.password }}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+						</div>
+				</div>
+	</div>
+</div>

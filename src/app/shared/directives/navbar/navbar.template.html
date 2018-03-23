@@ -2,7 +2,7 @@
   <div class="container-fluid">
 
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Budget Studis®</a>
+      <a class="navbar-brand" href="/">Budget Studis®</a>
     </div>
 
     <ul class="nav navbar-nav">
@@ -10,6 +10,7 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
+      <li ng-show="vm.loggedIn"><a href="/control">Control Panel</a></li>
       <li ng-hide="vm.loggedIn"><a href="/login">Login</a></li>
       <li><a href="/">Main</a></li>
       <li><a href="/student">Student</a></li>
