@@ -2,26 +2,20 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-
-      <form class="form" ng-submit="vm.performSearch()">
-        <div class="form-group">
-          <label for="searchStudent" class="control-label">Iskanje študentov</label>
-          <input type="text" class="form-control" id="searchStudent" placeholder="Iskanje..." ng-model="vm.searchValue" />
-          <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-search"></span> Iskanje</button>
-          <p class="help-block">Iščete lahko po imenu in priimku ali po vpisni številki.<br />Za iskanje pritisnite na gumb ali tipko Enter.</p>
-        </div>
-      </form>
+    <h3>Podatki študenta: {{ vm.student.studentId }}</h3>
+    <div class="col-md-4">
+      <h4>Osebni podatki</h4>
+      <ul>
+        <li>Priimek in Ime: {{ vm.student.surname }}, {{ vm.student.name }}</li>
+        <li>Naslov stalnega bivališča:</li>
+        <li>Naslov začasnega bivališča:</li>
+        <li>Telefonska številka:</li>
+        <li>Elektronski naslov: {{ vm.student.email }}</li>
+      </ul>
 
     </div>
-    <div class="col-md-9">
-      <h3>Rezultati iskanja</h3>
-      <ul ng-repeat="result in vm.searchResult">
-        <li>
-          {{ result.vpisna }} | {{ result.ime }} {{ result.priimek }}
-        </li>
-      </ul>
-      <div ng-hide="vm.searchResult">Začnite iskanje z obrazcem na levi.</div>
+    <div class="col-md-8">
+      <h4>Vpisi</h4>
       <!--ul>
         <li>Vpisna številka: {{ vm.student.vpisna }}</li>
         <li>Priimek in ime: {{ vm.student.priimek }}, {{ vm.student.ime }}</li>

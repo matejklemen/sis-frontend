@@ -22,3 +22,7 @@ za nodemon (v `src` direktoriju):
   * vsebina viewa, karkoli že je *
 </div>
 ```
+
+### Bootstrap tema
+
+[Flatly for Bootstrap 3](https://bootswatch.com/3/flatly/)
