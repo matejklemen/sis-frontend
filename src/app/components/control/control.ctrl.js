@@ -8,7 +8,7 @@
           $scope.content = response.data;
         },
         function error(error){
-          console.log("Error in controlCtrl. Message: " + error);
+          console.log("Error in controlCtrl. Message: ", error);
         }
       )
     };

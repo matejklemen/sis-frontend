@@ -7,7 +7,7 @@
       <form class="form" ng-submit="vm.performSearch()">
         <div class="form-group">
           <label for="searchStudent" class="control-label">Iskanje študentov</label>
-          <input type="text" class="form-control" id="searchStudent" placeholder="Iskanje..." ng-model="vm.searchValue" />
+          <input type="text" class="form-control" id="searchStudent" placeholder="Iskanje..." ng-model="vm.searchValue" autocomplete="off" />
           <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-search"></span> Iskanje</button>
           <p class="help-block">Iščete lahko po imenu in priimku ali po vpisni številki.<br />Za iskanje pritisnite na gumb ali tipko Enter.</p>
         </div>
@@ -18,7 +18,7 @@
       <h3>Rezultati iskanja</h3>
       <ul ng-repeat="result in vm.searchResult">
         <li>
-          {{ result.studentId }} | {{ result.name }} {{ result.surname }} <a href="/student/{{ result.studentId }}">Več...</a>
+          {{ result.registerNumber }} | {{ result.name }} {{ result.surname }} <a href="/student/{{ result.registerNumber }}">Več...</a>
         </li>
       </ul>
       <div ng-hide="vm.searchResult">Začnite iskanje z obrazcem na levi.</div>
