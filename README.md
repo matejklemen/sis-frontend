@@ -26,3 +26,6 @@ za nodemon (v `src` direktoriju):
 ### Bootstrap tema
 
 [Flatly for Bootstrap 3](https://bootswatch.com/3/flatly/)
+
+### Student import:
+use: doc/exampleStudents.txt
