@@ -1,18 +1,37 @@
 
 (function() {
   var controlCtrl = function($scope, fileService) {
+    var vm = this;
+    var file = null;
 
-    $scope.processData = function($fileContent) {
-      fileService.putFile($fileContent).then(
+    vm.processData = function($fileContent) {
+      file=$fileContent;
+      importFile($fileContent);
+    };
+
+    vm.hideTable = function(){
+      vm.hide = true;
+    };
+
+    vm.reimport = function(){
+      importFile(file);
+    }
+
+    var importFile = function(fileContent){
+      vm.status="progress";
+      vm.hide = false;
+      vm.content = null;
+      fileService.putFile(fileContent).then(
         function success(response){
-          $scope.content = response.data;
-          //console.log($scope.content[0]);
+          vm.content = response.data;
+          vm.status = "success";
         },
         function error(error){
-          console.log("Error in controlCtrl. Message: ", error);
+          console.log("Error in controlCtrl. Message: ", error, status);
+          vm.status="error";
         }
       );
-    };
+    } 
   };
 
   controlCtrl.$inject = ["$scope","fileService"];

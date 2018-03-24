@@ -1,0 +1,14 @@
+.status-message{
+  margin-right: 15px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 45px;
+}
+
+.status-error{
+  color: maroon;
+}
+
+.status-success{
+  color: #42a271;
+}
