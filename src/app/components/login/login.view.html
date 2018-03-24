@@ -1,19 +1,30 @@
 <sis-navbar></sis-navbar>
 
 <div class="container login-content">
-	<div ng-controller="loginCtrl" class="container">
-      <h2>Prijava v študijski informacijski sistem</h2>
-      <form onsubmit="false" id="login-form" name="login-form" role="form" ng-submit="vm.submitLogin()">
-          <input type="text" name="username" tabindex="1" placeholder="Username" class="form-control" ng-model="vm.username"/>
+	<div ng-controller="loginCtrl" class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-5">
+        <h4 class="login-title">Prijava v študijski informacijski sistem</h4>
+        <form onsubmit="false" id="login-form" name="login-form" role="form" ng-submit="vm.submitLogin()">
+          
+          <div class="form-group input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+            <input type="text" name="username" tabindex="1" placeholder="Uporabniško ime" class="form-control" ng-model="vm.username"/>
+          </div>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+            <input type="password" name="password" tabindex="2" placeholder="Geslo" class="form-control" ng-model="vm.password"/>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-success btn-block" type="submit">Login</button>
+          </div>
 
-          <input type="password" name="password" tabindex="2" placeholder="Password" class="form-control" ng-model="vm.password"/>
-
-          <button class="btn btn-success" type="submit">Login</button>
-      </form>
-			<div ng-show="vm.error" class="alert-danger">
-        <strong>Something went wrong!&nbsp;</strong>
-        <ul>{{ vm.errorMsg }}</ul>
+        </form>
+  			<div ng-show="vm.error" class="alert alert-danger">
+          <strong>Something went wrong!</strong> {{ vm.errorMsg }}
+        </div>
       </div>
+      <div class="col-sm-3"></div>
 	</div>
 
 </div>
