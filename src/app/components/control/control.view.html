@@ -37,7 +37,7 @@
 												<td>{{ student.name }}</td>
 												<td>{{ student.surname }}</td>
 												<td>{{ student.email }}</td>
-												<td>{{ student.studyProgram.name }}</td>
+												<td>{{ student.enrolments[0].studyProgram.name }}</td>
 												<td>{{ student.registerNumber }}</td>
 												<td>{{ student.loginData.username }}</td>
 												<td>{{ student.loginData.username.substring(0,2) + '_' + student.registerNumber }}</td>

@@ -1,21 +1,56 @@
 <sis-navbar></sis-navbar>
 
-<div class="container">
+<div class="container student-view">
   <div class="row">
     <h3>Podatki študenta: {{ vm.student.registerNumber }}</h3>
     <div class="col-md-4">
       <h4>Osebni podatki</h4>
-      <ul>
-        <li>Priimek in Ime: {{ vm.student.surname }}, {{ vm.student.name }}</li>
-        <li>Naslov stalnega bivališča:</li>
-        <li>Naslov začasnega bivališča:</li>
-        <li>Telefonska številka:</li>
-        <li>Elektronski naslov: {{ vm.student.email }}</li>
+      <ul class="list-group personal-data">
+        <li class="list-group-item">
+          Priimek in ime:<br />
+          <strong>{{ vm.student.surname }}, {{ vm.student.name }}</strong>
+        </li>
+        <li class="list-group-item">
+          Naslov stalnega bivališča:
+          <strong>{{ vm.student.address1 }}</strong>
+        </li>
+        <li class="list-group-item">
+          Naslov začasnega bivališča:
+          <strong>{{ vm.student.address2 }}</strong>
+        </li>
+        <li class="list-group-item">
+          Telefonska številka:
+          <strong>{{ vm.student.phone }}</strong>
+        </li>
+        <li class="list-group-item">
+          Elektronski naslov: 
+          <strong>{{ vm.student.email }}</strong>
+        </li>
       </ul>
 
     </div>
     <div class="col-md-8">
       <h4>Vpisi</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr class="success">
+            <th>Študijski program</th>
+            <th>Študijsko leto</th>
+            <th>Letnik</th>
+            <th>Vrsta vpisa</th>
+            <th>Način vpisa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="enrolment in vm.student.enrolments">
+            <th>{{ enrolment.studyProgram.name }}</th>
+            <td>{{ enrolment.studyYear.name }}</td>
+            <td>{{ enrolment.year + '.' }}</td>
+            <td>{{ enrolment.type }}</td>
+            <td>{{ enrolment.kind }}</td>
+          </tr>
+        </tbody>
+      </table>
       <!--ul>
         <li>Vpisna številka: {{ vm.student.vpisna }}</li>
         <li>Priimek in ime: {{ vm.student.priimek }}, {{ vm.student.ime }}</li>

@@ -2,6 +2,8 @@
   var studentCtrl = function($scope, $routeParams, studentService) {
     var vm = this;
 
+    vm.searchValue = "";
+
     vm.performSearch = function() {
       console.log("Seaching...");
 

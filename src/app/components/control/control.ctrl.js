@@ -6,11 +6,12 @@
       fileService.putFile($fileContent).then(
         function success(response){
           $scope.content = response.data;
+          //console.log($scope.content[0]);
         },
         function error(error){
           console.log("Error in controlCtrl. Message: ", error);
         }
-      )
+      );
     };
   };
 

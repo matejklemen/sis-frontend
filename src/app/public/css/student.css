@@ -1,0 +1,6 @@
+.student-view .personal-data strong {
+  display: block;
+  margin-left: 12px;
+  margin-top: 6px;
+  font-size: 1.2em;
+}

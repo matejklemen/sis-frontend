@@ -8,6 +8,8 @@
         <div class="form-group">
           <label for="searchStudent" class="control-label">Iskanje študentov</label>
           <input type="text" class="form-control" id="searchStudent" placeholder="Iskanje..." ng-model="vm.searchValue" autocomplete="off" />
+        </div>
+        <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-search"></span> Iskanje</button>
           <p class="help-block">Iščete lahko po imenu in priimku ali po vpisni številki.<br />Za iskanje pritisnite na gumb ali tipko Enter.</p>
         </div>
@@ -16,11 +18,24 @@
     </div>
     <div class="col-md-9">
       <h3>Rezultati iskanja</h3>
-      <ul ng-repeat="result in vm.searchResult">
-        <li>
-          {{ result.registerNumber }} | {{ result.name }} {{ result.surname }} <a href="/student/{{ result.registerNumber }}">Več...</a>
-        </li>
-      </ul>
+      <table ng-show="vm.searchResult" class="table table-striped">
+        <thead>
+          <tr class="success">
+            <th>Vpisna številka</th>
+            <th>Ime</th>
+            <th>Priimek</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="result in vm.searchResult">
+            <th>{{ result.registerNumber }}</th>
+            <td>{{ result.name }}</td>
+            <td>{{ result.surname }}</td>
+            <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
+          </tr>
+        </tbody>
+      </table>
       <div ng-hide="vm.searchResult">Začnite iskanje z obrazcem na levi.</div>
       <!--ul>
         <li>Vpisna številka: {{ vm.student.vpisna }}</li>
