@@ -34,6 +34,35 @@
       );
     };
 
+    var passwordReset = function(email) {
+      var user = {
+          username: email
+      };
+      return $http.post(apiBaseRoute+'/api/login/reset-password', user, {headers:{'Content-Type': 'application/json'}}).then(
+        function success(res) {
+          return true;
+        },
+        function error(res) {
+          throw res;
+        }
+      );
+    };
+
+    var passwordChange = function(token, password) {
+      var user = {
+        newPassword: password,
+        jwtToken: token
+      };
+      return $http.post(apiBaseRoute+'/api/login/change-password', user, {headers:{'Content-Type': 'application/json'}}).then(
+        function success(res) {
+          return true;
+        },
+        function error(res) {
+          throw res;
+        }
+      );
+    };
+
     var logout = function() {
       $window.localStorage.removeItem('sis-token');
     };
@@ -70,6 +99,8 @@
 
     return {
       login: login,
+      passwordReset: passwordReset,
+      passwordChange: passwordChange,
       saveToken: saveToken,
       returnToken: returnToken,
       logout: logout,
