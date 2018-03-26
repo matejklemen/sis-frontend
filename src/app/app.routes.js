@@ -1,7 +1,7 @@
 (function() {
   /* global angular */
 
-  angular.module('sis', ['ngRoute']);
+  angular.module('sis', ['ngRoute', 'ngMaterial', 'ngMessages']);
 
   function setup($routeProvider, $locationProvider) {
     $routeProvider

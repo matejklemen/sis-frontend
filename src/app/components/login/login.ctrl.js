@@ -1,5 +1,5 @@
 (function() {
-  var loginCtrl = function($scope, $location, $route, authenticationService) {
+  var loginCtrl = function($scope, $location, $route, authenticationService, $mdDialog) {
     var vm = this;
     vm.error = false;
 
@@ -20,12 +20,27 @@
         });
       } else {
         vm.error = true;
-        vm.errorMsg = "Username or password missing.";
+        vm.errorMsg = "Manjkata uporabniško ime ali geslo...";
       }
-
     }
 
+    vm.showPasswordRecover = function(ev) {
+      $mdDialog.show({
+        controller: 'passwordCtrl',
+        templateUrl: 'components/login/password.view.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen,
+        controllerAs: 'vm'
+      }).then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
 
+
+    };
   };
 
   angular
