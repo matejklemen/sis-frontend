@@ -12,15 +12,15 @@
         </li>
         <li class="list-group-item">
           Naslov stalnega bivališča:
-          <strong>{{ vm.student.address1 }}</strong>
+          <strong>{{ vm.student.address1 | formatAddress:false }}</strong>
         </li>
         <li class="list-group-item">
           Naslov začasnega bivališča:
-          <strong>{{ vm.student.address2 }}</strong>
+          <strong>{{ vm.student.address2 | formatAddress:false }}</strong>
         </li>
         <li class="list-group-item">
           Telefonska številka:
-          <strong>{{ vm.student.phone }}</strong>
+          <strong>{{ vm.student.phoneNumber || '/' }}</strong>
         </li>
         <li class="list-group-item">
           Elektronski naslov: 
