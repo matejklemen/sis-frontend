@@ -1,5 +1,4 @@
 (function() {
-  /* global angular */
 
   var navbarDirective = function() {
     return {

@@ -1,64 +1,29 @@
 <sis-navbar></sis-navbar>
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#students" target="_self">Upravlanje študentov</a></li>
+		<li><a data-toggle="tab" href="#import" target="_self">Uvoz podatkov</a></li>
+		<li><a data-toggle="tab" href="#tokens" target="_self">Žetoni za vpis</a></li>
+	</ul>
+	
+	<div class="tab-content" style="margin-top:20px">
+		<div id="students" class="tab-pane fade in active">
 
-<div class="container controll-content">
+			<!-- Student data (#3)-->
+			<student></student>
 
-	<!-- Student data import (#4)-->
-	<div ng-controller="controlCtrl" class="container">
-			<div class="panel panel-default">
-					<div class="panel-heading">
-							<div>
-									<div style="font-size:30px; display: inline;">Import student data:</div>
-									<label for="file-input" class="btn btn-default pull-right" flow-btn>
-											Browse
-										<input id="file-input" type="file" on-read-file="vm.processData($fileContent)" style="visibility: hidden; position: absolute;">
-									</label>
-									<div ng-if="vm.status=='error'" class="pull-right status-message status-error">
-											<span class="glyphicon glyphicon-exclamation-sign" style="margin-right:5px"></span>
-											Error while importing data. <u><a style="cursor:pointer" ng-click="vm.reimport()">Try again</a></u> or import different file!
-									</div>
-									<div ng-if="vm.status=='success'" class="pull-right status-message status-success">
-											<span class="glyphicon glyphicon-ok" style="margin-right:5px"></span>
-											Success!
-									</div>
-									<div ng-if="vm.status=='progress'" class="pull-right status-message">
-											<span class="glyphicon glyphicon-refresh" style="margin-right:5px"></span>
-											In progress!
-									</div>
-							</div>
-					</div>
-					<div class="panel-body" ng-if="vm.content" ng-hide="vm.hide">
-							<div >
-									<h4>Imported data:</h4>
-					
-									<table class="table table-striped">
-										<thead>
-											<tr class="success">
-												<th scope="col">#</th>
-												<th scope="col">Name</th>
-												<th scope="col">Surname</th>
-												<th scope="col">Email</th>
-												<th scope="col">Student program</th>
-												<th scope="col">StudentId</th>
-												<th scope="col">Username</th>
-												<th scope="col">Password</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr ng-repeat="student in vm.content">
-												<th scope="row">{{ $index }}</th>
-												<td>{{ student.name }}</td>
-												<td>{{ student.surname }}</td>
-												<td>{{ student.email }}</td>
-												<td>{{ student.enrolments[0].studyProgram.name }}</td>
-												<td>{{ student.registerNumber }}</td>
-												<td>{{ student.loginData.username }}</td>
-												<td>{{ student.loginData.username.substring(0,2) + '_' + student.registerNumber }}</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<div class="pull-right"><a ng-click="vm.hideTable()" class="btn btn-primary btn-xs">Hide</a></div>
-						</div>
-				</div>
-	</div>
+		</div>
+		<div id="import" class="tab-pane fade">
+
+			<!-- Student data import (#4)-->
+			<student-import></student-import>
+
+		</div>
+		<div id="tokens" class="tab-pane fade">
+
+				<!-- Generate enrollment token (#5)-->
+			<enrollment-tokent></enrollment-tokent>
+	
+		</div>
+	</div>	
 </div>
