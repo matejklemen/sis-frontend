@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
       <div class="col-md-3">
-  
+
         <form class="form" ng-submit="vm.performSearch()">
           <div class="form-group">
             <label for="searchStudent" class="control-label">Iskanje študentov</label>
@@ -12,30 +12,33 @@
             <p class="help-block">Iščete lahko po imenu in priimku ali po vpisni številki.<br />Za iskanje pritisnite na gumb ali tipko Enter.</p>
           </div>
         </form>
-  
+
       </div>
       <div class="col-md-9">
+        <button ng-click="vm.exportAction('pdf')">Export</button>
         <h3>Rezultati iskanja</h3>
-        <table ng-show="vm.searchResult" class="table table-striped">
-          <thead>
-            <tr class="success">
-              <th>Vpisna številka</th>
-              <th>Ime</th>
-              <th>Priimek</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="result in vm.searchResult">
-              <th>{{ result.registerNumber }}</th>
-              <td>{{ result.name }}</td>
-              <td>{{ result.surname }}</td>
-              <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
-              <td><enrolment-token-button id="result.id"></enrolment-token-button></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="export-table">
+          <table ng-show="vm.searchResult" class="table table-striped">
+            <thead>
+              <tr class="success">
+                <th>Vpisna številka</th>
+                <th>Ime</th>
+                <th>Priimek</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="result in vm.searchResult">
+                <th>{{ result.registerNumber }}</th>
+                <td>{{ result.name }}</td>
+                <td>{{ result.surname }}</td>
+                <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
+                <td><enrolment-token-button id="result.id"></enrolment-token-button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div ng-hide="vm.searchResult">Začnite iskanje z obrazcem na levi.</div>
         <!--ul>
           <li>Vpisna številka: {{ vm.student.vpisna }}</li>
@@ -55,7 +58,7 @@
                 <li>Način študija: {{ vpis.nacin }}</li>
               </ul>
             </ul>
-  
+
           </li>
         </ul-->
       </div>
