@@ -23,11 +23,12 @@
               <th>Ime</th>
               <th>Priimek</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="result in vm.searchResult">
-              <th>{{ result.registerNber }}</th>
+              <th>{{ result.registerNumber }}</th>
               <td>{{ result.name }}</td>
               <td>{{ result.surname }}</td>
               <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>

@@ -2,23 +2,6 @@
   var studentCtrl = function($scope, $routeParams, studentService) {
     var vm = this;
 
-    vm.searchValue = "";
-
-    vm.performSearch = function() {
-      console.log("Seaching...");
-
-      studentService.searchStudents(vm.searchValue).then(
-        function success(response) {
-          vm.searchResult = response.data;
-          //console.log(vm.searchResult[0]);
-        },
-        function error(response) {
-          console.error("Oh no... ", response);
-        }
-      );
-
-    };
-
     if($routeParams.studentId != null) {
       // pridobi in prikazi podatke o studentu
       vm.student = studentService.getByStudentId($routeParams.studentId).then(
@@ -30,6 +13,8 @@
           console.error("Oh no... ", response);
         }
       );
+    } else {
+      console.error("parameter studentId is null");
     }
 
   };
