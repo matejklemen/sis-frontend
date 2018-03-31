@@ -21,11 +21,9 @@
 
     vm.exportAction = function(action) {
       switch(action){
-          case 'pdf': $scope.$broadcast('export-pdf', {});
+          case 'pdf': $scope.$broadcast('export-pdf', {"ignore": [3,4]});
                       break;
-          case 'excel': $scope.$broadcast('export-excel', {});
-                      break;
-          case 'doc': $scope.$broadcast('export-doc', {});
+          case 'csv': $scope.$broadcast('export-csv', {"ignore": [3,4]});
                       break;
           default: console.log('no event caught');
        }
