@@ -15,7 +15,8 @@
 
       </div>
       <div class="col-md-9">
-        <button ng-click="vm.exportAction('pdf')">Export</button>
+        <button class="btn btn-primary btn-xs" ng-click="vm.exportAction('pdf')">PDF</button>
+        <button class="btn btn-primary btn-xs" ng-click="vm.exportAction('csv')">CSV</button>
         <h3>Rezultati iskanja</h3>
         <div class="export-table">
           <table ng-show="vm.searchResult" class="table table-striped">
@@ -30,7 +31,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="result in vm.searchResult">
-                <th>{{ result.registerNumber }}</th>
+                <td>{{ result.registerNumber }}</td>
                 <td>{{ result.name }}</td>
                 <td>{{ result.surname }}</td>
                 <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>

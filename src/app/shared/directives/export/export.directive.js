@@ -3,16 +3,11 @@
     var link = function($scope, elm, attr){
 
     $scope.$on('export-pdf', function(e, d){
-          console.log("hey");
-          elm.tableExport({type:'pdf', escape:'false'});
+          elm.tableExport({type:'pdf', escape:'false', ignoreColumn:(d.ignore ? d.ignore : [])});
      });
 
-    $scope.$on('export-excel', function(e, d){
-           elm.tableExport({type:'excel', escape:false});
-     });
-
-    $scope.$on('export-doc', function(e, d){
-         elm.tableExport({type: 'doc', escape:false});
+    $scope.$on('export-csv', function(e, d){
+           elm.tableExport({type:'csv', escape:'false', ignoreColumn:(d.ignore ? d.ignore : [])});
      });
 
   }
