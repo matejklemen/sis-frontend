@@ -1,7 +1,7 @@
 <sis-navbar></sis-navbar>
 
 <div class="container login-content">
-	<div ng-controller="loginCtrl" class="row">
+	<div class="row">
       <div class="col-sm-3"></div>
       <div class="col-sm-5">
         <h4 class="login-title">Prijava v študijski informacijski sistem</h4>
@@ -24,9 +24,9 @@
           <strong>Šment, nekaj se je zalomilo!</strong> {{ vm.errorMsg }}
         </div>
 				<div>
-			    <md-button ng-click="vm.showPasswordRecover($event)" class="md-raised md-info">
+			    <button class="btn btn-default btn-sm" ng-click="vm.showPasswordRecover()">
 			      Pozabljeno geslo?
-			    </md-button>
+			    </button>
 			  </div>
       </div>
       <div class="col-sm-3"></div>

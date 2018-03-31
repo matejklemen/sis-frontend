@@ -1,7 +1,7 @@
 (function() {
   /* global angular */
 
-  angular.module('sis', ['ngRoute', 'ngMaterial', 'ngMessages']);
+  angular.module('sis', ['ngRoute', 'ngMessages', 'ui.bootstrap']);
 
   function setup($routeProvider, $locationProvider) {
     $routeProvider
@@ -10,7 +10,7 @@
         controller: 'loginCtrl',
         controllerAs: 'vm'
       })
-      .when('/', {
+      .when('/control', {
         templateUrl: 'components/control/control.view.html',
         controller: 'controlCtrl',
         controllerAs: 'vm'
@@ -36,7 +36,7 @@
         controllerAs: 'vm'
       })
 
-      .otherwise({redirectTo: '/'});
+      .otherwise({redirectTo: '/login'});
 
     $locationProvider.html5Mode(true);
   }
