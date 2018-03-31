@@ -36,7 +36,7 @@
         controllerAs: 'vm'
       })
 
-      .otherwise({redirectTo: '/login'});
+      .otherwise({redirectTo: '/control'});
 
     $locationProvider.html5Mode(true);
   }
