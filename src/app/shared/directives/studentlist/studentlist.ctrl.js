@@ -19,6 +19,18 @@
 
     };
 
+    vm.exportAction = function(action) {
+      switch(action){
+          case 'pdf': $scope.$broadcast('export-pdf', {});
+                      break;
+          case 'excel': $scope.$broadcast('export-excel', {});
+                      break;
+          case 'doc': $scope.$broadcast('export-doc', {});
+                      break;
+          default: console.log('no event caught');
+       }
+     }
+
   };
 
   angular
