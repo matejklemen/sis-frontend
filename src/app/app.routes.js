@@ -5,29 +5,37 @@
 
   function setup($routeProvider, $locationProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'components/main/main.view.html',
-        controller: 'mainCtrl',
-        controllerAs: 'vm'
-      })
       .when('/login', {
         templateUrl: 'components/login/login.view.html',
         controller: 'loginCtrl',
         controllerAs: 'vm'
       })
-      .when('/student', {
-        redirectTo: '/control'
-      })
-      .when('/control', {
+      .when('/', {
         templateUrl: 'components/control/control.view.html',
         controller: 'controlCtrl',
         controllerAs: 'vm'
+      })
+      
+      .when('/student', {
+        redirectTo: '/control'
       })
       .when('/student/:studentId', {
         templateUrl: 'components/student/student.view.html',
         controller: 'studentCtrl',
         controllerAs: 'vm'
       })
+
+      .when('/codelist', {
+        templateUrl: 'components/codelist/codelist.view.html',
+        controller: 'codelistCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/codelist/:codelistId', {
+        templateUrl: 'components/codelist/codelist.view.html',
+        controller: 'codelistCtrl',
+        controllerAs: 'vm'
+      })
+
       .otherwise({redirectTo: '/'});
 
     $locationProvider.html5Mode(true);

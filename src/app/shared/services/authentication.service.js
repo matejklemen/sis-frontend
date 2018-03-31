@@ -1,7 +1,5 @@
 (function() {
 
-  var apiBaseRoute = "http://localhost:8080"
-
   var authenticationService = function($window, $http) {
 
     var b64Utf8 = function (string) {

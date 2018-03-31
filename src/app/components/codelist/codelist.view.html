@@ -1,0 +1,31 @@
+<sis-navbar></sis-navbar>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <h3>Seznam šifrantov</h3>
+          <a href="/codelist/{{ clist.name }}" class="btn {{ vm.selectedCodelist == clist.displayName ? 'btn-primary' : 'btn-default' }}" ng-repeat="clist in vm.codelists"> {{ clist.displayName }} <span class="badge"> {{ clist.entriesCount }} </span></a>
+      </div>
+      <div class="col-md-12" ng-show="vm.codelistData">
+        <h3>Urejanje šifranta: {{ vm.selectedCodelist }}</h3>
+        <div class="form-group">
+          <label for="filterList" class="control-label">Filtriranje</label>
+          <input type="text" class="form-control" id="filterList" placeholder="Iskanje..." ng-model="vm.searchValue" autocomplete="off" ng-change="" />
+        </div>
+        <table ng-show="vm.codelists" class="table table-striped">
+          <thead>
+            <tr class="success">
+              <th ng-repeat="key in vm.codelistCols">{{ key }}</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="vals in vm.codelistData | filter:vm.searchValue">
+              <td ng-repeat="val in vals">{{ val }}</td>
+              <td><a href="" class="btn btn-primary btn-xs">Uredi ...</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

@@ -1,7 +1,5 @@
 (function() {
 
-  var apiBaseRoute = "http://localhost:8080";
-
   var studentService = function($http) {
     /*
      - vpisna številka
