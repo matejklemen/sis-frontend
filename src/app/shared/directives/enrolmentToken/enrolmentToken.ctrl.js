@@ -7,7 +7,7 @@
       tokenService.putToken($scope.id).then(
         function success(response){
           vm.content = response.data;
-          console.log("dobil rezultat: "+vm.content);
+          console.log("dobil rezultat: ", vm.content);
           vm.status = "success";
         },
         function error(error){

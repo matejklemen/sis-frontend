@@ -1,5 +1,5 @@
 (function() {
-  var loginCtrl = function($scope, $location, $route, authenticationService, $mdDialog) {
+  var loginCtrl = function($scope, $location, $route, authenticationService, $uibModal) {
     var vm = this;
     vm.error = false;
 
@@ -22,24 +22,24 @@
         vm.error = true;
         vm.errorMsg = "Manjkata uporabniško ime ali geslo...";
       }
-    }
+    };
 
-    vm.showPasswordRecover = function(ev) {
-      $mdDialog.show({
+    vm.showPasswordRecover = function() {
+      var modalInstance = $uibModal.open({
+        templateUrl: '/components/login/password.view.html',
         controller: 'passwordCtrl',
-        templateUrl: 'components/login/password.view.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true,
-        fullscreen: $scope.customFullscreen,
-        controllerAs: 'vm'
-      }).then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
+        controllerAs: 'vm',
       });
 
-
+      modalInstance.result.then(
+        function(result) {
+          console.log("Modal closed with result:", result);
+        },
+        function(closeInfo) {
+          console.log("Modal closed with info:", closeInfo);
+        }
+      );
+      
     };
   };
 

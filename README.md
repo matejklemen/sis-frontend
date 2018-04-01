@@ -27,5 +27,10 @@ za nodemon (v `src` direktoriju):
 
 [Flatly for Bootstrap 3](https://bootswatch.com/3/flatly/)
 
+### Dodatne AngularJS direktive
+
+[UI Bootstrap for AngularJS](http://angular-ui.github.io/bootstrap/) (Modalna okna, progress bari, itd.)
+
 ### Student import:
+
 use: doc/exampleStudents.txt

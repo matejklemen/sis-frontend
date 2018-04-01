@@ -1,5 +1,5 @@
 (function() {
-  var passwordCtrl = function($scope, authenticationService, $mdDialog) {
+  var passwordCtrl = function($uibModalInstance, authenticationService) {
     var vm = this;
     vm.error = false;
 
@@ -17,7 +17,7 @@
         vm.error = true;
         vm.errorMsg = "Manjka email...";
       }
-    }
+    };
 
     vm.submit = function() {
       if(vm.token && vm.password && vm.passwordRepeat) {
@@ -25,7 +25,7 @@
           authenticationService.passwordChange(vm.token, vm.password).then(
             function success(res) {
               console.log("Password changed to: "+ vm.password);
-              $mdDialog.hide();
+              $uibModalInstance.dismiss("password changed");
             },
             function error(error) {
               vm.error = true;
@@ -39,12 +39,12 @@
         vm.error = true;
         vm.errorMsg = "Manjka token ali geslo...";
       }
-    }
+    };
 
     vm.close = function() {
-      $mdDialog.hide();
-    }
-  }
+      $uibModalInstance.dismiss("cancel");
+    };
+  };
 
   angular
     .module('sis')
