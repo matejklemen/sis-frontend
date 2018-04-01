@@ -25,7 +25,7 @@
                 <th>Vpisna številka</th>
                 <th>Ime</th>
                 <th>Priimek</th>
-                <th></th>
+                <th>Žeton za vpis</th>
                 <th></th>
               </tr>
             </thead>
@@ -34,8 +34,8 @@
                 <td>{{ result.registerNumber }}</td>
                 <td>{{ result.name }}</td>
                 <td>{{ result.surname }}</td>
-                <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
                 <td><enrolment-token-button id="result.id"></enrolment-token-button></td>
+                <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
               </tr>
             </tbody>
           </table>
