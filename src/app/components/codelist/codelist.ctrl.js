@@ -1,5 +1,5 @@
 (function() {
-  var codelistCtrl = function($scope, $routeParams, codelistService, $filter) {
+  var codelistCtrl = function($routeParams, $uibModal, codelistService, $filter) {
     var vm = this;
 
     // load a list of codelists
@@ -15,25 +15,27 @@
     );
 
     function loadListIfSelected() {
-      vm.currentCodelist = $routeParams.codelistId;
+      var codelistId = $routeParams.codelistId;
 
-      if(vm.currentCodelist != null) {
-        codelistService.getCodelist(vm.currentCodelist).then(
+      if(codelistId != null) {
+        codelistService.getCodelist(codelistId).then(
           function success(response) {
 
-            vm.codelistData = response.data;
-            vm.codelistCols = Object.keys(vm.codelistData[0]);
-            
+            // get current selected codelist from the list of codelists
             vm.codelists.some(function(item) {
-              //console.log(item);
-              if(item.name == vm.currentCodelist) {
-                vm.selectedCodelist = item.displayName;
+              if(item.name == codelistId) {
+                vm.currentCodelist = item;
                 return true;
               }
             });
 
+            vm.codelistData = response.data;
+
+            // from the first row, get column names
+            vm.codelistCols = Object.keys(vm.codelistData[0]);
+
+            // fix study degree & study program formatting
             vm.codelistData.forEach(function(item) {
-              //console.log(item);
               if(item.studyDegree) {
                 item.studyDegree = $filter('formatStudyDegree')(item.studyDegree);
               }
@@ -42,7 +44,6 @@
               }
             });
 
-            //console.log(vm.codelistCols);
           },
           function error(response) {
             console.error("Oh no... ", response);
@@ -50,6 +51,26 @@
         );
       }
     }
+
+    vm.openAddEntryModal = function() {
+      var modalInstance = $uibModal.open({
+        templateUrl: 'components/codelist/codelistaddentry.modalview.html',
+        controller: 'codelistAddEntryCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          // pass values to modal window using "resolve" functions
+          resCodelist: function() {
+            return vm.currentCodelist;
+          }
+        }
+      });
+
+      // get result from modal after it's closed here
+      modalInstance.result.then(
+        function(result) {},
+        function(closeInfo) {}
+      );
+    };
 
   };
 

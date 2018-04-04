@@ -40,7 +40,7 @@
       // create a modal instance and open it
       var modalInstance = $uibModal.open({
         templateUrl: 'shared/directives/enrolmentToken/enrolmentTokenEdit.modalview.html',
-        controller: 'enrolmentTokenEdit',
+        controller: 'enrolmentTokenEditCtrl',
         controllerAs: 'vm',
         resolve: {
           // pass values to modal window using "resolve" functions

@@ -4,10 +4,10 @@
     <div class="row">
       <div class="col-md-12">
           <h3>Seznam šifrantov</h3>
-          <a href="/codelist/{{ clist.name }}" class="btn {{ vm.selectedCodelist == clist.displayName ? 'btn-primary' : 'btn-default' }} margin-4px" ng-repeat="clist in vm.codelists"> {{ clist.displayName }} <span class="badge"> {{ clist.entriesCount }} </span></a>
+          <a href="/codelist/{{ clist.name }}" class="btn {{ vm.currentCodelist.displayName == clist.displayName ? 'btn-primary' : 'btn-default' }} margin-4px" ng-repeat="clist in vm.codelists"> {{ clist.displayName }} <span class="badge"> {{ clist.entriesCount }} </span></a>
       </div>
       <div class="col-md-12" ng-show="vm.codelistData">
-        <h3>Urejanje šifranta: {{ vm.selectedCodelist }}</h3>
+        <h3>Urejanje šifranta: {{ vm.currentCodelist.displayName }}</h3>
 
         <form class="form-inline margin-4px">
           <div class="form-group">
@@ -15,7 +15,7 @@
             <input type="text" class="form-control" id="filterList" placeholder="Filtrirni niz..." ng-model="vm.searchValue" autocomplete="off" ng-change="" />
           </div>
           <div class="form-group" style="float:right;">
-            <button class="btn btn-success btn-sm">Dodaj vnos v: {{ vm.selectedCodelist }}</button>
+            <button class="btn btn-success btn-sm" ng-click="vm.openAddEntryModal(vm.currentCodelist.name)">Dodaj vnos v: {{ vm.currentCodelist.displayName }}</button>
           </div>
         </form> 
         

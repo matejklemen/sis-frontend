@@ -1,5 +1,5 @@
 (function() {
-  var enrolmentTokenEdit = function($scope, $uibModalInstance, tokenService, resEnrolmentToken) {
+  var enrolmentTokenEditCtrl = function($scope, $uibModalInstance, tokenService, resEnrolmentToken) {
     // resolved functions are added to controller parameters above (in this case resEnrolmentToken).
     // You can then access what is returned in resolved function by accessing this variable.
 
@@ -36,5 +36,5 @@
 
   angular
     .module('sis')
-    .controller('enrolmentTokenEdit', enrolmentTokenEdit);
+    .controller('enrolmentTokenEditCtrl', enrolmentTokenEditCtrl);
 })();
