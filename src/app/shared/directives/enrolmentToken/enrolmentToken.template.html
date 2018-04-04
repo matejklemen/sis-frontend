@@ -5,94 +5,12 @@
 
 <!-- Edit or delete token -->
 <div ng-if="vm.enrolmentToken">
-  <a data-toggle="modal" ng-click="vm.setTokenData(vm.enrolmentToken)" data-target="#myModal" href="#" class="btn btn-info btn-xs" ng-class="vm.enrolmentToken.used ? 'disabled' :''">
+  <a ng-click="vm.openEditModal(vm.enrolmentToken)" class="btn btn-info btn-xs" ng-class="vm.enrolmentToken.used ? 'disabled' :''">
     <span class="glyphicon glyphicon-pencil"></span>
     Uredi
   </a>
-  <a ng-click="vm.DeleteEnrolmentToken(vm.enrolmentToken.id)" href="#" class="btn btn-danger btn-xs" ng-class="vm.enrolmentToken.used ? 'disabled' :''">
+  <a ng-click="vm.DeleteEnrolmentToken(vm.enrolmentToken.id)" class="btn btn-danger btn-xs" ng-class="vm.enrolmentToken.used ? 'disabled' :''">
     <span class="glyphicon glyphicon-trash"></span>
     Izbriši
   </a>
-</div>
-
-
-<!-- Modal for token edit -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-  
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Urejanje žetona za vpis</h4>
-      </div>
-
-      <div class="modal-body">
-        <form class="form-horizontal">
-          <fieldset>
-
-            <!-- Study program -->
-            <div class="form-group">
-              <label for="select" class="col-lg-4 control-label">Študijski program</label>
-              <div class="col-lg-8">
-                <select class="form-control" ng-model="vm.selectedStudyProgram" ng-options="p for p in vm.studyProgram"></select>
-              </div>
-            </div>
-
-            <!-- Study year -->
-            <div class="form-group">
-              <label for="select" class="col-lg-4 control-label">Letnik</label>
-              <div class="col-lg-8">
-                <select class="form-control" ng-model="vm.selectedStudyYear" ng-options="y for y in vm.studyYear"></select>
-              </div>
-            </div>
-              
-            <!-- Enrolment type -->
-            <div class="form-group">
-              <label for="select" class="col-lg-4 control-label">Vrsta vpisa</label>
-              <div class="col-lg-8">
-                <select class="form-control" ng-model="vm.selectedEnrolmentType" ng-options="t for t in vm.enrolmentType"></select>
-              </div>
-            </div>
-
-            <!-- Study type -->
-            <div class="form-group">
-              <label for="select" class="col-lg-4 control-label">Način vpisa</label>
-              <div class="col-lg-8">
-                <select class="form-control" ng-model="vm.selectedStudyType" ng-options="t for t in vm.studyType"></select>
-              </div>
-            </div>
-
-            <!-- Free choice -->
-            <div class="form-group" ng-if="vm.selectedStudyYear==3">
-              <label class="col-lg-4 control-label">Prosta izbira predmetov</label>
-              <div class="col-lg-8">
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="freeChoiceYes" id="freeChoiceYes" value="yes" checked="">
-                    Da
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="freeChoiceNo" id="freeChoiceNo" value="no">
-                    Ne
-                  </label>
-                </div>
-              </div>
-            </div>
-
-          </fieldset>
-        </form>
-      </div>
-      
-
-      <div class="modal-footer">
-        <div>{{ vm.postStatus }}</div>
-        <button ng-click="vm.saveChanges(vm.enrolmentToken)" type="button" class="btn btn-success btn-sm">Save</button>
-        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-    
-  </div>
 </div>

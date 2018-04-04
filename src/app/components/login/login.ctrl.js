@@ -26,7 +26,7 @@
 
     vm.showPasswordRecover = function() {
       var modalInstance = $uibModal.open({
-        templateUrl: '/components/login/password.view.html',
+        templateUrl: '/components/login/password.modalview.html',
         controller: 'passwordCtrl',
         controllerAs: 'vm',
       });
