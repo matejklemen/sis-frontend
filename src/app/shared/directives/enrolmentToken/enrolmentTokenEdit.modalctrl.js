@@ -1,5 +1,5 @@
 (function() {
-  var enrolmentTokenEditCtrl = function($scope, $uibModalInstance, tokenService, resEnrolmentToken) {
+  var enrolmentTokenEditCtrl = function($scope, $uibModalInstance, tokenService, codelistService, resEnrolmentToken) {
     // resolved functions are added to controller parameters above (in this case resEnrolmentToken).
     // You can then access what is returned in resolved function by accessing this variable.
 
@@ -9,8 +9,27 @@
     vm.enrolmentToken = resEnrolmentToken;
     console.log(resEnrolmentToken);
 
-    vm.studyProgram=["Z2","XU","X6","X5","VV","VU","VT","P7","MM","LE","L3","L2","L1","KP00","Izmenjave","HB","7E","71","7002801","03","02"];
-    vm.studyYear=[1,2,3];
+
+    codelistService.getCodelist("study_program").then(
+      function success(response) {
+        vm.studyPrograms = response.data;
+      },
+      function error(error) {
+        console.log("Oh no...", error);
+      }
+    );
+
+    codelistService.getCodelist("study_year").then(
+      function success(response) {
+        vm.studyYears = response.data;
+      },
+      function error(error) {
+        console.log("Oh no...", error);
+      }
+    );
+
+    //vm.studyProgram=["Z2","XU","X6","X5","VV","VU","VT","P7","MM","LE","L3","L2","L1","KP00","Izmenjave","HB","7E","71","7002801","03","02"];
+    //vm.studyYear=[1,2,3];
     vm.enrolmentType=["prvi vpis", "ponovni vpis", "absolvent"];
     vm.studyType=["redni", "izredni"]; // enrolmentToken.kind
 

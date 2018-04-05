@@ -5,14 +5,22 @@
 </div>
 
 <div class="modal-body">
-  <form class="form-horizontal">
+  <form class="form-horizontal" id="enrolmentTokenForm" ng-submit="vm.saveChanges(vm.enrolmentToken)">
     <fieldset>
 
       <!-- Study program -->
       <div class="form-group">
         <label for="select" class="col-lg-4 control-label">Študijski program</label>
         <div class="col-lg-8">
-          <select class="form-control" ng-model="vm.enrolmentToken.studyProgram.id" ng-options="p for p in vm.studyProgram"></select>
+          <select class="form-control" ng-model="vm.enrolmentToken.studyProgram.id" ng-options="sp.id as sp.name for sp in vm.studyPrograms"></select>
+        </div>
+      </div>
+
+      <!-- Study year -->
+      <div class="form-group">
+        <label for="select" class="col-lg-4 control-label">Študijsko leto</label>
+        <div class="col-lg-8">
+          <select class="form-control" ng-model="vm.enrolmentToken.studyYear.id" ng-options="sy.id as sy.name for sy in vm.studyYears"></select>
         </div>
       </div>
 
@@ -20,7 +28,7 @@
       <div class="form-group">
         <label for="select" class="col-lg-4 control-label">Letnik</label>
         <div class="col-lg-8">
-          <select class="form-control" ng-model="vm.enrolmentToken.studyYear.id" ng-options="y for y in vm.studyYear"></select>
+          <input type="number" max="6" min="1" class="form-control" ng-model="vm.enrolmentToken.year" />
         </div>
       </div>
         
@@ -70,6 +78,6 @@
     <strong>{{ vm.postStatus }}</strong>
   </div>
 
-  <button ng-click="vm.saveChanges(vm.enrolmentToken)" type="button" class="btn btn-success btn-sm">Shrani</button>
+  <button type="submit" form="enrolmentTokenForm" class="btn btn-success btn-sm">Shrani</button>
   <button type="button" class="btn btn-default btn-sm" ng-click="vm.close()">Zapri</button>
 </div>
