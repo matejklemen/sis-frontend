@@ -52,12 +52,17 @@
       }
     }
 
-    vm.openAddEntryModal = function() {
+    vm.openEditEntryModal = function(entry, index) {
+      var entryCopy = angular.copy(entry);
+
       var modalInstance = $uibModal.open({
-        templateUrl: 'components/codelist/codelistaddentry.modalview.html',
-        controller: 'codelistAddEntryCtrl',
+        templateUrl: 'components/codelist/codelistentry.modalview.html',
+        controller: 'codelistEntryCtrl',
         controllerAs: 'vm',
         resolve: {
+          resModeEdit: function() {
+            return entry;
+          },
           // pass values to modal window using "resolve" functions
           resCodelist: function() {
             return vm.currentCodelist;
@@ -67,7 +72,42 @@
 
       // get result from modal after it's closed here
       modalInstance.result.then(
-        function(result) {},
+        function(result) {
+          if(result == "deleted") {
+            // remove deleted entry from list
+            vm.codelistData.splice(index, 1);
+          }
+          // we are just editing an existing entry, no need to add
+          //vm.codelistData.push(result);
+        },
+        function(closeInfo) {
+          // revert any changes to entry when modal is cancelled
+          angular.copy(entryCopy, entry);
+        }
+      );
+    };
+
+    vm.openAddEntryModal = function() {
+      var modalInstance = $uibModal.open({
+        templateUrl: 'components/codelist/codelistentry.modalview.html',
+        controller: 'codelistEntryCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          resModeEdit: function() {
+            return false;
+          },
+          // pass values to modal window using "resolve" functions
+          resCodelist: function() {
+            return vm.currentCodelist;
+          }
+        }
+      });
+
+      // get result from modal after it's closed here
+      modalInstance.result.then(
+        function(result) {
+          vm.codelistData.push(result);
+        },
         function(closeInfo) {}
       );
     };

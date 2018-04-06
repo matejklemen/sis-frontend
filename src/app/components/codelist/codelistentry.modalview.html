@@ -1,0 +1,36 @@
+<!-- Modal for token edit -->
+<div class="modal-header">
+  <button type="button" class="close" ng-click="vm.close()">&times;</button>
+  <h4 class="modal-title">Dodajanje vnosa v: {{ vm.name }}</h4>
+</div>
+
+<div class="modal-body">
+
+  <form class="form-horizontal" id="entryForm" ng-submit="vm.saveEntry()">
+    <div class="form-group" ng-repeat="col in vm.columnNames">
+
+      <label for="{{ col }}" class="col-sm-3 control-label">{{ col }}</label>
+      <div class="col-sm-9">
+
+        <input ng-if="vm.columnTypes[$index] == 's'" ng-required="col == 'id'" type="text" autocomplete="off" ng-model="vm.entry[col]" class="form-control" id="{{ col }}" placeholder="{{ col }}">
+        <input ng-if="vm.columnTypes[$index] == 'n'" ng-required="col == 'id'" type="number" autocomplete="off" ng-model="vm.entry[col]" class="form-control" id="{{ col }}" placeholder="{{ col }}">
+        <select ng-if="vm.columnTypes[$index].length > 2" ng-model="vm.entry[col]" class="form-control" ng-options="elem.id as elem.name for elem in vm.columnOptions[vm.columnTypes[$index]]"></select>
+
+      </div>
+
+    </div>
+  </form>
+
+</div>
+
+
+<div class="modal-footer">
+  
+  <div ng-show="vm.sendStatus" class="alert alert-danger" style="display: block; text-align: left;">
+    <strong>{{ vm.sendStatus }}</strong>
+  </div>
+
+  <button type="submit" class="btn btn-success" form="entryForm"><span class="glyphicon glyphicon-floppy-disk"></span> Shrani</button>
+  <button type="button" class="btn btn-danger" ng-show="vm.editMode" ng-click="vm.deleteEntry()"><span class="glyphicon glyphicon-trash"></span> Izbriši</button>
+  <button type="button" class="btn btn-default" ng-click="vm.close()">Zapri</button>
+</div>
