@@ -49,21 +49,10 @@
       </div>
 
       <!-- Free choice -->
-      <div class="form-group" ng-if="vm.selectedStudyYear==3">
+      <div class="form-group" ng-if="vm.enrolmentToken.year==3">
         <label class="col-lg-4 control-label">Prosta izbira predmetov</label>
         <div class="col-lg-8">
-          <div class="radio">
-            <label>
-              <input type="radio" name="freeChoiceYes" id="freeChoiceYes" value="yes" checked="">
-              Da
-            </label>
-          </div>
-          <div class="radio">
-            <label>
-              <input type="radio" name="freeChoiceNo" id="freeChoiceNo" value="no">
-              Ne
-            </label>
-          </div>
+          <select class="form-control" ng-model="vm.enrolmentToken.freeChoice" ng-options="f.key as f.value for f in vm.freeChoice"></select>
         </div>
       </div>
 

@@ -7,8 +7,14 @@
     vm.postStatus = false;
 
     vm.enrolmentToken = resEnrolmentToken;
-    console.log(resEnrolmentToken);
 
+    /* Valid values for selection */
+    vm.enrolmentType=["prvi vpis", "ponovni vpis", "absolvent"];
+    vm.studyType=["redni", "izredni"]; // enrolmentToken.kind
+    vm.freeChoice=[
+      {key:true,value:"da"},
+      {key:false,value:"ne"}
+    ]
 
     codelistService.getCodelist("study_program").then(
       function success(response) {
@@ -28,13 +34,8 @@
       }
     );
 
-    //vm.studyProgram=["Z2","XU","X6","X5","VV","VU","VT","P7","MM","LE","L3","L2","L1","KP00","Izmenjave","HB","7E","71","7002801","03","02"];
-    //vm.studyYear=[1,2,3];
-    vm.enrolmentType=["prvi vpis", "ponovni vpis", "absolvent"];
-    vm.studyType=["redni", "izredni"]; // enrolmentToken.kind
-
+    /* Save */
     vm.saveChanges = function(){
-
       tokenService.postToken(vm.enrolmentToken).then(
         function success(response){
           console.log("Token was successfully posted");

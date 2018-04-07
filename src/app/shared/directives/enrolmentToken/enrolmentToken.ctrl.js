@@ -1,12 +1,12 @@
 
 (function() {
-  var enrTokenCtrl = function($scope,tokenService,$uibModal) {
+  var enrTokenCtrl = function($scope,tokenService,$uibModal,enrolmentService) {
     var vm = this;
-    
-    getEnrolmentToken($scope.id);
 
+    if(checkEnrolment($scope.id)){
+      getEnrolmentToken($scope.id);
+    }
     
-
     vm.currentStudent = undefined;
 
     vm.NewEnrolmentToken = function(){
@@ -36,6 +36,7 @@
       }
     };
 
+    /* Modal */
     vm.openEditModal = function(enrolmentToken) {
       // create a modal instance and open it
       var modalInstance = $uibModal.open({
@@ -61,6 +62,7 @@
       );
     };
 
+    /* Helpers */
     function getEnrolmentToken(studentId){
       tokenService.getTokenByStudentId(studentId).then(
         function success(response){
@@ -72,7 +74,19 @@
       );
     }
 
-
+    function checkEnrolment(id){
+      return enrolmentService.checkEnrolment(id).then(
+        function success(response){
+          vm.enrolled = true;
+          return true;
+        },
+        function error(error){
+          console.log("student with id "+id+" has no enrolments yet");
+          vm.enrolled = false;
+          return false;
+        }
+      );
+    }
   };
 
   enrTokenCtrl.$Inject = ["$scope","tokenService"];

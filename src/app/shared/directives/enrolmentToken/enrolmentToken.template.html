@@ -1,8 +1,7 @@
 <!-- Generate token -->
 <div ng-if="vm.enrolmentToken == null">
-  <a ng-click="vm.NewEnrolmentToken()" href="#" class="btn btn-primary btn-xs">Generiraj</a>
+  <a ng-click="vm.NewEnrolmentToken()" href="#" class="btn btn-primary btn-xs" ng-class="!vm.enrolled ? 'disabled' :''">Generiraj</a>
 </div>
-
 <!-- Edit or delete token -->
 <div ng-if="vm.enrolmentToken">
   <a ng-click="vm.openEditModal(vm.enrolmentToken)" class="btn btn-info btn-xs" ng-class="vm.enrolmentToken.used ? 'disabled' :''">
