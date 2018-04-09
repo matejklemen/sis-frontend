@@ -46,8 +46,8 @@
             <th>{{ enrolment.studyProgram.name }}</th>
             <td>{{ enrolment.studyYear.name }}</td>
             <td>{{ enrolment.year + '.' }}</td>
-            <td>{{ enrolment.type }}</td>
-            <td>{{ enrolment.kind }}</td>
+            <td>{{ enrolment.type | formatDisplayName }}</td>
+            <td>{{ enrolment.kind | formatDisplayName }}</td>
           </tr>
         </tbody>
       </table>
