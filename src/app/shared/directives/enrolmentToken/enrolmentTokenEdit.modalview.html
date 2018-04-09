@@ -36,7 +36,7 @@
       <div class="form-group">
         <label for="select" class="col-lg-4 control-label">Vrsta vpisa</label>
         <div class="col-lg-8">
-          <select class="form-control" ng-model="vm.enrolmentToken.type" ng-options="t for t in vm.enrolmentType"></select>
+          <select class="form-control" ng-model="vm.enrolmentToken.type.id" ng-options="et.id as et.name for et in vm.enrolmentType"></select>
         </div>
       </div>
 
@@ -44,7 +44,7 @@
       <div class="form-group">
         <label for="select" class="col-lg-4 control-label">Način vpisa</label>
         <div class="col-lg-8">
-          <select class="form-control" ng-model="vm.enrolmentToken.kind" ng-options="t for t in vm.studyType"></select>
+          <select class="form-control" ng-model="vm.enrolmentToken.kind.id" ng-options="ek.id as ek.name for ek in vm.enrolmentKind"></select>
         </div>
       </div>
 

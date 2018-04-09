@@ -17,17 +17,17 @@
     function loadListIfSelected() {
       var codelistId = $routeParams.codelistId;
 
-      if(codelistId != null) {
-        codelistService.getCodelist(codelistId).then(
-          function success(response) {
+      // get current selected codelist from the list of codelists
+      vm.codelists.some(function(item) {
+        if(item.name == codelistId) {
+          vm.currentCodelist = item;
+          return true;
+        }
+      });
 
-            // get current selected codelist from the list of codelists
-            vm.codelists.some(function(item) {
-              if(item.name == codelistId) {
-                vm.currentCodelist = item;
-                return true;
-              }
-            });
+      if(codelistId != null) {
+        codelistService.getCodelist(vm.currentCodelist.endpoint).then(
+          function success(response) {
 
             vm.codelistData = response.data;
 
