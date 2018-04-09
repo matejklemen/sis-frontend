@@ -19,7 +19,7 @@
       .when('/student', {
         redirectTo: '/control'
       })
-      .when('/student/:studentId', {
+      .when('/student/:registerNumber', {
         templateUrl: 'components/student/student.view.html',
         controller: 'studentCtrl',
         controllerAs: 'vm'
@@ -33,6 +33,11 @@
       .when('/codelist/:codelistId', {
         templateUrl: 'components/codelist/codelist.view.html',
         controller: 'codelistCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/enrol/:studentId', {
+        templateUrl: 'components/enrol/enrol.view.html',
+        controller: 'enrolCtrl',
         controllerAs: 'vm'
       })
 

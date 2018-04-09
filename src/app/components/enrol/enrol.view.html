@@ -1,0 +1,89 @@
+<sis-navbar></sis-navbar>
+
+<div class="container">
+  <h2>Vpisni list 2014/2015</h2>
+
+  <h3>Osebni podatki</h3>
+
+  Vpisna številka
+  {{ vm.student.registerNumber }}<br />
+
+  Priimek in Ime
+  {{ vm.student.name }} {{ vm.student.surname }}<br />
+
+  Datum rojstva
+  <br />
+
+  Kraj rojstva
+  <br />
+
+  Država, občina rojstva
+  <br />
+
+  Državljanstvo
+  <br />
+
+  Spol
+  <br />
+
+  EMŠO
+  <br />
+
+  Davčna številka
+  <br />
+
+  e-pošta
+  {{ vm.student.email }}<br />
+
+  Prenosni telefon
+  {{ vm.student.phoneNumber }}<br />
+
+  Stalno bivališče
+  {{ vm.student.address1 | formatAddress }}<br />
+
+  Začasno bivališče
+  {{ vm.student.address2 | formatAddress }}<br />
+
+  Država, občina<br />
+  {{ vm.student.address1.country.name }}<br />
+  {{ vm.student.address2.country.name }}<br />
+
+  <h3>Podatki o vpisu</h3>
+
+  Študijski program
+
+  Smer/usmeritev/modul/znanstveno področje
+
+  Kraj izvajanja
+
+  Izbirna skupina
+
+  Vrsta študija
+
+  Vrsta vpisa
+
+  Letnik/dodatno leto
+
+  Način in oblika študija
+
+  Študijsko leto prvega vpisa v ta študijski program
+
+  <h3>Podatki o vzporednem študiju</h3>
+
+  Zavod
+
+  Letnik/dodatno leto
+
+  Študijski program
+
+  Vrsta študija
+
+  <h3>Priloga 1: Predmetnik</h3>
+
+  predmeti .....
+
+  <h3>Priloga 2: Predhodno dosežena izborazba</h3>
+
+  <h3>Priloga 3: Dodatni podatki</h3>
+
+</div>
