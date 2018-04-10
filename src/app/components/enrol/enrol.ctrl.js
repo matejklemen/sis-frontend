@@ -1,6 +1,8 @@
 (function() {
-  var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService) {
+  var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService, codelistService) {
     var vm = this;
+
+    vm.cl = {};
 
     /* Get and set data */
     tokenService.getTokenByStudentId($routeParams.studentId).then(
@@ -30,20 +32,47 @@
         }
       );
     }
+
+    codelistService.getCodelist("postaddresses").then(
+      function success(response) {
+        vm.cl.postaddresses = response.data;
+      },
+      function error(error) {
+        console.log("Oh no...", error);
+      }
+    );
+
+    codelistService.getCodelist("countries").then(
+      function success(response) {
+        vm.cl.countries = response.data;
+      },
+      function error(error) {
+        console.log("Oh no...", error);
+      }
+    );
+
+    codelistService.getCodelist("municipalities").then(
+      function success(response) {
+        vm.cl.municipalities = response.data;
+      },
+      function error(error) {
+        console.log("Oh no...", error);
+      }
+    );
     
     function setAndParseStudentData(){
       vm.parsedStProgram = vm.token.studyProgram.evsCode + " " + (vm.token.studyProgram.name).split('(')[0];
     }
 
     /* Helpers */
-    function checkEMSO(emso){
-      numbs = emso.split('');
-      sum = 0;
-      counter = 0;
-      facts=[7,6,5,4,3,2,7,6,5,4,3,2];
-      for(i in numbs){
-        if(counter==12){
-          if(11 - (sum%11) == parseInt(numbs[i])){
+    function checkEMSO(emso) {
+      var numbs = emso.split('');
+      var sum = 0;
+      var counter = 0;
+      var facts = [7,6,5,4,3,2,7,6,5,4,3,2];
+      for(var i in numbs) {
+        if(counter == 12) {
+          if(11 - (sum % 11) == parseInt(numbs[i])) {
             return true;
           }
           return false;

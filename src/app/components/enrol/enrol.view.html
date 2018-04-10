@@ -12,42 +12,49 @@
         <div class="col-md-6">
           <!-- Name and surname -->
           <b>Priimek in Ime: </b>
-          <div class="important-data">{{ vm.student.surname }} {{ vm.student.name }}</div>
+          <div class="important-data">{{ vm.student.surname }}, {{ vm.student.name }}</div>
           <br />
         </div>
         <div class="col-md-6">
           <!-- Registr. number -->
           <div class="form-group">
-            <label for="iRegisterNumber">Vpisna številka: </label>
-            <input class="form-control input-sm" type="text" id="iRegisterNumber" ng-model="vm.student.registerNumber" ng-disabled="vm.student.registerNumber != undefined">
+            <label for="i1">Vpisna številka: </label>
+            <input class="form-control input-sm" type="text" id="i1" ng-model="vm.student.registerNumber" ng-disabled="vm.student.registerNumber != undefined">
           </div>
         </div>
         <div class="col-md-6">
           <!-- Date of birth -->
           <div class="form-group">
-            <label for="iDateOfBirth">Datum rojstva: </label>
-            <input class="form-control input-sm" type="date" id="iDateOfBirth" ng-model="vm.student.dateOfBirth" ng-disabled="vm.student.dateOfBirth != undefined">
+            <label for="i2">Datum rojstva: </label>
+            <input class="form-control input-sm" type="date" id="i2" ng-model="vm.student.dateOfBirth" ng-disabled="vm.student.dateOfBirth != undefined">
           </div>
         </div>
         <div class="col-md-6">
           <!-- Place of birth -->
           <div class="form-group">
-            <label for="iPlaceOfBirth">Kraj rojstva: </label>
-            <input class="form-control input-sm" type="text" id="iPlaceOfBirth" ng-model="vm.student.placeOfBirth" ng-disabled="vm.student.placeOfBirth != undefined">
+            <label for="i3">Kraj rojstva: </label>
+            <input class="form-control input-sm" type="text" id="i3" ng-model="vm.student.placeOfBirth" ng-disabled="vm.student.placeOfBirth != undefined">
           </div>
         </div>
         <div class="col-md-6">
-          <!-- Country, municipality of birth -->
+          <!-- Municipality of birth -->
           <div class="form-group">
-            <label for="iCountryOfBirth">Država, občina rojstva: </label>
-            <input class="form-control input-sm" type="text" id="iCountryOfBirth" ng-model="vm.student.countryOfBirth" ng-disabled="vm.student.countryOfBirth != undefined">
+            <label for="i4">Občina rojstva: </label>
+            <select ng-model="vm.student.municipalityOfBirth.id" class="form-control input-sm" ng-options="m.id as m.name for m in vm.cl.municipalities"></select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Country of birth -->
+          <div class="form-group">
+            <label for="i5">Država rojstva: </label>
+            <select ng-model="vm.student.countryOfBirth.id" class="form-control input-sm" ng-options="c.id as c.name for c in vm.cl.countries"></select>
           </div>
         </div>
         <div class="col-md-6">
           <!-- Citizenship -->
           <div class="form-group">
-            <label for="iCitizenship">Državljanstvo: </label>
-            <input class="form-control input-sm" type="text" id="iCitizenship" ng-model="vm.student.citizenship" ng-disabled="vm.student.citizenship != undefined">
+            <label for="i6">Državljanstvo: </label>
+            <select ng-model="vm.student.citizenship.id" class="form-control input-sm" ng-options="c.id as c.name for c in vm.cl.countries"></select>
           </div>
         </div>
 
@@ -56,22 +63,22 @@
         <div class="col-md-6">
           <!-- Gender -->
           <div class="form-group">
-            <label for="iGender">Spol: </label>
-            <input class="form-control input-sm" type="text" id="iGender" ng-model="vm.student.gender" ng-disabled="vm.student.gender != undefined">
+            <label for="i7">Spol: </label>
+            <input class="form-control input-sm" type="text" id="i7" ng-model="vm.student.gender" ng-disabled="vm.student.gender != undefined">
           </div>
         </div>
         <div class="col-md-6">
           <!-- EMSO -->
           <div class="form-group">
-            <label for="iEmso">EMŠO: </label>
-            <input class="form-control input-sm" type="text" id="iEmso" ng-model="vm.student.emso" ng-disabled="vm.student.emso != undefined">
+            <label for="i8">EMŠO: </label>
+            <input class="form-control input-sm" type="text" id="i8" ng-model="vm.student.emso" ng-disabled="vm.student.emso != undefined">
           </div>
         </div>
         <div class="col-md-6">
           <!-- Tax number -->
           <div class="form-group">
-            <label for="iTaxNumber">Davčna številka: </label>
-            <input class="form-control input-sm" type="text" id="iTaxNumber" ng-model="vm.student.taxNumber" ng-disabled="vm.student.taxNumber != undefined">
+            <label for="i9">Davčna številka: </label>
+            <input class="form-control input-sm" type="text" id="i9" ng-model="vm.student.taxNumber" ng-disabled="vm.student.taxNumber != undefined">
           </div>
         </div>
 
@@ -80,15 +87,15 @@
         <div class="col-md-6">
           <!-- e-mail -->
           <div class="form-group">
-            <label for="iEmail">E-pošta: </label>
-            <input class="form-control input-sm" type="text" id="iEmail" ng-model="vm.student.email">
+            <label for="i10">E-pošta: </label>
+            <input class="form-control input-sm" type="text" id="i10" ng-model="vm.student.email">
           </div>
         </div>
         <div class="col-md-6">
           <!-- Phone number -->
           <div class="form-group">
-            <label for="iPhoneNumber">Prenosni telefon: </label>
-            <input class="form-control input-sm" type="text" id="iPhoneNumber" ng-model="vm.student.phoneNumber">
+            <label for="i11">Prenosni telefon: </label>
+            <input class="form-control input-sm" type="text" id="i11" ng-model="vm.student.phoneNumber">
           </div>
         </div>
 
@@ -101,25 +108,33 @@
           <!-- Address1 -->
           <h4><span class="glyphicon glyphicon-home"></span> Stalno bivališče</h4>
           <div class="form-group" >
-            <label for="iAddress1">Naslov: </label>
-            <input class="form-control input-sm" type="text" id="iAddress1" ng-model="vm.student.address1.line1">
+            <label for="i12">Naslov: </label>
+            <input class="form-control input-sm" type="text" id="i12" ng-model="vm.student.address1.line1">
           </div>
           <div class="form-group" >
-            <label for="iAddress1Country">Država, občina: </label>
-            <input class="form-control input-sm" type="text" id="iAddress1Country" ng-model="vm.student.address1.country.name">
+            <label for="i13">Pošta: </label>
+            <select ng-model="vm.student.address1.post.id" class="form-control input-sm" ng-options="p.id as p.name for p in vm.cl.postaddresses"></select>
+          </div>
+          <div class="form-group" >
+            <label for="i14">Država: </label>
+            <select ng-model="vm.student.address1.country.id" class="form-control input-sm" ng-options="c.id as c.name for c in vm.cl.countries"></select>
           </div>
         </div>
 
         <div class="col-lg-6">
           <!-- Address2 -->
-          <h4><span class="glyphicon glyphicon-home"></span> Začasno bivališče</h4>
+          <h4><span class="glyphicon glyphicon-home"></span> Stalno bivališče</h4>
           <div class="form-group" >
-            <label for="iAddress2">Naslov: </label>
-            <input class="form-control input-sm" type="text" id="iAddress2" ng-model="vm.student.address2.line1">
+            <label for="i12">Naslov: </label>
+            <input class="form-control input-sm" type="text" id="i12" ng-model="vm.student.address2.line1">
           </div>
           <div class="form-group" >
-            <label for="iAddress2Country">Država, občina: </label>
-            <input class="form-control input-sm" type="text" id="iAddress2Country" ng-model="vm.student.address2.country.name">
+            <label for="i13">Pošta: </label>
+            <select ng-model="vm.student.address2.post.id" class="form-control input-sm" ng-options="p.id as p.name for p in vm.cl.postaddresses"></select>
+          </div>
+          <div class="form-group" >
+            <label for="i14">Država: </label>
+            <select ng-model="vm.student.address2.country.id" class="form-control input-sm" ng-options="c.id as c.name for c in vm.cl.countries"></select>
           </div>
         </div>
 
@@ -184,21 +199,28 @@
           <!-- Enrolment type -->
           <div class="form-group">
             <label for="iTokenType">Vrsta vpisa: </label>
-            <input class="form-control input-sm" type="text" id="iTokenType" ng-model="vm.token.type" ng-disabled="vm.token.type != undefined">
+            <input class="form-control input-sm" type="text" id="iTokenType" ng-model="vm.token.type.name" ng-disabled="vm.token.type != undefined">
           </div>
         </div>
         <div class="col-md-6">
           <!--Year/additional year -->
           <div class="form-group">
             <label for="iTokenYear">Letnik/dodatno leto: </label>
-            <input class="form-control input-sm" type="text" id="iTokenYear" ng-model="vm.token.year" ng-disabled="vm.token.year != undefined">
+            <input class="form-control input-sm" type="text" id="iTokenYear" ng-model="vm.token.year.name" ng-disabled="vm.token.year != undefined">
           </div>
         </div>
         <div class="col-md-6">
           <!-- Study kind -->
           <div class="form-group">
-            <label for="iTokenKind">Način in oblika študija: </label>
-            <input class="form-control input-sm" type="text" id="iTokenKind" ng-model="vm.token.kind" ng-disabled="vm.token.kind != undefined">
+            <label for="iTokenKind">Način študija: </label>
+            <input class="form-control input-sm" type="text" id="iTokenKind" ng-model="vm.token.kind.name" ng-disabled="vm.token.kind != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Study form -->
+          <div class="form-group">
+            <label for="iTokenKind">Oblika študija: </label>
+            <input class="form-control input-sm" type="text" id="iTokenKind" ng-model="vm.token.form.name" ng-disabled="vm.token.kind != undefined">
           </div>
         </div>
         <div class="col-md-6">
