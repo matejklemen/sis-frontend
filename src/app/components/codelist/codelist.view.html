@@ -28,7 +28,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="entry in vm.codelistData | filter:vm.searchValue">
-              <td ng-repeat="val in entry">{{ val }}</td>
+              <td ng-repeat="val in entry">{{ val | formatDisplayName }}</td>
               <td><a href="" class="btn btn-primary btn-xs" ng-click="vm.openEditEntryModal(entry, $index)">Uredi ...</a></td>
             </tr>
           </tbody>

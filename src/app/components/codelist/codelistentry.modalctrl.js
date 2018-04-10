@@ -35,6 +35,16 @@
     });
 
     vm.saveEntry = function() {
+      // update/add studyDegree.name field
+      if('studyDegree' in vm.entry) {
+        vm.columnOptions.studydegrees.some(function(item) {
+          if(item.id == vm.entry.studyDegree.id) {
+            vm.entry.studyDegree.name = item.name;
+            return true;
+          }
+        });
+      }
+
       if(!resModeEdit) {
           codelistService.putEntry(resCodelist.endpoint, vm.entry).then(
           function success(response) {

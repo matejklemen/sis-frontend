@@ -17,33 +17,21 @@
     function loadListIfSelected() {
       var codelistId = $routeParams.codelistId;
 
+      // get current selected codelist from the list of codelists
+      vm.codelists.some(function(item) {
+        if(item.name == codelistId) {
+          vm.currentCodelist = item;
+          return true;
+        }
+      });
+
       if(codelistId != null) {
-        codelistService.getCodelist(codelistId).then(
+        codelistService.getCodelist(vm.currentCodelist.endpoint).then(
           function success(response) {
-
-            // get current selected codelist from the list of codelists
-            vm.codelists.some(function(item) {
-              if(item.name == codelistId) {
-                vm.currentCodelist = item;
-                return true;
-              }
-            });
-
             vm.codelistData = response.data;
 
             // from the first row, get column names
             vm.codelistCols = Object.keys(vm.codelistData[0]);
-
-            // fix study degree & study program formatting
-            vm.codelistData.forEach(function(item) {
-              if(item.studyDegree) {
-                item.studyDegree = $filter('formatStudyDegree')(item.studyDegree);
-              }
-              if(item.studyPrograms) {
-                item.studyPrograms = $filter('formatStudyPrograms')(item.studyPrograms);
-              }
-            });
-
           },
           function error(response) {
             console.error("Oh no... ", response);

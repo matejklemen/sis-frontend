@@ -9,14 +9,14 @@
     vm.enrolmentToken = resEnrolmentToken;
 
     /* Valid values for selection */
-    vm.enrolmentType=["prvi vpis", "ponovni vpis", "absolvent"];
-    vm.studyType=["redni", "izredni"]; // enrolmentToken.kind
+    //vm.enrolmentType=["prvi vpis", "ponovni vpis", "absolvent"];
+    //vm.enrolmentKind=["redni", "izredni"]; // enrolmentToken.kind
     vm.freeChoice=[
       {key:true,value:"da"},
       {key:false,value:"ne"}
-    ]
+    ];
 
-    codelistService.getCodelist("study_program").then(
+    codelistService.getCodelist("studyprograms").then(
       function success(response) {
         vm.studyPrograms = response.data;
       },
@@ -25,9 +25,27 @@
       }
     );
 
-    codelistService.getCodelist("study_year").then(
+    codelistService.getCodelist("studyyears").then(
       function success(response) {
         vm.studyYears = response.data;
+      },
+      function error(error) {
+        console.log("Oh no...", error);
+      }
+    );
+
+    codelistService.getCodelist("studytypes").then(
+      function success(response) {
+        vm.enrolmentType = response.data;
+      },
+      function error(error) {
+        console.log("Oh no...", error);
+      }
+    );
+
+    codelistService.getCodelist("studykinds").then(
+      function success(response) {
+        vm.enrolmentKind = response.data;
       },
       function error(error) {
         console.log("Oh no...", error);

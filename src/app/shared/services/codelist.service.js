@@ -6,8 +6,8 @@
       return $http.get(apiBaseRoute+'/api/codelists');
     };
 
-    var getCodelist = function(codelistName) {
-      return $http.get(apiBaseRoute + '/api/codelists/' + codelistName);
+    var getCodelist = function(codelistEndpointName) {
+      return $http.get(apiBaseRoute + '/api/' + codelistEndpointName);
     };
 
     var putEntry = function(apiEndpointName, entryObject) {
