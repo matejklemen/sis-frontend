@@ -1,5 +1,5 @@
 (function() {
-  var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService, codelistService) {
+  var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService, codelistService, curriculumService) {
     var vm = this;
 
     vm.cl = {};
@@ -12,6 +12,7 @@
         if(vm.token.used) {
           $window.location.href = "/";
         } else {
+          getCurriculum(vm.token);
           getStudentData(vm.token.student);
         }
       },
@@ -60,6 +61,19 @@
       }
     );
     
+    function getCurriculum(token){
+      curriculumService.getCurriculum("20172018", token.studyProgram.id, token.year).then(
+        function success(response){
+          console.log("got curriculum: ",response.data);
+          vm.curriculum = response.data;
+          vm.selectable = true; //tmp for testing
+        },
+        function error(error){
+          console.log("Oh no...",error)
+        }
+      );
+    } 
+
     function setAndParseStudentData(){
       vm.parsedStProgram = vm.token.studyProgram.evsCode + " " + (vm.token.studyProgram.name).split('(')[0];
     }

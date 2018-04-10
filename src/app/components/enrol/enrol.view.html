@@ -206,7 +206,7 @@
           <!--Year/additional year -->
           <div class="form-group">
             <label for="iTokenYear">Letnik/dodatno leto: </label>
-            <input class="form-control input-sm" type="text" id="iTokenYear" ng-model="vm.token.year.name" ng-disabled="vm.token.year != undefined">
+            <input class="form-control input-sm" type="text" id="iTokenYear" ng-model="vm.token.year" ng-disabled="vm.token.year != undefined">
           </div>
         </div>
         <div class="col-md-6">
@@ -241,7 +241,24 @@
     </div>
     <div class="panel-body">
 
-      to-do
+      <table class="table table-striped">
+        <thead>
+          <tr class="active">
+            <th scope="col">#</th>
+            <th scope="col">Ime</th>
+            <th scope="col">Semester</th>
+            <th scope="col">Izbira</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="subject in vm.curriculum">
+            <th scope="row">{{ $index + 1 }}</th>
+            <td>{{ subject.idCourse.name }}</td>
+            <td>{{ subject.idCourse.semester }}</td>
+            <td><input type="checkbox" ng-model="subject.selected" ng-if="vm.selectable" ng-checked="true"></td>
+          </tr>
+        </tbody>
+      </table>
 
     </div>
   </div>
