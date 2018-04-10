@@ -1,180 +1,227 @@
 <sis-navbar></sis-navbar>
 
 <div class="container">
-  <h2>Vpisni list 2014/2015</h2>
+  <h2>Vpisni list</h2>
 
-
-
-  <!-- Personal data -->
-  <h3 class="enrol-section">Osebni podatki</h3>
-
-  <!-- Name and surname -->
-  <b>Priimek in Ime: </b>
-  <div class="important-data">{{ vm.student.surname }} {{ vm.student.name }}</div>
-  <br />
-
-  <!-- Registr. number -->
-  <b>Vpisna številka: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.registerNumber" ng-disabled="vm.student.registerNumber != undefined">
-  </div>
-
-  <!-- Date of birth -->
-  <b>Datum rojstva: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="date" id="inputSmall" ng-model="vm.student.dateOfBirth" ng-disabled="vm.student.dateOfBirth != undefined">
-  </div>
-
-  <!-- Place of birth -->
-  <b>Kraj rojstva: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.placeOfBirth" ng-disabled="vm.student.placeOfBirth != undefined">
-  </div>
-
-  <!-- Country, municipality of birth -->
-  <b>Država, občina rojstva: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.countryOfBirth" ng-disabled="vm.student.countryOfBirth != undefined">
-  </div>
-
-  <!-- Citizenship -->
-  <b>Državljanstvo: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.citizenship" ng-disabled="vm.student.citizenship != undefined">
-  </div>
-
-  <!-- Gender -->
-  <b>Spol: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.gender" ng-disabled="vm.student.gender != undefined">
-  </div>
-
-  <!-- EMSO -->
-  <b>EMŠO: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.emso" ng-disabled="vm.student.emso != undefined">
-  </div>
-
-  <!-- Tax number -->
-  <b>Davčna številka: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.taxNumber" ng-disabled="vm.student.taxNumber != undefined">
-  </div>
-
-  <!-- e-mail -->
-  <b>e-pošta: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.email">
-  </div>
-
-  <!-- Phone number -->
-  <b>Prenosni telefon: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.phoneNumber">
-  </div>
-
-  <!-- Address -->
-  <div class="col-lg-6">
-    <!-- Address1 -->
-    <b>Stalno bivališče</b>
-    </br>
-    <b>Naslov: </b>
-    <div class="form-group" >
-      <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.address1.line1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Osebni podatki</h3>
     </div>
-    <b>Država, občina: </b><br />
-    <div class="form-group" >
-      <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.address1.country.name">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Name and surname -->
+          <b>Priimek in Ime: </b>
+          <div class="important-data">{{ vm.student.surname }} {{ vm.student.name }}</div>
+          <br />
+        </div>
+        <div class="col-md-6">
+          <!-- Registr. number -->
+          <div class="form-group">
+            <label for="iRegisterNumber">Vpisna številka: </label>
+            <input class="form-control input-sm" type="text" id="iRegisterNumber" ng-model="vm.student.registerNumber" ng-disabled="vm.student.registerNumber != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Date of birth -->
+          <div class="form-group">
+            <label for="iDateOfBirth">Datum rojstva: </label>
+            <input class="form-control input-sm" type="date" id="iDateOfBirth" ng-model="vm.student.dateOfBirth" ng-disabled="vm.student.dateOfBirth != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Place of birth -->
+          <div class="form-group">
+            <label for="iPlaceOfBirth">Kraj rojstva: </label>
+            <input class="form-control input-sm" type="text" id="iPlaceOfBirth" ng-model="vm.student.placeOfBirth" ng-disabled="vm.student.placeOfBirth != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Country, municipality of birth -->
+          <div class="form-group">
+            <label for="iCountryOfBirth">Država, občina rojstva: </label>
+            <input class="form-control input-sm" type="text" id="iCountryOfBirth" ng-model="vm.student.countryOfBirth" ng-disabled="vm.student.countryOfBirth != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Citizenship -->
+          <div class="form-group">
+            <label for="iCitizenship">Državljanstvo: </label>
+            <input class="form-control input-sm" type="text" id="iCitizenship" ng-model="vm.student.citizenship" ng-disabled="vm.student.citizenship != undefined">
+          </div>
+        </div>
+
+        <div class="col-md-12"><hr /></div>
+
+        <div class="col-md-6">
+          <!-- Gender -->
+          <div class="form-group">
+            <label for="iGender">Spol: </label>
+            <input class="form-control input-sm" type="text" id="iGender" ng-model="vm.student.gender" ng-disabled="vm.student.gender != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- EMSO -->
+          <div class="form-group">
+            <label for="iEmso">EMŠO: </label>
+            <input class="form-control input-sm" type="text" id="iEmso" ng-model="vm.student.emso" ng-disabled="vm.student.emso != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Tax number -->
+          <div class="form-group">
+            <label for="iTaxNumber">Davčna številka: </label>
+            <input class="form-control input-sm" type="text" id="iTaxNumber" ng-model="vm.student.taxNumber" ng-disabled="vm.student.taxNumber != undefined">
+          </div>
+        </div>
+
+        <div class="col-md-12"><hr /></div>
+
+        <div class="col-md-6">
+          <!-- e-mail -->
+          <div class="form-group">
+            <label for="iEmail">E-pošta: </label>
+            <input class="form-control input-sm" type="text" id="iEmail" ng-model="vm.student.email">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Phone number -->
+          <div class="form-group">
+            <label for="iPhoneNumber">Prenosni telefon: </label>
+            <input class="form-control input-sm" type="text" id="iPhoneNumber" ng-model="vm.student.phoneNumber">
+          </div>
+        </div>
+
+        <div class="col-md-12"><hr /></div>
+      </div>
+
+      <div class="row">
+        <!-- Address -->
+        <div class="col-lg-6">
+          <!-- Address1 -->
+          <h4><span class="glyphicon glyphicon-home"></span> Stalno bivališče</h4>
+          <div class="form-group" >
+            <label for="iAddress1">Naslov: </label>
+            <input class="form-control input-sm" type="text" id="iAddress1" ng-model="vm.student.address1.line1">
+          </div>
+          <div class="form-group" >
+            <label for="iAddress1Country">Država, občina: </label>
+            <input class="form-control input-sm" type="text" id="iAddress1Country" ng-model="vm.student.address1.country.name">
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <!-- Address2 -->
+          <h4><span class="glyphicon glyphicon-home"></span> Začasno bivališče</h4>
+          <div class="form-group" >
+            <label for="iAddress2">Naslov: </label>
+            <input class="form-control input-sm" type="text" id="iAddress2" ng-model="vm.student.address2.line1">
+          </div>
+          <div class="form-group" >
+            <label for="iAddress2Country">Država, občina: </label>
+            <input class="form-control input-sm" type="text" id="iAddress2Country" ng-model="vm.student.address2.country.name">
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <!--Address for sending mail -->
+          <b>Vročanje: </b>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios1" value="address1" checked="">
+              Stalno bivališče
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios2" value="address2">
+              Začasno bivališče
+            </label>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
-  <div class="col-lg-6">
-    <!-- Address2 -->
-    <b>Zacasno bivališče</b>
-    </br>
-    <b>Naslov: </b>
-    <div class="form-group" >
-      <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.address2.line1">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"><span class="glyphicon glyphicon-pencil"></span> Podatki o vpisu</h3>
     </div>
-    <b>Država, občina: </b><br />
-    <div class="form-group" >
-      <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.student.address2.country.name">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Study program -->
+          <div class="form-group">
+            <label for="iStudyProgram">Študijski program: </label>
+            <input class="form-control input-sm" type="text" id="iStudyProgram" ng-disabled="true" ng-model="vm.parsedStProgram">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Place -->
+          <div class="form-group">
+            <label for="iKrajStudija">Kraj izvajanja: </label>
+            <input class="form-control input-sm" type="text" id="iKrajStudija" ng-disabled="true" value="Ljubljana">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Selected group -->
+          <div class="form-group">
+            <label for="iIzbirnaSkupina">Izbirna skupina: </label>
+            <input class="form-control input-sm" type="text" id="iIzbirnaSkupina" ng-disabled="true" value="-">
+          </div>
+        </div>
+        <div class="col-md-12"><hr /></div>
+        <div class="col-md-6">
+          <!-- Study type -->
+          <div class="form-group">
+            <label for="iStudyDegree">Vrsta študija: </label>
+            <input class="form-control input-sm" type="text" id="iStudyDegree" ng-model="vm.token.studyProgram.studyDegree.name" ng-disabled="vm.token.studyProgram.studyDegree.name != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Enrolment type -->
+          <div class="form-group">
+            <label for="iTokenType">Vrsta vpisa: </label>
+            <input class="form-control input-sm" type="text" id="iTokenType" ng-model="vm.token.type" ng-disabled="vm.token.type != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!--Year/additional year -->
+          <div class="form-group">
+            <label for="iTokenYear">Letnik/dodatno leto: </label>
+            <input class="form-control input-sm" type="text" id="iTokenYear" ng-model="vm.token.year" ng-disabled="vm.token.year != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Study kind -->
+          <div class="form-group">
+            <label for="iTokenKind">Način in oblika študija: </label>
+            <input class="form-control input-sm" type="text" id="iTokenKind" ng-model="vm.token.kind" ng-disabled="vm.token.kind != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Study year of first enrolment -->
+          <div class="form-group">
+            <label for="">Študijsko leto prvega vpisa v ta študijski program: </label>
+            <input class="form-control input-sm" type="text" id="" ng-model="lala" ng-disabled="">
+          </div>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
     </div>
   </div>
 
-  <!--Address for sending mail -->
-  <b>Vročanje: </b>
-  <div class="radio" style="text-align:left;">
-    <label>
-      <input type="radio" name="optionsRadios" id="optionsRadios1" value="address1" checked="">
-      Stalno bivališče
-    </label>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><span class="glyphicon glyphicon-briefcase"></span> Priloga 1: Predmetnik</h3>
+    </div>
+    <div class="panel-body">
+
+      to-do
+
+    </div>
   </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="optionsRadios" id="optionsRadios2" value="address2">
-      Začasno bivališče
-    </label>
-  </div>
-
-
-
-
-  <!-- Enrolment data -->
-  <h3 class="enrol-section">Podatki o vpisu</h3>
-
-  <!-- Study program -->
-  <b>Študijski program: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-disabled="true" ng-model="vm.parsedStProgram">
-  </div>
-
-  <!-- Place -->
-  <b>Kraj izvajanja: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-disabled="true" value="Ljubljana">
-  </div>
-
-  <!-- Selected group -->
-  <b>Izbirna skupina: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-disabled="true" value="-">
-  </div>
-
-  <!-- Study type -->
-  <b>Vrsta študija: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.token.studyProgram.studyDegree.name" ng-disabled="vm.token.studyProgram.studyDegree.name != undefined">
-  </div>
-
-  <!-- Enrolment type -->
-  <b>Vrsta vpisa: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.token.type" ng-disabled="vm.token.type != undefined">
-  </div>
-
-  <!--Year/additional year -->
-  <b>Letnik/dodatno leto: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.token.year" ng-disabled="vm.token.year != undefined">
-  </div>
-
-  <!-- Study kind -->
-  <b>Način in oblika študija: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="vm.token.kind" ng-disabled="vm.token.kind != undefined">
-  </div>
-
-  <!-- Study year of first enrolment -->
-  <b>Študijsko leto prvega vpisa v ta študijski program: </b>
-  <div class="form-group">
-    <input class="form-control input-sm" type="text" id="inputSmall" ng-model="lala" ng-disabled="">
-  </div>
-
-  
-
-  <!-- Curriculum -->
-  <h3 class="enrol-section">Priloga 1: Predmetnik</h3>
-
-  to-do
 
 </div>
