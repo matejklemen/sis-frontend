@@ -1,0 +1,349 @@
+<sis-navbar></sis-navbar>
+
+<div class="container">
+  <h2>Vpisni list</h2>
+
+  <!-- Osebni podatki -->
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Osebni podatki</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Name and surname -->
+          <b>Priimek in Ime: </b>
+          <div class="important-data">{{ vm.student.surname }}, {{ vm.student.name }}</div>
+          <br />
+        </div>
+        <div class="col-md-6">
+          <!-- Registr. number -->
+          <div class="form-group">
+            <label for="i1">Vpisna številka: </label>
+            <input class="form-control input-sm" type="text" id="i1" ng-model="vm.student.registerNumber">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Date of birth -->
+          <div class="form-group">
+            <label for="i2">Datum rojstva: </label>
+            <input class="form-control input-sm" type="date" id="i2" ng-model="vm.student.dateOfBirth">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Place of birth -->
+          <div class="form-group">
+            <label for="i3">Kraj rojstva: </label>
+            <input class="form-control input-sm" type="text" id="i3" ng-model="vm.student.placeOfBirth">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Municipality of birth -->
+          <div class="form-group">
+            <label for="i4">Občina rojstva: </label>
+            <select ng-model="vm.student.municipalityOfBirth.id" class="form-control input-sm" ng-options="m.id as m.name for m in vm.cl.municipalities"></select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Country of birth -->
+          <div class="form-group">
+            <label for="i5">Država rojstva: </label>
+            <select ng-model="vm.student.countryOfBirth.id" class="form-control input-sm" ng-options="c.id as c.name for c in vm.cl.countries"></select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Citizenship -->
+          <div class="form-group">
+            <label for="i6">Državljanstvo: </label>
+            <select ng-model="vm.student.citizenship.id" class="form-control input-sm" ng-options="c.id as c.name for c in vm.cl.countries"></select>
+          </div>
+        </div>
+
+        <div class="col-md-12"><hr /></div>
+
+        <div class="col-md-6">
+          <!-- Gender -->
+          <div class="form-group">
+            <label for="i7">Spol: </label>
+            <select ng-model="vm.student.gender" class="form-control input-sm">
+              <option value="M">Moški</option>
+              <option value="Ž">Ženski</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- EMSO -->
+          <div class="form-group">
+            <label for="i8">EMŠO: </label>
+            <input class="form-control input-sm" type="text" id="i8" ng-model="vm.student.emso">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Tax number -->
+          <div class="form-group">
+            <label for="i9">Davčna številka: </label>
+            <input class="form-control input-sm" type="text" id="i9" ng-model="vm.student.taxNumber">
+          </div>
+        </div>
+
+        <div class="col-md-12"><hr /></div>
+
+        <div class="col-md-6">
+          <!-- e-mail -->
+          <div class="form-group">
+            <label for="i10">E-pošta: </label>
+            <input class="form-control input-sm" type="text" id="i10" ng-model="vm.student.email">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Phone number -->
+          <div class="form-group">
+            <label for="i11">Prenosni telefon: </label>
+            <input class="form-control input-sm" type="text" id="i11" ng-model="vm.student.phoneNumber">
+          </div>
+        </div>
+
+        <div class="col-md-12"><hr /></div>
+      </div>
+
+      <div class="row">
+        <!-- Address -->
+        <div class="col-md-6">
+          <!-- Address1 -->
+          <h4><span class="glyphicon glyphicon-home"></span> Stalno bivališče</h4>
+          <div class="form-group" >
+            <label for="i12">Naslov: </label>
+            <input class="form-control input-sm" type="text" id="i12" ng-model="vm.student.address1.line1">
+          </div>
+          <div class="form-group" >
+            <label for="i13">Pošta: </label>
+            <select ng-model="vm.student.address1.post.id" class="form-control input-sm" ng-options="p.id as p.name for p in vm.cl.postaddresses"></select>
+          </div>
+          <div class="form-group" >
+            <label for="i14">Država: </label>
+            <select ng-model="vm.student.address1.country.id" class="form-control input-sm" ng-options="c.id as c.name for c in vm.cl.countries"></select>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <!-- Address2 -->
+          <h4><span class="glyphicon glyphicon-home"></span> Začasno bivališče</h4>
+          <div class="form-group" >
+            <label for="i12">Naslov: </label>
+            <input class="form-control input-sm" type="text" id="i12" ng-model="vm.student.address2.line1">
+          </div>
+          <div class="form-group" >
+            <label for="i13">Pošta: </label>
+            <select ng-model="vm.student.address2.post.id" class="form-control input-sm" ng-options="p.id as p.name for p in vm.cl.postaddresses"></select>
+          </div>
+          <div class="form-group" >
+            <label for="i14">Država: </label>
+            <select ng-model="vm.student.address2.country.id" class="form-control input-sm" ng-options="c.id as c.name for c in vm.cl.countries"></select>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <!--Address for sending mail -->
+          <b>Vročanje: </b>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios1" value="address1" checked="">
+              Stalno bivališče
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios2"  value="address2" ng-disabled='vm.student.address2 == undefined || vm.student.address2.country.id == undefined || vm.student.address2.post.id == undefined || vm.student.address2.line1 == undefined || vm.student.address2.line1 == ""'>
+              Začasno bivališče
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Podatki o vpisu -->
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"><span class="glyphicon glyphicon-pencil"></span> Podatki o vpisu</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Study program -->
+          <div class="form-group">
+            <label for="i13">Študijski program: </label>
+            <select ng-model="vm.token.studyProgram.id" ng-disabled="true" class="form-control input-sm" ng-options="sp.id as sp.name for sp in vm.cl.studyprograms"></select>
+            <!-- input class="form-control input-sm" type="text" id="i13" ng-disabled="true" ng-model="vm.parsedStProgram" -->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Place -->
+          <div class="form-group">
+            <label for="i14">Kraj izvajanja: </label>
+            <input class="form-control input-sm" type="text" id="i14" ng-disabled="true" value="Ljubljana">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Selected group -->
+          <div class="form-group">
+            <label for="i15">Izbirna skupina: </label>
+            <input class="form-control input-sm" type="text" id="i15" ng-disabled="true" value="-">
+          </div>
+        </div>
+        <div class="col-md-12"><hr /></div>
+        <div class="col-md-6">
+          <!-- Study type -->
+          <div class="form-group">
+            <label for="i16">Vrsta študija: </label>
+            <select ng-model="vm.token.studyProgram.studyDegree.id" ng-disabled="true" class="form-control input-sm" ng-options="sd.id as sd.name for sd in vm.cl.studydegrees"></select>
+            <!-- input class="form-control input-sm" type="text" id="i16" ng-model="vm.token.studyProgram.studyDegree.name" ng-disabled="vm.token.studyProgram.studyDegree.name != undefined" -->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Enrolment type -->
+          <div class="form-group">
+            <label for="i17">Vrsta vpisa: </label>
+            <select ng-model="vm.token.type.id" ng-disabled="true" class="form-control input-sm" ng-options="st.id as st.name for st in vm.cl.studytypes"></select>
+            <!--input class="form-control input-sm" type="text" id="i17" ng-model="vm.token.type.name" ng-disabled="vm.token.type != undefined" -->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!--Year/additional year -->
+          <div class="form-group">
+            <label for="i18">Letnik/dodatno leto: </label>
+            <input class="form-control input-sm" type="text" id="i18" ng-model="vm.token.year" ng-disabled="vm.token.year != undefined">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Study kind -->
+          <div class="form-group">
+            <label for="i19">Način študija: </label>
+            <select ng-model="vm.token.kind.id" ng-disabled="true" class="form-control input-sm" ng-options="sk.id as sk.name for sk in vm.cl.studykinds"></select>
+            <!-- input class="form-control input-sm" type="text" id="i19" ng-model="vm.token.kind.name" ng-disabled="vm.token.kind != undefined" -->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Study form -->
+          <div class="form-group">
+            <label for="i20">Oblika študija: </label>
+            <select ng-model="vm.token.form.id" ng-disabled="true" class="form-control input-sm" ng-options="sf.id as sf.name for sf in vm.cl.studyforms"></select>
+            <!-- input class="form-control input-sm" type="text" id="i20" ng-model="vm.token.form.name" ng-disabled="vm.token.kind != undefined" -->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Study year of first enrolment -->
+          <div class="form-group">
+            <label for="">Študijsko leto prvega vpisa v ta študijski program: </label>
+            <input class="form-control input-sm" type="text" id="" ng-model="vm.firstEnrolment" ng-disabled="true">
+          </div>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Predmetnik -->
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><span class="glyphicon glyphicon-briefcase"></span> Priloga 1: Predmetnik</h3>
+    </div>
+    <div class="panel-body">
+
+      <div class="well well-sm">
+        Skupaj izbranih kreditnih točk: <strong ng-class="vm.creditSum >= 60 ? 'text-success' : 'text-danger'"><span>{{ vm.creditSum }}</span> / 60</strong>
+      </div>
+
+      <h4>Obvezni predmeti</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr class="active">
+            <th scope="col">#</th>
+            <th scope="col">Ime</th>
+            <th scope="col">Semester</th>
+            <th scope="col">KT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="subject in vm.courses.obv">
+            <th scope="row">{{ $index + 1 }}</th>
+            <td>{{ subject.idCourse.name }}</td>
+            <td>{{ subject.idCourse.semester }}</td>
+            <td>{{ subject.idCourse.creditPoints }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div ng-if="vm.courses.siz.length > 0">
+        <h4>Strokovno izbirni predmeti</h4>
+        <p ng-if="vm.token.year == 2">Izbrati morate vsaj en strokovno izbirni predmet.</p>
+        <p ng-if="vm.token.year == 3 && vm.token.freeChoice">Izbrati morate vsaj 6 strokovno izbirnih predmetov.</p>
+        <p ng-if="vm.token.year == 3 && !vm.token.freeChoice">Izbrati morate dva modula (po trije predmeti skupaj) v sklopu strokovno izbirnih predmetov.</p>
+        <table class="table table-striped">
+          <thead>
+            <tr class="active">
+              <th scope="col">#</th>
+              <th scope="col">Ime</th>
+              <th scope="col">Modul</th>
+              <th scope="col">Semester</th>
+              <th scope="col">KT</th>
+              <th scope="col">Izbira</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="subject in vm.courses.siz">
+              <th scope="row">{{ $index + 1 }}</th>
+              <td>{{ subject.idCourse.name }}</td>
+              <td>{{ subject.poc.moduleName }}</td>
+              <td>{{ subject.idCourse.semester }}</td>
+              <td>{{ subject.idCourse.creditPoints }}</td>
+              <td><input type="checkbox" ng-model="subject.selected" ng-change="vm.courseCheckboxClick(subject)" ng-checked="false"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div ng-if="vm.courses.piz.length > 0">
+        <h4>Prosto izbirni predmeti</h4>
+        <p>Namesto prosto izbirnih predmetov lahko izberete tudi dodatne strokovno izbirne predmete zgoraj.</p>
+        <table class="table table-striped">
+          <thead>
+            <tr class="active">
+              <th scope="col">#</th>
+              <th scope="col">Ime</th>
+              <th scope="col">Semester</th>
+              <th scope="col">KT</th>
+              <th scope="col">Izbira</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="subject in vm.courses.piz">
+              <th scope="row">{{ $index + 1 }}</th>
+              <td>{{ subject.idCourse.name }}</td>
+              <td>{{ subject.idCourse.semester }}</td>
+              <td>{{ subject.idCourse.creditPoints }}</td>
+              <td><input type="checkbox" ng-model="subject.selected" ng-change="vm.courseCheckboxClick(subject)" ng-checked="false"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="well well-sm">
+        Skupaj izbranih kreditnih točk: <strong ng-class="vm.creditSum >= 60 ? 'text-success' : 'text-danger'"><span>{{ vm.creditSum }}</span> / 60</strong>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Potrdi vpis || preklici vpis -->
+  <div style="text-align: right;margin-bottom: 100px;">
+    <div class="alert alert-danger" ng-if="vm.finalizeError.length > 0">
+      <strong>Napaka!</strong> {{ vm.finalizeError }}
+    </div>
+    <a ng-click="vm.cancelEnrolment()" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-chevron-left"></span> Prekliči vpis</a>
+    <a ng-click="vm.finalizeEnrolment()" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-ok-sign"></span> Zaključi vpis</a>
+  </div>
+
+</div>
