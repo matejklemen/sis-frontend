@@ -2,8 +2,6 @@
   var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService, codelistService, curriculumService) {
     var vm = this;
 
-    vm.cl = {};
-
     /* Get and set data */
     tokenService.getTokenByStudentId($routeParams.studentId).then(
       function success(response) {
@@ -26,6 +24,10 @@
         function success(response) {
           console.log(response.data);
           vm.student = response.data;
+
+          // fix for ng-model with input type date
+          vm.student.dateOfBirth = new Date(vm.student.dateOfBirth);
+          
           setAndParseStudentData();
         },
         function error(error) {
@@ -34,32 +36,84 @@
       );
     }
 
-    codelistService.getCodelist("postaddresses").then(
-      function success(response) {
-        vm.cl.postaddresses = response.data;
-      },
-      function error(error) {
-        console.log("Oh no...", error);
-      }
-    );
+    loadCodelists();
 
-    codelistService.getCodelist("countries").then(
-      function success(response) {
-        vm.cl.countries = response.data;
-      },
-      function error(error) {
-        console.log("Oh no...", error);
-      }
-    );
+    function loadCodelists() {
+      vm.cl = {};
 
-    codelistService.getCodelist("municipalities").then(
-      function success(response) {
-        vm.cl.municipalities = response.data;
-      },
-      function error(error) {
-        console.log("Oh no...", error);
-      }
-    );
+      codelistService.getCodelist("postaddresses").then(
+        function success(response) {
+          vm.cl.postaddresses = response.data;
+        },
+        function error(error) {
+          console.log("Oh no...", error);
+        }
+      );
+
+      codelistService.getCodelist("countries").then(
+        function success(response) {
+          vm.cl.countries = response.data;
+        },
+        function error(error) {
+          console.log("Oh no...", error);
+        }
+      );
+
+      codelistService.getCodelist("municipalities").then(
+        function success(response) {
+          vm.cl.municipalities = response.data;
+        },
+        function error(error) {
+          console.log("Oh no...", error);
+        }
+      );
+
+      codelistService.getCodelist("studyprograms").then(
+        function success(response) {
+          vm.cl.studyprograms = response.data;
+        },
+        function error(error) {
+          console.log("Oh no...", error);
+        }
+      );
+
+      codelistService.getCodelist("studydegrees").then(
+        function success(response) {
+          vm.cl.studydegrees = response.data;
+        },
+        function error(error) {
+          console.log("Oh no...", error);
+        }
+      );
+
+      codelistService.getCodelist("studytypes").then(
+        function success(response) {
+          vm.cl.studytypes = response.data;
+        },
+        function error(error) {
+          console.log("Oh no...", error);
+        }
+      );
+
+      codelistService.getCodelist("studykinds").then(
+        function success(response) {
+          vm.cl.studykinds = response.data;
+        },
+        function error(error) {
+          console.log("Oh no...", error);
+        }
+      );
+
+      codelistService.getCodelist("studyforms").then(
+        function success(response) {
+          vm.cl.studyforms = response.data;
+        },
+        function error(error) {
+          console.log("Oh no...", error);
+        }
+      );
+
+    }
     
     function getCurriculum(token){
       curriculumService.getCurriculum("20172018", token.studyProgram.id, token.year).then(
