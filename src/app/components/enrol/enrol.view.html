@@ -3,6 +3,7 @@
 <div class="container">
   <h2>Vpisni list</h2>
 
+  <!-- Osebni podatki -->
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Osebni podatki</h3>
@@ -152,7 +153,7 @@
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios2" value="address2">
+              <input type="radio" name="optionsRadios" id="optionsRadios2"  value="address2" ng-disabled='vm.student.address2 == undefined || vm.student.address2.country.id == undefined || vm.student.address2.post.id == undefined || vm.student.address2.line1 == undefined || vm.student.address2.line1 == ""'>
               Začasno bivališče
             </label>
           </div>
@@ -163,6 +164,7 @@
     </div>
   </div>
 
+  <!-- Podatki o vpisu -->
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title"><span class="glyphicon glyphicon-pencil"></span> Podatki o vpisu</h3>
@@ -235,7 +237,7 @@
           <!-- Study year of first enrolment -->
           <div class="form-group">
             <label for="">Študijsko leto prvega vpisa v ta študijski program: </label>
-            <input class="form-control input-sm" type="text" id="" ng-model="lala" ng-disabled="">
+            <input class="form-control input-sm" type="text" id="" ng-model="vm.firstEnrolment" ng-disabled="true">
           </div>
         </div>
         <div class="col-md-6"></div>
@@ -243,6 +245,7 @@
     </div>
   </div>
 
+  <!-- Predmetnik -->
   <div class="panel panel-info">
     <div class="panel-heading">
       <h3 class="panel-title"><span class="glyphicon glyphicon-briefcase"></span> Priloga 1: Predmetnik</h3>
@@ -271,4 +274,8 @@
     </div>
   </div>
 
+  <!-- Potrdi vpis || preklici vpis -->
+  <a ng-click="vm.finalizeEnrolment()" class="btn btn-success pull-right" style="margin:5px;">Zaključi vpis</a>
+  <a ng-click="vm.cencelEnrolment()" class="btn btn-danger pull-right" style="margin:5px;">Prekliči vpis</a>
+  <div style="height:100px"></div>
 </div>

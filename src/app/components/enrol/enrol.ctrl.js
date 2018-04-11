@@ -1,5 +1,5 @@
 (function() {
-  var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService, codelistService, curriculumService) {
+  var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService, codelistService, curriculumService,enrolmentService) {
     var vm = this;
 
     /* Get and set data */
@@ -28,6 +28,7 @@
           // fix for ng-model with input type date
           vm.student.dateOfBirth = new Date(vm.student.dateOfBirth);
           
+          getFirstEnrolmentInProgram();
           setAndParseStudentData();
         },
         function error(error) {
@@ -128,8 +129,31 @@
       );
     } 
 
+    function getFirstEnrolmentInProgram(){
+      enrolmentService.getFirstEnrolment(vm.student.id, vm.token.studyProgram.id).then(
+        function success(response){
+          console.log("first enrolment, ",response.data);
+          vm.firstEnrolment = response.data.studyYear.name;
+        },
+        function error(error){
+          console.log("Oh no...",error)
+        }
+      );
+    }
+
     function setAndParseStudentData(){
       vm.parsedStProgram = vm.token.studyProgram.evsCode + " " + (vm.token.studyProgram.name).split('(')[0];
+    }
+
+    /* Finalize || Cencel enrolment*/
+
+    vm.finalizeEnrolment = function(){
+      //send to BE
+    }
+
+    vm.cencelEnrolment = function(){
+      if(confirm("Ste prepričani da želite preklicati vpis?"))
+        $window.history.back();
     }
 
     /* Helpers */
