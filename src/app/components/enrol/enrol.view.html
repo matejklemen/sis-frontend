@@ -249,24 +249,87 @@
     </div>
     <div class="panel-body">
 
+      <div class="well well-sm">
+        Skupaj izbranih kreditnih točk: <strong ng-class="vm.creditSum >= 60 ? 'text-success' : 'text-danger'"><span>{{ vm.creditSum }}</span> / 60</strong>
+      </div>
+
+      <h4>Obvezni predmeti</h4>
       <table class="table table-striped">
         <thead>
           <tr class="active">
             <th scope="col">#</th>
             <th scope="col">Ime</th>
             <th scope="col">Semester</th>
-            <th scope="col">Izbira</th>
+            <th scope="col">KT</th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="subject in vm.curriculum">
+          <tr ng-repeat="subject in vm.courses.obv">
             <th scope="row">{{ $index + 1 }}</th>
             <td>{{ subject.idCourse.name }}</td>
             <td>{{ subject.idCourse.semester }}</td>
-            <td><input type="checkbox" ng-model="subject.selected" ng-if="vm.selectable" ng-checked="true"></td>
+            <td>{{ subject.idCourse.creditPoints }}</td>
           </tr>
         </tbody>
       </table>
+
+      <div ng-if="vm.courses.siz.length > 0">
+        <h4>Strokovno izbirni predmeti</h4>
+        <p ng-if="vm.token.year == 2">Izbrati morate vsaj en strokovno izbirni predmet.</p>
+        <p ng-if="vm.token.year == 3 && vm.token.freeChoice">Izbrati morate vsaj 6 strokovno izbirnih predmetov.</p>
+        <p ng-if="vm.token.year == 3 && !vm.token.freeChoice">Izbrati morate dva modula (po trije predmeti skupaj) v sklopu strokovno izbirnih predmetov.</p>
+        <table class="table table-striped">
+          <thead>
+            <tr class="active">
+              <th scope="col">#</th>
+              <th scope="col">Ime</th>
+              <th scope="col">Modul</th>
+              <th scope="col">Semester</th>
+              <th scope="col">KT</th>
+              <th scope="col">Izbira</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="subject in vm.courses.siz">
+              <th scope="row">{{ $index + 1 }}</th>
+              <td>{{ subject.idCourse.name }}</td>
+              <td>{{ subject.poc.moduleName }}</td>
+              <td>{{ subject.idCourse.semester }}</td>
+              <td>{{ subject.idCourse.creditPoints }}</td>
+              <td><input type="checkbox" ng-model="subject.selected" ng-change="vm.courseCheckboxClick(subject)" ng-checked="false"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div ng-if="vm.courses.piz.length > 0">
+        <h4>Prosto izbirni predmeti</h4>
+        <p>Namesto prosto izbirnih predmetov lahko izberete tudi dodatne strokovno izbirne predmete zgoraj.</p>
+        <table class="table table-striped">
+          <thead>
+            <tr class="active">
+              <th scope="col">#</th>
+              <th scope="col">Ime</th>
+              <th scope="col">Semester</th>
+              <th scope="col">KT</th>
+              <th scope="col">Izbira</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="subject in vm.courses.piz">
+              <th scope="row">{{ $index + 1 }}</th>
+              <td>{{ subject.idCourse.name }}</td>
+              <td>{{ subject.idCourse.semester }}</td>
+              <td>{{ subject.idCourse.creditPoints }}</td>
+              <td><input type="checkbox" ng-model="subject.selected" ng-change="vm.courseCheckboxClick(subject)" ng-checked="false"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="well well-sm">
+        Skupaj izbranih kreditnih točk: <strong ng-class="vm.creditSum >= 60 ? 'text-success' : 'text-danger'"><span>{{ vm.creditSum }}</span> / 60</strong>
+      </div>
 
     </div>
   </div>

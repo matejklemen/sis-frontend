@@ -27,8 +27,6 @@
 
           // fix for ng-model with input type date
           vm.student.dateOfBirth = new Date(vm.student.dateOfBirth);
-          
-          setAndParseStudentData();
         },
         function error(error) {
           
@@ -115,22 +113,76 @@
 
     }
     
-    function getCurriculum(token){
+    function getCurriculum(token) {
       curriculumService.getCurriculum("20172018", token.studyProgram.id, token.year).then(
-        function success(response){
+        function success(response) {
           console.log("got curriculum: ",response.data);
+
+          vm.courses = {
+            obv: [],
+            siz: [], // strokovni izbirni
+            piz: [], // prosto izbirni
+            mod: {}
+          };
+          
           vm.curriculum = response.data;
-          vm.selectable = true; //tmp for testing
+          vm.curriculum.forEach(function(element, index, array) {
+            if(element.poc.type == "obv") {
+              vm.courses.obv.push(element);
+            } else if(element.poc.type == "siz") {
+              vm.courses.siz.push(element);
+            } else if(element.poc.type == "piz") {
+              vm.courses.piz.push(element);
+            } else {
+              // modulske predmete dodaj tudi med strokovne
+              vm.courses.siz.push(element);
+
+              // hrani tabelice kjer so zdruzeni modulski predmeti
+              if(vm.courses.mod[element.poc.idPOC] === undefined) vm.courses.mod[element.poc.idPOC] = [];
+              vm.courses.mod[element.poc.idPOC].push(element);
+            }
+
+          });
+
+          updateCreditSum();
         },
-        function error(error){
-          console.log("Oh no...",error)
+        function error(error) {
+          console.log("Oh no...",error);
         }
       );
+    }
+
+    function updateCreditSum() {
+      vm.creditSum = 0;
+      vm.curriculum.forEach(function(element, index, array) {
+        if(element.selected || element.poc.type == "obv") {
+          vm.creditSum += element.idCourse.creditPoints;
+        }
+      });
     } 
 
-    function setAndParseStudentData(){
-      vm.parsedStProgram = vm.token.studyProgram.evsCode + " " + (vm.token.studyProgram.name).split('(')[0];
-    }
+    vm.courseCheckboxClick = function(cu) {
+      if(vm.token.year == 2) {
+        // izbrati mora vsaj en strokovni izbirni predmet (lahko več)
+      }
+
+      if(vm.token.year == 3) {
+        if(vm.token.freeChoice) {
+          // izbira lahko med katerikolimi predmeti brez omejitev
+        } else {
+          // izbira je omejena na module
+          if(cu.poc.type == "mod") {
+            // v istem modulu oznaci enako vse predmete
+            vm.courses.mod[cu.poc.idPOC].forEach(function(element, index, array) {
+              element.selected = cu.selected;
+            });
+          }
+        }
+      }
+
+
+      updateCreditSum();
+    };
 
     /* Helpers */
     function checkEMSO(emso) {
