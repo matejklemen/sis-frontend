@@ -171,7 +171,7 @@
           vm.firstEnrolment = response.data.studyYear.name;
         },
         function error(error){
-          console.log("Oh no...",error)
+          console.log("Oh no...",error);
         }
       );
     }
@@ -204,14 +204,55 @@
 
     /* Finalize || Cencel enrolment*/
 
-    vm.finalizeEnrolment = function(){
-      //send to BE
-    }
+    vm.finalizeEnrolment = function() {
+      if(vm.creditSum < 60) {
+        // error
+        vm.finalizeError = "Število kreditnih točk mora biti vsaj 60.";
+        return;
+      }
 
-    vm.cencelEnrolment = function(){
-      if(confirm("Ste prepričani da želite preklicati vpis?"))
+      // stevilo izbranih strokovnih predmetov
+      var countSiz = 0;
+      vm.courses.siz.forEach(function(element, index, array) {
+          if(element.selected) countSiz++;
+        });
+
+      if(vm.token.year == 2 && countSiz < 1) {
+        vm.finalizeError = "Izbrati morate vsaj en strokovno izbirni predmet.";
+        return;
+      }
+
+      if(vm.token.year == 3 && countSiz < 6) {
+        if(vm.token.freeChoice)
+          vm.finalizeError = "Izbrati morate vsaj 6 strokovno izbirnih predmetov.";
+        else
+          vm.finalizeError = "Izbrati morate vsaj 2 modula.";
+        return;
+      }
+
+      //send to BE
+      var objectToSend = {
+        student: {},
+        enrolment: {},
+        courses: []
+      };
+
+      objectToSend.student = vm.student;
+      objectToSend.enrolment = vm.token;
+
+      vm.curriculum.forEach(function(element, index, array) {
+        if(element.selected || element.poc.type == "obv") {
+          objectToSend.courses.push(element.idCourse.id);
+        }
+      });
+
+      console.log(objectToSend);
+    };
+
+    vm.cancelEnrolment = function(){
+      if(confirm("Ste prepričani da želite preklicati vpis? Spremembe, ki ste jih naredili, se ne bodo shranile!"))
         $window.history.back();
-    }
+    };
 
     /* Helpers */
     function checkEMSO(emso) {

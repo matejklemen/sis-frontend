@@ -338,7 +338,12 @@
   </div>
 
   <!-- Potrdi vpis || preklici vpis -->
-  <a ng-click="vm.finalizeEnrolment()" class="btn btn-success pull-right" style="margin:5px;">Zaključi vpis</a>
-  <a ng-click="vm.cencelEnrolment()" class="btn btn-danger pull-right" style="margin:5px;">Prekliči vpis</a>
-  <div style="height:100px"></div>
+  <div style="text-align: right;margin-bottom: 100px;">
+    <div class="alert alert-danger" ng-if="vm.finalizeError.length > 0">
+      <strong>Napaka!</strong> {{ vm.finalizeError }}
+    </div>
+    <a ng-click="vm.cancelEnrolment()" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-chevron-left"></span> Prekliči vpis</a>
+    <a ng-click="vm.finalizeEnrolment()" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-ok-sign"></span> Zaključi vpis</a>
+  </div>
+
 </div>
