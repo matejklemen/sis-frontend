@@ -66,6 +66,36 @@
         });
       }
 
+      // update/add idCourse.name field
+      if('idCourse' in vm.entry) {
+        vm.columnOptions.courses.some(function(item) {
+          if(item.id == vm.entry.idCourse.id) {
+            vm.entry.idCourse.name = item.name;
+            return true;
+          }
+        });
+      }
+
+      // update/add idStudyProgram.name field
+      if('idStudyProgram' in vm.entry) {
+        vm.columnOptions.studyprograms.some(function(item) {
+          if(item.id == vm.entry.idStudyProgram.id) {
+            vm.entry.idStudyProgram.name = item.name;
+            return true;
+          }
+        });
+      }
+
+      // update/add studyYear.name field
+      if('studyYear' in vm.entry) {
+        vm.columnOptions.studyyears.some(function(item) {
+          if(item.id == vm.entry.studyYear.id) {
+            vm.entry.studyYear.name = item.name;
+            return true;
+          }
+        });
+      }        
+
       if(!resModeEdit) {
           codelistService.putEntry(resCodelist.endpoint, vm.entry).then(
           function success(response) {
