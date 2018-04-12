@@ -231,14 +231,11 @@
       }
 
       //send to BE
-      var objectToSend = {
-        student: {},
-        enrolment: {},
-        courses: []
-      };
+      var objectToSend = {};
 
       objectToSend.student = vm.student;
-      objectToSend.enrolment = vm.token;
+      objectToSend.enrolmentToken = vm.token;
+      objectToSend.courses = [];
 
       vm.curriculum.forEach(function(element, index, array) {
         if(element.selected || element.poc.type == "obv") {
@@ -247,6 +244,17 @@
       });
 
       console.log(objectToSend);
+
+      tokenService.postEnrolData(objectToSend).then(
+        function success(response) {
+          console.log("Vpis uspel:", response);
+          $window.location.href = "/student/" + vm.student.registerNumber;
+        },
+        function error(error) {
+          console.log(error);
+          vm.finalizeError = error.data.status + ":" + error.data.message;
+        }
+      );
     };
 
     vm.cancelEnrolment = function(){

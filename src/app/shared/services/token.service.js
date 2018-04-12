@@ -11,17 +11,22 @@
 
     var deleteToken = function(id){
       return $http.delete(apiBaseRoute+'/api/tokens/'+id);
-    }
+    };
 
     var postToken = function(token){
       return $http.post(apiBaseRoute+'/api/tokens',token);
-    }
+    };
+
+    var postEnrolData = function(enrolFormObject) {
+      return $http.post(apiBaseRoute + '/api/enrolments', enrolFormObject);
+    };
 
     return {
       putToken: putToken,
       getTokenByStudentId: getTokenByStudentId,
       deleteToken: deleteToken,
       postToken: postToken,
+      postEnrolData: postEnrolData,
     };
   };
 
