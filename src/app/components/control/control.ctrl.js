@@ -6,18 +6,19 @@
     vm.role = authenticationService.getRole();
     vm.loginId = authenticationService.getLoginId();
 
-    authenticationService.getUserData(vm.loginId, vm.role.id).then(
-      function success(response) {
-        if(vm.role.id == 2) {
+    if(vm.role.id == 2)
+    {
+      console.log("klicem")
+      authenticationService.getUserData(vm.loginId, vm.role.id).then(
+        function success(response) {
+          console.log("grem")
           $window.location.href = "/student/" + response.data.registerNumber;
+        },
+        function error(error) {
+          console.log("Ooopse poopse~~!", error);
         }
-      },
-      function error(error) {
-        console.log("Ooopse poopse~~!", error);
-      }
-    );
-
-    
+      );
+    }
   };
 
   angular
