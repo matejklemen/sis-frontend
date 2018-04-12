@@ -79,7 +79,19 @@
       var token = returnToken();
       if (token) {
         var data = JSON.parse(b64Utf8(token.split('.')[1]));
+        console.log(data);
         return data.sub;
+      } else {
+        return false;
+      }
+    };
+
+    var getLoginId = function() {
+      var token = returnToken();
+      if (token) {
+        var data = JSON.parse(b64Utf8(token.split('.')[1]));
+        console.log(data);
+        return data.loginid;
       } else {
         return false;
       }
@@ -95,6 +107,10 @@
       }
     };
 
+    var getUserData = function(loginId, roleId) {
+      return $http.get(apiBaseRoute + '/api/login/' + loginId + '?roleId=' + roleId);
+    };
+
     return {
       login: login,
       passwordReset: passwordReset,
@@ -104,9 +120,11 @@
       logout: logout,
       isLoggedIn: isLoggedIn,
       getUsername: getUsername,
-      getRole: getRole
+      getRole: getRole,
+      getUserData: getUserData,
+      getLoginId: getLoginId,
     };
-  }
+  };
 
   angular
     .module('sis')

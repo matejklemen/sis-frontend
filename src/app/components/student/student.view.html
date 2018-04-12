@@ -12,11 +12,13 @@
           <strong>{{ vm.student.surname }}, {{ vm.student.name }}</strong>
         </li>
         <li class="list-group-item">
-          Naslov stalnega bivališča:
+          Naslov stalnega bivališča:<br />
+          <span class="text-success" ng-if="vm.student.sendingAddress != 2"><span class="glyphicon glyphicon-inbox"></span> Naslov za prejemanje:</span>
           <strong>{{ vm.student.address1 | formatAddress:false }}</strong>
         </li>
         <li class="list-group-item">
-          Naslov začasnega bivališča:
+          Naslov začasnega bivališča:<br />
+          <span class="text-success" ng-if="vm.student.sendingAddress == 2"><span class="glyphicon glyphicon-inbox"></span> Naslov za prejemanje:</span>
           <strong>{{ vm.student.address2 | formatAddress:false }}</strong>
         </li>
         <li class="list-group-item">

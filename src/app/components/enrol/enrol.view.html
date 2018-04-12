@@ -144,19 +144,15 @@
 
         <div class="col-md-6">
           <!--Address for sending mail -->
-          <b>Vročanje: </b>
-          <div class="radio">
+          <b>Naslov za vročanje: </b><br />
             <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios1" value="address1" checked="">
+              <input type="radio" ng-value="1" ng-model="vm.student.sendingAddress">
               Stalno bivališče
-            </label>
-          </div>
-          <div class="radio">
+            </label><br />
             <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios2"  value="address2" ng-disabled='vm.student.address2 == undefined || vm.student.address2.country.id == undefined || vm.student.address2.post.id == undefined || vm.student.address2.line1 == undefined || vm.student.address2.line1 == ""'>
+              <input type="radio" ng-value="2" ng-model="vm.student.sendingAddress" ng-disabled='vm.student.address2 == undefined || vm.student.address2.country.id == undefined || vm.student.address2.post.id == undefined || vm.student.address2.line1 == undefined || vm.student.address2.line1 == ""'>
               Začasno bivališče
-            </label>
-          </div>
+            </label><br />
         </div>
 
       </div>

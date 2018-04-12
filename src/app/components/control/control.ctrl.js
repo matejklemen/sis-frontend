@@ -4,10 +4,20 @@
     var vm = this;
 
     vm.role = authenticationService.getRole();
+    vm.loginId = authenticationService.getLoginId();
 
-    if(vm.role.id == 2){
-      $window.location.href = "/student/63180006";
-    }
+    authenticationService.getUserData(vm.loginId, vm.role.id).then(
+      function success(response) {
+        if(vm.role.id == 2) {
+          $window.location.href = "/student/" + response.data.registerNumber;
+        }
+      },
+      function error(error) {
+        console.log("Ooopse poopse~~!", error);
+      }
+    );
+
+    
   };
 
   angular
