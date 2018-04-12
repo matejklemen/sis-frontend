@@ -9,9 +9,14 @@
       return $http.get(apiBaseRoute+'/api/enrolments/'+id+'?order=first&studyProgramId='+studyProgramId);
     };
 
+    var getEnrolmentsForStudent = function(studentId) {
+      return $http.get(apiBaseRoute + '/api/enrolments/' + studentId);
+    }
+
     return {
       checkEnrolment: checkEnrolment,
-      getFirstEnrolment: getFirstEnrolment
+      getFirstEnrolment: getFirstEnrolment,
+      getEnrolmentsForStudent: getEnrolmentsForStudent
     };
   };
 

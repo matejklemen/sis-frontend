@@ -78,9 +78,9 @@
         }
       );
 
-      codelistService.getCodelist("studydegrees").then(
+      codelistService.getCodelist("klasius").then(
         function success(response) {
-          vm.cl.studydegrees = response.data;
+          vm.cl.klasius = response.data;
         },
         function error(error) {
           console.log("Oh no...", error);

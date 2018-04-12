@@ -1,5 +1,5 @@
 (function() {
-  var studentCtrl = function($scope, $window, $routeParams, studentService, tokenService) {
+  var studentCtrl = function($scope, $window, $routeParams, studentService, enrolmentService, tokenService) {
     var vm = this;
 
     if($routeParams.registerNumber != null) {
@@ -15,6 +15,15 @@
               vm.hasToken = !response.data.used;
             },
             function error(error) {}
+          );
+
+          enrolmentService.getEnrolmentsForStudent(vm.student.id).then(
+            function success(response) {
+              vm.enrolments = response.data;
+            },
+            function error(error) {
+              console.log("Oh no...", error);
+            }
           );
         },
         function error(response) {
