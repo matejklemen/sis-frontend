@@ -81,7 +81,7 @@
           return true;
         },
         function error(error){
-          console.log("student with id "+id+" has no enrolments yet");
+          //console.log("student with id "+id+" has no enrolments yet");
           vm.enrolled = false;
           return false;
         }

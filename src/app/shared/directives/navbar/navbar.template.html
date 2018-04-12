@@ -6,15 +6,15 @@
     </div>
 
     <ul class="nav navbar-nav">
-      <p ng-show="vm.loggedIn" class="navbar-text">Prijavljen kot {{ vm.user }}. <a ng-click="vm.logout()" href="#" class="navbar-link">Odjava</a></p>
+      <p ng-show="vm.loggedIn" class="navbar-text">Prijavljen kot: {{ vm.user }}. Vloga: {{ vm.role.name }}</p>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li ng-show="vm.loggedIn"><a href="/control">Nadzorna plošča</a></li>
-      <li ng-hide="vm.loggedIn"><a href="/login">Prijava</a></li>
-      <li><a href="/">Doma</a></li>
-      <li><a href="/student">Študent</a></li>
-      <li><a href="/codelist">Šifranti</a></li>
+      <li ng-if="!vm.loggedIn" ><a href="/login">Prijava</a></li>
+      <li ng-if="vm.loggedIn" ><a ng-click="vm.logout()" href="#" class="navbar-link">Odjava</a></li>
+      <li ng-if="vm.loggedIn && vm.role.id == 1" ><a href="/control">Nadzorna plošča</a></li>
+      <li ng-if="vm.loggedIn && vm.role.id == 2" ><a href="/">Doma</a></li>
+      <li ng-if="vm.loggedIn && vm.role.id == 1" ><a href="/codelist">Šifranti</a></li>
     </ul>
   </div>
 </nav>

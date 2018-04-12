@@ -103,7 +103,8 @@
       returnToken: returnToken,
       logout: logout,
       isLoggedIn: isLoggedIn,
-      getUsername: getUsername
+      getUsername: getUsername,
+      getRole: getRole
     };
   }
 
