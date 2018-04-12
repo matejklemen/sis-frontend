@@ -25,6 +25,7 @@
         function success(response){
           vm.content = response.data;
           vm.status = "success";
+          console.log(response.data)
         },
         function error(error){
           console.log("Error in importCtrl. Message: ", error, status);
