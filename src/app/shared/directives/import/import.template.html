@@ -1,41 +1,43 @@
 <div class="container">
   <div class="panel panel-default">
-      <div class="panel-heading">
+      <div class="panel-heading clearfix">
           <div>
-              <div style="font-size:30px; display: inline;">Import student data:</div>
-              <label for="file-input" class="btn btn-default pull-right" flow-btn>
-                  Browse
-                <input id="file-input" type="file" on-read-file="vm.processData($fileContent)" style="visibility: hidden; position: absolute;">
-              </label>
-              <div ng-if="vm.status=='error'" class="pull-right status-message status-error">
-                  <span class="glyphicon glyphicon-exclamation-sign" style="margin-right:5px"></span>
-                  Error while importing data. <u><a style="cursor:pointer" ng-click="vm.reimport()">Try again</a></u> or import different file!
-              </div>
-              <div ng-if="vm.status=='success'" class="pull-right status-message status-success">
-                  <span class="glyphicon glyphicon-ok" style="margin-right:5px"></span>
-                  Success!
-              </div>
-              <div ng-if="vm.status=='progress'" class="pull-right status-message">
-                  <span class="glyphicon glyphicon-refresh" style="margin-right:5px"></span>
-                  In progress!
-              </div>
+            <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Uvozi podatke o sprejetih kandidatih</h4>
+            <div class="btn-group pull-right">
+                <label for="file-input" class="btn btn-default btn-sm" flow-btn>
+                    Išči
+                    <input id="file-input" type="file" on-read-file="vm.processData($fileContent)" style="visibility: hidden; position: absolute;">
+                </label>
+            </div>
+            <div ng-if="vm.status=='error'" class="pull-right status-message status-error">
+                <span class="glyphicon glyphicon-exclamation-sign" style="margin-right:5px"></span>
+                Error while importing data. <u><a style="cursor:pointer" ng-click="vm.reimport()">Try again</a></u> or import different file!
+            </div>
+            <div ng-if="vm.status=='success'" class="pull-right status-message status-success">
+                <span class="glyphicon glyphicon-ok" style="margin-right:5px"></span>
+                Success!
+            </div>
+            <div ng-if="vm.status=='progress'" class="pull-right status-message">
+                <span class="glyphicon glyphicon-refresh" style="margin-right:5px"></span>
+                In progress!
+            </div>
           </div>
       </div>
       <div class="panel-body" ng-if="vm.content" ng-hide="vm.hide">
           <div >
-              <h4>Imported data:</h4>
+              <h4>Uvoženi zapisi:</h4>
       
               <table class="table table-striped">
                 <thead>
                   <tr class="success">
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Surname</th>
+                    <th scope="col">Ime</th>
+                    <th scope="col">Priimek</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Student program</th>
-                    <th scope="col">StudentId</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Password</th>
+                    <th scope="col">Študijski program</th>
+                    <th scope="col">Vpisna številka</th>
+                    <th scope="col">Uporabniško ime</th>
+                    <th scope="col">Geslo</th>
                   </tr>
                 </thead>
                 <tbody>
