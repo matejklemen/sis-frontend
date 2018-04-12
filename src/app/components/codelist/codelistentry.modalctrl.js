@@ -14,6 +14,8 @@
       vm.editMode = true;
     }
 
+    console.log(vm.entry);
+
     vm.name = resCodelist.displayName;
 
     vm.columnNames = resCodelist.columnNames;
@@ -26,6 +28,16 @@
         codelistService.getCodelist(element).then(
           function success(response) {
             vm.columnOptions[element] = response.data;
+            // fix for poc type -> name
+            if(element == "poc") {
+              console.log(element);
+              vm.columnOptions[element].forEach(function(el) {
+                if(el.moduleName != null)
+                  el.name = el.moduleName;
+                else
+                  el.name = el.type;
+              });
+            }
           },
           function error(response) {
             console.error("Oh no... ", response);
@@ -41,6 +53,15 @@
           if(item.id == vm.entry.studyDegree.id) {
             vm.entry.studyDegree.name = item.name;
             return true;
+          }
+        });
+      }
+      // update/add type & moduleName field if POC
+      if('poc' in vm.entry) {
+        vm.columnOptions.poc.some(function(item) {
+          if(item.id == vm.entry.poc.id) {
+            vm.entry.poc.moduleName = item.moduleName;
+            vm.entry.poc.type = item.type;
           }
         });
       }
