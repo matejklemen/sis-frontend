@@ -27,8 +27,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="entry in vm.codelistData | filter:vm.searchValue">
-              <td ng-repeat="val in entry">{{ val | formatDisplayName }}</td>
+            <tr ng-repeat="entry in vm.codelistData | filter:vm.searchValue" ng-class="entry.deleted ? 'text-danger' : ''">
+              <td ng-repeat="(key, val) in entry" ng-if="key !== 'deleted'">{{ val | formatDisplayName }}</td>
               <td><a href="" class="btn btn-primary btn-xs" ng-click="vm.openEditEntryModal(entry, $index)">Uredi ...</a></td>
             </tr>
           </tbody>

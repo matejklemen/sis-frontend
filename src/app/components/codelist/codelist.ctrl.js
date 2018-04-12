@@ -32,6 +32,17 @@
 
             // from the first row, get column names
             vm.codelistCols = Object.keys(vm.codelistData[0]);
+            codelistService.getCodelistDeleted(vm.currentCodelist.endpoint).then(
+              function success(response) {
+                response.data.forEach(function(item, index, array) {
+                  item.deleted = true;
+                });
+                vm.codelistData = vm.codelistData.concat(response.data);
+              },
+              function error(error) {
+                console.error("Oh no... ", response);
+              }
+            );
           },
           function error(response) {
             console.error("Oh no... ", response);
@@ -63,7 +74,13 @@
         function(result) {
           if(result == "deleted") {
             // remove deleted entry from list
-            vm.codelistData.splice(index, 1);
+            //vm.codelistData.splice(index, 1);
+            vm.codelistData[index].deleted = true;
+          }
+          if(result == "restored") {
+            // remove deleted entry from list
+            //vm.codelistData.splice(index, 1);
+            vm.codelistData[index].deleted = false;
           }
           // we are just editing an existing entry, no need to add
           //vm.codelistData.push(result);
