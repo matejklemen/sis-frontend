@@ -15,10 +15,6 @@
         controller: 'controlCtrl',
         controllerAs: 'vm'
       })
-      
-      .when('/student', {
-        redirectTo: '/control'
-      })
       .when('/student/:registerNumber', {
         templateUrl: 'components/student/student.view.html',
         controller: 'studentCtrl',
