@@ -23,7 +23,7 @@
             </div>
           </div>
       </div>
-      <div class="panel-body" ng-if="vm.content" ng-hide="vm.hide">
+      <div class="panel-body" ng-if="vm.candidates" ng-hide="vm.hide">
           <div >
               <h4>Uvoženi zapisi:</h4>
       
@@ -41,15 +41,38 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="student in vm.content">
+                  <tr ng-repeat="candidate in vm.candidates">
                     <th scope="row">{{ $index }}</th>
-                    <td>{{ student.name }}</td>
-                    <td>{{ student.surname }}</td>
-                    <td>{{ student.email }}</td>
-                    <td>{{ student.enrolments[0].studyProgram.name }}</td>
-                    <td>{{ student.registerNumber }}</td>
-                    <td>{{ student.loginData.username }}</td>
-                    <td>{{ student.loginData.username.substring(0,2) + '_' + student.registerNumber }}</td>
+                    <td>{{ candidate.name }}</td>
+                    <td>{{ candidate.surname }}</td>
+                    <td>{{ candidate.email }}</td>
+                    <td>{{ candidate.studyProgram.id }}</td>
+                    <td>{{ candidate.registerNumber }}</td>
+                    <td>{{ candidate.loginData.username }}</td>
+                    <td>{{ candidate.loginData.username.substring(0,2) + '_' + candidate.registerNumber }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h4 style="margin-top:50px">Vnosi, ki so bili zaradi podvojitve zavrnjeni:</h4>
+      
+              <table class="table table-striped">
+                <thead>
+                  <tr class="danger">
+                    <th scope="col">#</th>
+                    <th scope="col">Ime</th>
+                    <th scope="col">Priimek</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Študijski program</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="rej in vm.rejects">
+                    <th scope="row">{{ $index }}</th>
+                    <td>{{ rej.name }}</td>
+                    <td>{{ rej.surname }}</td>
+                    <td>{{ rej.email }}</td>
+                    <td>{{ rej.studyProgram.id }}</td>
                   </tr>
                 </tbody>
               </table>
