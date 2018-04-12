@@ -27,7 +27,7 @@
 <div class="modal-footer">
   
   <div ng-show="vm.sendStatus" class="alert alert-danger" style="display: block; text-align: left;">
-    <strong>{{ vm.sendStatus }}</strong>
+    <strong>{{ vm.sendStatus | formatError }}</strong>
   </div>
 
   <button type="submit" class="btn btn-success" form="entryForm"><span class="glyphicon glyphicon-floppy-disk"></span> Shrani</button>
