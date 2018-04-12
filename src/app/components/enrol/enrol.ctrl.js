@@ -171,6 +171,7 @@
           vm.firstEnrolment = response.data.studyYear.name;
         },
         function error(error){
+          vm.firstEnrolment = "2017/2018"
           console.log("Oh no...",error);
         }
       );

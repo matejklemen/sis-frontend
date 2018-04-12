@@ -21,12 +21,17 @@
       return $http.post(apiBaseRoute + '/api/enrolments', enrolFormObject);
     };
 
+    var putTokenForFirstEnrolment = function(id){
+      return $http.put(apiBaseRoute + '/api/tokens/first/'+id);
+    }
+
     return {
       putToken: putToken,
       getTokenByStudentId: getTokenByStudentId,
       deleteToken: deleteToken,
       postToken: postToken,
       postEnrolData: postEnrolData,
+      putTokenForFirstEnrolment: putTokenForFirstEnrolment
     };
   };
 

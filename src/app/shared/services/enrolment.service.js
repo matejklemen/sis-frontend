@@ -2,11 +2,11 @@
 
   var enrolmentService = function($http) {
     var checkEnrolment = function(id) {
-      return $http.head(apiBaseRoute+'/api/enrolments/'+id);
+      return $http.head(apiBaseRoute+'/api/enrolments/'+id+"?order=last");
     };
 
     var getLastEnrolment = function(id) {
-      return $http.get(apiBaseRoute+'/api/enrolments/'+id);
+      return $http.get(apiBaseRoute+'/api/enrolments/'+id+"?order=last");
     };
 
     var getFirstEnrolment = function(id,studyProgramId) {

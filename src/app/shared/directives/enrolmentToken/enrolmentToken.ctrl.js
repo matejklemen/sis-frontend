@@ -10,16 +10,30 @@
     vm.currentStudent = undefined;
 
     vm.NewEnrolmentToken = function(){
-      tokenService.putToken($scope.id).then(
-        function success(response){
-          vm.enrolmentToken = response.data;
-          console.log("dobil rezultat: ", vm.content);
-        },
-        function error(error){
-          console.log("Error in enrTokenCtrl. Message: ", error);
-          vm.enrolmentToken = null;
-        }
-      );
+      console.log("enrolled: ",vm.enrolled)
+      if(vm.enrolled){
+        tokenService.putToken($scope.id).then(
+          function success(response){
+            vm.enrolmentToken = response.data;
+            console.log("dobil rezultat: ", vm.enrolmentToken);
+          },
+          function error(error){
+            console.log("Error in enrTokenCtrl. Message: ", error);
+            vm.enrolmentToken = null;
+          }
+        );
+      }else{
+        tokenService.putTokenForFirstEnrolment($scope.id).then(
+          function success(response){
+            vm.enrolmentToken = response.data;
+            console.log("dobil rezultat: ", vm.enrolmentToken);
+          },
+          function error(error){
+            console.log("Error in enrTokenCtrl. Message: ", error);
+            vm.enrolmentToken = null;
+          }
+        );
+      }
     };
 
     vm.DeleteEnrolmentToken = function(id){
