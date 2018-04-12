@@ -22,12 +22,14 @@
         <table ng-show="vm.codelists" class="table table-striped">
           <thead>
             <tr class="success">
+              <th>#</th>
               <th ng-repeat="key in vm.codelistCols">{{ key }}</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="entry in vm.codelistData | filter:vm.searchValue" ng-class="entry.deleted ? 'text-danger' : ''">
+              <td>{{ $index+1 }}</td>
               <td ng-repeat="(key, val) in entry" ng-if="key !== 'deleted'">{{ val | formatDisplayName }}</td>
               <td><a href="" class="btn btn-primary btn-xs" ng-click="vm.openEditEntryModal(entry, $index)">Uredi ...</a></td>
             </tr>
