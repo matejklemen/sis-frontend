@@ -31,6 +31,7 @@
   </div>
 
   <button type="submit" class="btn btn-success" form="entryForm"><span class="glyphicon glyphicon-floppy-disk"></span> Shrani</button>
-  <button type="button" class="btn btn-danger" ng-show="vm.editMode" ng-click="vm.deleteEntry()"><span class="glyphicon glyphicon-trash"></span> Izbriši</button>
+  <button type="button" class="btn btn-danger" ng-show="vm.editMode" ng-click="vm.deleteEntry()" ng-if="!vm.entry.deleted"><span class="glyphicon glyphicon-trash"></span> Izbriši</button>
+  <button type="button" class="btn btn-info" ng-show="vm.editMode" ng-click="vm.restoreEntry()" ng-if="vm.entry.deleted"><span class="glyphicon glyphicon-refresh"></span> Obnovi</button>
   <button type="button" class="btn btn-default" ng-click="vm.close()">Zapri</button>
 </div>

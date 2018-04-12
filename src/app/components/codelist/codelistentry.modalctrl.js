@@ -129,6 +129,17 @@
       );
     };
 
+    vm.restoreEntry = function() {
+      codelistService.restoreEntry(resCodelist.endpoint, vm.entry).then(
+        function success(response) {
+          $uibModalInstance.close("restored");
+        },
+        function error(error) {
+          vm.sendStatus = error.data;
+        }
+      );
+    };
+
     vm.close = function() {
       $uibModalInstance.dismiss();
     };
