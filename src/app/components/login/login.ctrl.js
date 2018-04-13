@@ -4,14 +4,14 @@
     vm.error = false;
 
     if(authenticationService.isLoggedIn()) {
-      $location.path("/");
+      $location.path("/control");
     }
 
     vm.submitLogin = function() {
       if(vm.username && vm.password) {
         authenticationService.login(vm.username, vm.password).then(
           function success(userId) {
-            $location.path("/");
+            $location.path("/control");
             $route.reload();
           },
           function error(error) {

@@ -7,17 +7,19 @@
     if(vm.loggedIn) {
       vm.user = authenticationService.getUsername();
       vm.role = authenticationService.getRole();
-    }else{
-      if($location.path()!="/login"){
-        $window.location.href = "/login";$window.location.href = "/login";
+    } else {
+      if($location.path() != "/login") {
+        $window.location.href = "/login";
       }
     }
+
+    vm.navbarLocation = $location;
     
     vm.logout = function() {
       authenticationService.logout();
       vm.loggedIn = false;
       $window.location.href = "/login";
-    }
+    };
   };
 
   angular

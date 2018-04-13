@@ -37,7 +37,7 @@
       <table class="table table-striped">
         <thead>
           <tr class="success">
-            <th>Študijski program</th>
+            <th colspan=2>Študijski program</th>
             <th>Študijsko leto</th>
             <th>Letnik</th>
             <th>Vrsta vpisa</th>
@@ -46,6 +46,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="enrolment in vm.enrolments">
+            <th>{{ enrolment.studyProgram.id }}</th>
             <th>{{ enrolment.studyProgram.name }}</th>
             <td>{{ enrolment.studyYear.name }}</td>
             <td>{{ enrolment.year + '.' }}</td>
