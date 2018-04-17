@@ -23,10 +23,10 @@
       vm.candidates = null;
       fileService.putFile(fileContent).then(
         function success(response){
-          vm.candidates = response.data.key;
-          vm.rejects = response.data.value;
+          vm.candidates = response.data.first;
+          vm.rejects = response.data.second;
           vm.status = "success";
-          console.log(vm.candidates)
+          console.log(response.data)
         },
         function error(error){
           console.log("Error in importCtrl. Message: ", error, status);
