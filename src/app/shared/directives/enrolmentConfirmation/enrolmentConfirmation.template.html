@@ -1,0 +1,19 @@
+<!-- Student has enrolment -->
+<div ng-if="vm.enrolmentConfirmed != null">
+
+  <!-- Enrolment was comfirmed -->
+  <div ng-if="vm.enrolmentConfirmed">
+    <a ng-click="vm.viewEnrolmentPdf()" href="#" class="btn btn-primary btn-xs">Natisni potrdila</a>
+  </div>
+
+  <!-- Enrolment was not comfirmed yet -->
+  <div ng-if="!vm.enrolmentConfirmed">
+    <a ng-click="vm.confirmEnrolment()" href="#" class="btn btn-warning btn-xs">Potrdi</a>
+  </div>
+
+</div>
+
+<!-- Student has no enrolments -->
+<div ng-if="vm.enrolmentConfirmed == null">
+  <a href="#" class="btn btn-warning btn-xs disabled">Potrdi</a>
+</div>

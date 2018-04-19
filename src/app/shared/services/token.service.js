@@ -18,7 +18,7 @@
     };
 
     var postEnrolData = function(enrolFormObject) {
-      return $http.post(apiBaseRoute + '/api/enrolments', enrolFormObject);
+      return $http.put(apiBaseRoute + '/api/enrolments', enrolFormObject);
     };
 
     var putTokenForFirstEnrolment = function(id){

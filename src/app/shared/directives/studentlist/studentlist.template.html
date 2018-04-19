@@ -27,6 +27,7 @@
                 <th>Ime</th>
                 <th>Priimek</th>
                 <th>Žeton za vpis</th>
+                <th>Vpis</th>
                 <th></th>
               </tr>
             </thead>
@@ -37,6 +38,7 @@
                 <td>{{ result.name }}</td>
                 <td>{{ result.surname }}</td>
                 <td><enrolment-token-button id="result.id"></enrolment-token-button></td>
+                <td><enrolment-confirmation-button id="result.id"></enrolment-confirmation-button></td>
                 <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
               </tr>
             </tbody>
