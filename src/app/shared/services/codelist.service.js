@@ -7,11 +7,11 @@
     };
 
     var getCodelist = function(codelistEndpointName) {
-      return $http.get(apiBaseRoute + '/api/' + codelistEndpointName);
+      return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?filter=deleted:EQ:false');
     };
 
     var getCodelistDeleted = function(codelistEndpointName) {
-      return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?deleted=true');
+      return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?filter=deleted:EQ:true');
     };
 
     var putEntry = function(apiEndpointName, entryObject) {
