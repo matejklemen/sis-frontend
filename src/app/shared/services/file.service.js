@@ -8,8 +8,13 @@
       return $http.put(apiBaseRoute+'/api/files', params);
     };
 
+    var getFile = function(){
+      return $http.post(apiBaseRoute+'/api/dataexporter/tablepdf',null,{responseType: 'arraybuffer'});
+    }
+
     return {
       putFile: putFile,
+      getFile: getFile,
     };
   };
 

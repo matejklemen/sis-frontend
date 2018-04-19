@@ -1,6 +1,9 @@
 (function() {
-  var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService, codelistService, curriculumService,enrolmentService) {
+  var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService, codelistService, curriculumService,enrolmentService, authenticationService) {
     var vm = this;
+
+    /* Get role */
+    vm.role = authenticationService.getRole();
 
     /* Get and set data */
     tokenService.getTokenByStudentId($routeParams.studentId).then(
@@ -24,7 +27,7 @@
         function success(response) {
           console.log(response.data);
           vm.student = response.data;
-
+          vm.surnameName = vm.student.surname + " " + vm.student.name;
           // fix for ng-model with input type date
           vm.student.dateOfBirth = new Date(vm.student.dateOfBirth);
 
@@ -203,7 +206,7 @@
       updateCreditSum();
     };
 
-    /* Finalize || Cencel enrolment*/
+    /* Finalize || Cencel enrolment [STUDENT] */
 
     vm.finalizeEnrolment = function() {
       if(vm.creditSum < 60) {
@@ -262,6 +265,18 @@
       if(confirm("Ste prepričani da želite preklicati vpis? Spremembe, ki ste jih naredili, se ne bodo shranile!"))
         $window.history.back();
     };
+
+    /* Confirm || Reject enrolment [SKRBNIK]*/
+
+    vm.confirmEnrolment = function(){
+      // na true in pol resenda sam vse
+    }
+
+    vm.rejectEnrolment = function(){
+      if(confirm("ALi ste prepričani da želite zvrniti vpis?")){
+        //what to do?!
+      }
+    }
 
     /* Helpers */
     function checkEMSO(emso) {

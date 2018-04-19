@@ -35,11 +35,6 @@
         controller: 'enrolCtrl',
         controllerAs: 'vm'
       })
-      .when('/enrol-pdf/:studentId', {
-        templateUrl: 'components/enrolmentPdf/enrolmentPdf.view.html',
-        controller: 'enrolmentPdfCtrl',
-        controllerAs: 'vm'
-      })
       .otherwise({redirectTo: '/login'});
 
     $locationProvider.html5Mode(true);

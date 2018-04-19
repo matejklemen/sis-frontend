@@ -8,12 +8,12 @@
 
   <!-- Enrolment was not comfirmed yet -->
   <div ng-if="!vm.enrolmentConfirmed">
-    <a ng-click="vm.confirmEnrolment()" href="#" class="btn btn-warning btn-xs">Potrdi</a>
+    <a href="/enrol/{{ id }}" class="btn btn-warning btn-xs">Potrdi vpis</a>
   </div>
 
 </div>
 
 <!-- Student has no enrolments -->
 <div ng-if="vm.enrolmentConfirmed == null">
-  <a href="#" class="btn btn-warning btn-xs disabled">Potrdi</a>
+  Brez vpisa
 </div>

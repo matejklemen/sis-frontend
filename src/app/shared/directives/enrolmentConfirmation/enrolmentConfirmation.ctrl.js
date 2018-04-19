@@ -24,21 +24,18 @@
       );
     }
 
-    vm.confirmEnrolment = function(){
-      if(confirm("Ste prepričani, da želite potrditi vpis?")){
-        enrolmentService.postConfirmeEnrolment(vm.enrolment.id).then(
-          function success(response){
-            console.log("posted confirmed enrolmnet: ",response.data)
-            vm.enrolmentConfirmed=true;
-          },
-          function error(error){
-            console.log("Oh no...",error)
-          }
-        );
-      }
-    }
-
     vm.viewEnrolmentPdf = function(){
+      //get pdf and set to path
+      fileService.getFile().then(
+        function success(response){
+          var blob = new Blob([response.data], {type: "application/pdf;charset=utf-8"});
+          console.log(response.data)
+          FileSaver.saveAs(blob, 'contract.pdf');
+        },
+        function error(error){
+          console.log("Oh no...",error)
+        }
+      );
       $window.location.href = "/enrol-pdf/123"
     }
    
