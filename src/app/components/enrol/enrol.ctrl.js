@@ -261,25 +261,40 @@
       );
     };
 
-    vm.cancelEnrolment = function(){
+    vm.cancelEnrolment = function() {
       if(confirm("Ste prepričani da želite preklicati vpis? Spremembe, ki ste jih naredili, se ne bodo shranile!"))
         $window.history.back();
     };
 
     /* Confirm || Reject enrolment [SKRBNIK]*/
 
-    vm.confirmEnrolment = function(){
+    vm.confirmEnrolment = function() {
       // na true in pol resenda sam vse
-    }
+    };
 
-    vm.rejectEnrolment = function(){
-      if(confirm("ALi ste prepričani da želite zvrniti vpis?")){
+    vm.rejectEnrolment = function() {
+      if(confirm("Ali ste prepričani da želite zavrniti vpis?")) {
         //what to do?!
       }
-    }
+    };
+
+    vm.checkTaxNumber = function(taxno) {
+      if(taxno == null || taxno.length != 8) {
+        vm.isValidTaxNumber = false;
+        return false;
+      }
+
+      vm.isValidTaxNumber = true;
+      return true;
+    };
 
     /* Helpers */
-    function checkEMSO(emso) {
+    vm.checkEmso = function(emso) {
+      if(emso == null || emso.length != 13) {
+        vm.isValidEmso = false;
+        return false;
+      }
+
       var numbs = emso.split('');
       var sum = 0;
       var counter = 0;
@@ -287,14 +302,17 @@
       for(var i in numbs) {
         if(counter == 12) {
           if(11 - (sum % 11) == parseInt(numbs[i])) {
+            vm.isValidEmso = true;
             return true;
           }
+          vm.isValidEmso = false;
           return false;
         }
         sum += facts[counter] * parseInt(numbs[i]);
         counter+=1;
       }
-    }
+
+    };
   };
 
   angular

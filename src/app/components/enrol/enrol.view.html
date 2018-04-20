@@ -78,16 +78,16 @@
         </div>
         <div class="col-md-6">
           <!-- EMSO -->
-          <div class="form-group">
+          <div class="form-group" ng-class="vm.isValidEmso ? 'has-success' : 'has-error'">
             <label for="i8">EMŠO: </label>
-            <input class="form-control input-sm" type="text" id="i8" ng-model="vm.student.emso">
+            <input class="form-control input-sm" type="text" id="i8" ng-model="vm.student.emso" ng-change="vm.checkEmso(vm.student.emso)">
           </div>
         </div>
         <div class="col-md-6">
           <!-- Tax number -->
-          <div class="form-group">
+          <div class="form-group" ng-class="vm.isValidTaxNumber ? 'has-success' : 'has-error'">
             <label for="i9">Davčna številka: </label>
-            <input class="form-control input-sm" type="text" id="i9" ng-model="vm.student.taxNumber">
+            <input class="form-control input-sm" type="text" id="i9" ng-model="vm.student.taxNumber" ng-change="vm.checkTaxNumber(vm.student.taxNumber)">
           </div>
         </div>
 
@@ -254,7 +254,7 @@
     <div class="panel-body">
 
       <div class="well well-sm">
-        Skupaj izbranih kreditnih točk: <strong ng-class="vm.creditSum >= 60 ? 'text-success' : 'text-danger'"><span>{{ vm.creditSum }}</span> / 60</strong>
+        Skupaj izbranih kreditnih točk: <strong ng-class="vm.creditSum == 60 ? 'text-success' : 'text-danger'"><span>{{ vm.creditSum }}</span> / 60</strong>
       </div>
 
       <h4>Obvezni predmeti</h4>
@@ -332,7 +332,7 @@
       </div>
 
       <div class="well well-sm">
-        Skupaj izbranih kreditnih točk: <strong ng-class="vm.creditSum >= 60 ? 'text-success' : 'text-danger'"><span>{{ vm.creditSum }}</span> / 60</strong>
+        Skupaj izbranih kreditnih točk: <strong ng-class="vm.creditSum == 60 ? 'text-success' : 'text-danger'"><span>{{ vm.creditSum }}</span> / 60</strong>
       </div>
 
     </div>

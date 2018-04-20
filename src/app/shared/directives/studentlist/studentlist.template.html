@@ -8,7 +8,7 @@
             <input type="text" class="form-control" id="searchStudent" placeholder="Iskanje..." ng-model="vm.searchValue" autocomplete="off" />
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-search"></span> Iskanje</button>
+            <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon" ng-class="vm.searchInProgress ? 'glyphicon-refresh' : 'glyphicon-search'"></span> Iskanje</button>
             <p class="help-block">Iščete lahko po imenu in priimku ali po vpisni številki.<br />Za iskanje pritisnite na gumb ali tipko Enter.</p>
           </div>
         </form>
