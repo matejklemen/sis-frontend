@@ -79,7 +79,7 @@
       var token = returnToken();
       if (token) {
         var data = JSON.parse(b64Utf8(token.split('.')[1]));
-        console.log(data);
+        //console.log(data);
         return data.sub;
       } else {
         return false;

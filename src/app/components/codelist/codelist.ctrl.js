@@ -2,21 +2,28 @@
   var codelistCtrl = function($routeParams, $uibModal, codelistService, $filter) {
     var vm = this;
 
+    vm.currentPage = 1;
+
+    // Note for this ctrl: codelistId == vm.currentCodelist.name (not)
+
     // load a list of codelists
     codelistService.getCodelists().then(
       function success(response) {
         vm.codelists = response.data;
         //console.log(vm.codelists);
-        loadListIfSelected();
+        // load list if any is selected
+        var codelistId = $routeParams.codelistId;
+        getCurrentCodelistMeta(codelistId);
+        // load first page of the list ...
+        getCodelistDataPage(vm.currentCodelist, vm.currentPage);
+
       },
       function error(response) {
         console.error("Oh no... ", response);
       }
     );
 
-    function loadListIfSelected() {
-      var codelistId = $routeParams.codelistId;
-
+    function getCurrentCodelistMeta(codelistId) {
       // get current selected codelist from the list of codelists
       vm.codelists.some(function(item) {
         if(item.name == codelistId) {
@@ -24,32 +31,35 @@
           return true;
         }
       });
-
-      if(codelistId != null) {
-        codelistService.getCodelist(vm.currentCodelist.endpoint).then(
-          function success(response) {
-            vm.codelistData = response.data;
-
-            // from the first row, get column names
-            vm.codelistCols = Object.keys(vm.codelistData[0]);
-            codelistService.getCodelistDeleted(vm.currentCodelist.endpoint).then(
-              function success(response) {
-                response.data.forEach(function(item, index, array) {
-                  item.deleted = true;
-                });
-                vm.codelistData = vm.codelistData.concat(response.data);
-              },
-              function error(error) {
-                console.error("Oh no... ", response);
-              }
-            );
-          },
-          function error(response) {
-            console.error("Oh no... ", response);
-          }
-        );
-      }
     }
+
+    function getCodelistDataPage(currentCodelist, page) {
+      if(currentCodelist == undefined) return;
+
+      var limit = 20;
+      var offset = (page-1) * limit;
+      codelistService.getCodelistAllEvenDeleted(currentCodelist.endpoint, offset, limit).then(
+        function success(response) {
+          vm.codelistData = response.data;
+          vm.totalCount = response.headers("X-total-count");
+
+          // from the first row, get column names
+          vm.codelistCols = Object.keys(vm.codelistData[0]);
+        },
+        function error(response) {
+          console.error("Oh no... ", response);
+        }
+      );
+    }
+
+    vm.changedPage = function() {
+      // load a new page of entries
+      getCodelistDataPage(vm.currentCodelist, vm.currentPage);
+    };
+
+    vm.applySearchFilter = function() {
+      // TODO
+    };
 
     vm.openEditEntryModal = function(entry, index) {
       var entryCopy = angular.copy(entry);
@@ -111,7 +121,9 @@
       // get result from modal after it's closed here
       modalInstance.result.then(
         function(result) {
-          vm.codelistData.push(result);
+          result.fresh = true;
+          // add on top
+          vm.codelistData.unshift(result);
         },
         function(closeInfo) {}
       );

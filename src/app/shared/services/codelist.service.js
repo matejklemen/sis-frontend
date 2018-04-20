@@ -10,8 +10,8 @@
       return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?filter=deleted:EQ:false');
     };
 
-    var getCodelistDeleted = function(codelistEndpointName) {
-      return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?filter=deleted:EQ:true');
+    var getCodelistAllEvenDeleted = function(codelistEndpointName, offset, limit) {
+      return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?offset=' + offset + '&limit=' + limit + '&order=id ASC');
     };
 
     var putEntry = function(apiEndpointName, entryObject) {
@@ -34,7 +34,7 @@
     return {
       getCodelists: getCodelists,
       getCodelist: getCodelist,
-      getCodelistDeleted: getCodelistDeleted,
+      getCodelistAllEvenDeleted: getCodelistAllEvenDeleted,
       putEntry: putEntry,
       postEntry: postEntry,
       deleteEntry: deleteEntry,
