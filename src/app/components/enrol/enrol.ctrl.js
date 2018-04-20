@@ -144,8 +144,8 @@
               vm.courses.siz.push(element);
 
               // hrani tabelice kjer so zdruzeni modulski predmeti
-              if(vm.courses.mod[element.poc.idPOC] === undefined) vm.courses.mod[element.poc.idPOC] = [];
-              vm.courses.mod[element.poc.idPOC].push(element);
+              if(vm.courses.mod[element.poc.id] === undefined) vm.courses.mod[element.poc.id] = [];
+              vm.courses.mod[element.poc.id].push(element);
             }
 
           });
@@ -167,14 +167,14 @@
       });
     } 
 
-    function getFirstEnrolmentInProgram(){
+    function getFirstEnrolmentInProgram() {
       enrolmentService.getFirstEnrolment(vm.student.id, vm.token.studyProgram.id).then(
         function success(response){
           console.log("first enrolment, ",response.data);
           vm.firstEnrolment = response.data.studyYear.name;
         },
         function error(error){
-          vm.firstEnrolment = "2017/2018"
+          vm.firstEnrolment = "2017/2018";
           console.log("Oh no...",error);
         }
       );
@@ -183,6 +183,7 @@
     function setAndParseStudentData(){
       vm.parsedStProgram = vm.token.studyProgram.evsCode + " " + (vm.token.studyProgram.name).split('(')[0];
     }
+
     vm.courseCheckboxClick = function(cu) {
       if(vm.token.year == 2) {
         // izbrati mora vsaj en strokovni izbirni predmet (lahko več)
@@ -195,13 +196,12 @@
           // izbira je omejena na module
           if(cu.poc.type == "mod") {
             // v istem modulu oznaci enako vse predmete
-            vm.courses.mod[cu.poc.idPOC].forEach(function(element, index, array) {
+            vm.courses.mod[cu.poc.id].forEach(function(element, index, array) {
               element.selected = cu.selected;
             });
           }
         }
       }
-
 
       updateCreditSum();
     };
