@@ -3,7 +3,7 @@
       <div class="col-md-3">
 
         <form class="form" ng-submit="vm.performSearch()">
-          <div class="form-group">
+          <div class="form-group" ng-class="vm.searchIsEmpty ? 'has-error' : ''">
             <label for="searchStudent" class="control-label">Iskanje študentov</label>
             <input type="text" class="form-control" id="searchStudent" placeholder="Iskanje..." ng-model="vm.searchValue" autocomplete="off" />
           </div>

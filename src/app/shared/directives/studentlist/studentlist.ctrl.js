@@ -7,15 +7,22 @@
     vm.performSearch = function() {
       console.log("Seaching...");
 
-      studentService.searchStudents(vm.searchValue).then(
-        function success(response) {
-          vm.searchResult = response.data;
-          //console.log(vm.searchResult[0]);
-        },
-        function error(response) {
-          console.error("Oh no... ", response);
-        }
+      if(vm.searchValue == undefined || vm.searchValue == "") {
+        vm.searchIsEmpty = true;
+      } else {
+        vm.searchIsEmpty = false;
+
+        studentService.searchStudents(vm.searchValue).then(
+          function success(response) {
+            vm.searchResult = response.data;
+            //console.log(vm.searchResult[0]);
+          },
+          function error(response) {
+            console.error("Oh no... ", response);
+          }
         );
+        
+      }
 
     };
 

@@ -6,7 +6,7 @@
       // pridobi in prikazi podatke o studentu
       studentService.getByRegisterNumber($routeParams.registerNumber).then(
         function success(response) {
-          vm.student = response.data;
+          vm.student = response.data[0];
           //console.log(response.data);
 
           tokenService.getTokenByStudentId(vm.student.id).then(

@@ -6,15 +6,11 @@
     </div>
 
     <ul class="nav navbar-nav" style="margin-left:20px">
-      <div ng-show="vm.loggedIn">
-        <div style="background-color: #15a589; height: 60px; width:60px;float:left">
-          <img src="public/images/User_Avatar.png" style="height:100%;">
-        </div>
-        <div style="background-color: #15a589; height: 60px; width:300px">
-          <div style="padding-top:8px;margin-left:70px">
-            <div>Prijavljen kot: {{ vm.user }}</div>
-            <div>Vloga: {{ vm.role.name }}</div>
-          </div>
+      <div ng-show="vm.loggedIn" style="background-color: #15a589;">
+        <span class="glyphicon glyphicon-user" style="font-size:36px;line-height:60px;display:block;float:left;padding-left:8px;"></span>
+        <div style="height:60px;width:auto;padding-top:8px;padding-right:12px;margin-left:70px;">
+          <div>Prijavljen kot: <b>{{ vm.user }}</b></div>
+          <div>Vloga: <b>{{ vm.role.name }}</b></div>
         </div>  
         <!--<p  class="navbar-text">Prijavljen kot: {{ vm.user }}. Vloga: {{ vm.role.name }}</p>-->
       </div>

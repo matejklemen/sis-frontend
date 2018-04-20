@@ -7,7 +7,7 @@
     };
 
     var getByRegisterNumber = function(registerNumber) {
-      return $http.get(apiBaseRoute+'/api/students/s/' + registerNumber);
+      return $http.get(apiBaseRoute+'/api/students?filter=registerNumber:EQ:' + registerNumber);
     };
 
     var getByStudentId = function(studentId) {
