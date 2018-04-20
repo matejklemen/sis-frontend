@@ -14,7 +14,7 @@
 
         <input ng-if="vm.columnTypes[$index] == 's'" ng-required="col == 'id'" type="text" autocomplete="off" ng-model="vm.entry[col]" class="form-control" id="{{ col }}" placeholder="{{ col }}">
         <input ng-if="vm.columnTypes[$index] == 'n'" ng-required="col == 'id'" type="number" autocomplete="off" ng-model="vm.entry[col]" class="form-control" id="{{ col }}" placeholder="{{ col }}">
-        <select ng-if="vm.columnTypes[$index].length > 2" ng-model="vm.entry[col].id" class="form-control" ng-options="elem.id as elem.name for elem in vm.columnOptions[vm.columnTypes[$index]]"></select>
+        <select ng-if="vm.columnTypes[$index].length > 2" ng-model="vm.entry[col].id" class="form-control" ng-options="elem.id as elem.id + ' - ' + elem.name for elem in vm.columnOptions[vm.columnTypes[$index]]"></select>
 
       </div>
 

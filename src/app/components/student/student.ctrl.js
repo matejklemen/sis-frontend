@@ -12,6 +12,7 @@
           tokenService.getTokenByStudentId(vm.student.id).then(
             function success(response) {
               //console.log(response.data);
+              vm.token = response.data;
               vm.hasToken = !response.data.used;
             },
             function error(error) {}

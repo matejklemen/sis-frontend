@@ -3,7 +3,6 @@
 <div class="container student-view">
   <div class="row">
     <h3>Podatki študenta: {{ vm.student.registerNumber }}</h3>
-    <a class="btn btn-info" ng-if="vm.hasToken" href="/enrol/{{ vm.student.id }}"> Vpis</a>
     <div class="col-md-4">
       <h4>Osebni podatki</h4>
       <ul class="list-group personal-data">
@@ -33,6 +32,7 @@
 
     </div>
     <div class="col-md-8">
+      <a class="btn btn-info btn-block" ng-if="vm.hasToken" href="/enrol/{{ vm.student.id }}"><span class="glyphicon glyphicon-edit"></span> Na voljo vam je vpis za <b>{{ vm.token.studyProgram.name }}</b> za leto <b>{{ vm.token.studyYear.name }}</b></a>
       <h4>Vpisi</h4>
       <table class="table table-striped">
         <thead>
