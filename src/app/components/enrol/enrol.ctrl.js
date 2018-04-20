@@ -10,10 +10,10 @@
       function success(response) {
         console.log(response.data);
         vm.token = response.data;
-        if(vm.token.used) {
+        if(vm.token.used && vm.role==2) {
           $window.location.href = "/";
         } else {
-          getCurriculum(vm.token);
+          getCurriculum(vm.token.studyProgram.id, vm.token.year);
           getStudentData(vm.token.student);
         }
       },
@@ -119,8 +119,8 @@
 
     }
     
-    function getCurriculum(token) {
-      curriculumService.getCurriculum("20172018", token.studyProgram.id, token.year).then(
+    function getCurriculum(studyProgramId, year) {
+      curriculumService.getCurriculum("20172018", studyProgramId, year).then(
         function success(response) {
           console.log("got curriculum: ",response.data);
 

@@ -3,7 +3,7 @@
   var confirmCtrl = function($scope, fileService, enrolmentService, $window) {
     var vm = this;
    
-    vm.enrolmentConfirmed=false;
+    vm.enrolmentConfirmed=null;
     vm.enrolment;
 
     checkIfValidEnrolment();

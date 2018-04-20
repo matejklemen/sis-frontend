@@ -5,7 +5,7 @@
     <h2>Vpisni list</h2>
   </div>
 
-  <div ng-if="vm.role.id == 1">
+  <div ng-if="vm.role.id == 4">
     <h2>Pregled vpisnega lista in potrditev vpisa</h2>
   </div>
 
@@ -19,7 +19,7 @@
         <div class="col-md-6">
           <!-- Name and surname -->
           <label for="i1">Priimek in Ime: </label>
-          <input class="form-control input-sm" type="text" ng-model="vm.surnameName" ng-disabled="true && vm.role.id != 1">
+          <input class="form-control input-sm" type="text" ng-model="vm.surnameName" ng-disabled="true && vm.role.id != 4">
         </div>
         <div class="col-md-6">
           <!-- Registr. number -->
@@ -176,7 +176,7 @@
           <!-- Study program -->
           <div class="form-group">
             <label for="i13">Študijski program: </label>
-            <select ng-model="vm.token.studyProgram.id" ng-disabled="true && vm.role.id != 1" class="form-control input-sm" ng-options="sp.id as sp.name for sp in vm.cl.studyprograms"></select>
+            <select ng-model="vm.token.studyProgram.id" ng-disabled="true && vm.role.id != 4" class="form-control input-sm" ng-options="sp.id as sp.name for sp in vm.cl.studyprograms"></select>
             <!-- input class="form-control input-sm" type="text" id="i13" ng-disabled="true" ng-model="vm.parsedStProgram" -->
           </div>
         </div>
@@ -184,14 +184,14 @@
           <!-- Place -->
           <div class="form-group">
             <label for="i14">Kraj izvajanja: </label>
-            <input class="form-control input-sm" type="text" id="i14" ng-disabled="true && vm.role.id != 1" value="Ljubljana">
+            <input class="form-control input-sm" type="text" id="i14" ng-disabled="true && vm.role.id != 4" value="Ljubljana">
           </div>
         </div>
         <div class="col-md-6">
           <!-- Selected group -->
           <div class="form-group">
             <label for="i15">Izbirna skupina: </label>
-            <input class="form-control input-sm" type="text" id="i15" ng-disabled="true && vm.role.id != 1" value="-">
+            <input class="form-control input-sm" type="text" id="i15" ng-disabled="true && vm.role.id != 4" value="-">
           </div>
         </div>
         <div class="col-md-12"><hr /></div>
@@ -199,7 +199,7 @@
           <!-- Study type -->
           <div class="form-group">
             <label for="i16">Vrsta študija: </label>
-            <select ng-model="vm.token.klasiusSrv.id" ng-disabled="true && vm.role.id != 1" class="form-control input-sm" ng-options="ks.id as ks.name for ks in vm.cl.klasius"></select>
+            <select ng-model="vm.token.klasiusSrv.id" ng-disabled="true && vm.role.id != 4" class="form-control input-sm" ng-options="ks.id as ks.name for ks in vm.cl.klasius"></select>
             <!-- input class="form-control input-sm" type="text" id="i16" ng-model="vm.token.studyProgram.studyDegree.name" ng-disabled="vm.token.studyProgram.studyDegree.name != undefined" -->
           </div>
         </div>
@@ -207,7 +207,7 @@
           <!-- Enrolment type -->
           <div class="form-group">
             <label for="i17">Vrsta vpisa: </label>
-            <select ng-model="vm.token.type.id" ng-disabled="true && vm.role.id != 1" class="form-control input-sm" ng-options="st.id as st.name for st in vm.cl.studytypes"></select>
+            <select ng-model="vm.token.type.id" ng-disabled="true && vm.role.id != 4" class="form-control input-sm" ng-options="st.id as st.name for st in vm.cl.studytypes"></select>
             <!--input class="form-control input-sm" type="text" id="i17" ng-model="vm.token.type.name" ng-disabled="vm.token.type != undefined" -->
           </div>
         </div>
@@ -215,14 +215,14 @@
           <!--Year/additional year -->
           <div class="form-group">
             <label for="i18">Letnik/dodatno leto: </label>
-            <input class="form-control input-sm" type="text" id="i18" ng-model="vm.token.year" ng-disabled="vm.token.year != undefined  && vm.role.id != 1">
+            <input class="form-control input-sm" type="text" id="i18" ng-model="vm.token.year" ng-disabled="vm.token.year != undefined  && vm.role.id != 4">
           </div>
         </div>
         <div class="col-md-6">
           <!-- Study kind -->
           <div class="form-group">
             <label for="i19">Način študija: </label>
-            <select ng-model="vm.token.kind.id" ng-disabled="true && vm.role.id != 1" class="form-control input-sm" ng-options="sk.id as sk.name for sk in vm.cl.studykinds"></select>
+            <select ng-model="vm.token.kind.id" ng-disabled="true && vm.role.id != 4" class="form-control input-sm" ng-options="sk.id as sk.name for sk in vm.cl.studykinds"></select>
             <!-- input class="form-control input-sm" type="text" id="i19" ng-model="vm.token.kind.name" ng-disabled="vm.token.kind != undefined" -->
           </div>
         </div>
@@ -230,7 +230,7 @@
           <!-- Study form -->
           <div class="form-group">
             <label for="i20">Oblika študija: </label>
-            <select ng-model="vm.token.form.id" ng-disabled="true && vm.role.id != 1" class="form-control input-sm" ng-options="sf.id as sf.name for sf in vm.cl.studyforms"></select>
+            <select ng-model="vm.token.form.id" ng-disabled="true && vm.role.id != 4" class="form-control input-sm" ng-options="sf.id as sf.name for sf in vm.cl.studyforms"></select>
             <!-- input class="form-control input-sm" type="text" id="i20" ng-model="vm.token.form.name" ng-disabled="vm.token.kind != undefined" -->
           </div>
         </div>
@@ -238,7 +238,7 @@
           <!-- Study year of first enrolment -->
           <div class="form-group">
             <label for="">Študijsko leto prvega vpisa v ta študijski program: </label>
-            <input class="form-control input-sm" type="text" id="" ng-model="vm.firstEnrolment" ng-disabled="true && vm.role.id != 1">
+            <input class="form-control input-sm" type="text" id="" ng-model="vm.firstEnrolment" ng-disabled="true && vm.role.id != 4">
           </div>
         </div>
         <div class="col-md-6"></div>
@@ -350,7 +350,7 @@
   </div>
 
   <!-- Potrdi vpis || zavrni vpis [SKRBNIK] -->
-  <div ng-if="vm.role.id == 1">
+  <div ng-if="vm.role.id == 4">
     <div style="text-align: right;margin-bottom: 100px;">
       <a ng-click="vm.rejectEnrolment()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Zavrni vpis</a>
       <a ng-click="vm.confirmEnrolment()" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Shrani in potrdi</a>
