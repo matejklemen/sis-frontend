@@ -229,7 +229,7 @@
     /* Finalize || Cencel enrolment [STUDENT] */
 
     vm.finalizeEnrolment = function() {
-      if(vm.creditSum < 60) {
+      if(vm.creditSum != 60) {
         // error
         vm.finalizeError = "Število kreditnih točk mora biti vsaj 60.";
         return;
@@ -238,8 +238,8 @@
       // stevilo izbranih strokovnih predmetov
       var countSiz = 0;
       vm.courses.siz.forEach(function(element, index, array) {
-          if(element.selected) countSiz++;
-        });
+        if(element.selected) countSiz++;
+      });
 
       if(vm.token.year == 2 && countSiz < 1) {
         vm.finalizeError = "Izbrati morate vsaj en strokovno izbirni predmet.";
@@ -247,10 +247,12 @@
       }
 
       if(vm.token.year == 3 && countSiz < 6) {
-        if(vm.token.freeChoice)
-          vm.finalizeError = "Izbrati morate vsaj 6 strokovno izbirnih predmetov.";
-        else
-          vm.finalizeError = "Izbrati morate vsaj 2 modula.";
+        vm.finalizeError = "Izbrati morate vsaj 6 strokovno izbirnih predmetov.";
+        return;
+      }
+
+      if(vm.token.year == 3 && !vm.token.freeChoice && vm.selectedModulesCount != 2) {
+        vm.finalizeError = "Izbrati morate vsaj 2 modula.";
         return;
       }
 
