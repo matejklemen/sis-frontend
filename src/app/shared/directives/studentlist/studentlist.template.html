@@ -15,35 +15,33 @@
 
       </div>
       <div class="col-md-9">
-        <button class="btn btn-primary btn-xs" ng-click="vm.exportAction('pdf')">PDF</button>
-        <button class="btn btn-primary btn-xs" ng-click="vm.exportAction('csv')">CSV</button>
+        <button ng-show="vm.searchResult" class="btn btn-primary btn-xs" ng-click="vm.exportAction('pdf')">PDF</button>
+        <button ng-show="vm.searchResult" class="btn btn-primary btn-xs" ng-click="vm.exportAction('csv')">CSV</button>
         <h3>Rezultati iskanja</h3>
-        <div class="export-table">
-          <table ng-show="vm.searchResult" class="table table-striped">
-            <thead>
-              <tr class="success">
-                <th>#</th>
-                <th>Vpisna številka</th>
-                <th>Ime</th>
-                <th>Priimek</th>
-                <th>Žeton za vpis</th>
-                <th>Vpis</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="result in vm.searchResult">
-                <td>{{ $index+1 }}</td>
-                <td>{{ result.registerNumber }}</td>
-                <td>{{ result.name }}</td>
-                <td>{{ result.surname }}</td>
-                <td><enrolment-token-button id="result.id"></enrolment-token-button></td>
-                <td><enrolment-confirmation-button id="result.id"></enrolment-confirmation-button></td>
-                <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <table ng-show="vm.searchResult" class="table table-striped">
+          <thead>
+            <tr class="success">
+              <th>#</th>
+              <th>Vpisna številka</th>
+              <th>Ime</th>
+              <th>Priimek</th>
+              <th>Žeton za vpis</th>
+              <th>Vpis</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="result in vm.searchResult">
+              <td>{{ $index+1 }}</td>
+              <td>{{ result.registerNumber }}</td>
+              <td>{{ result.name }}</td>
+              <td>{{ result.surname }}</td>
+              <td><enrolment-token-button id="result.id"></enrolment-token-button></td>
+              <td><enrolment-confirmation-button id="result.id"></enrolment-confirmation-button></td>
+              <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
+            </tr>
+          </tbody>
+        </table>
         <div ng-hide="vm.searchResult">Začnite iskanje z obrazcem na levi.</div>
         <!--ul>
           <li>Vpisna številka: {{ vm.student.vpisna }}</li>
