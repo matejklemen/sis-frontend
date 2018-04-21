@@ -8,7 +8,7 @@
     /* Get and set data */
     tokenService.getTokenByStudentId($routeParams.studentId).then(
       function success(response) {
-        console.log(response.data);
+        console.log("Token:", response.data);
         vm.token = response.data;
         if(vm.token.used && vm.role==2) {
           $window.location.href = "/";
@@ -25,7 +25,7 @@
     function getStudentData(id) {
       studentService.getByStudentId(id).then(
         function success(response) {
-          console.log(response.data);
+          console.log("Student:", response.data);
           vm.student = response.data;
           vm.surnameName = vm.student.surname + " " + vm.student.name;
           // fix for ng-model with input type date
@@ -122,7 +122,7 @@
     function getCurriculum(studyProgramId, year) {
       curriculumService.getCurriculum("20172018", studyProgramId, year).then(
         function success(response) {
-          console.log("got curriculum: ",response.data);
+          console.log("Curriculum:",response.data);
 
           vm.courses = {
             obv: [],
@@ -151,6 +151,7 @@
           });
 
           updateCreditSum();
+          updateSelectedModulesCount();
         },
         function error(error) {
           console.log("Oh no...",error);
@@ -165,7 +166,22 @@
           vm.creditSum += element.idCourse.creditPoints;
         }
       });
-    } 
+    }
+
+    function updateSelectedModulesCount() {
+      vm.selectedModulesCount = 0;
+      Object.keys(vm.courses.mod).forEach(function(key) {
+        var hasAllChecked = true;
+        for(var i=0; i<vm.courses.mod[key].length; i++) {
+          if(!vm.courses.mod[key][i].selected) {
+            hasAllChecked = false;
+            break;
+          }
+        }
+
+        if(hasAllChecked) vm.selectedModulesCount++;
+      });
+    }
 
     function getFirstEnrolmentInProgram() {
       enrolmentService.getFirstEnrolment(vm.student.id, vm.token.studyProgram.id).then(
@@ -196,13 +212,17 @@
           // izbira je omejena na module
           if(cu.poc.type == "mod") {
             // v istem modulu oznaci enako vse predmete
-            vm.courses.mod[cu.poc.id].forEach(function(element, index, array) {
-              element.selected = cu.selected;
-            });
+            if(vm.selectedModulesCount < 2) {
+              vm.courses.mod[cu.poc.id].forEach(function(element, index, array) {
+                element.selected = cu.selected;
+              });
+            }
           }
         }
       }
 
+      // update selected modules count
+      updateSelectedModulesCount();
       updateCreditSum();
     };
 

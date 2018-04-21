@@ -281,7 +281,12 @@
         <h4>Strokovno izbirni predmeti</h4>
         <p ng-if="vm.token.year == 2">Izbrati morate vsaj en strokovno izbirni predmet.</p>
         <p ng-if="vm.token.year == 3 && vm.token.freeChoice">Izbrati morate vsaj 6 strokovno izbirnih predmetov.</p>
-        <p ng-if="vm.token.year == 3 && !vm.token.freeChoice">Izbrati morate dva modula (po trije predmeti skupaj) v sklopu strokovno izbirnih predmetov.</p>
+        <p ng-if="vm.token.year == 3 && !vm.token.freeChoice">
+          Izbrati morate dva modula (po trije predmeti skupaj) v sklopu strokovno izbirnih predmetov.
+          <span class="well well-sm">
+            Izbranih modulov: <strong ng-class="vm.selectedModulesCount == 2 ? 'text-success' : 'text-danger'">{{ vm.selectedModulesCount }} / 2</strong>
+          </span>
+        </p>
         <table class="table table-striped">
           <thead>
             <tr class="active">
