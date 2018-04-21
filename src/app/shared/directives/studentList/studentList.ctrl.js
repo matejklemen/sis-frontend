@@ -1,5 +1,5 @@
 (function() {
-  var studentlistCtrl = function($scope, $routeParams, studentService) {
+  var studentListCtrl = function($scope, $routeParams, studentService) {
     var vm = this;
 
     vm.searchValue = "";
@@ -44,5 +44,5 @@
 
   angular
   .module('sis')
-  .controller('studentlistCtrl', studentlistCtrl);
+  .controller('studentListCtrl', studentListCtrl);
 })();

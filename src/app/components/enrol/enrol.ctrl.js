@@ -231,7 +231,7 @@
     vm.finalizeEnrolment = function() {
       if(vm.creditSum != 60) {
         // error
-        vm.finalizeError = "Število kreditnih točk mora biti vsaj 60.";
+        vm.finalizeError = "Število kreditnih točk mora biti 60.";
         return;
       }
 
@@ -252,7 +252,7 @@
       }
 
       if(vm.token.year == 3 && !vm.token.freeChoice && vm.selectedModulesCount != 2) {
-        vm.finalizeError = "Izbrati morate vsaj 2 modula.";
+        vm.finalizeError = "Izbrati morate 2 modula.";
         return;
       }
 
