@@ -8,13 +8,13 @@
       return $http.put(apiBaseRoute+'/api/files', params);
     };
 
-    var getFile = function(){
-      return $http.post(apiBaseRoute+'/api/dataexporter/tablepdf',null,{responseType: 'arraybuffer'});
+    var getEnrolmentSheet = function(id){
+      return $http.get(apiBaseRoute+'/api/dataexporter/enrolmentSheet/'+id, {responseType: 'arraybuffer'});
     }
 
     return {
       putFile: putFile,
-      getFile: getFile,
+      getEnrolmentSheet: getEnrolmentSheet,
     };
   };
 

@@ -25,20 +25,21 @@
     }
 
     vm.viewEnrolmentPdf = function(){
-      //get pdf and set to path
-      fileService.getFile().then(
+      //var popup = $window.open("about:blank", "Vpisni List");
+      //popup.document.write('loading ...');popup.document.write('loading ...');
+      
+      fileService.getEnrolmentSheet(1).then(
         function success(response){
-          var blob = new Blob([response.data], {type: "application/pdf;charset=utf-8"});
-          console.log(response.data)
-          FileSaver.saveAs(blob, 'contract.pdf');
+          var file = new Blob([response.data], {type: 'application/pdf'});
+          var fileURL = URL.createObjectURL(file);
+          $window.location.href = fileURL
         },
         function error(error){
           console.log("Oh no...",error)
         }
       );
-      $window.location.href = "/enrol-pdf/123"
+
     }
-   
   };
 
   angular
