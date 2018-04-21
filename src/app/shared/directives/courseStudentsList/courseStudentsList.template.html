@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-3">
+
+        TODO
+
+      </div>
+      <div class="col-md-9">
+        <h3>TODO</h3>
+        <div class="export-table">
+          <table ng-show="vm.searchResult" class="table table-striped">
+            <thead>
+              <tr class="success">
+                <th>#</th>
+                <th>Vpisna številka</th>
+                <th>Ime</th>
+                <th>Priimek</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="result in vm.searchResult">
+                <td>{{ $index+1 }}</td>
+                <td>{{ result.registerNumber }}</td>
+                <td>{{ result.name }}</td>
+                <td>{{ result.surname }}</td>
+                <td><enrolment-token-button id="result.id"></enrolment-token-button></td>
+                <td><enrolment-confirmation-button id="result.id"></enrolment-confirmation-button></td>
+                <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div ng-hide="vm.searchResult">Začnite iskanje z obrazcem na levi.</div>
+        
+      </div>
+    </div>
+  </div>

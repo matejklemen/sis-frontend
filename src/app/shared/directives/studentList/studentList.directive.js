@@ -5,9 +5,9 @@
       restrict: 'EC',
       scope: {
       },
-      controller: "studentlistCtrl",
+      controller: "studentListCtrl",
       controllerAs:'vm',
-      templateUrl: "/shared/directives/studentlist/studentlist.template.html"
+      templateUrl: "/shared/directives/studentList/studentList.template.html"
     };
   };
 

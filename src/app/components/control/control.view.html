@@ -1,22 +1,44 @@
 <sis-navbar></sis-navbar>
-<div class="container" ng-if="vm.role.id != 2">
+
+<div class="container">
+
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#students" target="_self">Upravljanje študentov</a></li>
-		<li><a data-toggle="tab" href="#import" target="_self">Uvoz podatkov</a></li>
-	</ul>
-	
-	<div class="tab-content" style="margin-top:20px">
-		<div id="students" class="tab-pane fade in active">
+    <li ng-show="vm.role.id == 4">
+      <a data-toggle="tab" data-target="#students" href="">
+        <span class="glyphicon glyphicon-tower"></span> Upravljanje študentov
+      </a>
+    </li>
+    <li ng-show="vm.role.id == 4">
+      <a data-toggle="tab" data-target="#import" href="">
+        <span class="glyphicon glyphicon-import"></span> Uvoz podatkov
+      </a>
+    </li>
+    <li ng-show="vm.role.id == 3 || vm.role.id == 4">
+      <a data-toggle="tab" data-target="#studentCourses" href="">
+        <span class="glyphicon glyphicon-list"></span> Študenti po predmetih
+      </a>
+    </li>
+  </ul>
+  
+  <div class="tab-content" style="margin-top:20px">
+    <div id="students" class="tab-pane fade">
 
-			<!-- Student data (#3)-->
-			<student-list></student-list>
+      <!-- Student data -->
+      <student-list></student-list>
 
-		</div>
-		<div id="import" class="tab-pane fade">
+    </div>
+    <div id="import" class="tab-pane fade">
 
-			<!-- Student data import (#4)-->
-			<student-import></student-import>
+      <!-- Student data import -->
+      <student-import></student-import>
 
-		</div>
-	</div>	
+    </div>
+    <div id="studentCourses" class="tab-pane fade">
+      
+      <!-- Student data by course -->
+      <course-students-list></course-students-list>
+
+    </div>
+  </div>
+
 </div>
