@@ -198,7 +198,10 @@
 
     function setAndParseStudentData(){
       vm.parsedStProgram = vm.token.studyProgram.evsCode + " " + (vm.token.studyProgram.name).split('(')[0];
+      vm.checkEmso(vm.student.emso);
+      vm.checkTaxNumber(vm.student.taxNumber);
     }
+    
 
     vm.courseCheckboxClick = function(cu) {
       if(vm.token.year == 2) {
@@ -258,6 +261,7 @@
 
       //send to BE
       var objectToSend = {};
+      setDate()
 
       objectToSend.student = vm.student;
       objectToSend.enrolmentToken = vm.token;
@@ -292,6 +296,8 @@
 
     vm.confirmEnrolment = function() {
       // na true in pol resenda sam vse
+      setDate();
+      console.log(vm.student)
     };
 
     vm.rejectEnrolment = function() {
@@ -333,8 +339,31 @@
         sum += facts[counter] * parseInt(numbs[i]);
         counter+=1;
       }
-
     };
+
+    vm.open2 = function() {
+      vm.popup2.opened = true;
+    };
+
+    vm.popup2 = {
+      opened: false
+    };
+
+    function setDate(){
+      var day = String(vm.student.dateOfBirth.getDate())
+      if(day.length < 2){
+        day= "0" + day
+      }
+
+      var month = String(vm.student.dateOfBirth.getMonth()+1)
+      if(month.length < 2){
+        month= "0" + month
+      }
+
+      var year = String(vm.student.dateOfBirth.getFullYear())
+
+      vm.student.dateOfBirth=year+"-"+month+"-"+day
+    }
   };
 
   angular
