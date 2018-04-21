@@ -1,5 +1,5 @@
 (function() {
-  var studentListCtrl = function($scope, $routeParams, studentService) {
+  var studentListCtrl = function($routeParams, studentService, exporterService) {
     var vm = this;
 
     vm.searchValue = "";
@@ -23,21 +23,13 @@
             vm.searchInProgress = false;
           }
         );
-        
+
       }
 
     };
 
     vm.exportAction = function(action) {
-      switch(action){
-        case 'pdf':
-          $scope.$broadcast('export-pdf', {"ignore": [3,4]});
-          break;
-        case 'csv':
-          $scope.$broadcast('export-csv', {"ignore": [3,4]});
-          break;
-        default: console.log('no event caught');
-      }
+      exporterService.getFile(action, vm.searchResult, "Seznam študentov", ["#", "Vpisna številka", "Ime", "Priimek"], ["registerNumber", "name", "surname"])
     };
 
   };
