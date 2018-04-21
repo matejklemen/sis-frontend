@@ -64,7 +64,7 @@
 <div class="modal-footer">
   
   <div ng-show="vm.postStatus" class="alert" ng-class="vm.postStatus == 'success' ? 'alert-success' : 'alert-danger'" style="display: block;">
-    <strong>{{ vm.postStatus }}</strong>
+    <strong>{{ vm.postStatus | formatError }}</strong>
   </div>
 
   <button type="submit" form="enrolmentTokenForm" class="btn btn-success btn-sm">Shrani</button>

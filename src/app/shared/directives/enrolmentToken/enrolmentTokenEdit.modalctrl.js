@@ -56,12 +56,13 @@
     vm.saveChanges = function(){
       tokenService.postToken(vm.enrolmentToken).then(
         function success(response){
-          console.log("Token was successfully posted");
-          vm.postStatus = "success";
+          //console.log("Token was successfully posted");
+          //vm.postStatus = "success";
+          $uibModalInstance.close("success");
         },
         function error(error){
-          console.log("Error while posting token");
-          vm.postStatus = "error";
+          //console.log("Error while posting token");
+          vm.postStatus = error;
         }
       );
     };

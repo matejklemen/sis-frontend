@@ -32,7 +32,7 @@
 
     </div>
     <div class="col-md-8">
-      <a class="btn btn-info btn-block" ng-if="vm.hasToken" href="/enrol/{{ vm.student.id }}"><span class="glyphicon glyphicon-edit"></span> Na voljo vam je vpis za <b>{{ vm.token.studyProgram.name }}</b> za leto <b>{{ vm.token.studyYear.name }}</b></a>
+      <a class="btn btn-info btn-block" ng-if="vm.hasToken" href="/enrol/{{ vm.student.id }}"><span class="glyphicon glyphicon-edit"></span> Na voljo vam je vpis za <b>{{ vm.token.year }}. letnik</b> programa <b>{{ vm.token.studyProgram.name }}</b> - <b>{{ vm.token.studyYear.name }}</b></a>
       <h4>Vpisi</h4>
       <table class="table table-striped">
         <thead>
