@@ -2,43 +2,35 @@
 
 <div class="container">
 
-	<ul class="nav nav-tabs">
-    <li ng-show="vm.role.id == 4">
-      <a data-toggle="tab" data-target="#students" href="">
+  <uib-tabset active="vm.selectedTab">
+    
+    <uib-tab index="0" ng-show="vm.role.id == 4" deselect="vm.saveSelectedTab($selectedIndex)">
+      <uib-tab-heading>
         <span class="glyphicon glyphicon-tower"></span> Upravljanje študentov
-      </a>
-    </li>
-    <li ng-show="vm.role.id == 4">
-      <a data-toggle="tab" data-target="#import" href="">
-        <span class="glyphicon glyphicon-import"></span> Uvoz podatkov
-      </a>
-    </li>
-    <li ng-show="vm.role.id == 3 || vm.role.id == 4">
-      <a data-toggle="tab" data-target="#studentCourses" href="">
-        <span class="glyphicon glyphicon-list"></span> Študenti po predmetih
-      </a>
-    </li>
-  </ul>
-  
-  <div class="tab-content" style="margin-top:20px">
-    <div id="students" class="tab-pane fade">
-
+      </uib-tab-heading>
+      
       <!-- Student data -->
       <student-list></student-list>
 
-    </div>
-    <div id="import" class="tab-pane fade">
-
+    </uib-tab>
+    <uib-tab index="1" ng-show="vm.role.id == 4" deselect="vm.saveSelectedTab($selectedIndex)">
+      <uib-tab-heading>
+        <span class="glyphicon glyphicon-import"></span> Uvoz podatkov
+      </uib-tab-heading>
+      
       <!-- Student data import -->
       <student-import></student-import>
 
-    </div>
-    <div id="studentCourses" class="tab-pane fade">
+    </uib-tab>
+    <uib-tab index="2" ng-show="vm.role.id == 3 || vm.role.id == 4" deselect="vm.saveSelectedTab($selectedIndex)">
+      <uib-tab-heading>
+        <span class="glyphicon glyphicon-list"></span> Študenti po predmetih
+      </uib-tab-heading>
       
       <!-- Student data by course -->
       <course-students-list></course-students-list>
 
-    </div>
-  </div>
+    </uib-tab>
+  </uib-tabset>
 
 </div>

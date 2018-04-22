@@ -1,24 +1,22 @@
-
 (function() {
-  var controlCtrl = function($scope, fileService,$window, authenticationService) {
+  var controlCtrl = function($scope, fileService, $location, authenticationService) {
     var vm = this;
 
     vm.role = authenticationService.getRole();
-    vm.loginId = authenticationService.getLoginId();
 
-    if(vm.role.id == 2)
-    {
-      console.log("klicem")
-      authenticationService.getUserData(vm.loginId, vm.role.id).then(
-        function success(response) {
-          console.log("grem")
-          $window.location.href = "/student/" + response.data.registerNumber;
-        },
-        function error(error) {
-          console.log("Ooopse poopse~~!", error);
-        }
-      );
+    // redirect to student view if user role is student
+    if(vm.role.id == 2) {
+      $location.path("/student/" + authenticationService.getIdentity());
+    } else {
+
+      // Load selected tab from localstorage - open last tab on view load
+      vm.selectedTab = parseInt(localStorage.getItem('lastTabIndex'));
     }
+
+    vm.saveSelectedTab = function(selectedIndex) {
+      localStorage.setItem("lastTabIndex", selectedIndex);
+    };
+
   };
 
   angular

@@ -8,11 +8,11 @@
       }).join(''));
     };
 
-    var saveToken = function(token) {
+    var setToken = function(token) {
       $window.localStorage['sis-token'] = token;
     };
 
-    var returnToken = function() {
+    var getToken = function() {
       return $window.localStorage['sis-token'];
     };
 
@@ -23,8 +23,8 @@
       };
       return $http.post(apiBaseRoute+'/api/login', user, {headers:{'Content-Type': 'application/json'}}).then(
         function success(res) {
-          saveToken(res.data.token);
-          return res.data.username;
+          setToken(res.data);
+          return getUsername();
         },
         function error(res) {
           throw res;
@@ -66,7 +66,7 @@
     };
 
     var isLoggedIn = function() {
-      var token = returnToken();
+      var token = getToken();
       if (token) {
         var data = JSON.parse(b64Utf8(token.split('.')[1]));
         return data.exp > Date.now() / 1000;
@@ -76,29 +76,27 @@
     };
 
     var getUsername = function() {
-      var token = returnToken();
+      var token = getToken();
       if (token) {
         var data = JSON.parse(b64Utf8(token.split('.')[1]));
-        //console.log(data);
-        return data.sub;
+        return data.username;
       } else {
         return false;
       }
     };
 
     var getLoginId = function() {
-      var token = returnToken();
+      var token = getToken();
       if (token) {
         var data = JSON.parse(b64Utf8(token.split('.')[1]));
-        console.log(data);
-        return data.loginid;
+        return data.loginId;
       } else {
         return false;
       }
     };
 
     var getRole = function() {
-      var token = returnToken();
+      var token = getToken();
       if (token) {
         var data = JSON.parse(b64Utf8(token.split('.')[1]));
         return data.role;
@@ -107,22 +105,28 @@
       }
     };
 
-    var getUserData = function(loginId, roleId) {
-      return $http.get(apiBaseRoute + '/api/login/' + loginId + '?roleId=' + roleId);
+    var getIdentity = function() {
+      var token = getToken();
+      if (token) {
+        var data = JSON.parse(b64Utf8(token.split('.')[1]));
+        return data.identity;
+      } else {
+        return false;
+      }
     };
 
     return {
+      setToken: setToken,
+      getToken: getToken,
       login: login,
       passwordReset: passwordReset,
       passwordChange: passwordChange,
-      saveToken: saveToken,
-      returnToken: returnToken,
       logout: logout,
       isLoggedIn: isLoggedIn,
       getUsername: getUsername,
-      getRole: getRole,
-      getUserData: getUserData,
       getLoginId: getLoginId,
+      getRole: getRole,
+      getIdentity: getIdentity,
     };
   };
 
