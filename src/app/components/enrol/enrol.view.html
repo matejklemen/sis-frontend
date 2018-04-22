@@ -32,10 +32,10 @@
           <!-- Date of birth -->
           <div class="form-group">
             <label for="i2">Datum rojstva: </label>
-            <p class="input-group">
-              <input type="text" class="form-control input-sm calendar" uib-datepicker-popup ng-model="vm.student.dateOfBirth" is-open="vm.popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <p class="input-group input-calendar">
+              <input type="text" class="form-control input-sm" uib-datepicker-popup ng-model="vm.student.dateOfBirth" is-open="vm.popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Zapri" current-text="Danes" clear-text="Počisti" placeholder="YYYY-MM-DD" alt-input-formats="['d!.M!.yyyy']"/>
               <span class="input-group-btn">
-                <button type="button" class="btn-sm btn" ng-click="vm.open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="vm.open2()"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </p>
           </div>
@@ -351,8 +351,8 @@
   <!-- Potrdi vpis || preklici vpis [STUDENT] -->
   <div ng-if="vm.role.id == 2">
     <div style="text-align: right;margin-bottom: 100px;">
-      <div class="alert alert-danger" ng-if="vm.finalizeError.length > 0">
-        <strong>Napaka!</strong> {{ vm.finalizeError }}
+      <div class="alert alert-danger" ng-show="vm.finalizeError">
+        <strong>Napaka!</strong> {{ vm.finalizeError | formatError }}
       </div>
       <a ng-click="vm.cancelEnrolment()" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Prekliči vpis</a>
       <a ng-click="vm.finalizeEnrolment()" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Zaključi vpis</a>

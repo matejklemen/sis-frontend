@@ -191,7 +191,7 @@
         },
         function error(error){
           vm.firstEnrolment = "2017/2018";
-          console.log("Oh no...",error);
+          //console.log("Oh no...",error);
         }
       );
     }
@@ -238,6 +238,12 @@
         return;
       }
 
+      // check if dateOfBirth is an object (if date is not set, it's of type 'undefined' and this test should fail)
+      if(typeof vm.student.dateOfBirth !== 'object') {
+        vm.finalizeError = "Datum rojstva ni vnešen ali je vnešen nepravilno.";
+        return;
+      }
+
       // stevilo izbranih strokovnih predmetov
       var countSiz = 0;
       vm.courses.siz.forEach(function(element, index, array) {
@@ -261,11 +267,12 @@
 
       //send to BE
       var objectToSend = {};
-      setDate()
 
-      objectToSend.student = vm.student;
+      objectToSend.student = Object.assign({}, vm.student); // Make a copy of object, don't reference
       objectToSend.enrolmentToken = vm.token;
       objectToSend.courses = [];
+
+      objectToSend.student.dateOfBirth = convertDateToString(objectToSend.student.dateOfBirth);
 
       vm.curriculum.forEach(function(element, index, array) {
         if(element.selected || element.poc.type == "obv") {
@@ -282,7 +289,7 @@
         },
         function error(error) {
           console.log(error);
-          vm.finalizeError = error.data.status + ":" + error.data.message;
+          vm.finalizeError = error.data;
         }
       );
     };
@@ -296,8 +303,7 @@
 
     vm.confirmEnrolment = function() {
       // na true in pol resenda sam vse
-      setDate();
-      console.log(vm.student)
+      console.log(vm.student);
     };
 
     vm.rejectEnrolment = function() {
@@ -349,20 +355,20 @@
       opened: false
     };
 
-    function setDate(){
-      var day = String(vm.student.dateOfBirth.getDate())
-      if(day.length < 2){
-        day= "0" + day
+    function convertDateToString(dateObject) {
+      var year = String(dateObject.getFullYear());
+
+      var month = String(dateObject.getMonth() + 1); // January is 0
+      if(month.length < 2) {
+        month = "0" + month;
+      }
+      
+      var day = String(dateObject.getDate());
+      if(day.length < 2) {
+        day = "0" + day;
       }
 
-      var month = String(vm.student.dateOfBirth.getMonth()+1)
-      if(month.length < 2){
-        month= "0" + month
-      }
-
-      var year = String(vm.student.dateOfBirth.getFullYear())
-
-      vm.student.dateOfBirth=year+"-"+month+"-"+day
+      return year + "-" + month + "-" + day;
     }
   };
 
