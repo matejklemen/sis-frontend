@@ -42,6 +42,7 @@
             <th>Letnik</th>
             <th>Vrsta vpisa</th>
             <th>Način vpisa</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -52,6 +53,8 @@
             <td>{{ enrolment.year + '.' }}</td>
             <td>{{ enrolment.type | formatDisplayName }}</td>
             <td>{{ enrolment.kind | formatDisplayName }}</td>
+            <td ng-if="enrolment.confirmed"> <b style="color:#18bc9c">Potrjeno</b> </td>
+            <td ng-if="!enrolment.confirmed"> <b style="color:#f39c12">Nepotrjeno</b> </td>
           </tr>
         </tbody>
       </table>

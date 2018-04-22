@@ -17,16 +17,17 @@
       return $http.get(apiBaseRoute + '/api/enrolments/' + studentId);
     }
 
-    var postConfirmeEnrolment = function(id){
-      return $http.post(apiBaseRoute + '/api/enrolments/confirm/' + id);
+    var updateAndConfirmEnrolment = function(id, body){
+      return $http.post(apiBaseRoute + '/api/enrolments/confirm/' + id, body);
     }
+
 
     return {
       checkEnrolment: checkEnrolment,
       getFirstEnrolment: getFirstEnrolment,
       getEnrolmentsForStudent: getEnrolmentsForStudent,
       getLastEnrolment: getLastEnrolment,
-      postConfirmeEnrolment: postConfirmeEnrolment
+      updateAndConfirmEnrolment: updateAndConfirmEnrolment
     };
   };
 

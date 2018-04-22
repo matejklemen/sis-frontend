@@ -10,12 +10,14 @@
       function success(response) {
         console.log("Token:", response.data);
         vm.token = response.data;
-        if(vm.token.used && vm.role==2) {
+        if(vm.token.used && vm.role.id==2) {
           $window.location.href = "/";
-        } else {
-          getCurriculum(vm.token.studyProgram.id, vm.token.year);
-          getStudentData(vm.token.student);
         }
+        if(vm.role.id == 4){
+          getLastEnrolment($routeParams.studentId);
+        }
+        getCurriculum(vm.token.studyProgram.id, vm.token.year);
+        getStudentData(vm.token.student);
       },
       function error(error) {
         $window.location.href = "/";
@@ -302,13 +304,45 @@
     /* Confirm || Reject enrolment [SKRBNIK]*/
 
     vm.confirmEnrolment = function() {
-      // na true in pol resenda sam vse
-      console.log(vm.student);
+      // Subjects
+      var countSiz = 0;
+      vm.courses.siz.forEach(function(element, index, array) {
+        if(element.selected) countSiz++;
+      });
+
+      // Object for backend
+      var objectToSend = {};
+
+      objectToSend.student = Object.assign({}, vm.student); // Make a copy of object, don't reference
+      objectToSend.enrolmentToken = vm.token;
+      objectToSend.courses = [];
+
+      objectToSend.student.dateOfBirth = convertDateToString(objectToSend.student.dateOfBirth);
+
+      vm.curriculum.forEach(function(element, index, array) {
+        if(element.selected || element.poc.type == "obv") {
+          objectToSend.courses.push(element.idCourse.id);
+        }
+      });
+
+      console.log(objectToSend);
+
+      // Send to backend
+      enrolmentService.updateAndConfirmEnrolment(vm.student.id, objectToSend).then(
+        function success(response) {
+          console.log("Potrditev uspela:", response);
+          $window.location.href = "/student/" + vm.student.registerNumber;
+        },
+        function error(error) {
+          console.log(error);
+          vm.finalizeError = error.data;
+        }
+      );
     };
 
-    vm.rejectEnrolment = function() {
-      if(confirm("Ali ste prepričani da želite zavrniti vpis?")) {
-        //what to do?!
+    vm.cancel = function() {
+      if(confirm("Ali ste prepričani da želite preklicati spremembe?")) {
+        $window.history.back();
       }
     };
 
@@ -369,6 +403,19 @@
       }
 
       return year + "-" + month + "-" + day;
+    }
+
+    function getLastEnrolment(id){
+      enrolmentService.getLastEnrolment(id).then(
+        function success(response){
+          if(response.data.confirmed){
+            $window.location.href = "/";
+          }
+        },
+        function error(error){
+          console.log("Oh no...",error);
+        }
+      );
     }
   };
 
