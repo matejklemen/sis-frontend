@@ -32,12 +32,12 @@
           <!-- Date of birth -->
           <div class="form-group">
             <label for="i2">Datum rojstva: </label>
-            <p class="input-group input-calendar">
+            <div class="input-group">
               <input type="text" class="form-control input-sm" uib-datepicker-popup ng-model="vm.student.dateOfBirth" is-open="vm.popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Zapri" current-text="Danes" clear-text="Počisti" placeholder="YYYY-MM-DD" alt-input-formats="['d!.M!.yyyy']"/>
               <span class="input-group-btn">
-                <button type="button" class="btn btn-sm btn-default" ng-click="vm.open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                <button type="button" class="btn btn-sm btn-default" style="line-height: inherit;" ng-click="vm.open2()"><span class="glyphicon glyphicon-calendar"></span></button>
               </span>
-            </p>
+            </div>
           </div>
         </div>
         <div class="col-md-6">
