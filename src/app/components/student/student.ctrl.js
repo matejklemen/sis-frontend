@@ -21,6 +21,7 @@
           enrolmentService.getEnrolmentsForStudent(vm.student.id).then(
             function success(response) {
               vm.enrolments = response.data;
+              console.log(vm.enrolments)
             },
             function error(error) {
               console.log("Oh no...", error);

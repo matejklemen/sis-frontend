@@ -359,10 +359,10 @@
     </div>
   </div>
 
-  <!-- Potrdi vpis || zavrni vpis [SKRBNIK] -->
+  <!-- Potrdi vpis || preklici [SKRBNIK] -->
   <div ng-if="vm.role.id == 4">
     <div style="text-align: right;margin-bottom: 100px;">
-      <a ng-click="vm.rejectEnrolment()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Zavrni vpis</a>
+      <a ng-click="vm.cancel()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Preklici</a>
       <a ng-click="vm.confirmEnrolment()" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Shrani in potrdi</a>
     </div>
   </div>
