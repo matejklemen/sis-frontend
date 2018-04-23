@@ -35,6 +35,11 @@
         controller: 'enrolCtrl',
         controllerAs: 'vm'
       })
+      .when('/examterm/:courseOrganizationId', {
+        templateUrl: 'components/examTerm/examTerm.view.html',
+        controller: 'examTermCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({redirectTo: '/login'});
 
     $locationProvider.html5Mode(true);
