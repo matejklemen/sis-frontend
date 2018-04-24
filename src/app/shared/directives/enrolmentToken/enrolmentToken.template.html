@@ -1,14 +1,15 @@
 <!-- Generate token -->
-<div ng-if="vm.enrolmentToken == null">
+<div ng-if="!vm.edit">
   <a ng-click="vm.NewEnrolmentToken()" href="#" class="btn btn-primary btn-xs">Generiraj</a>
 </div>
+
 <!-- Edit or delete token -->
-<div ng-if="vm.enrolmentToken">
-  <a ng-click="vm.openEditModal(vm.enrolmentToken)" class="btn btn-info btn-xs" ng-class="vm.enrolmentToken.used ? 'disabled' :''">
+<div ng-if="vm.edit">
+  <a ng-click="vm.openEditModal(vm.enrolmentToken)" class="btn btn-info btn-xs" ng-disabled="vm.editDisable">
     <span class="glyphicon glyphicon-pencil"></span>
     Uredi
   </a>
-  <a ng-click="vm.DeleteEnrolmentToken(vm.enrolmentToken.id)" class="btn btn-danger btn-xs" ng-class="vm.enrolmentToken.used ? 'disabled' :''">
+  <a ng-click="vm.DeleteEnrolmentToken(vm.enrolmentToken.id)" class="btn btn-danger btn-xs" ng-disabled="vm.editDisable">
     <span class="glyphicon glyphicon-trash"></span>
     Izbriši
   </a>

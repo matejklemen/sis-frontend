@@ -1,5 +1,5 @@
 (function() {
-  var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService, codelistService, curriculumService,enrolmentService, authenticationService) {
+  var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService, codelistService, curriculumService,enrolmentService, authenticationService, courseService) {
     var vm = this;
 
     /* Get role */
@@ -411,6 +411,46 @@
           if(response.data.confirmed){
             $window.location.href = "/";
           }
+
+          // Get chosen subjects
+          getChosenSubjects(response.data.id)
+
+        },
+        function error(error){
+          console.log("Oh no...",error);
+        }
+      );
+    }
+
+    function getChosenSubjects(enrolmentId){
+      courseService.getCourseForEnrolment(enrolmentId).then(
+        function success(response){
+
+          response.data.forEach(function(element, index, array) {
+            var found = vm.curriculum.find(function(elementInner) {
+              return elementInner.idCourse.id == element.course.id;
+            });
+            switch(found.poc.type){
+              case "obv":
+                break;
+              case "siz":
+              case "mod":
+                var course = vm.courses.siz.find(function(elementInner) {
+                  return elementInner.idCourse.id == element.course.id;
+                });
+                course.selected = true;
+                break;
+              case "piz":
+                var course = vm.courses.piz.find(function(elementInner) {
+                  return elementInner.idCourse.id == element.course.id;
+                });
+                course.selected = true;
+                break;
+              default:
+                console.log("Oh no... Nepricakovan tip predmeta")
+            }
+          });
+
         },
         function error(error){
           console.log("Oh no...",error);

@@ -3,18 +3,19 @@
   var enrTokenCtrl = function($scope,tokenService,$uibModal,enrolmentService) {
     var vm = this;
 
-    if(checkEnrolment($scope.id)){
-      getEnrolmentToken($scope.id);
-    }
-    
+    getEnrolmentToken($scope.id);
+
+    vm.edit = false;
+    vm.editDisable = false;
     vm.currentStudent = undefined;
 
     vm.NewEnrolmentToken = function(){
-      console.log("enrolled: ",vm.enrolled)
       if(vm.enrolled){
         tokenService.putToken($scope.id).then(
           function success(response){
             vm.enrolmentToken = response.data;
+            vm.edit = true;
+            vm.editDisable = false;
             console.log("dobil rezultat: ", vm.enrolmentToken);
           },
           function error(error){
@@ -26,6 +27,8 @@
         tokenService.putTokenForFirstEnrolment($scope.id).then(
           function success(response){
             vm.enrolmentToken = response.data;
+            vm.edit = true;
+            vm.editDisable = false;
             console.log("dobil rezultat: ", vm.enrolmentToken);
           },
           function error(error){
@@ -42,6 +45,7 @@
           function success(response){
             console.log("Token was successfully deleted");
             vm.enrolmentToken = null;
+            vm.edit = false;
           },
           function error(error){
             console.log("Error while deleting token");
@@ -49,6 +53,46 @@
         );
       }
     };
+
+
+    /* Helpers */
+    function getEnrolmentToken(studentId){
+      tokenService.getTokenByStudentId(studentId).then(
+        function success(response){
+          vm.enrolmentToken = response.data;
+          if(vm.enrolmentToken.used){
+            vm.editDisable = true;
+            getLastEnrolment($scope.id);
+          }
+          vm.edit = true;
+        },
+        function error(error){
+          vm.edit = false;
+          console.log("Oh no...",error)
+        }
+      );
+    }
+
+    function getLastEnrolment(id){
+      enrolmentService.getLastEnrolment(id).then(
+        function success(response){
+          console.log("ima enrolment: ",id," data: ",response.data)
+          if(!response.data.confirmed){
+            console.log("ima nepotrjen enrolment: ",id)
+            vm.edit = true;
+            vm.editDisable = true;
+          }
+          else{
+            console.log("ima potrjen enrolment: ",id)
+            vm.edit = false;
+          }
+        },
+        function error(error){
+          console.log("Oh no...",error)
+        }
+      );
+    }
+
 
     /* Modal */
     vm.openEditModal = function(enrolmentToken) {
@@ -76,31 +120,6 @@
       );
     };
 
-    /* Helpers */
-    function getEnrolmentToken(studentId){
-      tokenService.getTokenByStudentId(studentId).then(
-        function success(response){
-          vm.enrolmentToken = response.data;
-        },
-        function error(error){
-          vm.enrolmentToken = null;
-        }
-      );
-    }
-
-    function checkEnrolment(id){
-      return enrolmentService.checkEnrolment(id).then(
-        function success(response){
-          vm.enrolled = true;
-          return true;
-        },
-        function error(error){
-          //console.log("student with id "+id+" has no enrolments yet");
-          vm.enrolled = false;
-          return false;
-        }
-      );
-    }
   };
 
   enrTokenCtrl.$Inject = ["$scope","tokenService"];
