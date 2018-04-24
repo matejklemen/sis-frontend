@@ -1,5 +1,5 @@
 (function() {
-  var examTermCtrl = function($scope, $routeParams, $window, professorsService, authenticationService, courseOrganizationService) {
+  var examTermCtrl = function($scope, $routeParams, $window, professorsService, authenticationService, courseOrganizationService, examTermService) {
     var vm = this;
 
     /* Get role */
@@ -47,10 +47,38 @@
     }
 
     isSaturdaySunday = function(dateString) {
-        day = dateString.split(" ")[0];
+        day = new Date(dateString).getDay();
 
-        if(day == "Sat" || day == "Sun")
-            console.log("Date is on a saturday or sunday!");
+        return (day == 0 || day == 6);
+    }
+
+    isDateHoliday = function(dateString) {
+        date = new Date(dateString);
+
+        month = date.getMonth() + 1;
+        day = date.getDate();
+
+        holidays = {
+                1: [1, 2],
+                2: [8],
+                4: [27],
+                5: [1, 2],
+                8: [15],
+                6: [25],
+                10: [31],
+                11: [1],
+                12: [25, 26]
+        };
+
+        hday = holidays[month];
+        if(hday === undefined)
+            return false;
+
+        for(var i = 0; i < hday.length; i++)
+            if(hday[i] == day)
+                return true;
+
+        return false;
     }
 
     // YYYY-MM-DD HH:MM:SS
@@ -66,7 +94,7 @@
         hrs = time.getHours();
         mins = time.getMinutes();
 
-        return (YYYY + "-" + MM + "-" + DD + "-" + hrs + "-" + mins + "-00");
+        return new Date(YYYY + "-" + MM + "-" + DD + " " + hrs + ":" + mins + ":00");
     }
 
     vm.open2 = function() {
@@ -84,17 +112,19 @@
             vm.finalizeError = "Datum izpita je neizpolnjen!";
             return;
         }
-        else {
-            console.log("Date: " + vm.dateOfExam.toDateString())
-            isSaturdaySunday(vm.dateOfExam.toDateString());
+        else if(isSaturdaySunday(vm.dateOfExam.toDateString())) {
+            vm.finalizeError = "Dan izpita je sobota ali nedelja!";
+            return;
+        }
+        else if(isDateHoliday(vm.dateOfExam.toDateString())) {
+            vm.finalizeError = "Dan izpita je dela prost dan!";
+            return;
         }
 
         if(vm.timeOfExam === undefined) {
             vm.finalizeError = "Čas izpita je neizpolnjen!";
             return;
         }
-        else
-            console.log("Time: " + vm.timeOfExam.toTimeString());
 
         if(vm.durationOfExam === undefined) {
             vm.finalizeError = "Trajanje izpita ni določeno!";
@@ -105,17 +135,20 @@
             return;
         }
 
-        // TODO check if professor belongs to a course organization
-
-
         // send payload
         var objectToSend = {};
         objectToSend.course = Object.assign({}, vm.selectedCourseOrganization);
         objectToSend.duration = vm.durationOfExam; 
         objectToSend.date = formatDatetime(vm.dateOfExam, vm.timeOfExam);
+        
 
-        console.log("Selected professor: " + vm.professor.fullName);
-        console.log(vm.selectedCourseOrganization);
+        examTermService.sendExamTerm(objectToSend).then(
+            function success(response) {
+                $window.location.href = "/control";
+            },
+            function error(error) {
+                vm.finalizeError = error.data;
+            });
     }
 
   };
