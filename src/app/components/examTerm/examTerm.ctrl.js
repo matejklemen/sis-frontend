@@ -7,20 +7,17 @@
 
     /* profesor/ica */
     if(vm.role.id == 3) {
-    	profIdentity = authenticationService.getIdentity();
+        profIdentity = authenticationService.getIdentity();
 
         // get professor's full name
-    	profFullName = professorsService.getProfessorData(profIdentity).then(
-    		function success(response) {
-    			profFullName = response.data.firstName + " " + response.data.lastName1 + " " + (response.data.lastName2 != null ? response.data.lastName2: "");
-
-                vm.professor = response.data;
-                vm.professor.fullName = profFullName;
-    		},
-    		function error(error) {
-    			console.log('Error obtaining professor\'s data! Are you sure you are logged into a professor\'s account?');
-                $window.location.href = "/";
-    		});
+        profFullName = professorsService.getProfessorData(profIdentity).then(
+            function success(response) {
+                vm.selectedProfessor = response.data;
+            },
+            function error(error) {
+                vm.finalizeError = 'račun ni povezan s podatki izvajalca';
+                return;
+            });
 
         // get courses organized or co-organized by current professor
         courseOrganizations = courseOrganizationService.getCourseOrganizationsForProfessor(profIdentity).then(
@@ -32,19 +29,40 @@
                     vm.selectedCourseOrganization = response.data[0];
             },
             function error(error) {
-                console.log('Error obtaining course organization data for selected professor!');
+                vm.finalizeError = 'za izbranega izvajalca ni v sistemu naveden noben predmet, ki bi se izvajal';
+                return;
             });
-
-        // set default exam type
-        vm.typeOfExam = "pisni";
-
-        // set default exam duration
-        vm.durationOfExam = 60;
     }
     /* referent/ka */
     else if(vm.role.id == 4) {
+        /*
+        professorsService.getAllProfessors().then(
+            function success(response) {
+                vm.professor = response.data;
+            },
+            function error(error) {
+                vm.finalizeError = 'v sistemu ni nobenega profesorja';
+                return;
+            });
+        */
+
+        // TODO: only get course organizations for current study year 
+        courseOrganizationService.getAllCourseOrganizations().then(
+            function success(response) {
+                vm.coursesForProfessor = response.data;
+            },
+            function error(error) {
+                vm.finalizeError = 'v sistemu ni vpisan noben predmet';
+                return;
+            })
 
     }
+
+    // set default exam type
+    vm.typeOfExam = "pisni";
+
+    // set default exam duration
+    vm.durationOfExam = 60;
 
     isSaturdaySunday = function(dateString) {
         day = new Date(dateString).getDay();
@@ -81,6 +99,19 @@
         return false;
     }
 
+    vm.updateSelectableOrganizers = function() {
+        selectableProfessors = [];
+
+        selectableProfessors.push(vm.selectedCourseOrganization.organizer1);
+        if(vm.selectedCourseOrganization.organizer2 !== null)
+            selectableProfessors.push(vm.selectedCourseOrganization.organizer2);
+        if(vm.selectedCourseOrganization.organizer3 !== null)
+            selectableProfessors.push(vm.selectedCourseOrganization.organizer3);
+
+        vm.professor = selectableProfessors;
+        vm.selectedProfessor = selectableProfessors[0];
+    }
+
     // YYYY-MM-DD HH:MM:SS
     formatDatetime = function(date, time) {
         YYYY = date.getFullYear();
@@ -108,30 +139,42 @@
     vm.finalizeInsertingExamTerm = function() {
         vm.finalizeError = "";
 
+        console.log(vm.selectedProfessor);
+        console.log(vm.selectedCourseOrganization);
+
+        if(vm.selectedCourseOrganization === undefined) {
+            vm.finalizeError = "izbran ni bil noben predmet";
+            return;
+        }
+
+        if(vm.selectedProfessor === undefined) {
+            vm.finalizeError = "izbran ni bil noben profesor";
+        }
+
         if(vm.dateOfExam === undefined) {
-            vm.finalizeError = "Datum izpita je neizpolnjen!";
+            vm.finalizeError = "datum izpita je neizpolnjen!";
             return;
         }
         else if(isSaturdaySunday(vm.dateOfExam.toDateString())) {
-            vm.finalizeError = "Dan izpita je sobota ali nedelja!";
+            vm.finalizeError = "dan izpita je sobota ali nedelja!";
             return;
         }
         else if(isDateHoliday(vm.dateOfExam.toDateString())) {
-            vm.finalizeError = "Dan izpita je dela prost dan!";
+            vm.finalizeError = "dan izpita je dela prost dan!";
             return;
         }
 
         if(vm.timeOfExam === undefined) {
-            vm.finalizeError = "Čas izpita je neizpolnjen!";
+            vm.finalizeError = "čas izpita je neizpolnjen!";
             return;
         }
 
         if(vm.durationOfExam === undefined) {
-            vm.finalizeError = "Trajanje izpita ni določeno!";
+            vm.finalizeError = "trajanje izpita ni določeno!";
             return;
         }
         else if(vm.durationOfExam < 0) {
-            vm.finalizeError = "Trajanje izpita ne sme biti negativno!";
+            vm.finalizeError = "trajanje izpita ne sme biti negativno!";
             return;
         }
 
@@ -140,7 +183,6 @@
         objectToSend.course = Object.assign({}, vm.selectedCourseOrganization);
         objectToSend.duration = vm.durationOfExam; 
         objectToSend.date = formatDatetime(vm.dateOfExam, vm.timeOfExam);
-        
 
         examTermService.sendExamTerm(objectToSend).then(
             function success(response) {

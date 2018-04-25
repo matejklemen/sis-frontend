@@ -5,8 +5,13 @@
       return $http.get(apiBaseRoute + '/api/professors/' + idProfessor);
     };
 
+    var getAllProfessors = function() {
+      return $http.get(apiBaseRoute + '/api/professors');
+    }
+
     return {
-      getProfessorData: getProfessorData
+      getProfessorData: getProfessorData,
+      getAllProfessors: getAllProfessors
     };
   };
 

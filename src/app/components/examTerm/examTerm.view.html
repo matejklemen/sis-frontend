@@ -13,13 +13,14 @@
         <div class="col-md-6">
           <!-- Name and surname -->
           <label for="i1"> Izvajalec: </label>
-          <input class="form-control input-sm" type="text" ng-model="vm.professor.fullName" ng-disabled="vm.role.id != 4">
+          <input class="form-control input-sm" type="text" ng-model="vm.selectedProfessor" ng-if="vm.role.id != 4" ng-value="vm.selectedProfessor.firstName + ' ' + vm.selectedProfessor.lastName1 + (vm.selectedProfessor.lastName2 != null ? ' ' + vm.selectedProfessor.lastName2: '')" ng-disabled="true">
+          <select ng-model="vm.selectedProfessor" class="form-control input-sm" ng-options="professor.firstName + ' ' + professor.lastName1 + (professor.lastName2 != null ? ' ' + professor.lastName2: '') for professor in vm.professor" ng-if="vm.role.id==4" ng-disabled="vm.selectedCourseOrganization === undefined"></select>
         </div>
         <div class="col-md-6">
           <!-- Course ID -->
           <div class="form-group">
             <label for="i2">Predmet: </label>
-            <select ng-model="vm.selectedCourseOrganization" class="form-control input-sm" ng-options="courseOrganization.course.id + ' ' + courseOrganization.course.name for courseOrganization in vm.coursesForProfessor"></select>
+            <select ng-model="vm.selectedCourseOrganization" class="form-control input-sm" ng-options="courseOrganization.course.id + ' ' + courseOrganization.course.name + ' (' + courseOrganization.studyYear.name + ')' for courseOrganization in vm.coursesForProfessor" ng-change="vm.updateSelectableOrganizers()"></select>
           </div>
         </div>
         <div class="col-md-6">
@@ -54,7 +55,7 @@
         <div class="col-md-6">
           <!-- Duration of exam -->
           <div class="form-group">
-            <label for="i6">Čas trajanja izpita: </label>
+            <label for="i6">Čas trajanja izpita (min): </label>
             <input class="form-control input-sm" type="number" min="0" id="i3" ng-model="vm.durationOfExam">
           </div>
         </div>
@@ -63,8 +64,8 @@
     </div>
   </div>
 
-  <!-- Potrdi || preklici [PROFESOR] -->
-  <div ng-if="vm.role.id == 3">
+  <!-- Potrdi || preklici -->
+  <div>
     <div style="text-align: right;margin-bottom: 100px;">
       <div class="alert alert-danger" ng-show="vm.finalizeError">
         <strong>Napaka!</strong> {{ vm.finalizeError | formatError }}
@@ -73,13 +74,4 @@
       <a ng-click="vm.finalizeInsertingExamTerm()" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Vnesi izpit</a>
     </div>
   </div>
-
-  <!-- Potrdi || preklici [REFERENT] -->
-  <div ng-if="vm.role.id == 4">
-    <div style="text-align: right;margin-bottom: 100px;">
-      <a ng-click="vm.cancel()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Prekliči vnos</a>
-      <a ng-click="vm.confirmEnrolment()" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Vnesi izpit</a>
-    </div>
-  </div>
-
 </div>

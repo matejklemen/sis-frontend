@@ -6,9 +6,14 @@
       return $http.get(apiBaseRoute + '/api/course-organization/professor/' + idProfessor);
     }
 
+    var getAllCourseOrganizations = function() {
+      return $http.get(apiBaseRoute + '/api/course-organization');
+    }
+
 
     return {
-      getCourseOrganizationsForProfessor: getCourseOrganizationsForProfessor
+      getCourseOrganizationsForProfessor: getCourseOrganizationsForProfessor,
+      getAllCourseOrganizations: getAllCourseOrganizations
     };
   };
 
