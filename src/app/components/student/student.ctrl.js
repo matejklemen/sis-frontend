@@ -1,5 +1,5 @@
 (function() {
-  var studentCtrl = function($scope, $window, $routeParams, studentService, enrolmentService, tokenService) {
+  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService) {
     var vm = this;
 
     if($routeParams.registerNumber != null) {
@@ -21,7 +21,7 @@
           enrolmentService.getEnrolmentsForStudent(vm.student.id).then(
             function success(response) {
               vm.enrolments = response.data;
-              console.log(vm.enrolments)
+              console.log(vm.enrolments);
             },
             function error(error) {
               console.log("Oh no...", error);
@@ -30,13 +30,13 @@
         },
         function error(response) {
           console.error("Oh no... ", response);
-          $window.location.href = "/";
+          $location.path("/");
         }
       );
 
     } else {
       console.error("parameter registerNumber is null");
-      $window.location.href = "/";
+      $location.path("/");
     }
 
   };

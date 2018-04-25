@@ -1,6 +1,6 @@
 (function() {
 
-  var navbarCtrl = function($window, $location, $route, $scope, authenticationService) {
+  var navbarCtrl = function($location, $route, $scope, authenticationService) {
     var vm = this;
 
     vm.loggedIn = authenticationService.isLoggedIn();
@@ -9,7 +9,7 @@
       vm.role = authenticationService.getRole();
     } else {
       if($location.path() != "/login") {
-        $window.location.href = "/login";
+        $location.path("/login");
       }
     }
 
@@ -18,7 +18,7 @@
     vm.logout = function() {
       authenticationService.logout();
       vm.loggedIn = false;
-      $window.location.href = "/login";
+      $location.path("/login");
     };
   };
 

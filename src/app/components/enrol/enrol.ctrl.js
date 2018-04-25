@@ -1,5 +1,5 @@
 (function() {
-  var enrolCtrl = function($scope, $routeParams, $window, studentService, tokenService, codelistService, curriculumService,enrolmentService, authenticationService, courseService) {
+  var enrolCtrl = function($scope, $routeParams, $location, $window, studentService, tokenService, codelistService, curriculumService,enrolmentService, authenticationService, courseService) {
     var vm = this;
 
     /* Get role */
@@ -11,7 +11,7 @@
         console.log("Token:", response.data);
         vm.token = response.data;
         if(vm.token.used && vm.role.id==2) {
-          $window.location.href = "/";
+          $location.path("/");
         }
         if(vm.role.id == 4){
           getLastEnrolment($routeParams.studentId);
@@ -20,7 +20,7 @@
         getStudentData(vm.token.student);
       },
       function error(error) {
-        $window.location.href = "/";
+        $location.path("/");
       }
     );
 
@@ -287,7 +287,7 @@
       tokenService.postEnrolData(objectToSend).then(
         function success(response) {
           console.log("Vpis uspel:", response);
-          $window.location.href = "/student/" + vm.student.registerNumber;
+          $location.path("/student/" + vm.student.registerNumber);
         },
         function error(error) {
           console.log(error);
@@ -331,7 +331,7 @@
       enrolmentService.updateAndConfirmEnrolment(vm.student.id, objectToSend).then(
         function success(response) {
           console.log("Potrditev uspela:", response);
-          $window.location.href = "/student/" + vm.student.registerNumber;
+          $location.path("/student/" + vm.student.registerNumber);
         },
         function error(error) {
           console.log(error);
@@ -409,11 +409,11 @@
       enrolmentService.getLastEnrolment(id).then(
         function success(response){
           if(response.data.confirmed){
-            $window.location.href = "/";
+            $location.path("/");
           }
 
           // Get chosen subjects
-          getChosenSubjects(response.data.id)
+          getChosenSubjects(response.data.id);
 
         },
         function error(error){
@@ -430,24 +430,25 @@
             var found = vm.curriculum.find(function(elementInner) {
               return elementInner.idCourse.id == element.course.id;
             });
+            var course;
             switch(found.poc.type){
               case "obv":
                 break;
               case "siz":
               case "mod":
-                var course = vm.courses.siz.find(function(elementInner) {
+                course = vm.courses.siz.find(function(elementInner) {
                   return elementInner.idCourse.id == element.course.id;
                 });
                 course.selected = true;
                 break;
               case "piz":
-                var course = vm.courses.piz.find(function(elementInner) {
+                course = vm.courses.piz.find(function(elementInner) {
                   return elementInner.idCourse.id == element.course.id;
                 });
                 course.selected = true;
                 break;
               default:
-                console.log("Oh no... Nepricakovan tip predmeta")
+                console.log("Oh no... Nepricakovan tip predmeta");
             }
           });
 
