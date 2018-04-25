@@ -149,6 +149,7 @@
 
         if(vm.selectedProfessor === undefined) {
             vm.finalizeError = "izbran ni bil noben profesor";
+            return;
         }
 
         if(vm.dateOfExam === undefined) {
