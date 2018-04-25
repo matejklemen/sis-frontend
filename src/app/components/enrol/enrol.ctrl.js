@@ -452,6 +452,8 @@
             }
           });
 
+          updateCreditSum();
+
         },
         function error(error){
           console.log("Oh no...",error);

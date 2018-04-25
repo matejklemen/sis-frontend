@@ -18,7 +18,7 @@
           console.log(response.data);
         },
         function error(error){
-          console.log("Oh no...",error);
+          //console.log("Oh no...",error);
           vm.enrolmentConfirmed = null;
         }
       );
@@ -32,14 +32,14 @@
         function success(response){
           var file = new Blob([response.data], {type: 'application/pdf'});
           var fileURL = URL.createObjectURL(file);
-          $window.location.href = fileURL
+          $window.location.href = fileURL;
         },
         function error(error){
-          console.log("Oh no...",error)
+          console.log("Oh no...",error);
         }
       );
 
-    }
+    };
   };
 
   angular

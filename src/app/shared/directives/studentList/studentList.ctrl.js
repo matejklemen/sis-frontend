@@ -2,17 +2,21 @@
   var studentListCtrl = function($routeParams, studentService, exporterService) {
     var vm = this;
 
-    vm.searchValue = "";
+    vm.search = {
+      value: "",
+      order: "registerNumber DESC",
+    };
+
     vm.searchInProgress = false;
 
     vm.performSearch = function() {
-      if(vm.searchValue == undefined || vm.searchValue == "") {
+      if(vm.search.value == undefined || vm.search.value == "") {
         vm.searchIsEmpty = true;
       } else {
         vm.searchIsEmpty = false;
         vm.searchInProgress = true;
 
-        studentService.searchStudents(vm.searchValue).then(
+        studentService.searchStudents(vm.search).then(
           function success(response) {
             vm.searchResult = response.data;
             vm.searchInProgress = false;
@@ -29,7 +33,7 @@
     };
 
     vm.exportAction = function(action) {
-      exporterService.getFile(action, vm.searchResult, "Seznam študentov", ["#", "Vpisna številka", "Ime", "Priimek"], ["registerNumber", "name", "surname"])
+      exporterService.getFile(action, vm.searchResult, "Seznam študentov", ["#", "Vpisna številka", "Ime", "Priimek"], ["registerNumber", "name", "surname"]);
     };
 
   };

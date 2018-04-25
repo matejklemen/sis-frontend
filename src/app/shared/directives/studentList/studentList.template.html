@@ -5,7 +5,16 @@
       <form class="form" ng-submit="vm.performSearch()">
         <div class="form-group" ng-class="vm.searchIsEmpty ? 'has-error' : ''">
           <label for="searchStudent" class="control-label">Iskanje študentov</label>
-          <input type="text" class="form-control" id="searchStudent" placeholder="Iskanje..." ng-model="vm.searchValue" autocomplete="off" />
+          <input type="text" class="form-control" id="searchStudent" placeholder="Iskanje..." ng-model="vm.search.value" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="orderStudent" class="control-label">Sortiranje</label>
+          <select class="form-control input-sm" ng-model="vm.search.order">
+            <option value="registerNumber DESC">Vpisna številka - padajoče</option>
+            <option value="registerNumber ASC">Vpisna številka - naraščajoče</option>
+            <option value="surname DESC,name DESC">Priimek in Ime - padajoče</option>
+            <option value="surname ASC,name ASC">Priimek in Ime - naraščajoče</option>
+          </select>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon" ng-class="vm.searchInProgress ? 'glyphicon-refresh' : 'glyphicon-search'"></span> Iskanje</button>

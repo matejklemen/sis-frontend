@@ -2,8 +2,13 @@
 
   var studentService = function($http) {
 
-    var searchStudents = function(searchValue) {
-      return $http.get(apiBaseRoute+'/api/students/search/' + searchValue);
+    /*
+      searchObj must have fields:
+      - value (search value)
+      - order (column name and type to sort by, i.e. "column ASC, column2 DESC")
+    */
+    var searchStudents = function(searchObj) {
+      return $http.get(apiBaseRoute+'/api/students/search/' + searchObj.value + '?order=' + searchObj.order);
     };
 
     var getByRegisterNumber = function(registerNumber) {
