@@ -11,6 +11,16 @@
       return $http.get(apiBaseRoute+'/api/students/search/' + searchObj.value + '?order=' + searchObj.order);
     };
 
+    /*
+      searchObj must have fields:
+      - course (course object)
+      - studyYear (study year object)
+      - order (column name and type to sort by, i.e. "column ASC, column2 DESC")
+    */
+    var getByCourse = function(searchObj) {
+      return $http.get(apiBaseRoute+'/api/students/enrolled?course=' + searchObj.course.id + '&study_year=' + searchObj.studyYear.id + '&order=' + searchObj.order);
+    };
+
     var getByRegisterNumber = function(registerNumber) {
       return $http.get(apiBaseRoute+'/api/students?filter=registerNumber:EQ:' + registerNumber);
     };
@@ -23,6 +33,7 @@
       searchStudents: searchStudents,
       getByRegisterNumber: getByRegisterNumber,
       getByStudentId: getByStudentId,
+      getByCourse: getByCourse,
     };
   };
 

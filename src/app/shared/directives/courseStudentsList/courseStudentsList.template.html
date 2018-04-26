@@ -2,36 +2,60 @@
     <div class="row">
       <div class="col-md-3">
 
-        TODO
+        <form class="form" ng-submit="vm.performQuery()">
+          <div class="form-group" ng-class="vm.error.course ? 'has-error' : ''">
+            <label for="" class="control-label">Predmet</label>
+            <input type="text" class="form-control" id="" uib-typeahead="c as c.id + ' - ' + c.name for c in vm.courses | filter:$viewValue | limitTo:8" placeholder="Šifra ali ime predmeta..." ng-model="vm.search.course">
+          </div>
+          <div class="form-group" ng-class="vm.error.studyYear ? 'has-error' : ''">
+            <label for="" class="control-label">Študijsko leto</label>
+            <select class="form-control" ng-model="vm.search.studyYear" ng-options="sy as sy.name for sy in vm.studyYears"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="orderStudent" class="control-label">Sortiranje</label>
+            <select class="form-control input-sm" ng-model="vm.search.order">
+              <option value="registerNumber DESC">Vpisna številka - padajoče</option>
+              <option value="registerNumber ASC">Vpisna številka - naraščajoče</option>
+              <option value="surname DESC,name DESC">Priimek in Ime - padajoče</option>
+              <option value="surname ASC,name ASC">Priimek in Ime - naraščajoče</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon" ng-class="vm.queryInProgress ? 'glyphicon-refresh' : 'glyphicon-search'"></span> Iskanje</button>
+            <p class="help-block">Izpišete lahko seznam študentov glede na predmet in študijsko leto.<br />Za izpis rezultatov pritisnite na gumb.</p>
+          </div>
+        </form>
 
       </div>
       <div class="col-md-9">
-        <h3>TODO</h3>
-        <div class="export-table">
-          <table ng-show="vm.searchResult" class="table table-striped">
-            <thead>
-              <tr class="success">
-                <th>#</th>
-                <th>Vpisna številka</th>
-                <th>Ime</th>
-                <th>Priimek</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="result in vm.searchResult">
-                <td>{{ $index+1 }}</td>
-                <td>{{ result.registerNumber }}</td>
-                <td>{{ result.name }}</td>
-                <td>{{ result.surname }}</td>
-                <td><enrolment-token-button id="result.id"></enrolment-token-button></td>
-                <td><enrolment-confirmation-button id="result.id"></enrolment-confirmation-button></td>
-                <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h3 ng-show="vm.searchResult">
+          Seznam študentov za <i>{{ vm.search.course.name }}</i> <small>({{ vm.search.studyYear.name }})</small>
+          <export-buttons ng-show="vm.searchResult" exp-data="vm.searchResult" exp-title="Seznam študentov", exp-col-names="['#','Vpisna številka','Ime','Priimek']", exp-col-values="['registerNumber','name','surname']"></export-buttons>
+        </h3>
+        <table ng-show="vm.searchResult" class="table table-striped">
+          <thead>
+            <tr class="success">
+              <th>#</th>
+              <th>Vpisna številka</th>
+              <th>Ime</th>
+              <th>Priimek</th>
+              <th>Vrsta vpisa</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="result in vm.searchResult">
+              <td>{{ $index+1 }}</td>
+              <td>{{ result.registerNumber }}</td>
+              <td>{{ result.name }}</td>
+              <td>{{ result.surname }}</td>
+              <td>vrsta vpisa ...</td>
+              <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
+            </tr>
+          </tbody>
+        </table>
         <div ng-hide="vm.searchResult">Začnite iskanje z obrazcem na levi.</div>
-        
       </div>
     </div>
   </div>

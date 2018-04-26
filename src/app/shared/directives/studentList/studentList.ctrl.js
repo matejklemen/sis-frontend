@@ -32,10 +32,6 @@
 
     };
 
-    vm.exportAction = function(action) {
-      exporterService.getFile(action, vm.searchResult, "Seznam študentov", ["#", "Vpisna številka", "Ime", "Priimek"], ["registerNumber", "name", "surname"]);
-    };
-
   };
 
   angular
