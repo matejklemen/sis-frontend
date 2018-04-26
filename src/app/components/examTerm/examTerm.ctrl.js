@@ -4,7 +4,7 @@
 
     /* Get role */
     vm.role = authenticationService.getRole();
-
+    
     /* profesor/ica */
     if(vm.role.id == 3) {
         profIdentity = authenticationService.getIdentity();
@@ -35,16 +35,6 @@
     }
     /* referent/ka */
     else if(vm.role.id == 4) {
-        /*
-        professorsService.getAllProfessors().then(
-            function success(response) {
-                vm.professor = response.data;
-            },
-            function error(error) {
-                vm.finalizeError = 'v sistemu ni nobenega profesorja';
-                return;
-            });
-        */
 
         // TODO: only get course organizations for current study year 
         courseOrganizationService.getAllCourseOrganizations().then(
@@ -56,6 +46,15 @@
                 return;
             })
 
+        if($routeParams.examTermId !== undefined) {
+            examTermService.getExamTermById($routeParams.examTermId).then(
+                function success(response) {
+                    vm.selectedCourseOrganization = response.data;
+                },
+                function error(error) {
+                    console.log('Error: TODO redirect');
+                })
+        }
     }
 
     // set default exam type
@@ -63,6 +62,7 @@
 
     // set default exam duration
     vm.durationOfExam = 60;
+    
 
     isSaturdaySunday = function(dateString) {
         day = new Date(dateString).getDay();
@@ -141,7 +141,7 @@
 
         console.log(vm.selectedProfessor);
         console.log(vm.selectedCourseOrganization);
-
+        
         if(vm.selectedCourseOrganization === undefined) {
             vm.finalizeError = "izbran ni bil noben predmet";
             return;
