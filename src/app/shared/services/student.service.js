@@ -13,12 +13,12 @@
 
     /*
       searchObj must have fields:
-      - course (course id)
-      - studyYear (study year id)
+      - course (course object)
+      - studyYear (study year object)
       - order (column name and type to sort by, i.e. "column ASC, column2 DESC")
     */
     var getByCourse = function(searchObj) {
-      return $http.get(apiBaseRoute+'/api/students/enrolled?course=' + searchObj.course + '&study_year=' + searchObj.studyYear + '&order=' + searchObj.order);
+      return $http.get(apiBaseRoute+'/api/students/enrolled?course=' + searchObj.course.id + '&study_year=' + searchObj.studyYear.id + '&order=' + searchObj.order);
     };
 
     var getByRegisterNumber = function(registerNumber) {

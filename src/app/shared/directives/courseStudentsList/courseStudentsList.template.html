@@ -5,11 +5,11 @@
         <form class="form" ng-submit="vm.performQuery()">
           <div class="form-group" ng-class="vm.error.course ? 'has-error' : ''">
             <label for="" class="control-label">Predmet</label>
-            <input type="text" class="form-control" id="" uib-typeahead="c.id as c.id + ' - ' + c.name for c in vm.courses | filter:$viewValue | limitTo:8" placeholder="Šifra ali ime predmeta..." ng-model="vm.search.course">
+            <input type="text" class="form-control" id="" uib-typeahead="c as c.id + ' - ' + c.name for c in vm.courses | filter:$viewValue | limitTo:8" placeholder="Šifra ali ime predmeta..." ng-model="vm.search.course">
           </div>
           <div class="form-group" ng-class="vm.error.studyYear ? 'has-error' : ''">
             <label for="" class="control-label">Študijsko leto</label>
-            <select class="form-control" ng-model="vm.search.studyYear" ng-options="sy.id as sy.name for sy in vm.studyYears"></select>
+            <select class="form-control" ng-model="vm.search.studyYear" ng-options="sy as sy.name for sy in vm.studyYears"></select>
           </div>
 
           <div class="form-group">
@@ -23,14 +23,14 @@
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon" ng-class="vm.queryInProgress ? 'glyphicon-refresh' : 'glyphicon-search'"></span> Iskanje</button>
-            <p class="help-block">Iščete lahko po imenu in priimku ali po vpisni številki.<br />Za iskanje pritisnite na gumb ali tipko Enter.</p>
+            <p class="help-block">Izpišete lahko seznam študentov glede na predmet in študijsko leto.<br />Za izpis rezultatov pritisnite na gumb.</p>
           </div>
         </form>
 
       </div>
       <div class="col-md-9">
-        <h3>
-          Rezultati poizvedbe
+        <h3 ng-show="vm.searchResult">
+          Seznam študentov za <i>{{ vm.search.course.name }}</i> <small>({{ vm.search.studyYear.name }})</small>
           <export-buttons ng-show="vm.searchResult" exp-data="vm.searchResult" exp-title="Seznam študentov", exp-col-names="['#','Vpisna številka','Ime','Priimek']", exp-col-values="['registerNumber','name','surname']"></export-buttons>
         </h3>
         <table ng-show="vm.searchResult" class="table table-striped">

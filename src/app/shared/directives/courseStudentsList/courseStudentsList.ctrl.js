@@ -22,7 +22,7 @@
     codelistService.getCodelist("studyyears").then(
       function success(response) {
         vm.studyYears = response.data;
-        vm.search.studyYear = vm.studyYears[vm.studyYears.length-1].id;
+        vm.search.studyYear = vm.studyYears[vm.studyYears.length-1];
       },
       function error(error) {
         console.log("Oh no...", error);
@@ -30,7 +30,7 @@
     );
 
     vm.performQuery = function() {
-      vm.error.course = (vm.search.course == undefined || vm.search.course == "" || !Number.isInteger(vm.search.course));
+      vm.error.course = (typeof vm.search.course !== 'object' || !vm.search.course);
       vm.error.studyYear = (vm.search.studyYear == undefined || vm.search.studyYear == "");
       
       if(vm.error.course || vm.error.studyYear) return;
