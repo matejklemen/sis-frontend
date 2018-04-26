@@ -19,16 +19,16 @@
         <div class="col-md-6">
           <!-- Course ID -->
           <div class="form-group">
-            <label for="i2">Predmet: </label>
-            <select ng-model="vm.selectedCourseOrganization" class="form-control input-sm" ng-options="co.course.id  + ' ' + co.course.name + ' (' + co.studyYear.name + ')' for co in vm.coursesForProfessor" ng-change="vm.updateSelectableOrganizers()"></select>
+            <label>Predmet: </label>
+            <select ng-model="vm.examTerm.course" class="form-control input-sm" ng-options="co as co.course.id  + ' - ' + co.course.name + ' (' + co.studyYear.name + ')' for co in vm.availableCourses" ng-change="vm.updateSelectableOrganizers()"></select>
           </div>
         </div>
         <div class="col-md-6">
           <!-- Datetime of exam -->
           <div class="form-group">
-            <label for="i3">Datum izpita: </label>
+            <label>Datum izpita: </label>
             <div class="input-group">
-              <input type="text" class="form-control input-sm" uib-datepicker-popup ng-model="vm.dateOfExam" is-open="vm.popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Zapri" current-text="Danes" clear-text="Počisti" placeholder="YYYY-MM-DD" alt-input-formats="['d!.M!.yyyy']" ng-change="vm.validateTime()"/>
+              <input type="text" class="form-control input-sm" uib-datepicker-popup ng-model="vm.examTerm.date" is-open="vm.popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Zapri" current-text="Danes" clear-text="Počisti" placeholder="YYYY-MM-DD" alt-input-formats="['d!.M!.yyyy']" ng-change="vm.validateDate()" />
               <span class="input-group-btn">
                 <button type="button" class="btn btn-sm btn-default" style="line-height: inherit;" ng-click="vm.open2()"><span class="glyphicon glyphicon-calendar"></span></button>
               </span>
@@ -38,15 +38,15 @@
         <div class="col-md-6">
           <!-- Time of exam -->
           <div class="form-group">
-            <label for="i4">Ura izpita: </label>
-            <input class="form-control input-sm" type="time" id="i3" ng-model="vm.timeOfExam">
+            <label>Ura izpita: </label>
+            <div uib-timepicker ng-model="vm.examTerm.time" ng-change="vm.validateTime()" hour-step="1" minute-step="15" show-meridian="false"></div>
           </div>
         </div>
         <div class="col-md-6">
           <!-- Type of exam -->
           <div class="form-group">
-            <label for="i5">Vrsta izpita: </label>
-            <select ng-model="vm.typeOfExam" class="form-control input-sm">
+            <label>Vrsta izpita: </label>
+            <select ng-model="vm.examTerm.type" class="form-control input-sm">
               <option value="pisni">pisni</option>
               <option value="ustni">ustni</option>
             </select>
@@ -55,8 +55,8 @@
         <div class="col-md-6">
           <!-- Duration of exam -->
           <div class="form-group">
-            <label for="i6">Čas trajanja izpita (min): </label>
-            <input class="form-control input-sm" type="number" min="0" id="i3" ng-model="vm.durationOfExam">
+            <label>Čas trajanja izpita (min): </label>
+            <input class="form-control input-sm" type="number" min="0" id="i3" ng-model="vm.examTerm.duration">
           </div>
         </div>
       </div>
