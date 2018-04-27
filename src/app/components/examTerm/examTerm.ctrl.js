@@ -5,75 +5,96 @@
     /* Get role */
     vm.role = authenticationService.getRole();
 
-    // load data by examTermId
-    if($routeParams.examTermId !== undefined) {
-      examTermService.getExamTermById($routeParams.examTermId).then(
-        function success(response) {
-          console.log(response.data);
-          
-          vm.examTerm = response.data;
-          
-          // assign temporary date and time from datetime
-          vm.examTerm.date = new Date(vm.examTerm.datetime);
-          vm.examTerm.time = new Date(vm.examTerm.datetime);
+    var profIdentity = authenticationService.getIdentity();
+    var updateMode = ($routeParams.examTermId !== undefined);
+    vm.examTerm = {};
 
-          getAvailableCourses();
+    /* profesor/ica */
+    if(vm.role.id == 3) {
+      prepareOptionsProf();
+    }
+    /* referent/ka */
+    else if(vm.role.id == 4) {
+      prepareOptionsRef();
+    }
+
+    function prepareOptionsProf() {
+      // get professor's full name
+      var profFullName = professorsService.getProfessorData(profIdentity).then(
+        function success(response) {
+            vm.examTerm.organizer = response.data;
         },
         function error(error) {
-          console.log('Error: TODO redirect');
-          //$location.path("/control");
+            vm.finalizeError = 'račun ni povezan s podatki izvajalca';
+            return;
+        });
+
+      // get courses organized or co-organized by current professor
+      var courseOrganizations = courseOrganizationService.getCourseOrganizationsForProfessor(profIdentity).then(
+        function success(response) {
+          vm.availableCourses = response.data;
+
+          if(updateMode)
+            selectSavedOptions();
+        },
+        function error(error) {
+          vm.finalizeError = 'za izbranega izvajalca ni v sistemu naveden noben predmet, ki bi se izvajal';
+          return;
         });
     }
 
-    function getAvailableCourses() {
-      if(vm.role.id == 3) { /* profesor/ica */
-        var profIdentity = authenticationService.getIdentity();
-
-        // get professor's full name
-        var profFullName = professorsService.getProfessorData(profIdentity).then(
-          function success(response) {
-              vm.selectedProfessor = response.data;
-          },
-          function error(error) {
-              vm.finalizeError = 'račun ni povezan s podatki izvajalca';
-              return;
-          });
-
-        // get courses organized or co-organized by current professor
-        var courseOrganizations = courseOrganizationService.getCourseOrganizationsForProfessor(profIdentity).then(
-          function success(response) {
-            console.log(response.data);
-            vm.availableCourses = response.data;
-
-            if(response.data.length > 0)
-              vm.selectedCourseOrganization = response.data[0];
-          },
-          function error(error) {
-            vm.finalizeError = 'za izbranega izvajalca ni v sistemu naveden noben predmet, ki bi se izvajal';
-            return;
-          });
-      } else if(vm.role.id == 4) { /* referent/ka */
-        // TODO: only get course organizations for current study year 
-        courseOrganizationService.getAllCourseOrganizations().then(
+    function prepareOptionsRef() {
+      courseOrganizationService.getAllCourseOrganizations().then(
           function success(response) {
             vm.availableCourses = response.data;
-            console.log(response.data);
-            // select default option from the list
-            vm.availableCourses.some(function(elem, index) {
-              if(elem.id == vm.examTerm.course.id) {
-                vm.examTerm.course = elem;
-                return;
-              }
-            });
+
+            if(updateMode)
+              selectSavedOptions();
         },
         function error(error) {
           vm.finalizeError = 'v sistemu ni vpisan noben predmet';
           return;
-        });            
-      }
-      
+        });
+    }
 
+    function selectSavedOptions() {
+      examTermService.getExamTermById($routeParams.examTermId).then(
+        function success(response) {
+          vm.examTerm = response.data;
 
+          // only allow professors to see exams for their own courses
+          if(vm.role.id == 3 && vm.examTerm.organizer.id !== profIdentity)
+            $location.path("/control");
+
+          // assign temporary date and time from datetime
+          vm.examTerm.date = new Date(vm.examTerm.datetime);
+          vm.examTerm.time = new Date(vm.examTerm.datetime);
+
+          var selectableProfessors = [vm.examTerm.course.organizer1];
+          if(vm.examTerm.course.organizer2 !== null)
+            selectableProfessors.push(vm.examTerm.course.organizer2);
+          if(vm.examTerm.course.organizer3 !== null)
+            selectableProfessors.push(vm.examTerm.course.organizer3);
+
+          vm.professor = selectableProfessors;
+          vm.professor.some(function(elem, index) {
+              if(elem.id == vm.examTerm.organizer.id) {
+                vm.examTerm.organizer = elem;
+                return;
+              }
+          });
+
+          vm.availableCourses.some(function(elem, index) {
+            if(elem.id == vm.examTerm.course.id) {
+              vm.examTerm.course = elem;
+              return;
+            }
+          });
+        },
+        function error(error) {
+          console.log(error);
+          $location.path("/control");
+        });      
     }
 
     var isSaturdaySunday = function(dateString) {
@@ -114,14 +135,14 @@
     vm.updateSelectableOrganizers = function() {
         var selectableProfessors = [];
 
-        selectableProfessors.push(vm.availableCourses.organizer1);
+        selectableProfessors.push(vm.examTerm.course.organizer1);
         if(vm.availableCourses.organizer2 !== null)
-            selectableProfessors.push(vm.availableCourses.organizer2);
+            selectableProfessors.push(vm.examTerm.course.organizer2);
         if(vm.availableCourses.organizer3 !== null)
-            selectableProfessors.push(vm.availableCourses.organizer3);
+            selectableProfessors.push(vm.examTerm.course.organizer3);
 
         vm.professor = selectableProfessors;
-        vm.selectedProfessor = selectableProfessors[0];
+        vm.examTerm.organizer = selectableProfessors[0];
     };
 
     // YYYY-MM-DD HH:MM:SS
@@ -151,18 +172,20 @@
     vm.finalizeInsertingExamTerm = function() {
         vm.finalizeError = "";
         
+        console.log(vm.examTerm);
+
         if(vm.examTerm.course === undefined) {
             vm.finalizeError = "izbran ni bil noben predmet";
             return;
         }
 
         // probably add field to CourseExamTerm that contains Professor entity to save orgnaizer of the exam
-        /*if(vm.examTerm.organizer === undefined) {
+        if(vm.examTerm.organizer === undefined) {
             vm.finalizeError = "izbran ni bil noben profesor";
             return;
-        }*/
+        }
 
-        if(vm.examTerm.datetime === undefined) {
+        if(vm.examTerm.date === undefined) {
             vm.finalizeError = "datum izpita je neizpolnjen!";
             return;
         }
@@ -178,6 +201,11 @@
         if(vm.examTerm.time === undefined) {
             vm.finalizeError = "čas izpita je neizpolnjen!";
             return;
+        }
+
+        if(vm.examTerm.type === undefined) {
+          vm.finalizeError = "vrsta izpita ni določena";
+          return;
         }
 
         if(vm.examTerm.duration === undefined) {
@@ -199,14 +227,24 @@
         delete objectToSend.time;
 
         console.log(objectToSend);
-
-        examTermService.sendExamTerm(objectToSend).then(
-          function success(response) {
-            $location.path("/control");
-          },
-          function error(error) {
-            vm.finalizeError = error.data;
-          });
+        if(updateMode) {
+          examTermService.updateExamTerm(objectToSend).then(
+            function success(response) {
+              $location.path("/control");
+            },
+            function error(error) {
+              vm.finalizeError = error.data;
+            });
+        }
+        else {
+          examTermService.sendExamTerm(objectToSend).then(
+            function success(response) {
+              $location.path("/control");
+            },
+            function error(error) {
+              vm.finalizeError = error.data;
+            });
+        }
     };
 
   };

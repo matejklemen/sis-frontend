@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-3">
+
+        <form class="form" ng-submit="vm.performQuery()">
+          <div class="form-group" ng-class="vm.error.course ? 'has-error' : ''">
+            <label for="" class="control-label">Predmet</label>
+            <input type="text" class="form-control" id="" uib-typeahead="c as c.id + ' - ' + c.name for c in vm.courses | filter:$viewValue | limitTo:8" placeholder="Šifra ali ime predmeta..." ng-model="vm.search.course">
+          </div>
+          <div class="form-group" ng-class="vm.error.studyYear ? 'has-error' : ''">
+            <label for="" class="control-label">Študijsko leto</label>
+            <select class="form-control" ng-model="vm.search.studyYear" ng-options="sy as sy.name for sy in vm.studyYears"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="orderStudent" class="control-label">Sortiranje</label>
+            <select class="form-control input-sm" ng-model="vm.search.order">
+              <option value="registerNumber DESC">Vpisna številka - padajoče</option>
+              <option value="registerNumber ASC">Vpisna številka - naraščajoče</option>
+              <option value="surname DESC,name DESC">Priimek in Ime - padajoče</option>
+              <option value="surname ASC,name ASC">Priimek in Ime - naraščajoče</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon" ng-class="vm.queryInProgress ? 'glyphicon-refresh' : 'glyphicon-search'"></span> Iskanje</button>
+            <p class="help-block">Izpišete lahko seznam študentov glede na predmet in študijsko leto.<br />Za izpis rezultatov pritisnite na gumb.</p>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-9">
+        <h3 ng-show="vm.searchResult">
+          Seznam izpitov za <i>PLACEHOLDER</i> <small>(PLACEHOLDER)</small>
+        </h3>
+        <table ng-show="vm.searchResult" class="table table-striped">
+          <thead>
+            <tr class="success">
+              <th>#</th>
+              <th>Datum</th>
+              <th>Predmet</th>
+              <th>Trajanje</th>
+              <th>Vrsta</th>
+              <th>Organizator</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="result in vm.searchResult">
+              <td>{{ result.id }}</td>
+              <td>{{ result.datetime }}</td>
+              <td>{{ result.course.course.name }}</td>
+              <td>{{ result.duration }}</td>
+              <td>{{ result.type }}</td>
+              <td>{{ result.organizer.firstName }}</td>
+              <td><a class="btn btn-primary btn-xs" href="/examterm/{{ result.id }}">Uredi</a></td>
+              <td><a class="btn btn-primary btn-xs" ng-click="vm.deleteCourse(result.id)">Izbriši</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <div ng-hide="vm.searchResult">Začnite iskanje z obrazcem na levi.</div>
+      </div>
+    </div>
+  </div>
