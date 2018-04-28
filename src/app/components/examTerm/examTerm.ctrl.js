@@ -64,7 +64,7 @@
 
           // only allow professors to see exams for their own courses
           if(vm.role.id == 3 && vm.examTerm.organizer.id !== profIdentity)
-            $location.path("/control");
+            vm.cancelEnrolment();
 
           // assign temporary date and time from datetime
           vm.examTerm.date = new Date(vm.examTerm.datetime);
@@ -93,7 +93,7 @@
         },
         function error(error) {
           console.log(error);
-          $location.path("/control");
+          vm.cancelEnrolment();
         });      
     }
 
@@ -144,6 +144,10 @@
         vm.professor = selectableProfessors;
         vm.examTerm.organizer = selectableProfessors[0];
     };
+
+    vm.cancelEnrolment = function() {
+      $location.path("/control");
+    }
 
     // YYYY-MM-DD HH:MM:SS
     var formatDatetime = function(date, time) {
