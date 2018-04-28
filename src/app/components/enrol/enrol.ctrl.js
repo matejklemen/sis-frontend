@@ -154,6 +154,7 @@
 
           updateCreditSum();
           updateSelectedModulesCount();
+          getChosenSubjects();
         },
         function error(error) {
           console.log("Oh no...",error);
@@ -318,6 +319,8 @@
       objectToSend.courses = [];
 
       objectToSend.student.dateOfBirth = convertDateToString(objectToSend.student.dateOfBirth);
+      objectToSend.student.surname = vm.surnameName.split(" ")[0]
+      objectToSend.student.name = vm.surnameName.split(" ")[1]
 
       vm.curriculum.forEach(function(element, index, array) {
         if(element.selected || element.poc.type == "obv") {
@@ -411,10 +414,7 @@
           if(response.data.confirmed){
             $location.path("/");
           }
-
-          // Get chosen subjects
-          getChosenSubjects(response.data.id);
-
+          vm.enrolmentId = response.data.id;
         },
         function error(error){
           console.log("Oh no...",error);
@@ -422,8 +422,8 @@
       );
     }
 
-    function getChosenSubjects(enrolmentId){
-      courseService.getCourseForEnrolment(enrolmentId).then(
+    function getChosenSubjects(){
+      courseService.getCourseForEnrolment(vm.enrolmentId).then(
         function success(response){
 
           response.data.forEach(function(element, index, array) {
