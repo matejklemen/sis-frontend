@@ -2,7 +2,8 @@
     <div class="row">
       <div class="col-md-9">
         <h3 ng-show="vm.searchResult">
-          Seznam izpitov <!--za <i>PLACEHOLDER</i> <small>(PLACEHOLDER)</small>-->
+          Seznam izpitov
+          <export-buttons ng-show="vm.searchResult" exp-data="vm.searchResult" exp-title="Seznam izpitov", exp-col-names="['#', 'Datum', 'Predmet', 'Organizator']", exp-col-values="['formattedDatetime', 'courseName', 'organizerFullName']"></export-buttons>
         </h3>
         <table ng-show="vm.searchResult" class="table table-striped">
           <thead>
@@ -20,11 +21,11 @@
           <tbody>
             <tr ng-repeat="result in vm.searchResult">
               <td>{{ result.id }}</td>
-              <td>{{ result.formattedDatetime}}</td>
-              <td>{{ result.course.course.name }}</td>
+              <td>{{ result.formattedDatetime }}</td>
+              <td>{{ result.courseName }}</td>
               <td>{{ result.duration }}</td>
               <td>{{ result.type }}</td>
-              <td>{{ result.organizer.firstName }} {{ result.organizer.lastName1 }} {{ result.organizer.lastName2 }}</td>
+              <td>{{ result.organizerFullName }}</td>
               <td><a class="btn btn-primary btn-xs" href="/examterm/{{ result.id }}">Uredi</a></td>
               <td><a class="btn btn-danger btn-xs" ng-click="vm.deleteCourse(result.id)">Izbriši</a></td>
             </tr>
