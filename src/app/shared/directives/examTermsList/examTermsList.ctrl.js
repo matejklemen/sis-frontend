@@ -1,5 +1,5 @@
 (function() {
-  var examTermsListCtrl = function($scope, $routeParams, examTermService, codelistService, authenticationService) {
+  var examTermsListCtrl = function($scope, $routeParams, $location, examTermService, codelistService, authenticationService) {
     var vm = this;
 
     /* Get role */
@@ -73,6 +73,10 @@
     vm.changedPage = function() {
       vm.getExamTermList();
     };
+
+    vm.redirectToExamForm = function() {
+      $location.path("/examterm");
+    }
 
   };
 
