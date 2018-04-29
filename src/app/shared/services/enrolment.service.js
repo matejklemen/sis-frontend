@@ -15,18 +15,23 @@
 
     var getEnrolmentsForStudent = function(studentId) {
       return $http.get(apiBaseRoute + '/api/enrolments/' + studentId);
-    }
+    };
+
+    var getEnrolmentsForStudentAndStudyYear = function(studentId, studyYearId) {
+      return $http.get(apiBaseRoute + '/api/enrolments/' + studentId + '?studyYearId=' + studyYearId);
+    };
 
     var updateAndConfirmEnrolment = function(id, body){
       return $http.post(apiBaseRoute + '/api/enrolments/confirm/' + id, body);
-    }
+    };
 
 
     return {
       checkEnrolment: checkEnrolment,
+      getLastEnrolment: getLastEnrolment,
       getFirstEnrolment: getFirstEnrolment,
       getEnrolmentsForStudent: getEnrolmentsForStudent,
-      getLastEnrolment: getLastEnrolment,
+      getEnrolmentsForStudentAndStudyYear: getEnrolmentsForStudentAndStudyYear,
       updateAndConfirmEnrolment: updateAndConfirmEnrolment
     };
   };
