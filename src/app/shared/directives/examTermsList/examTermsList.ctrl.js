@@ -13,8 +13,21 @@
 
     vm.error = {};
 
-    var getExamTermList = function() {
-      examTermService.getAllExamTerms((vm.currentPage - 1) * limit, limit, profIdentity).then(
+    codelistService.getCodelist("studyyears").then(
+      function success(response) {
+        vm.selectableYears = response.data;
+        vm.selectableYears.push({"id": null, "name": "Vsa šolska leta"});
+        vm.filterYear = vm.selectableYears[vm.selectableYears.length - 1];
+      },
+      function error(error) {
+        console.log("Oh no...", error);
+      }
+    );
+
+    vm.getExamTermList = function() {
+      var selectedYr = vm.filterYear === undefined? null: vm.filterYear.id;
+
+      examTermService.getAllExamTerms((vm.currentPage - 1) * limit, limit, profIdentity, selectedYr).then(
         function success(response) {
           vm.totalCount = response.headers('X-total-count');
           vm.searchResult = response.data;
@@ -34,6 +47,7 @@
             vm.searchResult[i].courseName = vm.searchResult[i].course.course.name;
             vm.searchResult[i].organizerFullName = vm.searchResult[i].organizer.firstName + ' ' + vm.searchResult[i].organizer.lastName1 + 
               (vm.searchResult[i].organizer.lastName2 !== null? ' ' + vm.searchResult[i].organizer.lastName2: '');
+
           }
         },
         function error(error) {
@@ -41,7 +55,7 @@
         });
     }
 
-    getExamTermList();
+    vm.getExamTermList();
 
     vm.deleteCourse = function(id) {
       if(!confirm('Ste prepričani, da želite izbrisati žeton za vpis?'))
@@ -49,7 +63,7 @@
 
       examTermService.deleteExamTerm(id).then(
         function success(response) {
-          getExamTermList();
+          vm.getExamTermList();
         },
         function error(error) {
           console.log(error);
@@ -57,7 +71,7 @@
     };
 
     vm.changedPage = function() {
-      getExamTermList();
+      vm.getExamTermList();
     };
 
   };

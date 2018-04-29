@@ -1,6 +1,10 @@
 <div class="container">
     <div class="row">
       <div class="col-md-9">
+        <div class="form-group">
+            <label for="" class="control-label">Prikaži izpite glede na šolsko leto:</label>
+            <select class="form-control" ng-model="vm.filterYear" ng-options="sy.name for sy in vm.selectableYears" ng-change="vm.getExamTermList()"></select>
+        </div>
         <h3 ng-show="vm.searchResult">
           Seznam izpitov
           <export-buttons ng-show="vm.searchResult" exp-data="vm.searchResult" exp-title="Seznam izpitov", exp-col-names="['#', 'Datum', 'Predmet', 'Organizator']", exp-col-values="['formattedDatetime', 'courseName', 'organizerFullName']"></export-buttons>

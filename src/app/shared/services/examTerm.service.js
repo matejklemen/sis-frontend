@@ -13,11 +13,12 @@
       return $http.get(apiBaseRoute + '/api/course-exam-term/' + idCourseExamTerm);
     }
 
-    var getAllExamTerms = function(offset, limit, idOrganizer) {
+    var getAllExamTerms = function(offset, limit, idOrganizer, idStudyYear) {
       // if any of the arguments won't be provided, they will be set to some default value
       offset = offset || 0;
       limit = limit || 0;
       idOrganizer = idOrganizer || 0;
+      idStudyYear = idStudyYear || 0;
 
       if(offset < 0)
         offset = 0;
@@ -25,14 +26,16 @@
         limit = 0;
       if(idOrganizer < 0)
         idOrganizer = 0;
+      if(idStudyYear < 0)
+        idStudyYear = 0;
 
       offsetPart = offset != 0? '&offset=' + offset: '';
       limitPart = limit != 0? '&limit=' + limit: '';
       organizerPart = idOrganizer != 0? ' organizer.id:EQ:' + idOrganizer: '';
+      studyYearPart = idStudyYear != 0? ' course.studyYear.id:EQ:' + idStudyYear: '';
+      orderPart = '&order=datetime DESC'
 
-      console.log(apiBaseRoute + '/api/course-exam-term?filter=deleted:EQ:false' + organizerPart + offsetPart + limitPart);
-
-      return $http.get(apiBaseRoute + '/api/course-exam-term?filter=deleted:EQ:false' + organizerPart + offsetPart + limitPart);
+      return $http.get(apiBaseRoute + '/api/course-exam-term?filter=deleted:EQ:false' + organizerPart + studyYearPart + offsetPart + limitPart + orderPart);
     }
 
     var deleteExamTerm = function(idCourseExamTerm) {
