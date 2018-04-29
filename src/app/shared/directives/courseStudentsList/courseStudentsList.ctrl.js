@@ -1,5 +1,5 @@
 (function() {
-  var courseStudentsListCtrl = function($scope, $routeParams, studentService, codelistService) {
+  var courseStudentsListCtrl = function($scope, $routeParams, studentService, enrolmentService, codelistService) {
     var vm = this;
 
     vm.search = {
@@ -32,6 +32,11 @@
     vm.performQuery = function() {
       vm.error.course = (typeof vm.search.course !== 'object' || !vm.search.course);
       vm.error.studyYear = (vm.search.studyYear == undefined || vm.search.studyYear == "");
+
+      vm.searched = {
+        course: vm.search.course,
+        studyYear: vm.search.studyYear
+      };
       
       if(vm.error.course || vm.error.studyYear) return;
   
@@ -42,7 +47,7 @@
         function success(response) {
           vm.searchResult = response.data;
           vm.queryInProgress = false;
-          console.log(vm.searchResult);
+          getEnrolmentTypesForStudents();
         },
         function error(response) {
           console.error("Oh no... ", response);
@@ -50,6 +55,18 @@
         }
       );
     };
+
+    function getEnrolmentTypesForStudents() {
+      vm.searchResult.forEach(function(elem, index) {
+        enrolmentService.getEnrolmentsForStudentAndStudyYear(elem.id, vm.search.studyYear.id).then(
+          function success(response) {
+            elem.enrolment = response.data;
+          },
+          function error(error) {
+            console.log("Woopsie poopsie~~~", error);
+          });
+      });
+    }
 
   };
 

@@ -50,3 +50,15 @@ md-dialog-content {
 .tab-content {
   margin-top: 20px;
 }
+
+/* examterm.css */
+.uib-timepicker .btn {
+  padding: 0;
+  line-height: 0.5em;
+}
+
+.uib-timepicker .uib-time input {
+  width: 56px;
+  height: 35px;
+  line-height: 35px;
+}
