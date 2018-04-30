@@ -133,13 +133,13 @@
     };
 
     vm.updateSelectableOrganizers = function() {
-        var selectableProfessors = [];
+        var selectableProfessors = [vm.examTerm.course.organizer1];
 
-        selectableProfessors.push(vm.examTerm.course.organizer1);
-        if(vm.availableCourses.organizer2 !== null)
-            selectableProfessors.push(vm.examTerm.course.organizer2);
-        if(vm.availableCourses.organizer3 !== null)
-            selectableProfessors.push(vm.examTerm.course.organizer3);
+        if(vm.examTerm.course.organizer2 !== null)
+          selectableProfessors.push(vm.examTerm.course.organizer2);
+
+        if(vm.examTerm.course.organizer3 !== null)
+          selectableProfessors.push(vm.examTerm.course.organizer3);
 
         vm.professor = selectableProfessors;
         vm.examTerm.organizer = selectableProfessors[0];
