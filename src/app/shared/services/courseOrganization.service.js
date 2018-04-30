@@ -7,7 +7,9 @@
     }
 
     var getAllCourseOrganizations = function() {
-      return $http.get(apiBaseRoute + '/api/course-organization');
+      var orderPart = '?order=course.id ASC';
+
+      return $http.get(apiBaseRoute + '/api/course-organization' + orderPart);
     }
 
 
