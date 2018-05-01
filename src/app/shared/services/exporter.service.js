@@ -48,12 +48,10 @@
       var i = 0;
       for(var i = 0; i < data.length; i++) {
         rows[i] = [];
-        var j = 1;
         rows[i][0] = i+1;
         for(cell in data[i]) {
           if(coloumnNames.indexOf(cell) >= 0) {
             rows[i][coloumnNames.indexOf(cell)+1] = data[i][cell];
-            j++;
           }
         }
       }
