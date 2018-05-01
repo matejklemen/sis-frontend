@@ -25,8 +25,6 @@
             responseType : "arraybuffer"
           }
         ).then( function onSuccess(result) {
-          console.log(typeof(result.data));
-          console.log(result.data);
           var file = new Blob([result.data], {type: 'text/csv'});
           var fileURL = URL.createObjectURL(file);
           var a = document.createElement("a");
@@ -54,7 +52,7 @@
         rows[i][0] = i+1;
         for(cell in data[i]) {
           if(coloumnNames.indexOf(cell) >= 0) {
-            rows[i][j] = data[i][cell];
+            rows[i][coloumnNames.indexOf(cell)+1] = data[i][cell];
             j++;
           }
         }

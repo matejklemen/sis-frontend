@@ -32,6 +32,7 @@
           vm.totalCount = response.headers('X-total-count');
           vm.searchResult = response.data;
 
+
           for(var i = 0; i < vm.searchResult.length; i++) {
             var tmp = new Date(vm.searchResult[i].datetime);
             var dd = tmp.getDate();
@@ -45,7 +46,7 @@
             vm.searchResult[i].formattedDatetime = dd + '. ' + mm + '. ' + yyyy + ' ob ' + hh + ':' + min;
             // reassigning some stuff to depth 0 variables so that export to PDF/csv works normally
             vm.searchResult[i].courseName = vm.searchResult[i].course.course.name;
-            vm.searchResult[i].organizerFullName = vm.searchResult[i].organizer.firstName + ' ' + vm.searchResult[i].organizer.lastName1 + 
+            vm.searchResult[i].organizerFullName = vm.searchResult[i].organizer.firstName + ' ' + vm.searchResult[i].organizer.lastName1 +
               (vm.searchResult[i].organizer.lastName2 !== null? ' ' + vm.searchResult[i].organizer.lastName2: '');
 
           }
