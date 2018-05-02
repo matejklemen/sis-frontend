@@ -63,6 +63,7 @@
 
     var logout = function() {
       $window.localStorage.removeItem('sis-token');
+      $window.localStorage.removeItem('lastTabIndex');
     };
 
     var isLoggedIn = function() {

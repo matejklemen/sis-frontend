@@ -33,18 +33,20 @@
       });
     }
 
-    function getCodelistDataPage(currentCodelist, page) {
+    function getCodelistDataPage(currentCodelist, page, searchQuery) {
       if(currentCodelist == undefined) return;
 
       var limit = 20;
       var offset = (page-1) * limit;
-      codelistService.getCodelistAllEvenDeleted(currentCodelist.endpoint, offset, limit).then(
+
+      codelistService.getCodelistAll(currentCodelist.endpoint, offset, limit, searchQuery).then(
         function success(response) {
           vm.codelistData = response.data;
           vm.totalCount = response.headers("X-total-count");
 
           // from the first row, get column names
-          vm.codelistCols = Object.keys(vm.codelistData[0]);
+          if(vm.codelistData.length > 0)
+            vm.codelistCols = Object.keys(vm.codelistData[0]);
         },
         function error(response) {
           console.error("Oh no... ", response);
@@ -54,11 +56,11 @@
 
     vm.changedPage = function() {
       // load a new page of entries
-      getCodelistDataPage(vm.currentCodelist, vm.currentPage);
+      getCodelistDataPage(vm.currentCodelist, vm.currentPage, vm.searchValue);
     };
 
-    vm.applySearchFilter = function() {
-      // TODO
+    vm.performSearch = function() {
+      getCodelistDataPage(vm.currentCodelist, vm.currentPage, vm.searchValue);
     };
 
     vm.openEditEntryModal = function(entry, index) {
