@@ -6,7 +6,7 @@
     
     <uib-tab index="0" ng-show="vm.role.id == 4" deselect="vm.saveSelectedTab($selectedIndex)">
       <uib-tab-heading>
-        <span class="glyphicon glyphicon-indent-right"></span> Upravljanje študentov
+        <span class="glyphicon glyphicon-indent-right" style="margin-right:5px"></span> Upravljanje študentov
       </uib-tab-heading>
       
       <!-- Student data -->
@@ -15,7 +15,7 @@
     </uib-tab>
     <uib-tab index="1" ng-show="vm.role.id == 4" deselect="vm.saveSelectedTab($selectedIndex)">
       <uib-tab-heading>
-        <span class="glyphicon glyphicon-import"></span> Uvoz podatkov
+        <span class="glyphicon glyphicon-import" style="margin-right:5px"></span> Uvoz podatkov
       </uib-tab-heading>
       
       <!-- Student data import -->
@@ -24,7 +24,7 @@
     </uib-tab>
     <uib-tab index="2" ng-show="vm.role.id == 3 || vm.role.id == 4" deselect="vm.saveSelectedTab($selectedIndex)">
       <uib-tab-heading>
-        <span class="glyphicon glyphicon-list"></span> Študenti po predmetih
+        <span class="glyphicon glyphicon-list" style="margin-right:5px"></span> Študenti po predmetih
       </uib-tab-heading>
       
       <!-- Student data by course -->
@@ -33,7 +33,7 @@
     </uib-tab>
     <uib-tab index="3" ng-show="vm.role.id == 3 || vm.role.id == 4" deselect="vm.saveSelectedTab($selectedIndex)">
       <uib-tab-heading>
-        <span class="glyphicon glyphicon-folder-open"></span> Izpitni roki
+        <span class="glyphicon glyphicon-folder-open" style="margin-right:5px"></span> Izpitni roki
       </uib-tab-heading>
       
       <exam-terms-list></exam-terms-list>
