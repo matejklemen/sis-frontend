@@ -1,5 +1,5 @@
 (function() {
-  var controlCtrl = function($scope, fileService, $location, authenticationService) {
+  var controlCtrl = function($scope, $window, fileService, $location, authenticationService) {
     var vm = this;
 
     vm.role = authenticationService.getRole();
@@ -10,11 +10,11 @@
     } else {
 
       // Load selected tab from localstorage - open last tab on view load
-      vm.selectedTab = parseInt(localStorage.getItem('lastTabIndex'));
+      vm.selectedTab = parseInt($window.localStorage.getItem('lastTabIndex'));
     }
 
     vm.saveSelectedTab = function(selectedIndex) {
-      localStorage.setItem("lastTabIndex", selectedIndex);
+      $window.localStorage.setItem("lastTabIndex", selectedIndex);
     };
 
   };

@@ -10,8 +10,12 @@
       return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?filter=deleted:EQ:false');
     };
 
-    var getCodelistAllEvenDeleted = function(codelistEndpointName, offset, limit) {
-      return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?offset=' + offset + '&limit=' + limit + '&order=id ASC');
+    var getCodelistAll = function(codelistEndpointName, offset, limit, search = '') {
+      if(search == '') {
+        return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?offset=' + offset + '&limit=' + limit + '&order=id ASC');
+      } else {
+        return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?offset=' + offset + '&limit=' + limit + '&order=id ASC&search=' + search.trim());
+      }
     };
 
     var putEntry = function(apiEndpointName, entryObject) {
@@ -34,7 +38,7 @@
     return {
       getCodelists: getCodelists,
       getCodelist: getCodelist,
-      getCodelistAllEvenDeleted: getCodelistAllEvenDeleted,
+      getCodelistAll: getCodelistAll,
       putEntry: putEntry,
       postEntry: postEntry,
       deleteEntry: deleteEntry,

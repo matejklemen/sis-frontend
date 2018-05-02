@@ -1,13 +1,16 @@
 <div class="container">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-6">
         <div class="form-group">
             <label for="" class="control-label">Prikaži izpite glede na šolsko leto:</label>
-            <select class="form-control" ng-model="vm.filterYear" ng-options="sy.name for sy in vm.selectableYears" ng-change="vm.getExamTermList()"></select>
+            <select class="form-control input-sm" ng-model="vm.filterYear" ng-options="sy.name for sy in vm.selectableYears" ng-change="vm.getExamTermList()"></select>
         </div>
+      </div>
+      <div class="col-md-12">
         <h3 ng-show="vm.searchResult">
-          Seznam izpitov <button class="btn btn-xs" ng-click="vm.redirectToExamForm()">Dodaj izpit</button>
+          Seznam izpitov
           <export-buttons ng-show="vm.searchResult" exp-data="vm.searchResult" exp-title="Seznam izpitov", exp-col-names="['#', 'Datum', 'Predmet', 'Organizator', 'Vrsta izpita']", exp-col-values="['formattedDatetime', 'courseName', 'organizerFullName', 'type']"></export-buttons>
+          <button class="btn btn-success btn-sm" style="float: right; margin-right: 4px;" ng-click="vm.redirectToExamForm()"><span class="glyphicon glyphicon-plus"></span> Dodaj izpit</button>
         </h3>
         <table ng-show="vm.searchResult" class="table table-striped">
           <thead>
