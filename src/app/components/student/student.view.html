@@ -33,6 +33,7 @@
     </div>
     <div class="col-md-8">
       <a class="btn btn-info btn-block" ng-if="vm.hasToken" href="/enrol/{{ vm.student.id }}"><span class="glyphicon glyphicon-edit"></span>  Na voljo vam je vpis v <b>{{ vm.token.year }}. letnik</b> programa <b>{{ vm.token.studyProgram.name }}</b> - <b>{{ vm.token.studyYear.name }}</b></a>
+      <a class="btn btn-warning btn-block" ng-click="vm.viewEnrolmentPdf()" ng-if="vm.uncEnrol != undefined" ><span class="glyphicon glyphicon-print"></span>  Natisni vpisni list za <b>{{ vm.uncEnrol.year }}. letnik</b> programa <b>{{ vm.uncEnrol.studyProgram.name }}</b> - <b>{{ vm.uncEnrol.studyYear.name }}</b>.</a>
       <h4>Vpisi</h4>
       <table class="table table-striped">
         <thead>
@@ -54,7 +55,7 @@
             <td>{{ enrolment.type | formatDisplayName }}</td>
             <td>{{ enrolment.kind | formatDisplayName }}</td>
             <td ng-if="enrolment.confirmed"> <b style="color:#18bc9c">Potrjeno</b> </td>
-            <td ng-if="!enrolment.confirmed"> <b style="color:#f39c12">Nepotrjeno</b> </td>
+            <td ng-if="!enrolment.confirmed"> {{vm.uncEnrol=enrolment;""}} <b style="color:#f39c12">Nepotrjeno</b> </td>
           </tr>
         </tbody>
       </table>
