@@ -59,6 +59,7 @@
     function getEnrolmentToken(studentId){
       tokenService.getTokenByStudentId(studentId).then(
         function success(response){
+          vm.enrolled = true;
           vm.enrolmentToken = response.data;
           if(vm.enrolmentToken.used){
             vm.editDisable = true;

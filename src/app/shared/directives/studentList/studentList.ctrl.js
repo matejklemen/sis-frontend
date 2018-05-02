@@ -1,6 +1,8 @@
 (function() {
-  var studentListCtrl = function($routeParams, studentService, exporterService) {
+  var studentListCtrl = function($routeParams, studentService, exporterService, authenticationService) {
     var vm = this;
+
+    vm.role = authenticationService.getRole();
 
     vm.search = {
       value: "",

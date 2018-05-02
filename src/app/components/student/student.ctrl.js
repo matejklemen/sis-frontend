@@ -1,6 +1,8 @@
 (function() {
-  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService) {
+  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService, fileService, $window, authenticationService) {
     var vm = this;
+
+    vm.role = authenticationService.getRole();
 
     if($routeParams.registerNumber != null) {
       // pridobi in prikazi podatke o studentu
@@ -39,6 +41,19 @@
       $location.path("/");
     }
 
+    /* Vpisni list */
+    vm.viewEnrolmentPdf = function(){
+      fileService.getEnrolmentSheet(vm.enrolments[0].student).then(
+        function success(response){
+          var file = new Blob([response.data], {type: 'application/pdf'});
+          var fileURL = URL.createObjectURL(file);
+          $window.location.href = fileURL;
+        },
+        function error(error){
+          console.log("Oh no...",error);
+        }
+      );
+    };
   };
 
   angular

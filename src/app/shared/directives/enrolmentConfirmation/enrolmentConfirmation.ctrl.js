@@ -24,11 +24,8 @@
       );
     }
 
-    vm.viewEnrolmentPdf = function(){
-      //var popup = $window.open("about:blank", "Vpisni List");
-      //popup.document.write('loading ...');popup.document.write('loading ...');
-      
-      fileService.getEnrolmentSheet(1).then(
+    vm.viewEnrolmentConformationPdf = function(){
+      fileService.getEnrolmentConformation($scope.id).then(
         function success(response){
           var file = new Blob([response.data], {type: 'application/pdf'});
           var fileURL = URL.createObjectURL(file);
@@ -38,7 +35,6 @@
           console.log("Oh no...",error);
         }
       );
-
     };
   };
 
