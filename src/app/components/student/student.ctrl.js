@@ -1,6 +1,8 @@
 (function() {
-  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService, fileService, $window) {
+  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService, fileService, $window, authenticationService) {
     var vm = this;
+
+    vm.role = authenticationService.getRole();
 
     if($routeParams.registerNumber != null) {
       // pridobi in prikazi podatke o studentu
