@@ -9,7 +9,7 @@
     };
 
     var getEnrolmentSheet = function(id){
-      return $http.get(apiBaseRoute+'/api/dataexporter/enrolmentSheet/'+id, {responseType: 'arraybuffer'});
+      return $http.get(apiBaseRoute+'/api/dataexporter/enrolmentsheet/'+id, {responseType: 'arraybuffer'});
     }
 
     return {
