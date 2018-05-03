@@ -226,6 +226,11 @@
 
         var objectToSend = Object.assign({}, vm.examTerm);
         objectToSend.datetime = formatDatetime(vm.examTerm.date, vm.examTerm.time);
+        
+        // send only professor's id, not whole entity
+        var neki = objectToSend.organizer.id;
+        objectToSend.organizer = {id: neki};
+
         // these two were joined into datetime, so we can remove them before sending
         delete objectToSend.date;
         delete objectToSend.time;
