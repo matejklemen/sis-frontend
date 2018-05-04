@@ -1,5 +1,5 @@
 (function() {
-  var controlCtrl = function($scope, $window, fileService, $location, authenticationService) {
+  var controlCtrl = function($scope, $window, $location, authenticationService) {
     var vm = this;
 
     vm.role = authenticationService.getRole();

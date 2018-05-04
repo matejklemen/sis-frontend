@@ -13,8 +13,8 @@
           }
         ).then( function onSuccess(result) {
           var file = new Blob([result.data], {type: 'application/pdf'});
-          var fileURL = URL.createObjectURL(file);
-          $window.open(fileURL, '_self', '');
+          console.log(result.headers());
+          initiateFileDownload(file, result.headers("X-Export-Filename"));
         },
         function onFailure(error) {
           console.log(error);
@@ -26,14 +26,7 @@
           }
         ).then( function onSuccess(result) {
           var file = new Blob([result.data], {type: 'text/csv'});
-          var fileURL = URL.createObjectURL(file);
-          var a = document.createElement("a");
-          document.body.appendChild(a);
-          a.style = "display: none";
-          a.href = fileURL;
-          a.download = tableName+".csv";
-          a.click();
-          window.URL.revokeObjectURL(fileURL);
+          initiateFileDownload(file, result.headers("X-Export-Filename"));
         },
         function onFailure(error) {
           console.log(error);
@@ -43,13 +36,12 @@
       }
     };
 
-    var formRows = function(data, coloumnNames) {
+    function formRows(data, coloumnNames) {
       var rows = [];
-      var i = 0;
       for(var i = 0; i < data.length; i++) {
         rows[i] = [];
         rows[i][0] = i+1;
-        for(cell in data[i]) {
+        for(var cell in data[i]) {
           if(coloumnNames.indexOf(cell) >= 0) {
             rows[i][coloumnNames.indexOf(cell)+1] = data[i][cell];
           }
@@ -58,8 +50,52 @@
       return rows;
     }
 
+    function initiateFileDownload(file, filename) {
+      var fileUrl = $window.URL.createObjectURL(file);
+
+      var caller = document.createElement("a");
+      caller.id = "downloadCaller";
+      caller.href = fileUrl;
+      caller.download = filename;
+      caller.style = "display: none;";
+      
+      document.body.append(caller);
+      caller.click();
+      caller.remove();
+      
+      $window.URL.revokeObjectURL(fileUrl);
+    }
+
+    var getPdfEnrolmentSheet = function(id){
+      return $http.get(apiBaseRoute+'/api/dataexporter/enrolmentsheet/'+id, {responseType: 'arraybuffer'}).then(
+        function onSuccess(result) {
+          var file = new Blob([result.data], {type: 'application/pdf'});
+          console.log(result.headers());
+          initiateFileDownload(file, result.headers("X-Export-Filename"));
+        },
+        function onFailure(error) {
+          console.log(error);
+        }
+      );
+    };
+
+    var getPdfEnrolmentConformation = function(id){
+      return $http.get(apiBaseRoute+"/api/dataexporter/enrolmentconfirmation/"+id, {responseType: 'arraybuffer'}).then(
+        function onSuccess(result) {
+          var file = new Blob([result.data], {type: 'application/pdf'});
+          console.log(result.headers());
+          initiateFileDownload(file, result.headers("X-Export-Filename"));
+        },
+        function onFailure(error) {
+          console.log(error);
+        }
+      );
+    };
+
     return {
-      getFile: getFile
+      getFile: getFile,
+      getPdfEnrolmentSheet: getPdfEnrolmentSheet,
+      getPdfEnrolmentConformation: getPdfEnrolmentConformation
     };
   };
 

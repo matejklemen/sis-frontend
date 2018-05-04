@@ -1,6 +1,6 @@
 
 (function() {
-  var confirmCtrl = function($scope, fileService, enrolmentService, $window) {
+  var confirmCtrl = function($scope, exporterService, enrolmentService, $window) {
     var vm = this;
    
     vm.enrolmentConfirmed=null;
@@ -25,7 +25,7 @@
     }
 
     vm.viewEnrolmentConformationPdf = function(){
-      fileService.getEnrolmentConformation($scope.id).then(
+      exporterService.getPdfEnrolmentConformation($scope.id).then(
         function success(response){
           var file = new Blob([response.data], {type: 'application/pdf'});
           var fileURL = URL.createObjectURL(file);

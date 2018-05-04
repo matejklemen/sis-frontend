@@ -1,5 +1,5 @@
 (function() {
-  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService, fileService, $window, authenticationService) {
+  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService, exporterService, $window, authenticationService) {
     var vm = this;
 
     vm.role = authenticationService.getRole();
@@ -43,16 +43,7 @@
 
     /* Vpisni list */
     vm.viewEnrolmentPdf = function(){
-      fileService.getEnrolmentSheet(vm.enrolments[0].student).then(
-        function success(response){
-          var file = new Blob([response.data], {type: 'application/pdf'});
-          var fileURL = URL.createObjectURL(file);
-          $window.location.href = fileURL;
-        },
-        function error(error){
-          console.log("Oh no...",error);
-        }
-      );
+      exporterService.getPdfEnrolmentSheet(vm.enrolments[0].student);
     };
   };
 
