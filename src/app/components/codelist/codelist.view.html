@@ -24,14 +24,14 @@
           <thead>
             <tr class="success">
               <th>#</th>
-              <th ng-repeat="key in vm.codelistCols" ng-if="key !== 'deleted' && key !== 'fresh'">{{ key }}</th>
+              <th ng-repeat="key in vm.codelistCols" ng-if="key !== 'deleted' && key !== 'fresh' && key !== 'loginData'">{{ key }}</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="entry in vm.codelistData" ng-class="{'text-danger': entry.deleted, 'text-info': entry.fresh}">
               <td>{{ ((vm.currentPage-1)*20) + $index+1 }}</td>
-              <td ng-repeat="(key, val) in entry" ng-if="key !== 'deleted' && key !== 'fresh'">{{ val | formatDisplayName }}</td>
+              <td ng-repeat="(key, val) in entry" ng-if="key !== 'deleted' && key !== 'fresh' && key !== 'loginData'">{{ val | formatDisplayName }}</td>
               <td>
                 <a href="" class="btn btn-primary btn-xs" ng-click="vm.openEditEntryModal(entry, $index)">Uredi ...</a>
                 <span class="label label-danger" ng-show="entry.deleted">Zbrisano</span>
