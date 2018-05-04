@@ -6,7 +6,7 @@
     vm.role = authenticationService.getRole();
 
     var profIdentity = authenticationService.getIdentity();
-    var updateMode = ($routeParams.examTermId !== undefined);
+    vm.updateMode = ($routeParams.examTermId !== undefined);
     vm.examTerm = {};
 
     /* profesor/ica */
@@ -20,7 +20,7 @@
 
     function prepareOptionsProf() {
       // get professor's full name
-      var profFullName = professorsService.getProfessorData(profIdentity).then(
+      professorsService.getProfessorData(profIdentity).then(
         function success(response) {
             vm.examTerm.organizer = response.data;
         },
@@ -30,11 +30,11 @@
         });
 
       // get courses organized or co-organized by current professor
-      var courseOrganizations = courseOrganizationService.getCourseOrganizationsForProfessor(profIdentity).then(
+      courseOrganizationService.getCourseOrganizationsForProfessor(profIdentity).then(
         function success(response) {
           vm.availableCourses = response.data;
 
-          if(updateMode)
+          if(vm.updateMode)
             selectSavedOptions();
         },
         function error(error) {
@@ -48,7 +48,7 @@
           function success(response) {
             vm.availableCourses = response.data;
 
-            if(updateMode)
+            if(vm.updateMode)
               selectSavedOptions();
         },
         function error(error) {
@@ -147,7 +147,7 @@
 
     vm.cancelEnrolment = function() {
       $location.path("/control");
-    }
+    };
 
     // YYYY-MM-DD HH:MM:SS
     var formatDatetime = function(date, time) {
@@ -236,7 +236,7 @@
         delete objectToSend.time;
 
         console.log(objectToSend);
-        if(updateMode) {
+        if(vm.updateMode) {
           examTermService.updateExamTerm(objectToSend).then(
             function success(response) {
               $location.path("/control");

@@ -2,7 +2,7 @@
 
 <div class="container">
   <div>
-    <h2>Vnos izpitnega roka</h2>
+    <h2>{{ vm.updateMode ? 'Urejanje' : 'Vnos' }} izpitnega roka</h2>
   </div>
 
   <!-- Osebni podatki -->
@@ -22,7 +22,7 @@
           <!-- Course ID -->
           <div class="form-group">
             <label>Predmet: </label>
-            <select ng-model="vm.examTerm.course" class="form-control input-sm" ng-options="co as co.course.id  + ' - ' + co.course.name + ' (' + co.studyYear.name + ')' for co in vm.availableCourses" ng-change="vm.updateSelectableOrganizers()"></select>
+            <select ng-model="vm.examTerm.course" class="form-control input-sm" ng-options="co as co.course.name+' - '+co.course.id+' (' + co.studyYear.name + ')' for co in vm.availableCourses" ng-change="vm.updateSelectableOrganizers()"></select>
           </div>
         </div>
         <div class="col-md-6">
@@ -57,8 +57,15 @@
         <div class="col-md-6">
           <!-- Duration of exam -->
           <div class="form-group">
-            <label>Čas trajanja izpita (min): </label>
+            <label>Čas trajanja izpita (minute): </label>
             <input class="form-control input-sm" type="number" min="0" id="i3" ng-model="vm.examTerm.duration">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <!-- exam term notes -->
+          <div class="form-group">
+            <label>Dodatne opombe (npr. predavalnica, v kateri bo potekal izpit), do 100 znakov: </label>
+            <input class="form-control input-sm" type="text" maxlength="100" ng-model="vm.examTerm.notes">
           </div>
         </div>
       </div>
