@@ -1,40 +1,43 @@
 <sis-navbar></sis-navbar>
 
 <div class="container student-view">
+  <h3>{{ vm.student.name }} {{ vm.student.surname }} ({{ vm.student.registerNumber }})</h3>
+  <hr/>
   <div class="row">
-    <h3>Podatki študenta: {{ vm.student.registerNumber }}</h3>
-    <div class="col-md-4">
-      <h4>Osebni podatki</h4>
-      <ul class="list-group personal-data">
-        <li class="list-group-item">
-          Priimek in ime:<br />
-          <strong>{{ vm.student.surname }}, {{ vm.student.name }}</strong>
-        </li>
-        <li class="list-group-item">
-          Naslov stalnega bivališča:<br />
-          <span class="text-success" ng-if="vm.student.sendingAddress != 2"><span class="glyphicon glyphicon-inbox"></span> Naslov za prejemanje:</span>
-          <strong>{{ vm.student.address1 | formatAddress:false }}</strong>
-        </li>
-        <li class="list-group-item">
-          Naslov začasnega bivališča:<br />
-          <span class="text-success" ng-if="vm.student.sendingAddress == 2"><span class="glyphicon glyphicon-inbox"></span> Naslov za prejemanje:</span>
-          <strong>{{ vm.student.address2 | formatAddress:false }}</strong>
-        </li>
-        <li class="list-group-item">
-          Telefonska številka:
-          <strong>{{ vm.student.phoneNumber || '/' }}</strong>
-        </li>
-        <li class="list-group-item">
-          Elektronski naslov: 
-          <strong>{{ vm.student.email }}</strong>
-        </li>
-      </ul>
-
+    <div class="col-md-12">
+      <h4><span class="glyphicon glyphicon-calendar"></span> Izpitni roki</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr class="success">
+            <th>Datum</th>
+            <th>Predmet</th>
+            <th>Organizator</th>
+            <th>Vrsta, trajanje</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- TODO -->
+          <tr>
+            <td>1.1.2018 15:00</td>
+            <td>Fizika</td>
+            <td>Borut Paul Kerševan</td>
+            <td>pisni, 60 minut</td>
+            <td><button uib-popover="PA in PB, razpored na učilnici" popover-trigger="'mouseenter'" class="btn btn-info btn-xs" style="padding-left: 8px; padding-right: 8px;"><span class="glyphicon glyphicon-info-sign"></span></button></td>
+            <td><a class="btn btn-primary btn-xs" href="">Prijava</a><a class="btn btn-danger btn-xs" href="">Odjava</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="col-md-8">
-      <a class="btn btn-info btn-block" ng-if="vm.hasToken && vm.role.id == 2" href="/enrol/{{ vm.student.id }}"><span class="glyphicon glyphicon-edit"></span>  Na voljo vam je vpis v <b>{{ vm.token.year }}. letnik</b> programa <b>{{ vm.token.studyProgram.name }}</b> - <b>{{ vm.token.studyYear.name }}</b></a>
-      <a class="btn btn-warning btn-block" ng-click="vm.viewEnrolmentPdf()" ng-if="vm.uncEnrol != undefined && (vm.role.id == 2 || vm.role.id == 4)" ><span class="glyphicon glyphicon-print"></span>  Natisni vpisni list za <b>{{ vm.uncEnrol.year }}. letnik</b> programa <b>{{ vm.uncEnrol.studyProgram.name }}</b> - <b>{{ vm.uncEnrol.studyYear.name }}</b>.</a>
-      <h4>Vpisi</h4>
+    <div class="col-md-12">
+      <h4><span class="glyphicon glyphicon-education"></span> Vpisi</h4>
+
+      <div style="margin-bottom: 6px;">
+        <a class="btn btn-info btn-block" ng-if="vm.hasToken && vm.role.id == 2" href="/enrol/{{ vm.student.id }}"><span class="glyphicon glyphicon-edit"></span>  Na voljo vam je vpis v <b>{{ vm.token.year }}. letnik</b> programa <b>{{ vm.token.studyProgram.name }}</b> - <b>{{ vm.token.studyYear.name }}</b></a>
+        <a class="btn btn-warning btn-block" ng-click="vm.viewEnrolmentPdf()" ng-if="vm.uncEnrol != undefined && (vm.role.id == 2 || vm.role.id == 4)" ><span class="glyphicon glyphicon-print"></span>  Natisni vpisni list za <b>{{ vm.uncEnrol.year }}. letnik</b> programa <b>{{ vm.uncEnrol.studyProgram.name }}</b> - <b>{{ vm.uncEnrol.studyYear.name }}</b>.</a>
+      </div>
+  
       <table class="table table-striped">
         <thead>
           <tr class="success">
@@ -48,10 +51,10 @@
         </thead>
         <tbody>
           <tr ng-repeat="enrolment in vm.enrolments">
-            <th>{{ enrolment.studyProgram.id }}</th>
-            <th>{{ enrolment.studyProgram.name }}</th>
+            <td><b>{{ enrolment.studyProgram.id }}</b></td>
+            <td><b>{{ enrolment.studyProgram.name }}</b></td>
             <td>{{ enrolment.studyYear.name }}</td>
-            <td>{{ enrolment.year + '.' }}</td>
+            <td><b>{{ enrolment.year + '.' }}</b></td>
             <td>{{ enrolment.type | formatDisplayName }}</td>
             <td>{{ enrolment.kind | formatDisplayName }}</td>
             <td ng-if="enrolment.confirmed"> <b style="color:#18bc9c">Potrjeno</b> </td>
@@ -59,27 +62,46 @@
           </tr>
         </tbody>
       </table>
-      <!--ul>
-        <li>Vpisna številka: {{ vm.student.vpisna }}</li>
-        <li>Priimek in ime: {{ vm.student.priimek }}, {{ vm.student.ime }}</li>
-        <li>Naslov stalnega bivališča: {{ vm.student.naslov1 }}</li>
-        <li>naslov za prejemanje pošte: {{ vm.student.naslov2 }}</li>
-        <li>telefonska številka: {{ vm.student.telefon }}</li>
-        <li>e-poštni naslov: {{ vm.student.eposta }}</li>
-        <li>
-          Vpisi:
-          <ul ng-repeat="vpis in vm.student.vpisi">
-            <li>Študijsko leto: {{ vpis.leto }}</li>
-            <ul>
-              <li>Letnik: {{ vpis.letnik }}</li>
-              <li>Študijski program: {{ vpis.program }}</li>
-              <li>Vrsta vpisa: {{ vpis.vrsta }}</li>
-              <li>Način študija: {{ vpis.nacin }}</li>
-            </ul>
+    </div>
+    <div class="col-md-12">
+      <h4><span class="glyphicon glyphicon-user"></span> Osebni podatki</h4>
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="list-group personal-data">
+            <li class="list-group-item">
+              Priimek in ime:<br />
+              <strong>{{ vm.student.surname }}, {{ vm.student.name }}</strong>
+            </li>
+            <li class="list-group-item">
+              Vpisna številka:<br />
+              <strong>{{ vm.student.registerNumber }}</strong>
+            </li>
+            <li class="list-group-item">
+              Telefonska številka:
+              <strong>{{ vm.student.phoneNumber || '/' }}</strong>
+            </li>
+            <li class="list-group-item">
+              Elektronski naslov: 
+              <strong>{{ vm.student.email }}</strong>
+            </li>
           </ul>
-
-        </li>
-      </ul-->
+        </div>
+        <div class="col-md-6">
+          <ul class="list-group personal-data">
+            <li class="list-group-item">
+              Naslov stalnega bivališča:<br />
+              <span class="text-success" ng-if="vm.student.sendingAddress != 2"><span class="glyphicon glyphicon-inbox"></span> Naslov za prejemanje:</span>
+              <strong>{{ vm.student.address1 | formatAddress:false }}</strong>
+            </li>
+            <li class="list-group-item">
+              Naslov začasnega bivališča:<br />
+              <span class="text-success" ng-if="vm.student.sendingAddress == 2"><span class="glyphicon glyphicon-inbox"></span> Naslov za prejemanje:</span>
+              <strong>{{ vm.student.address2 | formatAddress:false }}</strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>
