@@ -62,3 +62,13 @@ md-dialog-content {
   height: 35px;
   line-height: 35px;
 }
+
+/* Pagination bar */
+.pagination>.disabled>span,
+.pagination>.disabled>span:hover,
+.pagination>.disabled>span:focus,
+.pagination>.disabled>a,
+.pagination>.disabled>a:hover,
+.pagination>.disabled>a:focus{
+  background-color:#18bc9c;
+}
