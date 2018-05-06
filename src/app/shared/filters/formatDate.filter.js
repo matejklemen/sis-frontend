@@ -21,7 +21,7 @@ var formatDate = function() {
     var minutes = d.getMinutes();
     if(minutes < 10) minutes = "0" + minutes;
 
-    return day+'.'+month+'.'+year+' '+hours+':'+minutes;
+    return day+'.'+month+'.'+year+' ob '+hours+':'+minutes;
   };
 };
 

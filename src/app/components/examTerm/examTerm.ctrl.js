@@ -70,11 +70,11 @@
           vm.examTerm.date = new Date(vm.examTerm.datetime);
           vm.examTerm.time = new Date(vm.examTerm.datetime);
 
-          var selectableProfessors = [vm.examTerm.course.organizer1];
-          if(vm.examTerm.course.organizer2 !== null)
-            selectableProfessors.push(vm.examTerm.course.organizer2);
-          if(vm.examTerm.course.organizer3 !== null)
-            selectableProfessors.push(vm.examTerm.course.organizer3);
+          var selectableProfessors = [vm.examTerm.courseOrganization.organizer1];
+          if(vm.examTerm.courseOrganization.organizer2 !== null)
+            selectableProfessors.push(vm.examTerm.courseOrganization.organizer2);
+          if(vm.examTerm.courseOrganization.organizer3 !== null)
+            selectableProfessors.push(vm.examTerm.courseOrganization.organizer3);
 
           vm.professor = selectableProfessors;
           vm.professor.some(function(elem, index) {
@@ -85,8 +85,8 @@
           });
 
           vm.availableCourses.some(function(elem, index) {
-            if(elem.id == vm.examTerm.course.id) {
-              vm.examTerm.course = elem;
+            if(elem.id == vm.examTerm.courseOrganization.id) {
+              vm.examTerm.courseOrganization = elem;
               return;
             }
           });
@@ -133,13 +133,13 @@
     };
 
     vm.updateSelectableOrganizers = function() {
-        var selectableProfessors = [vm.examTerm.course.organizer1];
+        var selectableProfessors = [vm.examTerm.courseOrganization.organizer1];
 
-        if(vm.examTerm.course.organizer2 !== null)
-          selectableProfessors.push(vm.examTerm.course.organizer2);
+        if(vm.examTerm.courseOrganization.organizer2 !== null)
+          selectableProfessors.push(vm.examTerm.courseOrganization.organizer2);
 
-        if(vm.examTerm.course.organizer3 !== null)
-          selectableProfessors.push(vm.examTerm.course.organizer3);
+        if(vm.examTerm.courseOrganization.organizer3 !== null)
+          selectableProfessors.push(vm.examTerm.courseOrganization.organizer3);
 
         vm.professor = selectableProfessors;
         vm.examTerm.organizer = selectableProfessors[0];
@@ -178,7 +178,7 @@
         
         console.log(vm.examTerm);
 
-        if(vm.examTerm.course === undefined) {
+        if(vm.examTerm.courseOrganization === undefined) {
             vm.finalizeError = "izbran ni bil noben predmet";
             return;
         }

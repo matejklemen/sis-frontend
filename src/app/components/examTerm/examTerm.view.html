@@ -22,7 +22,7 @@
           <!-- Course ID -->
           <div class="form-group">
             <label>Predmet: </label>
-            <select ng-model="vm.examTerm.course" class="form-control input-sm" ng-options="co as co.course.name+' - '+co.course.id+' (' + co.studyYear.name + ')' for co in vm.availableCourses" ng-change="vm.updateSelectableOrganizers()"></select>
+            <select ng-model="vm.examTerm.courseOrganization" class="form-control input-sm" ng-options="co as co.course.name+' - '+co.course.id+' (' + co.studyYear.name + ')' for co in vm.availableCourses" ng-change="vm.updateSelectableOrganizers()"></select>
           </div>
         </div>
         <div class="col-md-6">

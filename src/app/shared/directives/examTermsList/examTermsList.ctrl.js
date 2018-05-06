@@ -1,5 +1,5 @@
 (function() {
-  var examTermsListCtrl = function($scope, $routeParams, $location, examTermService, codelistService, authenticationService) {
+  var examTermsListCtrl = function($scope, $routeParams, $location, $filter, examTermService, codelistService, authenticationService) {
     var vm = this;
 
     /* Get role */
@@ -34,18 +34,9 @@
 
 
           for(var i = 0; i < vm.searchResult.length; i++) {
-            var tmp = new Date(vm.searchResult[i].datetime);
-            var dd = tmp.getDate();
-            var mm = tmp.getMonth() + 1;
-            var yyyy = tmp.getFullYear();
-            var hh = tmp.getHours();
-            var min = tmp.getMinutes();
-            if(min < 10)
-              min = '0' + min;
-
-            vm.searchResult[i].formattedDatetime = dd + '. ' + mm + '. ' + yyyy + ' ob ' + hh + ':' + min;
+            vm.searchResult[i].formattedDatetime = $filter('formatDate')(vm.searchResult[i].datetime);
             // reassigning some stuff to depth 0 variables so that export to PDF/csv works normally
-            vm.searchResult[i].courseName = vm.searchResult[i].course.course.name;
+            vm.searchResult[i].courseName = vm.searchResult[i].courseOrganization.course.name;
             vm.searchResult[i].organizerFullName = vm.searchResult[i].organizer.firstName + ' ' + vm.searchResult[i].organizer.lastName1 +
               (vm.searchResult[i].organizer.lastName2 !== null? ' ' + vm.searchResult[i].organizer.lastName2: '');
 
