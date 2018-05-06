@@ -19,13 +19,13 @@
         </thead>
         <tbody>
           <!-- TODO -->
-          <tr>
-            <td>1.1.2018 15:00</td>
-            <td>Fizika</td>
-            <td>Borut Paul Kerševan</td>
-            <td>pisni, 60 minut</td>
-            <td><button uib-popover="PA in PB, razpored na učilnici" popover-trigger="'mouseenter'" class="btn btn-info btn-xs" style="padding-left: 8px; padding-right: 8px;"><span class="glyphicon glyphicon-info-sign"></span></button></td>
-            <td><a class="btn btn-primary btn-xs" href="">Prijava</a><a class="btn btn-danger btn-xs" href="">Odjava</a></td>
+          <tr ng-repeat="term in vm.examTerms">
+            <td>{{ term.datetime | formatDate }}</td>
+            <td>{{ term.course.course.name }}</td>
+            <td>{{ term.organizer.lastName1 }}</td>
+            <td>{{ term.type }}, {{ term.duration }} minut</td>
+            <td><button uib-popover="{{ term.notes || 'Ni opomb' }}" popover-trigger="'mouseenter'" class="btn btn-info btn-xs" style="padding-left: 8px; padding-right: 8px;"><span class="glyphicon glyphicon-info-sign"></span></button></td>
+            <td><a class="btn btn-primary btn-xs" ng-click="vm.signUp(term)">Prijava</a><a class="btn btn-danger btn-xs" ng-click="vm.signDown(term)">Odjava</a></td>
           </tr>
         </tbody>
       </table>
