@@ -1,5 +1,5 @@
 (function() {
-  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService, exporterService, $window, authenticationService) {
+  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService, exporterService, $window, authenticationService,examTermService) {
     var vm = this;
 
     vm.role = authenticationService.getRole();
@@ -27,6 +27,15 @@
             },
             function error(error) {
               console.log("Oh no...", error);
+            }
+          );
+
+          examTermService.getExamTermsForStudent(vm.student.id).then(
+            function succes(response){
+              console.log("vsi razpisani roki: ",response.data);
+            },
+            function error(error){
+              console.log("Oh no...",error);
             }
           );
         },

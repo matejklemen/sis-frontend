@@ -42,12 +42,17 @@
       return $http.delete(apiBaseRoute + '/api/course-exam-term/' + idCourseExamTerm);
     }
 
+    var getExamTermsForStudent = function(idStudent) {
+      return $http.get(apiBaseRoute + '/api/course-exam-term/student/' + idStudent);
+    }
+
     return {
       sendExamTerm: sendExamTerm,
       updateExamTerm: updateExamTerm,
       getExamTermById: getExamTermById,
       getAllExamTerms: getAllExamTerms,
-      deleteExamTerm: deleteExamTerm
+      deleteExamTerm: deleteExamTerm,
+      getExamTermsForStudent: getExamTermsForStudent
     };
   };
 
