@@ -22,7 +22,7 @@
         <tbody>
           <tr ng-repeat="term in vm.examTerms">
             <td ng-if="$index < vm.hideInt">{{ term.datetime | formatDate }}</td>
-            <td ng-if="$index < vm.hideInt">{{ term.course.course.name }}</td>
+            <td ng-if="$index < vm.hideInt">{{ term.courseOrganization.course.name }}</td>
             <td ng-if="$index < vm.hideInt">{{ term.organizer.firstName }} {{ term.organizer.lastName1 }} {{ term.organizer.lastName2 }}</td>
             <td ng-if="$index < vm.hideInt">{{ term.type }}, {{ term.duration }} minut</td>
             <td ng-if="$index < vm.hideInt">

@@ -1,5 +1,5 @@
 (function() {
-  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService, exporterService, $window, authenticationService,examTermService) {
+  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService, exporterService, $filter, $window, authenticationService,examTermService) {
     var vm = this;
 
     vm.role = authenticationService.getRole();
@@ -60,13 +60,13 @@
     }
 
     vm.signUp = function(term) {
-      if(window.confirm("Prijavim na izpit pri predmetu " + term.course.course.name + ", " + term.datetime + "?")) {
+      if(window.confirm("Prijavim na izpit pri predmetu " + term.courseOrganization.course.name + ", " + $filter('formatDate')(term.datetime) + "?")) {
         // TODO: izvedi prijavo ...
       }
     };
 
     vm.signDown = function(term) {
-      if(window.confirm("Odjavim z izpita pri predmetu " + term.course.course.name + ", " + term.datetime + "?")) {
+      if(window.confirm("Odjavim z izpita pri predmetu " + term.courseOrganization.course.name + ", " + $filter('formatDate')(term.datetime) + "?")) {
         // TODO: izvedi odjavo ...
       }
     };
