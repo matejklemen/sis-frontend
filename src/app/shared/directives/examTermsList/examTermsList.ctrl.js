@@ -54,7 +54,7 @@
         function error(error) {
           console.log(error);
         });
-    }
+    };
 
     vm.getExamTermList();
 
