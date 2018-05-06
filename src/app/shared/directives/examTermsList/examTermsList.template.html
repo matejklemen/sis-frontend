@@ -27,7 +27,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="result in vm.searchResult">
-              <td>{{ $index + 1  }}</td>
+              <td>{{ $index + 1 + (vm.limit * (vm.currentPage - 1))}}</td>
               <td>{{ result.formattedDatetime }}</td>
               <td>{{ result.courseName }}</td>
               <td>{{ result.duration }}</td>

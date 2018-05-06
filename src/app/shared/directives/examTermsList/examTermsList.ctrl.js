@@ -6,7 +6,7 @@
     vm.role = authenticationService.getRole();
 
     vm.currentPage = 1;
-    var limit = 20;
+    vm.limit = 20;
 
     // will be 'undefined' in case of role != professor, so all data will be shown
     var profIdentity = authenticationService.getIdentity();
@@ -27,7 +27,7 @@
     vm.getExamTermList = function() {
       var selectedYr = vm.filterYear === undefined? null: vm.filterYear.id;
 
-      examTermService.getAllExamTerms((vm.currentPage - 1) * limit, limit, profIdentity, selectedYr).then(
+      examTermService.getAllExamTerms((vm.currentPage - 1) * vm.limit, vm.limit, profIdentity, selectedYr).then(
         function success(response) {
           vm.totalCount = response.headers('X-total-count');
           vm.searchResult = response.data;
