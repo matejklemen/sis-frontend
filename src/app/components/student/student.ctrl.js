@@ -37,6 +37,8 @@
               vm.hideInt = 10;
               vm.examTermsCount = response.data.length;
 
+              console.log(response.data)
+
               vm.examTerms.sort(function(a,b){
                 // Turn your strings into dates, and then subtract them
                 // to get a value that is either negative, positive, or zero.
@@ -61,7 +63,14 @@
 
     vm.signUp = function(term) {
       if(window.confirm("Prijavim na izpit pri predmetu " + term.courseOrganization.course.name + ", " + $filter('formatDate')(term.datetime) + "?")) {
-        // TODO: izvedi prijavo ...
+        examTermService.putExamSignUp(vm.student.id, term.studentCoursesId, term.id).then(
+          function success(response){
+            console.log("Prijava uspešna")
+          },
+          function error(error){
+            console.log("Oh no...",error)
+          }
+        );
       }
     };
 

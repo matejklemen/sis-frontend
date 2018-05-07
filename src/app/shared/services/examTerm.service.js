@@ -46,13 +46,18 @@
       return $http.get(apiBaseRoute + '/api/course-exam-term/student/' + idStudent);
     }
 
+    var putExamSignUp = function(studentId, studentCoursesId, courseExamTermId ) {
+      return $http.put(apiBaseRoute + '/api/exam-sign-up?studentId=' + studentId + "&studentCoursesId=" + studentCoursesId + "&courseExamTermId=" + courseExamTermId);
+    }
+
     return {
       sendExamTerm: sendExamTerm,
       updateExamTerm: updateExamTerm,
       getExamTermById: getExamTermById,
       getAllExamTerms: getAllExamTerms,
       deleteExamTerm: deleteExamTerm,
-      getExamTermsForStudent: getExamTermsForStudent
+      getExamTermsForStudent: getExamTermsForStudent,
+      putExamSignUp: putExamSignUp
     };
   };
 
