@@ -40,9 +40,7 @@
         </tbody>
       </table>
       <div style="width: 100%; text-align: center; font-size: 1.2em;">
-        <div ng-if="vm.examTerms == undefined" class="progress progress-striped active" style="width: 50%; display: inline-block;">
-          <div class="progress-bar" style="width: 100%;"></div>
-        </div>
+        <img ng-if="vm.examTerms == undefined" src="public/images/progress.gif" class="loading-gif">
         <div ng-if="vm.examTerms.length == 0">
           <span class="glyphicon glyphicon-lamp"></span><br />Ni razpisanih rokov
         </div>
@@ -81,9 +79,7 @@
         </tbody>
       </table>
       <div style="width: 100%; text-align: center; font-size: 1.2em;">
-        <div ng-if="vm.enrolments == undefined" class="progress progress-striped active" style="width: 50%; display: inline-block;">
-          <div class="progress-bar" style="width: 100%;"></div>
-        </div>
+        <img ng-if="vm.enrolments == undefined" src="public/images/progress.gif" class="loading-gif">
         <div ng-if="vm.enrolments.length == 0">
           <span class="glyphicon glyphicon-road"></span><br />Ni vpisov
         </div>
