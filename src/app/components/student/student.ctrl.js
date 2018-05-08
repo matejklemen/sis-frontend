@@ -47,6 +47,8 @@
                 b.isValid = new Date(b.datetime) - Date.now() > 0 ? true : false;
                 return new Date(a.datetime) - new Date(b.datetime);
               });
+
+              console.log(vm.examTerms)
             },
             function error(error) {
               vm.examTerms = []; // assigning empty array hides progress bar

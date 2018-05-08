@@ -23,7 +23,16 @@
     };
 
     vm.signdown = function() {
-      // TODO: exam sign down
+      examTermService.returnExamSignUp(vm.examTerm.id, vm.examTerm.studentCoursesId).then(
+        function success(response) {
+          console.log("Odjava uspešna. ",response.data);
+          $uibModalInstance.close(vm.action);
+        },
+        function error(error) {
+          console.log("Odjava ni uspela, ", error);
+          vm.sendStatus = error.data;
+        }
+      );
     };
 
     vm.close = function() {
