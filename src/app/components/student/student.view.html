@@ -1,6 +1,12 @@
 <sis-navbar></sis-navbar>
 
 <div class="container student-view">
+
+    <div ng-if="vm.alert" class="alert alert-dismissible alert-danger custom-alert">
+      <button type="button" class="close" data-dismiss="alert" ng-click="vm.alert = false">&times;</button>
+      <strong>Napaka!</strong> {{ vm.alertMessage }}
+    </div>
+
   <h3>{{ vm.student.name }} {{ vm.student.surname }} ({{ vm.student.registerNumber }})</h3>
   <hr/>
   <div class="row">
@@ -21,14 +27,14 @@
         </thead>
         <tbody>
           <tr ng-repeat="term in vm.examTerms">
-            <td ng-if="$index < vm.hideInt">{{ term.datetime | formatDate }}</td>
-            <td ng-if="$index < vm.hideInt">{{ term.courseOrganization.course.name }}</td>
-            <td ng-if="$index < vm.hideInt">{{ term.organizer.firstName }} {{ term.organizer.lastName1 }} {{ term.organizer.lastName2 }}</td>
-            <td ng-if="$index < vm.hideInt">{{ term.type }}, {{ term.duration }} minut</td>
-            <td ng-if="$index < vm.hideInt">
-              <a class="btn btn-danger btn-xs pull-right" ng-click="vm.signDown(term)">Odjava</a>
-              <a class="btn btn-primary btn-xs pull-right" ng-click="vm.signUp(term)" style="margin-right:3px">Prijava</a>
-              <button uib-popover="{{ term.notes || 'Ni opomb' }}" popover-trigger="'mouseenter'" class="btn btn-info btn-xs  pull-right" style="padding-left: 8px; padding-right: 8px; margin-right:30px"><span class="glyphicon glyphicon-info-sign"></span></button>
+            <td ng-class="!term.isValid? 'disable-row':''" ng-if="$index < vm.hideInt">{{ term.datetime | formatDate }}</td>
+            <td ng-class="!term.isValid? 'disable-row':''" ng-if="$index < vm.hideInt">{{ term.courseOrganization.course.name }}</td>
+            <td ng-class="!term.isValid? 'disable-row':''" ng-if="$index < vm.hideInt">{{ term.organizer.firstName }} {{ term.organizer.lastName1 }} {{ term.organizer.lastName2 }}</td>
+            <td ng-class="!term.isValid? 'disable-row':''" ng-if="$index < vm.hideInt">{{ term.type }}, {{ term.duration }} minut</td>
+            <td ng-class="!term.isValid? 'disable-row':''" ng-if="$index < vm.hideInt">
+              <a ng-if="term.signedUp" class="btn btn-danger btn-xs pull-right" ng-click="vm.signDown(term)">Odjava</a>
+              <a ng-disabled="!term.isValid" ng-if="!term.signedUp" class="btn btn-primary btn-xs pull-right" ng-click="vm.signUp(term)">Prijava</a>
+              <button ng-disabled="!term.isValid" uib-popover="{{ term.notes || 'Ni opomb' }}" popover-trigger="'mouseenter'" class="btn btn-info btn-xs  pull-right" style="padding-left: 8px; padding-right: 8px; margin-right:30px"><span class="glyphicon glyphicon-info-sign"></span></button>
             </td>
           </tr>
         </tbody>

@@ -37,13 +37,14 @@
               vm.hideInt = 10;
               vm.examTermsCount = response.data.length;
 
-              console.log(response.data)
-
               vm.examTerms.sort(function(a,b){
                 // Turn your strings into dates, and then subtract them
                 // to get a value that is either negative, positive, or zero.
+                a.isValid = new Date(a.datetime) - Date.now() > 0 ? true : false;
                 return new Date(a.datetime) - new Date(b.datetime);
               });
+
+              console.log(response.data)
             },
             function error(error){
               console.log("Oh no...",error);
@@ -66,9 +67,18 @@
         examTermService.putExamSignUp(vm.student.id, term.studentCoursesId, term.id).then(
           function success(response){
             console.log("Prijava uspešna")
+            term.signedUp = true;
           },
           function error(error){
             console.log("Oh no...",error)
+            vm.alert = true;
+            vm.alertMessage = ""
+            for(var i = 0; i < error.data.length; i++){
+              if(i > 0){
+                vm.alertMessage += ",";
+              }
+              vm.alertMessage += error.data[i];
+            }
           }
         );
       }

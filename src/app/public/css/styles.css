@@ -72,3 +72,16 @@ md-dialog-content {
 .pagination>.disabled>a:focus{
   background-color:#18bc9c;
 }
+
+/* class for disabled row (just style of text) */
+.disable-row{
+  color:gray;
+}
+
+/* custom alert */
+.custom-alert{
+  position: fixed;
+  transform: translate(-50%, 0%);
+  left: 50%;
+  z-index: 1000 !important;
+}
