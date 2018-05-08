@@ -15,7 +15,7 @@
         function success(response){
           vm.enrolmentConfirmed = response.data.confirmed;
           vm.enrolment = response.data;
-          console.log(response.data);
+          //console.log(response.data);
         },
         function error(error){
           //console.log("Oh no...",error);

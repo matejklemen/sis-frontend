@@ -1,0 +1,19 @@
+<div class="modal-body clearfix">
+  
+  <div>  
+    <span ng-if="vm.action == 'signup'"><strong class="text-success">Prijavim</strong> se na izpit</span>
+    <span ng-if="vm.action == 'signdown'"><strong class="text-danger">Odjavim</strong> se z izpita</span>
+    pri predmetu <strong>{{ vm.examTerm.courseOrganization.course.name }}</strong>, ki bo <strong>{{ vm.examTerm.datetime | formatDate }}</strong>?
+  </div>
+
+  <div ng-show="vm.sendStatus" class="alert alert-danger" style="display: block; text-align: left; margin-top: 6px; margin-bottom: 6px;">
+    Prijava ni mogoča zaradi sledečih napak: <strong>{{ vm.sendStatus | formatError }}</strong>
+  </div>
+
+  <div style="float: right; margin-top: 6px;">
+    <button type="button" class="btn btn-success btn-sm" ng-if="vm.action == 'signup'" ng-click="vm.signup()"><span class="glyphicon glyphicon-log-in"></span> Prijava</button>
+    <button type="button" class="btn btn-danger btn-sm" ng-if="vm.action == 'signdown'" ng-click="vm.signdown()"><span class="glyphicon glyphicon-log-out"></span> Odjava</button>
+    <button type="button" class="btn btn-default btn-sm" ng-click="vm.close()">Zapri</button>
+  </div>
+
+</div>

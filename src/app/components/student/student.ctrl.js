@@ -1,5 +1,5 @@
 (function() {
-  var studentCtrl = function($scope, $location, $routeParams, studentService, enrolmentService, tokenService, exporterService, $filter, $window, authenticationService,examTermService) {
+  var studentCtrl = function($scope, $location, $routeParams, $uibModal, studentService, enrolmentService, tokenService, exporterService, $filter, $window, authenticationService,examTermService) {
     var vm = this;
 
     vm.role = authenticationService.getRole();
@@ -28,6 +28,7 @@
             },
             function error(error) {
               console.log("Oh no...", error);
+              vm.enrolments = []; // assigning empty array hides progress bar
             }
           );
 
@@ -47,7 +48,8 @@
                 return new Date(a.datetime) - new Date(b.datetime);
               });
             },
-            function error(error){
+            function error(error) {
+              vm.examTerms = []; // assigning empty array hides progress bar
               console.log("Oh no...",error);
             }
           );
@@ -63,32 +65,47 @@
       $location.path("/");
     }
 
-    vm.signUp = function(term) {
-      if(window.confirm("Prijavim na izpit pri predmetu " + term.courseOrganization.course.name + ", " + $filter('formatDate')(term.datetime) + "?")) {
-        examTermService.putExamSignUp(vm.student.id, term.studentCoursesId, term.id).then(
-          function success(response){
-            console.log("Prijava uspešna")
-            term.signedUp = true;
+    function showStudentSignModal(action, examTerm) {
+      // action should be either 'signup' or 'signdown'
+      var modalInstance = $uibModal.open({
+        templateUrl: 'components/student/studentExamSign.modalview.html',
+        controller: 'studentExamSignCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          resAction: function() {
+            return action;
           },
-          function error(error){
-            console.log("Oh no...",error)
-            vm.alert = true;
-            vm.alertMessage = ""
-            for(var i = 0; i < error.data.length; i++){
-              if(i > 0){
-                vm.alertMessage += ",";
-              }
-              vm.alertMessage += error.data[i];
-            }
+          resStudent: function() {
+            return vm.student;
+          },
+          resExamTerm: function() {
+            return examTerm;
+          },
+        }
+      });
+
+      // get result from modal after it's closed here
+      modalInstance.result.then(
+        function(result) {
+          if(result == "signup") {
+            // mark exam term as signed up to
+            examTerm.signedUp = true;
           }
-        );
-      }
+          if(result == "signdown") {
+            // mark exam term as not signed up to
+            examTerm.signedUp = false;
+          }
+        },
+        function(closeInfo) {}
+      );
+    }
+
+    vm.signUp = function(term) {
+      showStudentSignModal('signup', term);
     };
 
     vm.signDown = function(term) {
-      if(window.confirm("Odjavim z izpita pri predmetu " + term.courseOrganization.course.name + ", " + $filter('formatDate')(term.datetime) + "?")) {
-        // TODO: izvedi odjavo ...
-      }
+      showStudentSignModal('signdown', term);
     };
 
     /* Vpisni list */
