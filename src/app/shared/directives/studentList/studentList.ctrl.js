@@ -1,5 +1,5 @@
 (function() {
-  var studentListCtrl = function($routeParams, studentService, exporterService, authenticationService) {
+  var studentListCtrl = function($window, studentService, exporterService, authenticationService) {
     var vm = this;
 
     vm.role = authenticationService.getRole();
@@ -15,6 +15,8 @@
       if(vm.search.value == undefined || vm.search.value == "") {
         vm.searchIsEmpty = true;
       } else {
+        $window.localStorage.setItem("studentListSearchQuery", vm.search.value);
+
         vm.searchIsEmpty = false;
         vm.searchInProgress = true;
 
@@ -29,10 +31,14 @@
             vm.searchInProgress = false;
           }
         );
-
       }
-
     };
+
+    var lastSearch = localStorage.getItem("studentListSearchQuery");
+    if(lastSearch !== null) {
+      vm.search.value = lastSearch;
+      vm.performSearch();
+    }
 
   };
 

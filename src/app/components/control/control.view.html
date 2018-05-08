@@ -4,7 +4,7 @@
 
   <uib-tabset active="vm.selectedTab">
     
-    <uib-tab index="0" ng-show="vm.role.id == 4" deselect="vm.saveSelectedTab($selectedIndex)">
+    <uib-tab index="0" ng-show="vm.role.id == 4">
       <uib-tab-heading>
         <span class="glyphicon glyphicon-indent-right" style="margin-right:5px"></span> Upravljanje študentov
       </uib-tab-heading>
@@ -13,7 +13,7 @@
       <student-list></student-list>
 
     </uib-tab>
-    <uib-tab index="1" ng-show="vm.role.id == 4" deselect="vm.saveSelectedTab($selectedIndex)">
+    <uib-tab index="1" ng-show="vm.role.id == 4">
       <uib-tab-heading>
         <span class="glyphicon glyphicon-import" style="margin-right:5px"></span> Uvoz podatkov
       </uib-tab-heading>
@@ -22,7 +22,7 @@
       <student-import></student-import>
 
     </uib-tab>
-    <uib-tab index="2" ng-show="vm.role.id == 3 || vm.role.id == 4" deselect="vm.saveSelectedTab($selectedIndex)">
+    <uib-tab index="2" ng-show="vm.role.id == 3 || vm.role.id == 4">
       <uib-tab-heading>
         <span class="glyphicon glyphicon-list" style="margin-right:5px"></span> Študenti po predmetih
       </uib-tab-heading>
@@ -31,7 +31,7 @@
       <course-students-list></course-students-list>
 
     </uib-tab>
-    <uib-tab index="3" ng-show="vm.role.id == 3 || vm.role.id == 4" deselect="vm.saveSelectedTab($selectedIndex)">
+    <uib-tab index="3" ng-show="vm.role.id == 3 || vm.role.id == 4">
       <uib-tab-heading>
         <span class="glyphicon glyphicon-folder-open" style="margin-right:5px"></span> Izpitni roki
       </uib-tab-heading>

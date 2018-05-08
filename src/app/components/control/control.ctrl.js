@@ -13,9 +13,9 @@
       vm.selectedTab = parseInt($window.localStorage.getItem('lastTabIndex'));
     }
 
-    vm.saveSelectedTab = function(selectedIndex) {
-      $window.localStorage.setItem("lastTabIndex", selectedIndex);
-    };
+    $scope.$watch('vm.selectedTab', function(newVal) {
+      $window.localStorage.setItem("lastTabIndex", vm.selectedTab);
+    });
 
   };
 

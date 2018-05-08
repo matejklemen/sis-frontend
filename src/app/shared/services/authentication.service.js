@@ -63,7 +63,9 @@
 
     var logout = function() {
       $window.localStorage.removeItem('sis-token');
+      // remove all temp saved data
       $window.localStorage.removeItem('lastTabIndex');
+      $window.localStorage.removeItem('studentListSearchQuery');
     };
 
     var isLoggedIn = function() {
