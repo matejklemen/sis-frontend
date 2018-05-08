@@ -68,7 +68,7 @@
 
     vm.redirectToExamForm = function() {
       $location.path("/examterm");
-    }
+    };
 
   };
 
