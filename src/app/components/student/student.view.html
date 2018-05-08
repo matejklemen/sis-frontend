@@ -10,7 +10,7 @@
   <h3>{{ vm.student.name }} {{ vm.student.surname }} ({{ vm.student.registerNumber }})</h3>
   <hr/>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" style="margin-bottom:50px">
       <h4><span class="glyphicon glyphicon-calendar"></span> Izpitni roki</h4>
       <table class="table table-striped">
         <thead>
@@ -20,8 +20,8 @@
             <th>Organizator</th>
             <th>Vrsta, trajanje</th>
             <th>
-              <a ng-if="vm.examTermsCount > vm.hideInt" ng-click="vm.hideInt = vm.examTermsCount" class="btn btn-primary btn-xs pull-right" >Prikaži vse izpitne roke <span class="glyphicon glyphicon-chevron-down" style="margin-left:5px"></span></a>
-              <a ng-if="vm.examTermsCount <= vm.hideInt" ng-click="vm.hideInt = 10" class="btn btn-primary btn-xs pull-right" >Prikaži manj izpitnih rokov <span class="glyphicon glyphicon-chevron-up" style="margin-left:5px"></span></a>
+              <a ng-if="vm.examTermsCount > 0 && vm.examTermsCount > vm.hideInt" ng-click="vm.hideInt = vm.examTermsCount" class="btn btn-primary btn-xs pull-right" >Prikaži vse izpitne roke <span class="glyphicon glyphicon-chevron-down" style="margin-left:5px"></span></a>
+              <a ng-if="vm.examTermsCount > 0 && vm.examTermsCount <= vm.hideInt" ng-click="vm.hideInt = 10" class="btn btn-primary btn-xs pull-right" >Prikaži manj izpitnih rokov <span class="glyphicon glyphicon-chevron-up" style="margin-left:5px"></span></a>
             </th>
           </tr>
         </thead>
@@ -39,8 +39,11 @@
           </tr>
         </tbody>
       </table>
+      <div style="width:100%;text-align:center">
+        <span ng-if="vm.examTerms == undefined || vm.examTerms.length == 0">Ni razpisanih rokov<spanh4>
+      </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12" style="margin-bottom:50px">
       <h4><span class="glyphicon glyphicon-education"></span> Vpisi</h4>
 
       <div style="margin-bottom: 6px;">
@@ -72,6 +75,9 @@
           </tr>
         </tbody>
       </table>
+      <div style="width:100%;text-align:center">
+          <span ng-if="vm.enrolments == undefined || vm.enrolments.length == 0">Ni vpisov<spanh4>
+        </div>
     </div>
     <div class="col-md-12">
       <h4><span class="glyphicon glyphicon-user"></span> Osebni podatki</h4>
