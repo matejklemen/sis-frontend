@@ -76,7 +76,7 @@
             vm.alertMessage = ""
             for(var i = 0; i < error.data.length; i++){
               if(i > 0){
-                vm.alertMessage += ",";
+                vm.alertMessage += ", ";
               }
               vm.alertMessage += error.data[i];
             }

@@ -50,6 +50,10 @@
       return $http.put(apiBaseRoute + '/api/exam-sign-up?studentId=' + studentId + "&studentCoursesId=" + studentCoursesId + "&courseExamTermId=" + courseExamTermId);
     }
 
+    var postExamSignUp = function(examSignUp ) {
+      return $http.post(apiBaseRoute + '/api/exam-sign-up',examSignUp);
+    }
+
     return {
       sendExamTerm: sendExamTerm,
       updateExamTerm: updateExamTerm,
@@ -57,7 +61,8 @@
       getAllExamTerms: getAllExamTerms,
       deleteExamTerm: deleteExamTerm,
       getExamTermsForStudent: getExamTermsForStudent,
-      putExamSignUp: putExamSignUp
+      putExamSignUp: putExamSignUp,
+      postExamSignUp: postExamSignUp
     };
   };
 
