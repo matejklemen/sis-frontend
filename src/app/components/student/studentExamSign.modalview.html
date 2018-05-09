@@ -1,13 +1,41 @@
 <div class="modal-body clearfix">
   
-  <div>  
-    <span ng-if="vm.action == 'signup'"><strong class="text-success">Prijavim</strong> se na izpit</span>
-    <span ng-if="vm.action == 'signdown'"><strong class="text-danger">Odjavim</strong> se z izpita</span>
-    pri predmetu <strong>{{ vm.examTerm.courseOrganization.course.name }}</strong>, ki bo <strong>{{ vm.examTerm.datetime | formatDate }}</strong>?
+  <div ng-if="vm.action != 'history'">
+    <div>  
+      <span ng-if="vm.action == 'signup'"><strong class="text-success">Prijavim</strong> se na izpit</span>
+      <span ng-if="vm.action == 'signdown'"><strong class="text-danger">Odjavim</strong> se z izpita</span>
+      pri predmetu <strong>{{ vm.examTerm.courseOrganization.course.name }}</strong>, ki bo <strong>{{ vm.examTerm.datetime | formatDate }}</strong>?
+    </div>
+
+    <div ng-show="vm.sendStatus" class="alert alert-danger" style="display: block; text-align: left; margin-top: 6px; margin-bottom: 6px;">
+      Prijava ni mogoča zaradi sledečih napak: <strong>{{ vm.sendStatus | formatError }}</strong>
+    </div>
   </div>
 
-  <div ng-show="vm.sendStatus" class="alert alert-danger" style="display: block; text-align: left; margin-top: 6px; margin-bottom: 6px;">
-    Prijava ni mogoča zaradi sledečih napak: <strong>{{ vm.sendStatus | formatError }}</strong>
+  <div ng-if="vm.action == 'history'" style="overflow-y: auto; max-height: 300px;">
+    <h4 style="margin-bottom:20px">Zgodovina zadnjih 30 dejanj</h4>
+    <div>
+        <table class="table table-striped">
+            <thead>
+              <tr class="active">
+                <th>Datum</th>
+                <th>Uporabniško ime odjavitelja</th>
+                <th>Dejanje</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="his in vm.history">
+                <td>{{ his.datetime | formatDate }}</td>
+                <td>{{ his.userLogin.username }}</td>
+                <td>{{ his.action }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+      <div ng-if="vm.history == undefined" style="text-align:center">
+        Ni zgodovine
+      </div>
+    </div>
   </div>
 
   <div style="float: right; margin-top: 6px;">

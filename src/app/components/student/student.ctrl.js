@@ -110,6 +110,10 @@
       showStudentSignModal('signdown', term);
     };
 
+    vm.history = function(term) {
+      showStudentSignModal('history', term);
+    };
+
     /* Vpisni list */
     vm.viewEnrolmentPdf = function() {
       exporterService.getPdfEnrolmentSheet(vm.enrolments[0].student);

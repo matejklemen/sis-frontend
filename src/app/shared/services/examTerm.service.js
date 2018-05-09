@@ -50,8 +50,12 @@
       return $http.put(apiBaseRoute + '/api/exam-sign-up?studentId=' + studentId + "&studentCoursesId=" + studentCoursesId + "&courseExamTermId=" + courseExamTermId);
     }
 
-    var returnExamSignUp = function(courseExamTermId, studentCourseId) {
-      return $http.post(apiBaseRoute + '/api/exam-sign-up/return?courseExamTermId='+courseExamTermId+"&studentCourseId="+studentCourseId);
+    var returnExamSignUp = function(courseExamTermId, studentCourseId, loginId) {
+      return $http.post(apiBaseRoute + '/api/exam-sign-up/return?courseExamTermId='+courseExamTermId+"&studentCourseId="+studentCourseId + "&loginId=" + loginId);
+    }
+
+    var getExamSignUpHistory = function(courseExamTermId, studentCourseId) {
+      return $http.get(apiBaseRoute + '/api/exam-sign-up/history?courseExamTermId='+courseExamTermId+"&studentCourseId="+studentCourseId);
     }
 
     return {
@@ -62,7 +66,8 @@
       deleteExamTerm: deleteExamTerm,
       getExamTermsForStudent: getExamTermsForStudent,
       putExamSignUp: putExamSignUp,
-      returnExamSignUp: returnExamSignUp
+      returnExamSignUp: returnExamSignUp,
+      getExamSignUpHistory: getExamSignUpHistory
     };
   };
 
