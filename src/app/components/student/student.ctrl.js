@@ -3,6 +3,7 @@
     var vm = this;
 
     vm.role = authenticationService.getRole();
+    vm.loginId = authenticationService.getLoginId();
 
     if($routeParams.registerNumber != null) {
       // pridobi in prikazi podatke o studentu
@@ -48,7 +49,7 @@
                 return new Date(a.datetime) - new Date(b.datetime);
               });
 
-              console.log(vm.examTerms)
+              console.log(vm.examTerms);
             },
             function error(error) {
               vm.examTerms = []; // assigning empty array hides progress bar
@@ -83,6 +84,12 @@
           resExamTerm: function() {
             return examTerm;
           },
+          resUserLogin: function() {
+            return vm.loginId;
+          },
+          resUserRole: function() {
+            return vm.role;
+          }
         }
       });
 
