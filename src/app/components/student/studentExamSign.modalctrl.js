@@ -16,7 +16,7 @@
     }
 
     vm.signup = function() {
-      examTermService.putExamSignUp(vm.student.id, vm.examTerm.studentCoursesId, vm.examTerm.id).then(
+      examTermService.putExamSignUp(vm.student.id, vm.examTerm.studentCoursesId, vm.examTerm.id, vm.userLoginId).then(
         function success(response) {
           console.log("Prijava uspešna.");
           $uibModalInstance.close(vm.action);
@@ -29,7 +29,7 @@
     };
 
     vm.signupforce = function() {
-      examTermService.putExamSignUp(vm.student.id, vm.examTerm.studentCoursesId, vm.examTerm.id, vm.userLoginId).then(
+      examTermService.putExamSignUp(vm.student.id, vm.examTerm.studentCoursesId, vm.examTerm.id, vm.userLoginId, true).then(
         function success(response) {
           console.log("Prijava uspešna.");
           $uibModalInstance.close(vm.action);

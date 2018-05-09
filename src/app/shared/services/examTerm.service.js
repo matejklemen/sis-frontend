@@ -46,11 +46,13 @@
       return $http.get(apiBaseRoute + '/api/course-exam-term/student/' + idStudent);
     };
 
-    var putExamSignUp = function(studentId, studentCoursesId, courseExamTermId, userLoginId = undefined) {
-      var link = apiBaseRoute + '/api/exam-sign-up?studentId=' + studentId + "&studentCoursesId=" + studentCoursesId + "&courseExamTermId=" + courseExamTermId;
-      if(userLoginId != undefined) {
-        link += '&userLoginId=' + userLoginId;
-      }
+    var putExamSignUp = function(studentId, studentCoursesId, courseExamTermId, userLoginId, force = false) {
+      var link = apiBaseRoute + '/api/exam-sign-up?studentId=' + studentId + 
+      "&studentCoursesId=" + studentCoursesId + 
+      "&courseExamTermId=" + courseExamTermId +
+      "&userLoginId=" + userLoginId +
+      "&force=" + force;
+      
       return $http.put(link);
     };
 
