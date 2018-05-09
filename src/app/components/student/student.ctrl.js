@@ -39,14 +39,19 @@
               vm.hideInt = 10;
               vm.examTermsCount = response.data.length;
 
+              // Sort by date
               vm.examTerms.sort(function(a,b){
-                // Turn your strings into dates, and then subtract them
-                // to get a value that is either negative, positive, or zero.
-
-                // We loop once but calculate for a and b so first and last element are in
-                a.isValid = new Date(a.datetime) - Date.now() > 0 ? true : false;
-                b.isValid = new Date(b.datetime) - Date.now() > 0 ? true : false;
                 return new Date(a.datetime) - new Date(b.datetime);
+              });
+
+              // Check if valid for deadline
+              vm.examTerms.forEach(element => {
+                deadline = new Date(element.datetime);
+                deadline.setDate(deadline.getDate() - 2);
+                deadline.setMinutes(59, 0, 0);
+                deadline.setHours(23);
+                
+                element.isValid = deadline - Date.now() >= 0 ? true : false;
               });
 
               console.log(vm.examTerms);
