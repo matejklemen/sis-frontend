@@ -32,6 +32,7 @@
             <td ng-if="$index < vm.hideInt">{{ term.organizer.firstName }} {{ term.organizer.lastName1 }} {{ term.organizer.lastName2 }}</td>
             <td ng-if="$index < vm.hideInt">{{ term.type }}, {{ term.duration }} minut</td>
             <td ng-if="$index < vm.hideInt">
+              <a ng-if="vm.role.id == 4" class="btn btn-warning btn-xs pull-right" ng-click="vm.history(term)" style="margin-left:3px;" uib-tooltip="Zgodovina"><span class="glyphicon glyphicon-facetime-video"></span></a>
               <a ng-if="term.signedUp" class="btn btn-danger btn-xs pull-right" ng-click="vm.signDown(term)">Odjava</a>
               <a ng-disabled="!term.isValid" ng-if="!term.signedUp" class="btn btn-primary btn-xs pull-right" ng-click="vm.signUp(term)">Prijava</a>
               <button ng-disabled="!term.isValid" uib-popover="{{ term.notes || 'Ni opomb' }}" popover-trigger="'mouseenter'" class="btn btn-info btn-xs  pull-right" style="padding-left: 8px; padding-right: 8px; margin-right:30px"><span class="glyphicon glyphicon-info-sign"></span></button>
