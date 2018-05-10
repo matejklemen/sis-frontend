@@ -25,7 +25,7 @@
           enrolmentService.getEnrolmentsForStudent(vm.student.id).then(
             function success(response) {
               vm.enrolments = response.data;
-              console.log(vm.enrolments);
+              //console.log(vm.enrolments);
             },
             function error(error) {
               console.log("Oh no...", error);
@@ -34,19 +34,19 @@
           );
 
           examTermService.getExamTermsForStudent(vm.student.id).then(
-            function succes(response){
+            function success(response) {
               vm.examTerms = response.data;
               vm.hideInt = 10;
               vm.examTermsCount = response.data.length;
 
               // Sort by date
-              vm.examTerms.sort(function(a,b){
+              vm.examTerms.sort(function(a,b) {
                 return new Date(a.datetime) - new Date(b.datetime);
               });
 
               // Check if valid for deadline
               vm.examTerms.forEach(element => {
-                deadline = new Date(element.datetime);
+                var deadline = new Date(element.datetime);
                 deadline.setDate(deadline.getDate() - 2);
                 deadline.setMinutes(59, 0, 0);
                 deadline.setHours(23);
@@ -54,7 +54,7 @@
                 element.isValid = deadline - Date.now() >= 0 ? true : false;
               });
 
-              console.log(vm.examTerms);
+              console.log("Exam terms", vm.examTerms);
             },
             function error(error) {
               vm.examTerms = []; // assigning empty array hides progress bar
