@@ -38,6 +38,30 @@
         Ni zgodovine
       </div>
     </div>
+    <hr/>
+    <h4 style="margin-bottom:20px">Pretekle prijave</h4>
+    <div style="overflow-y: auto; max-height: 300px;">
+        <table class="table table-striped">
+            <thead>
+              <tr class="active">
+                <th>Čas izpita</th>
+                <th>Ocena</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="sig in vm.signups">
+                <td>{{ sig.courseExamTerm.datetime | formatDate }}</td>
+                <td>{{ sig.grade }}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+      <div ng-if="vm.signups == undefined" style="text-align:center">
+        Ni preteklih prijav
+      </div>
+    </div>
   </div>
 
   <div style="float: right; margin-top: 6px;">

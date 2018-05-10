@@ -64,6 +64,10 @@
       return $http.get(apiBaseRoute + '/api/exam-sign-up/history?courseExamTermId='+courseExamTermId+"&studentCourseId="+studentCourseId);
     };
 
+    var getExamSignUpForCourse = function(studentId, courseId) {
+      return $http.get(apiBaseRoute + '/api/exam-sign-up?studentId=' + studentId + '&courseId=' + courseId);
+    };
+
     return {
       sendExamTerm: sendExamTerm,
       updateExamTerm: updateExamTerm,
@@ -73,7 +77,8 @@
       getExamTermsForStudent: getExamTermsForStudent,
       putExamSignUp: putExamSignUp,
       returnExamSignUp: returnExamSignUp,
-      getExamSignUpHistory: getExamSignUpHistory
+      getExamSignUpHistory: getExamSignUpHistory,
+      getExamSignUpForCourse: getExamSignUpForCourse
     };
   };
 

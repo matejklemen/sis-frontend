@@ -65,6 +65,16 @@
           console.log("Oh no...", error);
         }
       );
+
+      examTermService.getExamSignUpForCourse(vm.student.id, vm.examTerm.courseOrganization.course.id).then(
+        function success(response) {
+          console.log("Pretekle prijave. ",response.data);
+          vm.signups = response.data;
+        },
+        function error(error) {
+          console.log("Oh no...", error);
+        }
+      );
     }
 
     vm.close = function() {
