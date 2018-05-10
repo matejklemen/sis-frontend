@@ -13,7 +13,13 @@
       return $http.get(apiBaseRoute + '/api/course-exam-term/' + idCourseExamTerm);
     };
 
-    var getAllExamTerms = function(offset = 0, limit = 0, idOrganizer = 0, idStudyYear = 0) {
+    var getAllExamTerms = function(offset, limit, idOrganizer, idStudyYear) {
+      // if any of the arguments won't be provided, they will be set to some default value
+      offset = offset || 0;
+      limit = limit || 0;
+      idOrganizer = idOrganizer || 0;
+      idStudyYear = idStudyYear || 0;
+
       if(offset < 0)
         offset = 0;
       if(limit < 0)
