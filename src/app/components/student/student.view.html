@@ -26,16 +26,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="term in vm.examTerms" ng-class="!term.isValid? 'disable-row':''">
+          <tr ng-repeat="term in vm.examTerms" ng-class="{'disable-row': !term.isValid, 'text-warning': (term.signedUp && !term.confirmed)}">
             <td ng-if="$index < vm.hideInt">{{ term.datetime | formatDate }}</td>
             <td ng-if="$index < vm.hideInt">{{ term.courseOrganization.course.name }}</td>
             <td ng-if="$index < vm.hideInt">{{ term.organizer.firstName }} {{ term.organizer.lastName1 }} {{ term.organizer.lastName2 }}</td>
             <td ng-if="$index < vm.hideInt">{{ term.type }}, {{ term.duration }} minut</td>
             <td ng-if="$index < vm.hideInt">
-              <a ng-if="vm.role.id == 4" class="btn btn-warning btn-xs pull-right btn-icon-only" ng-click="vm.history(term)" style="margin-left:3px;" uib-tooltip="Zgodovina"><span class="glyphicon glyphicon-facetime-video"></span></a>
-              <a ng-if="term.signedUp" class="btn btn-danger btn-xs pull-right" ng-click="vm.signDown(term)">Odjava</a>
-              <a ng-disabled="!term.isValid" ng-if="!term.signedUp" class="btn btn-primary btn-xs pull-right" ng-click="vm.signUp(term)">Prijava</a>
+              <span ng-if="term.signedUp && !term.confirmed" class="btn btn-xs btn-warning" uib-tooltip="To opozorilo bo izginilo, ko bo plačilo poravnano in bo študentski referat potrdil vašo prijavo."><span class="glyphicon glyphicon-alert"></span> <b>Izpit ni plačan!</b></span>
+              <a ng-if="term.signedUp && !term.confirmed && vm.role.id == 4" class="btn btn-info btn-xs" style="margin-left: 2px;" ng-click="vm.signUpConfirm(term)">Potrdi prijavo</a>
+
+              <a ng-if="vm.role.id == 4" class="btn btn-warning btn-xs pull-right btn-icon-only" ng-click="vm.history(term)" style="margin-left: 2px;" uib-tooltip="Zgodovina"><span class="glyphicon glyphicon-facetime-video"></span></a>
+
+              <a ng-if="term.signedUp" class="btn btn-danger btn-xs pull-right" style="margin-left: 2px;" ng-click="vm.signDown(term)">Odjava</a>
+              
+              <a ng-disabled="!term.isValid" ng-if="!term.signedUp" class="btn btn-primary btn-xs pull-right" style="margin-left: 2px;" ng-click="vm.signUp(term)">Prijava</a>
+              
               <button ng-disabled="!term.isValid" uib-popover="{{ term.notes || 'Ni opomb' }}" popover-trigger="'mouseenter'" class="btn btn-info btn-xs pull-right btn-icon-only" style="margin-right: 30px;"><span class="glyphicon glyphicon-info-sign"></span></button>
+
             </td>
           </tr>
         </tbody>

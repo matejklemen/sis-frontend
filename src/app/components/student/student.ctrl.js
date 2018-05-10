@@ -122,6 +122,19 @@
       showStudentSignModal('signdown', term);
     };
 
+    vm.signUpConfirm = function(term) {
+      examTermService.putExamSignUp(vm.student.id, term.studentCoursesId, term.id, vm.loginId, true).then(
+        function success(response) {
+          console.log("Prijava uspešna.", response.data);
+          term.confirmed = response.data.confirmed; // TODO: move that to modal result for clearer code
+        },
+        function error(error) {
+          console.log("Prijava ni uspela, ", error);
+          vm.sendStatus = error.data;
+        }
+      );
+    };
+
     vm.history = function(term) {
       showStudentSignModal('history', term);
     };

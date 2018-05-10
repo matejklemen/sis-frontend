@@ -83,8 +83,8 @@ md-dialog-content {
 }
 
 /* class for disabled row (just style of text) */
-.disable-row{
-  color:gray;
+.disable-row {
+  color: gray;
 }
 
 /* custom alert */

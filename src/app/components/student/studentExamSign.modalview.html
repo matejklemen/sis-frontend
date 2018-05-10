@@ -5,7 +5,7 @@
       <span ng-if="vm.action == 'signup'"><strong class="text-success">Prijavim</strong> se na izpit</span>
       <span ng-if="vm.action == 'signdown'"><strong class="text-danger">Odjavim</strong> se z izpita</span>
       pri predmetu <strong>{{ vm.examTerm.courseOrganization.course.name }}</strong>, ki bo <strong>{{ vm.examTerm.datetime | formatDate }}</strong>?
-      <br/>
+      <br/><br/>
       <span ng-if="vm.action == 'signup'">To bo <strong>{{ vm.examTerm.previousAttempts[0]+1 }}.</strong> polaganje izpita letos, in <strong>{{ vm.examTerm.previousAttempts[1]+1 }}.</strong> polaganje izpita pri tem predmetu (vključno s polaganji prejšnjih let).</span>
     </div>
 

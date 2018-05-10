@@ -18,7 +18,8 @@
     vm.signup = function() {
       examTermService.putExamSignUp(vm.student.id, vm.examTerm.studentCoursesId, vm.examTerm.id, vm.userLoginId).then(
         function success(response) {
-          console.log("Prijava uspešna.");
+          console.log("Prijava uspešna.", response.data);
+          vm.examTerm.confirmed = response.data.confirmed; // TODO: move that to modal result for clearer code
           $uibModalInstance.close(vm.action);
         },
         function error(error) {
