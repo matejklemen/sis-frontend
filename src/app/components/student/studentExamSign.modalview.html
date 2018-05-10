@@ -10,7 +10,9 @@
     </div>
 
     <div ng-show="vm.sendStatus" class="alert alert-danger" style="display: block; text-align: left; margin-top: 6px; margin-bottom: 6px;">
-      Prijava ni mogoča zaradi sledečih napak: <strong>{{ vm.sendStatus | formatError }}</strong>
+      <span ng-if="vm.action == 'signup'">Prijava</span>
+      <span ng-if="vm.action == 'signdown'">Odjava</span>
+       ni mogoča zaradi sledečih napak: <strong>{{ vm.sendStatus | formatError }}</strong>
     </div>
   </div>
 
