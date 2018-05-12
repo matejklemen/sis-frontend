@@ -1,5 +1,5 @@
 (function() {
-  var studentCtrl = function($scope, $location, $routeParams, $uibModal, studentService, enrolmentService, tokenService, exporterService, $filter, $window, authenticationService,examTermService) {
+  var studentCtrl = function($scope, $location, $routeParams, $uibModal, studentService, enrolmentService, tokenService, exporterService, $filter, $window, authenticationService,examTermService,gradeData) {
     var vm = this;
 
     vm.role = authenticationService.getRole();
@@ -54,10 +54,19 @@
                 element.isValid = deadline - Date.now() >= 0 ? true : false;
               });
 
-              console.log("Exam terms", vm.examTerms);
+              //console.log("Exam terms", vm.examTerms);
             },
             function error(error) {
               vm.examTerms = []; // assigning empty array hides progress bar
+              console.log("Oh no...",error);
+            }
+          );
+
+          gradeData.getGradeData(vm.student.id).then(
+            function success(response){
+              vm.studentCourses = response.data;
+            },
+            function error(error){
               console.log("Oh no...",error);
             }
           );

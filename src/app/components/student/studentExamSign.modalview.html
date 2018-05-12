@@ -23,14 +23,14 @@
             <thead>
               <tr class="active">
                 <th>Datum</th>
-                <th>Uporabniško ime odjavitelja</th>
+                <th>Akter</th>
                 <th>Dejanje</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="his in vm.history">
                 <td>{{ his.datetime | formatDate }}</td>
-                <td>{{ his.userLogin.username }}</td>
+                <td>{{ his.name }}</td>
                 <td>{{ his.action }}</td>
               </tr>
             </tbody>

@@ -59,6 +59,40 @@
     </div>
 
 
+    <!-- Ocene -->
+    <div class="col-md-12" style="margin-bottom:50px">
+      <h4><span class="glyphicon glyphicon-list-alt"></span> Ocene</h4>
+  
+      <table class="table table-striped">
+        <thead>
+          <tr class="success">
+            <th>Letnik</th>
+            <th>Predmet</th>
+            <th>Profesor</th>
+            <th style="text-align:center;">Ocena izpita</th>
+            <th style="text-align:center;">Končna ocena</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="course in vm.studentCourses">
+            <td>{{ course.year }}. letnik</td>
+            <td>{{ course.courseOrganization.course.name }}</td>
+            <td>{{ course.courseOrganization | formatOrganizers }}</td>
+            <td style="text-align:center;">{{ course.examGrade }}</td>
+            <td style="text-align:center;">{{ course.finalGrade }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="width: 100%; text-align: center; font-size: 1.2em;">
+        <img ng-if="vm.studentCourses == undefined" src="public/images/progress.gif" class="loading-gif">
+        <div ng-if="response.data.length == 0">
+          <span class="glyphicon glyphicon-road"></span><br />Ni predmetov
+        </div>
+      </div>
+    </div>
+
+
+
     <!-- Vpisi -->
     <div class="col-md-12" style="margin-bottom:50px">
       <h4><span class="glyphicon glyphicon-education"></span> Vpisi</h4>
