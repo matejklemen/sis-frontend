@@ -67,9 +67,10 @@
   </div>
 
   <div style="float: right; margin-top: 6px;">
-    <button type="button" class="btn btn-success btn-sm" ng-if="vm.action == 'signup'" ng-click="vm.signup()"><span class="glyphicon glyphicon-log-in"></span> Prijava</button>
-    <button type="button" class="btn btn-warning btn-sm" ng-if="vm.action == 'signup' && vm.sendStatus && vm.userRole.id == 4" ng-click="vm.signupforce()"><span class="glyphicon glyphicon-log-in"></span> Prijavi kljub opozorilom</button>
-    <button type="button" class="btn btn-danger btn-sm" ng-if="vm.action == 'signdown'" ng-click="vm.signdown()"><span class="glyphicon glyphicon-log-out"></span> Odjava</button>
+    <button type="button" class="btn btn-success btn-sm" ng-if="vm.action == 'signup' && !vm.sendStatus && !vm.allowForce" ng-click="vm.signup()"><span class="glyphicon glyphicon-log-in"></span> Prijava</button>
+    <button type="button" class="btn btn-warning btn-sm" ng-if="vm.action == 'signup' && vm.allowForce" ng-click="vm.signupforce()"><span class="glyphicon glyphicon-log-in"></span> Prijavi kljub opozorilom</button>
+    <button type="button" class="btn btn-danger btn-sm" ng-if="vm.action == 'signdown' && !vm.sendStatus && !vm.allowForce" ng-click="vm.signdown(force=false)"><span class="glyphicon glyphicon-log-out"></span> Odjava</button>
+    <button type="button" class="btn btn-warning btn-sm" ng-if="vm.action == 'signdown' && vm.allowForce" ng-click="vm.signdown(force=true)"><span class="glyphicon glyphicon-log-in"></span> Odjavi kljub opozorilom</button>
     <button type="button" class="btn btn-default btn-sm" ng-click="vm.close()">Zapri</button>
   </div>
 

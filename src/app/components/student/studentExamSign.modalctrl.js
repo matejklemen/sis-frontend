@@ -10,6 +10,7 @@
     vm.userRole = resUserRole;
 
     vm.sendStatus = undefined;
+    vm.allowForce = false;
 
     if(vm.action == "history"){
       history();
@@ -25,6 +26,9 @@
         function error(error) {
           console.log("Prijava ni uspela, ", error);
           vm.sendStatus = error.data;
+          if(vm.userRole.id == 4){
+            vm.allowForce = true;
+          }
         }
       );
     };
@@ -39,18 +43,24 @@
         function error(error) {
           console.log("Prijava ni uspela, ", error);
           vm.sendStatus = error.data;
+          vm.allowForce = false;
         }
       );
     };
 
-    vm.signdown = function() {
-      examTermService.returnExamSignUp(vm.examTerm.id, vm.examTerm.studentCoursesId, vm.userLoginId).then(
+    vm.signdown = function(force) {
+      examTermService.returnExamSignUp(vm.examTerm.id, vm.examTerm.studentCoursesId, vm.userLoginId, force).then(
         function success(response) {
           console.log("Odjava uspešna. ",response.data);
           $uibModalInstance.close(vm.action);
         },
         function error(error) {
           console.log("Odjava ni uspela, ", error);
+          if(!force && vm.userRole.id == 4){
+            vm.allowForce = true;
+          }else{
+            vm.allowForce = false;
+          }
           vm.sendStatus = error.data;
         }
       );

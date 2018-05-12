@@ -39,7 +39,7 @@
 
               <a ng-if="term.signedUp" class="btn btn-danger btn-xs pull-right" style="margin-left: 2px;" ng-click="vm.signDown(term)">Odjava</a>
               
-              <a ng-disabled="!term.isValid" ng-if="!term.signedUp" class="btn btn-primary btn-xs pull-right" style="margin-left: 2px;" ng-click="vm.signUp(term)">Prijava</a>
+              <a ng-disabled="!term.isValid" ng-if="!term.signedUp" class="btn btn-primary btn-xs pull-right" style="margin-left: 2px;" ng-click="!term.isValid || vm.signUp(term)">Prijava</a>
               
               <button ng-disabled="!term.isValid" uib-popover="{{ term.notes || 'Ni opomb' }}" popover-trigger="'mouseenter'" class="btn btn-info btn-xs pull-right btn-icon-only" style="margin-right: 30px;"><span class="glyphicon glyphicon-info-sign"></span></button>
 
