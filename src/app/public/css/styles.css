@@ -94,3 +94,7 @@ md-dialog-content {
   left: 50%;
   z-index: 1000 !important;
 }
+
+.enable-click{
+  cursor: pointer !important;
+}
