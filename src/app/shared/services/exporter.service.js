@@ -92,10 +92,24 @@
       );
     };
 
+    var getPdfIndex = function(id){
+      return $http.get(apiBaseRoute+"/api/dataexporter/index/"+id, {responseType: 'arraybuffer'}).then(
+        function onSuccess(result) {
+          var file = new Blob([result.data], {type: 'application/pdf'});
+          console.log(result.headers());
+          initiateFileDownload(file, result.headers("X-Export-Filename"));
+        },
+        function onFailure(error) {
+          console.log(error);
+        }
+      );
+    };
+
     return {
       getFile: getFile,
       getPdfEnrolmentSheet: getPdfEnrolmentSheet,
-      getPdfEnrolmentConformation: getPdfEnrolmentConformation
+      getPdfEnrolmentConformation: getPdfEnrolmentConformation,
+      getPdfIndex: getPdfIndex,
     };
   };
 

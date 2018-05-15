@@ -5,6 +5,11 @@
     return function(courseOrganization) {
       var format = "";
 
+      if(courseOrganization == null){
+        console.log("courseOrganization == null")
+        return format;
+      }
+
       if(courseOrganization.organizer1 != null){
         format += courseOrganization.organizer1.firstName + " ";
         format += courseOrganization.organizer1.lastName1;

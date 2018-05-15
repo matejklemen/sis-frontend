@@ -1,5 +1,5 @@
 (function() {
-  var studentCtrl = function($scope, $location, $routeParams, $uibModal, studentService, enrolmentService, tokenService, exporterService, $filter, $window, authenticationService,examTermService,gradeData) {
+  var studentCtrl = function($scope, $location, $routeParams, $uibModal, studentService, enrolmentService, tokenService, exporterService, $filter, $window, authenticationService,examTermService,gradeData, exporterService) {
     var vm = this;
 
     vm.role = authenticationService.getRole();
@@ -54,7 +54,7 @@
                 element.isValid = deadline - Date.now() >= 0 ? true : false;
               });
 
-              //console.log("Exam terms", vm.examTerms);
+              console.log("Exam terms", vm.examTerms);
             },
             function error(error) {
               vm.examTerms = []; // assigning empty array hides progress bar
@@ -152,6 +152,11 @@
     vm.viewEnrolmentPdf = function() {
       exporterService.getPdfEnrolmentSheet(vm.enrolments[0].student);
     };
+
+    /* Kartotečn list */
+    vm.getIndexCard = function(){
+      exporterService.getPdfIndex(vm.student.id);
+    }
   };
 
   angular
