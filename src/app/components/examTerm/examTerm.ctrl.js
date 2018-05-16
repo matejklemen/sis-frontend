@@ -237,13 +237,37 @@
 
         console.log(objectToSend);
         if(vm.updateMode) {
-          examTermService.updateExamTerm(objectToSend).then(
+
+          // check if there are any sign ups for exam term - if there are, warn the user
+          examTermService.getSignedUpStudentsForExamTerm($routeParams.examTermId).then(
             function success(response) {
-              $location.path("/control");
+
+              dispWarning = response.data.length > 0;
+              // if there are sign ups, make sure that user is aware of consequences
+              var continueUpdating = confirm("Opozorilo: spreminjate izpitni rok, ki že ima prijavljene študente. Prijavljeni študenti bodo ob spremembi prijavljeni na spremenjen termin.");
+
+              if(continueUpdating) {
+                examTermService.updateExamTerm(objectToSend).then(
+                function success(response) {
+                  $location.path("/control");
+                },
+                function error(error) {
+                  vm.finalizeError = error.data;
+                });
+              }
             },
-            function error(error) {
-              vm.finalizeError = error.data;
+            function error(error){
+              console.log("No signed up students for this exam term yet...");
+              // if there are no sign ups, let the user update the exam term freely
+              examTermService.updateExamTerm(objectToSend).then(
+                function success(response) {
+                  $location.path("/control");
+                },
+                function error(error) {
+                  vm.finalizeError = error.data;
+                });
             });
+
         }
         else {
           examTermService.sendExamTerm(objectToSend).then(
