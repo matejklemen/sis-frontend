@@ -10,6 +10,10 @@
       return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?filter=deleted:EQ:false');
     };
 
+    var getCodelistOrdered = function(codelistEndpointName, order) {
+      return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?filter=deleted:EQ:false&order=' + order);
+    };
+
     var getCodelistAll = function(codelistEndpointName, offset, limit, search = '') {
       if(search == '') {
         return $http.get(apiBaseRoute + '/api/' + codelistEndpointName + '?offset=' + offset + '&limit=' + limit + '&order=id ASC');
@@ -38,6 +42,7 @@
     return {
       getCodelists: getCodelists,
       getCodelist: getCodelist,
+      getCodelistOrdered: getCodelistOrdered,
       getCodelistAll: getCodelistAll,
       putEntry: putEntry,
       postEntry: postEntry,

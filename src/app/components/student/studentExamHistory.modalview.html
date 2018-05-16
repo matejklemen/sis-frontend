@@ -1,0 +1,56 @@
+<div class="modal-body clearfix">
+  <div>
+    <h4 style="margin-bottom:20px">Zgodovina zadnjih 30 dejanj</h4>
+    <div style="overflow-y: auto; max-height: 300px;">
+        <table class="table table-striped">
+            <thead>
+              <tr class="active">
+                <th>Datum</th>
+                <th>Akter</th>
+                <th>Dejanje</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="his in vm.history">
+                <td>{{ his.datetime | formatDate }}</td>
+                <td>{{ his.name }}</td>
+                <td>{{ his.action }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+      <div ng-if="vm.history == undefined || vm.history.length == 0" style="text-align:center">
+        Ni zgodovine
+      </div>
+    </div>
+    <hr/>
+    <h4 style="margin-bottom:20px">Pretekle prijave</h4>
+    <div style="overflow-y: auto; max-height: 300px;">
+        <table class="table table-striped">
+            <thead>
+              <tr class="active">
+                <th>Čas izpita</th>
+                <th>Ocena</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="sig in vm.signups">
+                <td>{{ sig.courseExamTerm.datetime | formatDate }}</td>
+                <td>{{ sig.grade }}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+      <div ng-if="vm.signups == undefined" style="text-align:center">
+        Ni preteklih prijav
+      </div>
+    </div>
+  </div>
+
+  <div style="float: right; margin-top: 6px;">
+    <button type="button" class="btn btn-default btn-sm" ng-click="vm.close()">Zapri</button>
+  </div>
+
+</div>
