@@ -92,8 +92,8 @@
       );
     };
 
-    var getPdfIndex = function(id){
-      return $http.get(apiBaseRoute+"/api/dataexporter/index/"+id, {responseType: 'arraybuffer'}).then(
+    var getPdfIndex = function(id, full=false){
+      return $http.get(apiBaseRoute+"/api/dataexporter/index/"+id+"?full="+full, {responseType: 'arraybuffer'}).then(
         function onSuccess(result) {
           var file = new Blob([result.data], {type: 'application/pdf'});
           console.log(result.headers());

@@ -152,11 +152,6 @@
     vm.viewEnrolmentPdf = function() {
       exporterService.getPdfEnrolmentSheet(vm.enrolments[0].student);
     };
-
-    /* Kartotečn list */
-    vm.getIndexCard = function(){
-      exporterService.getPdfIndex(vm.student.id);
-    }
   };
 
   angular
