@@ -6,7 +6,7 @@
       var format = "";
 
       if(courseOrganization == null){
-        console.log("courseOrganization == null")
+        //console.log("courseOrganization == null");
         return format;
       }
 
@@ -38,7 +38,30 @@
     };
   };
   
-    angular
-      .module('sis')
-      .filter('formatOrganizers', formatOrganizers);
-  })();
+  var formatOrganizer = function() {
+    return function(organizer) {
+      if(!organizer) return organizer;
+
+      var format = "";
+
+      if(organizer.firstName && organizer.firstName != null) {
+        format += organizer.firstName + " ";
+      }
+
+      if(organizer.lastName1 && organizer.lastName1 != null) {
+        format += organizer.lastName1 + " ";
+      }
+
+      if(organizer.lastName2 && organizer.lastName2 != null) {
+        format += organizer.lastName2 + " ";
+      }
+      
+      return format;
+    };
+  };
+
+  angular
+    .module('sis')
+    .filter('formatOrganizers', formatOrganizers)
+    .filter('formatOrganizer', formatOrganizer);
+})();

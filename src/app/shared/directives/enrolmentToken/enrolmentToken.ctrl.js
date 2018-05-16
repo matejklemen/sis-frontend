@@ -77,14 +77,14 @@
     function getLastEnrolment(id){
       enrolmentService.getLastEnrolment(id).then(
         function success(response){
-          console.log("ima enrolment: ",id," data: ",response.data);
+          //console.log("ima enrolment: ",id," data: ",response.data);
           if(!response.data.confirmed){
-            console.log("ima nepotrjen enrolment: ",id);
+            //console.log("ima nepotrjen enrolment: ",id);
             vm.edit = true;
             vm.editDisable = true;
           }
           else{
-            console.log("ima potrjen enrolment: ",id);
+            //console.log("ima potrjen enrolment: ",id);
             vm.edit = false;
           }
         },

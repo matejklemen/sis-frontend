@@ -35,9 +35,14 @@
         controller: 'enrolCtrl',
         controllerAs: 'vm'
       })
-      .when('/examterm/:examTermId?', {
+      .when('/examterm/:examTermId', {
         templateUrl: 'components/examTerm/examTerm.view.html',
         controller: 'examTermCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/signeduplist/:examTermId', {
+        templateUrl: 'components/signedUpList/signedUpList.view.html',
+        controller: 'signedUpListCtrl',
         controllerAs: 'vm'
       })
       .otherwise({redirectTo: '/login'});

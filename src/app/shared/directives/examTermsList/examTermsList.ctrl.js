@@ -33,15 +33,16 @@
           vm.totalCount = response.headers('X-total-count');
           vm.searchResult = response.data;
 
-
-          for(var i = 0; i < vm.searchResult.length; i++) {
-            vm.searchResult[i].formattedDatetime = $filter('formatDate')(vm.searchResult[i].datetime);
+          vm.searchResult.forEach(function(elem, index, array) {
+            elem.isValid = new Date(elem.datetime) - Date.now() >= 0;
+            
+            elem.formattedDatetime = $filter('formatDate')(elem.datetime);
             // reassigning some stuff to depth 0 variables so that export to PDF/csv works normally
-            vm.searchResult[i].courseName = vm.searchResult[i].courseOrganization.course.name;
-            vm.searchResult[i].organizerFullName = vm.searchResult[i].organizer.firstName + ' ' + vm.searchResult[i].organizer.lastName1 +
-              (vm.searchResult[i].organizer.lastName2 !== null? ' ' + vm.searchResult[i].organizer.lastName2: '');
+            elem.courseName = elem.courseOrganization.course.name;
+            elem.organizerFullName = elem.organizer.firstName + ' ' + elem.organizer.lastName1 +
+              (elem.organizer.lastName2 !== null? ' ' + elem.organizer.lastName2: '');
 
-          }
+          });
         },
         function error(error) {
           console.log(error);
