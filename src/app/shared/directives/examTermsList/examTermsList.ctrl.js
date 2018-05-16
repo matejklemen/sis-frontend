@@ -1,9 +1,10 @@
 (function() {
-  var examTermsListCtrl = function($scope, $routeParams, $location, $filter, examTermService, codelistService, authenticationService) {
+  var examTermsListCtrl = function($scope, $routeParams, $location, $filter, $uibModal, examTermService, codelistService, authenticationService) {
     var vm = this;
 
     /* Get role */
     vm.role = authenticationService.getRole();
+    vm.loginId = authenticationService.getLoginId();
 
     vm.currentPage = 1;
     vm.limit = 20;
@@ -49,17 +50,35 @@
 
     vm.getExamTermList();
 
-    vm.deleteCourse = function(id) {
-      if(!confirm('Ste prepričani, da želite izbrisati žeton za vpis?'))
-        return;
+    vm.deleteExamTerm = function(examTerm, index) {
+      //showDeleteExamTermModal
+      var modalInstance = $uibModal.open({
+        templateUrl: 'shared/directives/examTermsList/deleteExamTermModal.modalview.html',
+        controller: 'deleteExamTermModalCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          resExamTerm: function() {
+            return examTerm;
+          },
+          resUserLogin: function() {
+            return vm.loginId;
+          },
+          resUserRole: function() {
+            return vm.role;
+          }
+        }
+      });
 
-      examTermService.deleteExamTerm(id).then(
-        function success(response) {
-          vm.getExamTermList();
+      // get result from modal after it's closed here
+      modalInstance.result.then(
+        function(result) {
+          if(result == "deleted") {
+            // remove exam term from the list
+            vm.searchResult.splice(index, 1);
+          }
         },
-        function error(error) {
-          console.log(error);
-        });
+        function(closeInfo) {}
+      );
     };
 
     vm.changedPage = function() {

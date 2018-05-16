@@ -1,6 +1,6 @@
 <div class="modal-body clearfix">
   
-  <div ng-if="vm.action != 'history'">
+  <div>
     <div>  
       <span ng-if="vm.action == 'signup'"><strong class="text-success">Prijavim</strong> se na izpit</span>
       <span ng-if="vm.action == 'signdown'"><strong class="text-danger">Odjavim</strong> se z izpita</span>
@@ -13,56 +13,6 @@
       <span ng-if="vm.action == 'signup'">Prijava</span>
       <span ng-if="vm.action == 'signdown'">Odjava</span>
        ni mogoča zaradi sledečih napak: <strong>{{ vm.sendStatus | formatError }}</strong>
-    </div>
-  </div>
-
-  <div ng-if="vm.action == 'history'">
-    <h4 style="margin-bottom:20px">Zgodovina zadnjih 30 dejanj</h4>
-    <div style="overflow-y: auto; max-height: 300px;">
-        <table class="table table-striped">
-            <thead>
-              <tr class="active">
-                <th>Datum</th>
-                <th>Akter</th>
-                <th>Dejanje</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="his in vm.history">
-                <td>{{ his.datetime | formatDate }}</td>
-                <td>{{ his.name }}</td>
-                <td>{{ his.action }}</td>
-              </tr>
-            </tbody>
-          </table>
-
-      <div ng-if="vm.history == undefined || vm.history.length == 0" style="text-align:center">
-        Ni zgodovine
-      </div>
-    </div>
-    <hr/>
-    <h4 style="margin-bottom:20px">Pretekle prijave</h4>
-    <div style="overflow-y: auto; max-height: 300px;">
-        <table class="table table-striped">
-            <thead>
-              <tr class="active">
-                <th>Čas izpita</th>
-                <th>Ocena</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="sig in vm.signups">
-                <td>{{ sig.courseExamTerm.datetime | formatDate }}</td>
-                <td>{{ sig.grade }}</td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-
-      <div ng-if="vm.signups == undefined" style="text-align:center">
-        Ni preteklih prijav
-      </div>
     </div>
   </div>
 

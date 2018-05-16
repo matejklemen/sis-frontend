@@ -34,7 +34,7 @@
               <td>{{ result.type }}</td>
               <td>{{ result.organizerFullName }}</td>
               <td><a class="btn btn-primary btn-xs" href="/examterm/{{ result.id }}">Uredi</a></td>
-              <td><a class="btn btn-danger btn-xs" ng-click="vm.deleteCourse(result.id)">Izbriši</a></td>
+              <td><a class="btn btn-danger btn-xs" ng-click="vm.deleteExamTerm(result, $index)">Izbriši</a></td>
             </tr>
           </tbody>
         </table>

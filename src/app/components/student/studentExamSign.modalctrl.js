@@ -12,10 +12,6 @@
     vm.sendStatus = undefined;
     vm.allowForce = false;
 
-    if(vm.action == "history"){
-      history();
-    }
-
     vm.signup = function() {
       examTermService.putExamSignUp(vm.student.id, vm.examTerm.studentCoursesId, vm.examTerm.id, vm.userLoginId).then(
         function success(response) {
@@ -65,28 +61,6 @@
         }
       );
     };
-
-    function history () {
-      examTermService.getExamSignUpHistory(vm.examTerm.id, vm.examTerm.studentCoursesId).then(
-        function success(response) {
-          console.log("Zgodovina. ",response.data);
-          vm.history = response.data;
-        },
-        function error(error) {
-          console.log("Oh no...", error);
-        }
-      );
-
-      examTermService.getExamSignUpForCourse(vm.student.id, vm.examTerm.courseOrganization.course.id).then(
-        function success(response) {
-          console.log("Pretekle prijave. ",response.data);
-          vm.signups = response.data;
-        },
-        function error(error) {
-          console.log("Oh no...", error);
-        }
-      );
-    }
 
     vm.close = function() {
       $uibModalInstance.dismiss();

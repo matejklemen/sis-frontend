@@ -79,8 +79,8 @@
       <div class="alert alert-danger" ng-show="vm.finalizeError">
         <strong>Napaka!</strong> {{ vm.finalizeError | formatError }}
       </div>
-      <a ng-click="vm.cancelEnrolment()" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Prekliči vnos</a>
-      <a ng-click="vm.finalizeInsertingExamTerm()" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Vnesi izpit</a>
+      <a ng-click="vm.cancelEnrolment()" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Prekliči {{ vm.updateMode ? 'urejanje' : 'vnos' }}</a>
+      <a ng-click="vm.finalizeInsertingExamTerm()" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> {{ vm.updateMode ? 'Posodobi' : 'Dodaj' }} izpitni rok</a>
     </div>
   </div>
 </div>

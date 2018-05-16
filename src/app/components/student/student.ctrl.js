@@ -1,5 +1,5 @@
 (function() {
-  var studentCtrl = function($scope, $location, $routeParams, $uibModal, studentService, enrolmentService, tokenService, exporterService, $filter, $window, authenticationService,examTermService,gradeData, exporterService) {
+  var studentCtrl = function($scope, $location, $routeParams, $uibModal, studentService, enrolmentService, tokenService, $filter, $window, authenticationService, examTermService,gradeData, exporterService) {
     var vm = this;
 
     vm.role = authenticationService.getRole();
@@ -144,8 +144,28 @@
       );
     };
 
-    vm.history = function(term) {
-      showStudentSignModal('history', term);
+    vm.history = function(examTerm) {
+      // show history modal
+      var modalInstance = $uibModal.open({
+        templateUrl: 'components/student/studentExamHistory.modalview.html',
+        controller: 'studentExamHistoryCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          resStudent: function() {
+            return vm.student;
+          },
+          resExamTerm: function() {
+            return examTerm;
+          },
+        }
+      });
+
+      // get result from modal after it's closed here
+      modalInstance.result.then(
+        function(result) {},
+        function(closeInfo) {}
+      );
+
     };
 
     /* Vpisni list */
@@ -156,7 +176,7 @@
     /* Kartotečn list */
     vm.getIndexCard = function(){
       exporterService.getPdfIndex(vm.student.id);
-    }
+    };
   };
 
   angular
