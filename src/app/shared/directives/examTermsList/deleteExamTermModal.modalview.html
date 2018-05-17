@@ -1,7 +1,7 @@
 <div class="modal-body clearfix">
   <div>
     <div>  
-      <strong class="text-danger">Izbrišem</strong> izpitni rok pri predmetu <strong>{{ vm.examTerm.courseOrganization.course.name }}</strong>, ki bo <strong>{{ vm.examTerm.datetime | formatDate }}</strong>?
+      <strong class="text-danger">Izbrišem</strong> izpitni rok pri predmetu <strong>{{ vm.examTerm.courseOrganization.course.name }}</strong>, ki bo <strong>{{ vm.examTerm.datetime | formatDate }}</strong>? {{ vm.deleteWarning }}
       <br/><br/>
     </div>
 
