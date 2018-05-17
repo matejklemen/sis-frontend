@@ -78,6 +78,10 @@
       return $http.get(apiBaseRoute + '/api/exam-sign-up/augmented?examtermid=' + examTermId);
     };
 
+    var postGradesForExamSignUp = function(examSignUpId, writtenScore, suggestedGrade) {
+      return $http.post(apiBaseRoute + '/api/exam-sign-up/' + examSignUpId + '/grades?writtenScore=' + writtenScore + '&suggestedGrade=' + suggestedGrade + '');
+    };
+
     return {
       sendExamTerm: sendExamTerm,
       updateExamTerm: updateExamTerm,
@@ -89,7 +93,8 @@
       returnExamSignUp: returnExamSignUp,
       getExamSignUpHistory: getExamSignUpHistory,
       getExamSignUpForCourse: getExamSignUpForCourse,
-      getSignedUpStudentsForExamTerm: getSignedUpStudentsForExamTerm
+      getSignedUpStudentsForExamTerm: getSignedUpStudentsForExamTerm,
+      postGradesForExamSignUp: postGradesForExamSignUp
     };
   };
 

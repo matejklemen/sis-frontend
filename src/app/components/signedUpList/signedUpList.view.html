@@ -9,16 +9,20 @@
       -->
     </h3>
     <h4>Predmet: <strong>{{ vm.examTerm.courseOrganization.course.id }} - {{ vm.examTerm.courseOrganization.course.name }}</strong></h4>
-    <div style="margin-bottom: 12px;">
+    <div class="clearfix" style="margin-bottom: 12px;">
       Datum in čas izpitnega roka: <strong>{{ vm.examTerm.datetime | formatDate }}</strong>
       <br/>
       Izpraševalci: <strong>{{ vm.examTerm.organizer | formatOrganizer }}</strong>
       <br/>
       Opombe: <strong>{{ vm.examTerm.notes || 'Ni opomb' }}</strong>
+      <div class="pull-right">
+        <button class="btn btn-primary btn-sm" ng-show="!vm.examTerm.isValid" ng-click="vm.toggleEditMode()"><span class="glyphicon glyphicon-edit"></span> {{ vm.editMode ? 'Končaj z urejanjem' : 'Urejanje ocen' }}</button>
+        <button class="btn btn-success btn-sm" ng-show="vm.editMode" ng-click="vm.postGrades()"><span class="glyphicon glyphicon-save"></span> Zapiši ocene</button>
+      </div>
     </div>
   </div>
 
-  <div class="col-md-12">
+  <div>
     <table class="table table-striped table-hover">
       <thead>
         <tr class="success">
@@ -27,9 +31,9 @@
           <th>Ime</th>
           <th>Priimek</th>
           <th>Študijsko leto</th>
-          <th>Številka polaganja</th>
-          <th>Ocena pisnega izpita</th>
-          <th>Končna ocena predmeta</th>
+          <th style="font-size: 0.9em;">Številka<br>polaganja</th>
+          <th style="font-size: 0.9em;">Točke pisnega<br>izpita</th>
+          <th style="font-size: 0.9em;">Končna ocena<br>predmeta</th>
         </tr>
       </thead>
       <tbody>
@@ -40,8 +44,18 @@
           <td>{{ stu.studentInfo.surname }}</td>
           <td>{{ stu.yearOfTakingCourse.name }}</td>
           <td>{{ stu.currentNumberOfTakings }}</td>
-          <td>{{ stu.currentGrade }}</td>
-          <td>{{ stu.finalGrade }}</td>
+          <td>
+            <span ng-hide="vm.editMode">{{ stu.currentGrade }}</span>
+            <div ng-class="{ 'has-success' : stu.posted === true, 'has-error' : stu.posted === false }">
+              <input type="number" class="form-control input-sm" style="width: 100px;" min="0" max="100" ng-show="vm.editMode" ng-model="stu.currentGrade" />
+            </div>
+          </td>
+          <td>
+            <span ng-hide="vm.editMode">{{ stu.finalGrade }}</span>
+            <div ng-class="{ 'has-success' : stu.posted === true, 'has-error' : stu.posted === false }">
+              <input type="number" class="form-control input-sm" style="width: 100px;" min="0" max="100" ng-show="vm.editMode" ng-model="stu.finalGrade" />
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -34,6 +34,7 @@
           vm.searchResult = response.data;
 
           vm.searchResult.forEach(function(elem, index, array) {
+            // if the exam term hasn't happened yet, if it's valid we can still edit it
             elem.isValid = new Date(elem.datetime) - Date.now() >= 0;
             
             elem.formattedDatetime = $filter('formatDate')(elem.datetime);
