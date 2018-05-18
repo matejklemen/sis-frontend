@@ -19,7 +19,7 @@
     <ul class="nav navbar-nav navbar-right">
       <li ng-if="!vm.loggedIn" ng-class="vm.navbarLocation.path() == '/login' ? 'active' : ''"><a href="/login">Prijava</a></li>
       <li ng-if="vm.loggedIn" ><a ng-click="vm.logout()" href="#" class="navbar-link">Odjava</a></li>
-      <li ng-if="vm.loggedIn && (vm.role.id == 1 || vm.role.id == 4)" ng-class="vm.navbarLocation.path() == '/control' ? 'active' : ''" ><a href="/control">Nadzorna plošča</a></li>
+      <li ng-if="vm.loggedIn && (vm.role.id == 1 || vm.role.id == 4 || vm.role.id == 3)" ng-class="vm.navbarLocation.path() == '/control' ? 'active' : ''" ><a href="/control">Nadzorna plošča</a></li>
       <li ng-if="vm.loggedIn && vm.role.id == 2" ng-class="vm.navbarLocation.path() == '/' ? 'active' : ''" ><a href="/">Doma</a></li>
       <li ng-if="vm.loggedIn && vm.role.id == 1" ng-class="vm.navbarLocation.path() == '/codelist' ? 'active' : ''" ><a href="/codelist">Šifranti</a></li>
     </ul>

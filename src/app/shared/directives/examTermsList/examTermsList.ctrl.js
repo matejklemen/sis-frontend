@@ -26,7 +26,7 @@
     );
 
     vm.getExamTermList = function() {
-      var selectedYr = vm.filterYear === undefined? null: vm.filterYear.id;
+      var selectedYr = vm.filterYear === undefined ? null : vm.filterYear.id;
 
       examTermService.getAllExamTerms((vm.currentPage - 1) * vm.limit, vm.limit, profIdentity, selectedYr).then(
         function success(response) {

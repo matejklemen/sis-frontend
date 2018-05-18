@@ -15,51 +15,79 @@
       Izpraševalci: <strong>{{ vm.examTerm.organizer | formatOrganizer }}</strong>
       <br/>
       Opombe: <strong>{{ vm.examTerm.notes || 'Ni opomb' }}</strong>
+      <br/>
+      Število prijavljenih: <strong>{{ vm.examTerm.signedUpCount || '0' }}</strong>
       <div class="pull-right">
-        <button class="btn btn-primary btn-sm" ng-show="!vm.examTerm.isValid" ng-click="vm.toggleEditMode()"><span class="glyphicon glyphicon-edit"></span> {{ vm.editMode ? 'Končaj z urejanjem' : 'Urejanje ocen' }}</button>
-        <button class="btn btn-success btn-sm" ng-show="vm.editMode" ng-click="vm.postGrades()"><span class="glyphicon glyphicon-save"></span> Zapiši ocene</button>
+        <button class="btn btn-primary btn-sm" ng-show="!vm.examTerm.isValid" ng-click="vm.toggleEditMode()"><span class="glyphicon" ng-class="vm.editMode ? 'glyphicon-check' : 'glyphicon-edit'"></span> {{ vm.editMode ? 'Končaj z urejanjem' : 'Urejanje ocen' }}</button>
+        <button type="submit" form="gradesform" class="btn btn-success btn-sm" ng-show="vm.editMode"><span class="glyphicon glyphicon-save"></span> Zapiši ocene</button>
       </div>
     </div>
+    <p class="well" ng-show="vm.editMode">
+      <strong>Vnašanje ocen:</strong> Za vsakega študenta lahko vnesete točke pisnega izpita in končno oceno predmeta, ali pa študentovo prijavo vrnete. Če ocene ne želite dati ali jo želite odstraniti, pustite polje za vnos prazno. Če študentovo prijavo vrnete, se pobrišejo morebitne vnešene točke in ocena.
+      <br/>
+      Vnešene ali popravljene vrstice, ki bodo shranjene, se <span class="text-info">obarvajo modro</span>. Uspešno vpisane vrstice se <span class="text-success">obarvajo zeleno</span>.
+    </p>
   </div>
 
-  <div>
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr class="success">
-          <th>#</th>
-          <th>Vpisna številka</th>
-          <th>Ime</th>
-          <th>Priimek</th>
-          <th>Študijsko leto</th>
-          <th style="font-size: 0.9em;">Številka<br>polaganja</th>
-          <th style="font-size: 0.9em;">Točke pisnega<br>izpita</th>
-          <th style="font-size: 0.9em;">Končna ocena<br>predmeta</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="stu in vm.studentsList">
-          <td>{{ $index+1 }}</td>
-          <td>{{ stu.studentInfo.registerNumber }}</td>
-          <td>{{ stu.studentInfo.name }}</td>
-          <td>{{ stu.studentInfo.surname }}</td>
-          <td>{{ stu.yearOfTakingCourse.name }}</td>
-          <td>{{ stu.currentNumberOfTakings }}</td>
-          <td>
-            <span ng-hide="vm.editMode">{{ stu.currentGrade }}</span>
-            <div ng-class="{ 'has-success' : stu.posted === true, 'has-error' : stu.posted === false }">
-              <input type="number" class="form-control input-sm" style="width: 100px;" min="0" max="100" ng-show="vm.editMode" ng-model="stu.currentGrade" />
-            </div>
-          </td>
-          <td>
-            <span ng-hide="vm.editMode">{{ stu.finalGrade }}</span>
-            <div ng-class="{ 'has-success' : stu.posted === true, 'has-error' : stu.posted === false }">
-              <input type="number" class="form-control input-sm" style="width: 100px;" min="0" max="100" ng-show="vm.editMode" ng-model="stu.finalGrade" />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div ng-hide="vm.studentsList">Na ta izpitni rok ni nobenih prijav.</div>
+  <div style="width: 100%; text-align: center; font-size: 1.2em;">
+    <img ng-if="vm.studentsList == undefined" src="public/images/progress.gif" class="loading-gif">
+    <div ng-if="vm.studentsList.length == 0">
+      <span class="glyphicon glyphicon-lamp"></span><br />Na ta izpitni rok ni nobenih prijav.
+    </div>
+  </div>
+  <div ng-show="vm.studentsList.length > 0">
+    <form name="gradesform" id="gradesform" ng-submit="gradesform.$valid && vm.postGrades()">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr class="success">
+            <th>#</th>
+            <th>Vpisna številka</th>
+            <th>Ime</th>
+            <th>Priimek</th>
+            <th>Študijsko leto</th>
+            <th style="font-size: 0.88em; text-align: right;">Številka<br/>polaganja</th>
+            <th style="font-size: 0.88em; text-align: right;">Točke pisnega<br/>izpita (0-100)</th>
+            <th style="font-size: 0.88em; text-align: right;">Končna ocena<br/>predmeta</th>
+            <th style="font-size: 0.88em; text-align: center;">Vrnjena<br/>prijava</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="stu in vm.studentsList" class="vertical-center-rows" ng-class="{ 'text-danger' : stu.errors, 'text-info' : stu.dirty }">
+            <td>{{ $index+1 }}</td>
+            <td>{{ stu.studentInfo.registerNumber }}</td>
+            <td>{{ stu.studentInfo.name }}</td>
+            <td>{{ stu.studentInfo.surname }}</td>
+            <td>{{ stu.yearOfTakingCourse.name }}</td>
+            <td style="text-align: right;">{{ stu.currentNumberOfTakings }}</td>
+            <td style="text-align: right;">
+              <span ng-hide="vm.editMode">{{ stu.writtenScore }}</span>
+              <div ng-show="vm.editMode" ng-class="{ 'has-success' : stu.posted === true, 'has-error' : stu.posted === false }">
+                <input type="number" class="form-control input-sm" ng-disabled="stu.returned" style="width: 90px;" min="0" max="100" ng-model="stu.writtenScore" placeholder="{{ vm.studentsListCopy[$index].writtenScore }}" ng-change="stu.dirty = true" />
+              </div>
+            </td>
+            <td style="text-align: right;">
+              <span ng-hide="vm.editMode">{{ stu.suggestedGrade }}</span>
+              <div ng-show="vm.editMode" style="display: inline-block;" class="form-inline" ng-class="{ 'has-success' : stu.posted === true, 'has-error' : stu.posted === false }">
+                <input type="number" class="form-control input-sm" ng-disabled="stu.returned" style="width: 90px;" min="1" max="10" ng-model="stu.suggestedGrade" placeholder="{{ vm.studentsListCopy[$index].suggestedGrade }}" ng-change="stu.dirty = true" />
+              </div>
+              <button ng-show="stu.errors" uib-popover="Podatek ni shranjen, popravite vnos: {{ stu.errors }}" popover-trigger="'mouseenter'" ng-class="vm.editMode ? 'btn-sm' : 'btn-xs'" class="btn btn-danger btn-icon-only"><span class="glyphicon glyphicon-info-sign"></span></button>
+            </td>
+            <td style="text-align: center;">
+              <label ng-show="vm.editMode">
+                <input type="checkbox" ng-checked="stu.returned" ng-click="vm.toggleReturned(stu)" />
+              </label>
+              <span ng-show="!vm.editMode && stu.returned" class="glyphicon glyphicon-ok"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+    <div>
+      <div class="pull-right" style="margin-bottom: 28px;">
+        <button class="btn btn-primary btn-sm" ng-show="!vm.examTerm.isValid" ng-click="vm.toggleEditMode()"><span class="glyphicon" ng-class="vm.editMode ? 'glyphicon-check' : 'glyphicon-edit'"></span> {{ vm.editMode ? 'Končaj z urejanjem' : 'Urejanje ocen' }}</button>
+        <button type="submit" form="gradesform" class="btn btn-success btn-sm" ng-show="vm.editMode"><span class="glyphicon glyphicon-save"></span> Zapiši ocene</button>
+      </div>
+    </div>
   </div>
 
 </div>

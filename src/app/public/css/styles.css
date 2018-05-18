@@ -72,6 +72,11 @@ md-dialog-content {
   line-height: 35px;
 }
 
+/* signeduplist.css */
+tbody > tr.vertical-center-rows, tbody > tr.vertical-center-rows td, tr.vertical-center-rows td > * {
+  vertical-align: middle;
+}
+
 /* Pagination bar */
 .pagination>.disabled>span,
 .pagination>.disabled>span:hover,

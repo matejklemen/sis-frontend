@@ -1,12 +1,12 @@
 (function() {
-  var signedUpListCtrl = function($scope, $routeParams, $location, authenticationService, examTermService) {
+  var signedUpListCtrl = function($scope, $routeParams, $location, $filter, authenticationService, examTermService) {
     var vm = this;
-
-    vm.editMode = false;
 
     if(!$routeParams.examTermId) {
       $location.path("/control");
     }
+
+    vm.editMode = false;
 
     vm.role = authenticationService.getRole();
     vm.identity = authenticationService.getIdentity();
@@ -21,42 +21,73 @@
       },
       function error(error) {
         console.log("Mon dieu", error);
+        $location.path("/control");
       }
     );
 
-    examTermService.getSignedUpStudentsForExamTerm($routeParams.examTermId).then(
-      function success(response) {
-        vm.studentsList = response.data;
-        console.log(vm.studentsList);
-      },
-      function error(error) {
-        console.log("Mon dieu", error);
-      }
-    );
+    getSignedUpStudents();
+
+    function getSignedUpStudents() {
+      examTermService.getSignedUpStudentsForExamTerm($routeParams.examTermId).then(
+        function success(response) {
+          vm.studentsList = response.data;
+          vm.studentsListCopy = JSON.parse(JSON.stringify(response.data));
+          console.log(vm.studentsList);
+        },
+        function error(error) {
+          console.log("Mon dieu, ni študentov?", error);
+          vm.studentsList = [];
+        }
+      );
+    }
 
     vm.toggleEditMode = function() {
       vm.editMode = !vm.editMode;
-
-      vm.studentsList.forEach(function(elem, index, array) {
-        elem.posted = undefined;
-      });
+      if(!vm.editMode) {
+        vm.studentsList.forEach(function(elem, index, array) {
+          // if it wasn't successfuly posted, reset it
+          if(!elem.posted) {
+            elem.writtenScore = vm.studentsListCopy[index].writtenScore;
+            elem.suggestedGrade = vm.studentsListCopy[index].suggestedGrade;
+            elem.returned = vm.studentsListCopy[index].returned;
+          } else {
+            vm.studentsListCopy[index].writtenScore = elem.writtenScore;
+            vm.studentsListCopy[index].suggestedGrade = elem.suggestedGrade;
+            vm.studentsListCopy[index].returned = elem.returned;
+          }
+          if(elem.returned) {
+            elem.writtenScore = null;
+            elem.suggestedGrade = null;
+          }
+          elem.posted = undefined;
+          elem.dirty = undefined;
+        });
+      }
     };
 
     vm.postGrades = function() {
       vm.studentsList.forEach(function(elem, index, array) {
-        var writtenScore = elem.currentGrade || '';
-        var suggestedGrade = elem.finalGrade || '';
-        elem.posted = undefined;
-        examTermService.postGradesForExamSignUp(elem.idExamSignUp, writtenScore, suggestedGrade).then(
-          function success(response) {
-            elem.posted = true;
-          },
-          function error(error) {
-            console.log("Mon dieu", error);
-            elem.posted = true;
-          }
-        );
+        if(elem.dirty) {
+          elem.posted = undefined;
+          examTermService.postGradesForExamSignUp(elem.idExamSignUp, vm.loginId, elem.writtenScore || '', elem.suggestedGrade || '', elem.returned || false).then(
+            function success(response) {
+              elem.posted = true;
+              elem.errors = undefined;
+              elem.dirty = undefined;
+            },
+            function error(error) {
+              console.log("Mon dieu", error);
+              elem.errors = $filter('formatError')(error.data);
+              elem.posted = false;
+            }
+          );
+        }
       });
+    };
+
+    vm.toggleReturned = function(listElem) {
+      listElem.returned = !listElem.returned;
+      listElem.dirty = true;
     };
     
   };

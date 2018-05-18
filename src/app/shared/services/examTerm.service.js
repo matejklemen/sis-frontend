@@ -78,8 +78,8 @@
       return $http.get(apiBaseRoute + '/api/exam-sign-up/augmented?examtermid=' + examTermId);
     };
 
-    var postGradesForExamSignUp = function(examSignUpId, writtenScore, suggestedGrade) {
-      return $http.post(apiBaseRoute + '/api/exam-sign-up/' + examSignUpId + '/grades?writtenScore=' + writtenScore + '&suggestedGrade=' + suggestedGrade + '');
+    var postGradesForExamSignUp = function(examSignUpId, loginId, writtenScore, suggestedGrade, isReturned) {
+      return $http.post(apiBaseRoute + '/api/exam-sign-up/' + examSignUpId + '/grades?loginId=' + loginId + '&writtenScore=' + writtenScore + '&suggestedGrade=' + suggestedGrade + '&isReturned=' + isReturned + '');
     };
 
     return {
