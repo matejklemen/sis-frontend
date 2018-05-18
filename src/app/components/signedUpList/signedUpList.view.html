@@ -61,7 +61,7 @@
             <td style="text-align: right;">{{ stu.currentNumberOfTakings }}</td>
             <td style="text-align: right;">
               <span ng-hide="vm.editMode">{{ stu.writtenScore }}</span>
-              <div ng-show="vm.editMode" ng-class="{ 'has-success' : stu.posted === true, 'has-error' : stu.posted === false }">
+              <div ng-show="vm.editMode" style="display: inline-block;" ng-class="{ 'has-success' : stu.posted === true, 'has-error' : stu.posted === false }">
                 <input type="number" class="form-control input-sm" ng-disabled="stu.returned" style="width: 90px;" min="0" max="100" ng-model="stu.writtenScore" placeholder="{{ vm.studentsListCopy[$index].writtenScore }}" ng-change="stu.dirty = true" />
               </div>
             </td>
