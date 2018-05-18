@@ -6,7 +6,7 @@
       $location.path("/control");
     }
 
-    vm.editMode = false;
+    vm.editMode = ($routeParams.edit !== undefined);
 
     vm.role = authenticationService.getRole();
     vm.identity = authenticationService.getIdentity();
