@@ -35,7 +35,7 @@
         controller: 'enrolCtrl',
         controllerAs: 'vm'
       })
-      .when('/examterm/:examTermId', {
+      .when('/examterm/:examTermId?', {
         templateUrl: 'components/examTerm/examTerm.view.html',
         controller: 'examTermCtrl',
         controllerAs: 'vm'
