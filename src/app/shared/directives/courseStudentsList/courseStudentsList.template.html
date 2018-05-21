@@ -11,6 +11,19 @@
             <label for="" class="control-label">Študijsko leto</label>
             <select class="form-control" ng-model="vm.search.studyYear" ng-options="sy as sy.name for sy in vm.studyYears"></select>
           </div>
+          <div class="form-group">
+            <label for="" class="control-label">Študijski program</label>
+            <select class="form-control" ng-model="vm.search.studyProgram" ng-options="sp as sp.name for sp in vm.studyPrograms"></select>
+          </div>
+          <div class="form-group">
+            <label for="year" class="control-label">Letnik</label>
+            <select class="form-control input-sm" ng-model="vm.search.year">
+              <option value=""></option>
+              <option value="1">Prvi</option>
+              <option value="2">Drugi</option>
+              <option value="3">Tretji</option>
+            </select>
+          </div>
 
           <div class="form-group">
             <label for="orderStudent" class="control-label">Sortiranje</label>

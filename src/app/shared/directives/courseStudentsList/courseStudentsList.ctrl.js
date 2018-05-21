@@ -5,6 +5,8 @@
     vm.search = {
       course: "",
       studyYear: "",
+      studyProgram : "",
+      year: "",
       order: "registerNumber DESC",
     };
 
@@ -29,17 +31,30 @@
       }
     );
 
+    codelistService.getCodelist("studyprograms").then(
+      function sucess(response) {
+        vm.studyPrograms = response.data;
+        vm.studyPrograms.unshift({name: ""});
+        vm.search.studyProgram = vm.studyPrograms[0];
+      },
+      function error(error) {
+        cosole.log("Oh no...", error);
+      }
+    )
+
     vm.performQuery = function() {
       vm.error.course = (typeof vm.search.course !== 'object' || !vm.search.course);
       vm.error.studyYear = (vm.search.studyYear == undefined || vm.search.studyYear == "");
 
       vm.searched = {
         course: vm.search.course,
-        studyYear: vm.search.studyYear
+        studyYear: vm.search.studyYear,
+        studyProgram: vm.search.studyProgram,
+        year: vm.search.year
       };
-      
+
       if(vm.error.course || vm.error.studyYear) return;
-  
+
       vm.error = {};
       vm.queryInProgress = true;
 
