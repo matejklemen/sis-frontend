@@ -87,6 +87,8 @@
 
     vm.toggleReturned = function(listElem) {
       listElem.returned = !listElem.returned;
+      listElem.writtenScore = '';
+      listElem.suggestedGrade = '';
       listElem.dirty = true;
     };
     
