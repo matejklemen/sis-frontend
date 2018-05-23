@@ -242,7 +242,6 @@
           examTermService.getSignedUpStudentsForExamTerm($routeParams.examTermId).then(
             function success(response) {
 
-              dispWarning = response.data.length > 0;
               // if there are sign ups, make sure that user is aware of consequences
               var continueUpdating = confirm("Opozorilo: spreminjate izpitni rok, ki že ima prijavljene študente. Prijavljeni študenti bodo ob spremembi prijavljeni na spremenjen termin.");
 
