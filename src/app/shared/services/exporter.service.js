@@ -1,11 +1,12 @@
 (function() {
   var exporterService = function($window, $http) {
 
-    var getFile = function(type, data, tableName, coloumnNames, coloumnNamesFromAPI) {
+    var getFile = function(type, data, head, coloumnNames, inLegend, coloumnNamesFromAPI) {
       var obj = {};
-      obj.tableName = tableName;
+      obj.head = head;
       obj.coloumnNames = coloumnNames;
       obj.rows = formRows(data, coloumnNamesFromAPI);
+      obj.inLegend = inLegend ? inLegend : new Array(coloumnNames.length-1).fill(false);
       if(type == "pdf") {
         return $http.post(apiBaseRoute + '/api/dataexporter/tablepdf', obj, {
             headers: { 'Accept': 'application/pdf' },
@@ -36,18 +37,45 @@
       }
     };
 
-    function formRows(data, coloumnNames) {
+    function formRows(data, coloumnNamesFromAPI) {
       var rows = [];
       for(var i = 0; i < data.length; i++) {
         rows[i] = [];
         rows[i][0] = i+1;
         for(var cell in data[i]) {
-          if(coloumnNames.indexOf(cell) >= 0) {
-            rows[i][coloumnNames.indexOf(cell)+1] = data[i][cell];
+          for(var j = 0; j < coloumnNamesFromAPI.length; j++) {
+            var content = propertySelected(cell, data[i], coloumnNamesFromAPI[j]);
+            if(content != null) {
+              rows[i][j+1] = content;
+            }
           }
         }
       }
       return rows;
+    }
+
+    function propertySelected(cell, data, coloumnName) {
+      var props = coloumnName.split(".");
+      if(props.length > 1) {
+        if(props[0] == cell) {
+          for(var new_cell in data[cell]) {
+            var content = propertySelected(new_cell, data[cell], coloumnName.substring(coloumnName.indexOf(".")+1, coloumnName.length));
+            if(content != null) {
+              return content;
+            }
+          }
+        } else {
+          return null;
+        }
+      } else if (cell == props[0]) {
+        if(data[cell] == null) {
+          return "/"
+        } else {
+          return data[cell];
+        }
+      } else {
+        return null;
+      }
     }
 
     function initiateFileDownload(file, filename) {
@@ -58,11 +86,11 @@
       caller.href = fileUrl;
       caller.download = filename;
       caller.style = "display: none;";
-      
+
       document.body.append(caller);
       caller.click();
       caller.remove();
-      
+
       $window.URL.revokeObjectURL(fileUrl);
     }
 

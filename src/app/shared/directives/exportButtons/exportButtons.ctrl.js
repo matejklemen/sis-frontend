@@ -3,7 +3,7 @@
     var vm = this;
 
     vm.exportAction = function(action) {
-      exporterService.getFile(action, $scope.data, $scope.title, $scope.columnNames, $scope.columnValues);
+      exporterService.getFile(action, $scope.data, $scope.head, $scope.columnNames, $scope.inLegend, $scope.columnValues);
     };
 
   };

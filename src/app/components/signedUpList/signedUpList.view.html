@@ -4,9 +4,7 @@
   <div>
     <h3>
       Seznam prijavljenih študentov
-      <!-- TODO: make proper export button i copied this one from studentlist
-      <export-buttons exp-data="vm.studentsList" exp-title="Seznam študentov za {{ vm.searched.course.id }} - {{ vm.searched.course.name }} ({{ vm.searched.studyYear.name }})", exp-col-names="['#','Vpisna številka','Ime','Priimek']", exp-col-values="['registerNumber','name','surname']"></export-buttons>
-      -->
+      <export-buttons ng-hide="!vm.studentsList.length" exp-data="vm.studentsList" exp-head="['Seznam prijavljenih študentov', 'Predmet: ' + vm.examTerm.courseOrganization.course.id + ' - ' + vm.examTerm.courseOrganization.course.name, 'Datum in čas izpitnega roka: ' + (vm.examTerm.datetime | formatDate), 'Izpraševalci: ' + (vm.examTerm.organizer | formatOrganizer), 'Opombe: ' + (vm.examTerm.notes || 'Ni opomb'), 'Število prijavljenih: ' + (vm.examTerm.signedUpCount || '0')]", exp-col-names="['#','Vpisna številka','Ime','Priimek','Študijsko leto','Številka polaganja','Točke pisnega izpita','Končna ocena predmeta','Vrnjena prijava']", exp-col-values="['studentInfo.registerNumber','studentInfo.name','studentInfo.surname','yearOfTakingCourse.name','currentNumberOfTakings','writtenScore','suggestedGrade','returned']", exp-in-legend="[false, false, false, false, true, true, true, false]"></export-buttons>
     </h3>
     <h4>Predmet: <strong>{{ vm.examTerm.courseOrganization.course.id }} - {{ vm.examTerm.courseOrganization.course.name }}</strong></h4>
     <div class="clearfix" style="margin-bottom: 12px;">

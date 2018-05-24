@@ -44,7 +44,7 @@
       <div class="col-md-9">
         <h3 ng-show="vm.searchResult">
           Seznam študentov za <i>{{ vm.searched.course.name }}</i> <small>({{ vm.searched.studyYear.name }})</small>
-          <export-buttons ng-show="vm.searchResult" exp-data="vm.searchResult" exp-title="Seznam študentov za {{ vm.searched.course.id }} - {{ vm.searched.course.name }} ({{ vm.searched.studyYear.name }})", exp-col-names="['#','Vpisna številka','Ime','Priimek']", exp-col-values="['registerNumber','name','surname']"></export-buttons>
+          <export-buttons ng-show="vm.searchResult" exp-data="vm.searchResult" exp-head="['Seznam študentov za ' + vm.searched.course.id + '-' + vm.searched.course.name, 'Študijsko leto: ' + vm.searched.studyYear.name]", exp-col-names="['#','Vpisna številka','Ime','Priimek']", exp-col-values="['registerNumber','name','surname']"></export-buttons>
         </h3>
         <table ng-show="vm.searchResult" class="table table-striped table-hover">
           <thead>
