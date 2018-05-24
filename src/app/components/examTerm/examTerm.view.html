@@ -16,7 +16,7 @@
           <!-- Name and surname -->
           <label for="i1"> Izvajalec: </label>
           <input class="form-control input-sm" type="text" ng-model="vm.examTerm.organizer" ng-if="vm.role.id != 4" ng-value="vm.examTerm.organizer.firstName + ' ' + vm.examTerm.organizer.lastName1 + (vm.examTerm.organizer.lastName2 != null ? ' ' + vm.examTerm.organizer.lastName2: '')" ng-disabled="true">
-          <select ng-model="vm.examTerm.organizer" class="form-control input-sm" ng-options="professor.firstName + ' ' + professor.lastName1 + (professor.lastName2 != null ? ' ' + professor.lastName2: '') for professor in vm.professor" ng-if="vm.role.id==4" ng-disabled="vm.examTerm.course === undefined"></select>
+          <select ng-model="vm.examTerm.organizer" class="form-control input-sm" ng-options="professor.firstName + ' ' + professor.lastName1 + (professor.lastName2 != null ? ' ' + professor.lastName2: '') for professor in vm.professor" ng-if="vm.role.id==4" ng-disabled="vm.examTerm.courseOrganization === undefined"></select>
         </div>
         <div class="col-md-6">
           <!-- Course ID -->
