@@ -3,7 +3,7 @@
 <div class="container">
 
   <uib-tabset active="vm.selectedTab">
-    
+
     <uib-tab index="0" ng-show="vm.role.id == 4">
       <uib-tab-heading>
         <span class="glyphicon glyphicon-indent-right" style="margin-right:5px"></span> Upravljanje študentov
@@ -39,6 +39,23 @@
       <exam-terms-list></exam-terms-list>
 
     </uib-tab>
+    <uib-tab index="4" ng-show="vm.role.id == 1">
+      <uib-tab-heading>
+        <span class="glyphicon glyphicon-briefcase" style="margin-right:5px"></span> Vzdrževanje predmetnika
+      </uib-tab-heading>
+      
+      <maintenance-courses></maintenance-courses>
+
+    </uib-tab>
+    <uib-tab index="5" ng-show="vm.role.id == 1">
+      <uib-tab-heading>
+        <span class="glyphicon glyphicon-bullhorn" style="margin-right:5px"></span> Vzdrževanje izvajalcev
+      </uib-tab-heading>
+      
+      <maintenance-professors></maintenance-professors>
+
+    </uib-tab>
+    
   </uib-tabset>
 
 </div>
