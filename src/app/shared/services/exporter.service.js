@@ -92,10 +92,23 @@
       );
     };
 
-    var getPdfIndex = function(id, full=false){
-      return $http.get(apiBaseRoute+"/api/dataexporter/index/"+id+"?full="+full, {responseType: 'arraybuffer'}).then(
+    var getPdfIndexPdf = function(id, full=false){
+      return $http.get(apiBaseRoute+"/api/dataexporter/indexpdf/"+id+"?full="+full, {responseType: 'arraybuffer'}).then(
         function onSuccess(result) {
           var file = new Blob([result.data], {type: 'application/pdf'});
+          console.log(result.headers());
+          initiateFileDownload(file, result.headers("X-Export-Filename"));
+        },
+        function onFailure(error) {
+          console.log(error);
+        }
+      );
+    };
+
+    var getPdfIndexCsv = function(id, full=false){
+      return $http.get(apiBaseRoute+"/api/dataexporter/indexcsv/"+id+"?full="+full, {responseType: 'arraybuffer'}).then(
+        function onSuccess(result) {
+          var file = new Blob([result.data], {type: 'text/csv'});
           console.log(result.headers());
           initiateFileDownload(file, result.headers("X-Export-Filename"));
         },
@@ -109,7 +122,8 @@
       getFile: getFile,
       getPdfEnrolmentSheet: getPdfEnrolmentSheet,
       getPdfEnrolmentConformation: getPdfEnrolmentConformation,
-      getPdfIndex: getPdfIndex,
+      getPdfIndexPdf: getPdfIndexPdf,
+      getPdfIndexCsv: getPdfIndexCsv,
     };
   };
 

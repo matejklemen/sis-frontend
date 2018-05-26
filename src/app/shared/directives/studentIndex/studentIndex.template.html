@@ -4,7 +4,10 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="indexDropdown">
-    <li><a ng-click="vm.getIndexCard('full')">Vsa polaganja</a></li>
-    <li><a ng-click="vm.getIndexCard()">Zadnje polaganje</a></li>
+    <li><a ng-click="vm.getIndexCardPdf('full')" style="cursor:pointer">Vsa polaganja (PDF)</a></li>
+    <li><a ng-click="vm.getIndexCardPdf()" style="cursor:pointer">Zadnje polaganje (PDF)</a></li>
+    <li class="divider"></li>
+    <li><a ng-click="vm.getIndexCardCsv('full')" style="cursor:pointer">Vsa polaganja (CSV)</a></li>
+    <li><a ng-click="vm.getIndexCardCsv()" style="cursor:pointer">Zadnje polaganje (CSV)</a></li>
   </ul>
 </div>
