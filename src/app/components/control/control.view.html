@@ -31,30 +31,46 @@
       <course-students-list></course-students-list>
 
     </uib-tab>
+
     <uib-tab index="3" ng-show="vm.role.id == 3 || vm.role.id == 4">
       <uib-tab-heading>
         <span class="glyphicon glyphicon-folder-open" style="margin-right:5px"></span> Izpitni roki
       </uib-tab-heading>
       
+      <!-- Exam terms list -->
       <exam-terms-list></exam-terms-list>
 
     </uib-tab>
+
     <uib-tab index="4" ng-show="vm.role.id == 1">
       <uib-tab-heading>
         <span class="glyphicon glyphicon-briefcase" style="margin-right:5px"></span> Vzdrževanje predmetnika
       </uib-tab-heading>
       
+      <!-- Courses -->
       <maintenance-courses></maintenance-courses>
 
     </uib-tab>
+
     <uib-tab index="5" ng-show="vm.role.id == 1">
       <uib-tab-heading>
         <span class="glyphicon glyphicon-bullhorn" style="margin-right:5px"></span> Vzdrževanje izvajalcev
       </uib-tab-heading>
       
+      <!-- Profesors -->
       <maintenance-professors></maintenance-professors>
 
     </uib-tab>
+
+    <uib-tab index="6" ng-show="vm.role.id == 4">
+        <uib-tab-heading>
+          <span class="glyphicon glyphicon-inbox" style="margin-right:5px"></span> Naročila
+        </uib-tab-heading>
+        
+        <!-- Requests -->
+        <requests></requests>
+  
+      </uib-tab>
     
   </uib-tabset>
 

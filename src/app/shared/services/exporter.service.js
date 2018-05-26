@@ -146,12 +146,27 @@
       );
     };
 
+    var putEnrolmentConfirmationRequest = function(studentId, copies){
+      return $http.put(apiBaseRoute + "/api/dataexporter/requests/" + studentId + "/" + copies);
+    }
+
+    var getAllRequsts = function(offset, limit){
+      return $http.get(apiBaseRoute + '/api/dataexporter/requests?offset=' + offset + '&limit=' + limit + '&order=id ASC');
+    }
+
+    var deleteRequest = function(requestId){
+      return $http.delete(apiBaseRoute + "/api/dataexporter/requests/" + requestId);
+    }
+
     return {
       getFile: getFile,
       getPdfEnrolmentSheet: getPdfEnrolmentSheet,
       getPdfEnrolmentConformation: getPdfEnrolmentConformation,
       getPdfIndexPdf: getPdfIndexPdf,
       getPdfIndexCsv: getPdfIndexCsv,
+      putEnrolmentConfirmationRequest: putEnrolmentConfirmationRequest,
+      getAllRequsts: getAllRequsts,
+      deleteRequest: deleteRequest,
     };
   };
 

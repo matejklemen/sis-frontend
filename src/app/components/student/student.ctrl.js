@@ -25,7 +25,7 @@
           enrolmentService.getEnrolmentsForStudent(vm.student.id).then(
             function success(response) {
               vm.enrolments = response.data;
-              //console.log(vm.enrolments);
+              console.log(vm.enrolments);
             },
             function error(error) {
               console.log("Oh no...", error);
@@ -65,6 +65,7 @@
           gradeData.getGradeData(vm.student.id).then(
             function success(response){
               vm.studentCourses = response.data;
+              console.log(response.data)
             },
             function error(error){
               console.log("Oh no...",error);
