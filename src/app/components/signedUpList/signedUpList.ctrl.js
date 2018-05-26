@@ -32,7 +32,6 @@
         function success(response) {
           vm.studentsList = response.data;
           vm.studentsListCopy = JSON.parse(JSON.stringify(response.data));
-          console.log(vm.studentsList);
         },
         function error(error) {
           console.log("Mon dieu, ni študentov?", error);
@@ -87,9 +86,11 @@
 
     vm.toggleReturned = function(listElem) {
       listElem.returned = !listElem.returned;
+      listElem.writtenScore = '';
+      listElem.suggestedGrade = '';
       listElem.dirty = true;
     };
-    
+
   };
 
   angular

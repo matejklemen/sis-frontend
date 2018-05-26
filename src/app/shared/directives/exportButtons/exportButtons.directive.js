@@ -5,9 +5,10 @@
       restrict: 'EC',
       scope: {
         data: '=expData',
-        title: '@expTitle',
+        head: '<expHead',
         columnNames: '<expColNames',
-        columnValues: '<expColValues'
+        columnValues: '<expColValues',
+        inLegend: '<expInLegend'
       },
       controller: "exportButtonsCtrl",
       controllerAs:'vm',
