@@ -26,6 +26,7 @@
             function success(response) {
               vm.enrolments = response.data;
               console.log(vm.enrolments);
+              vm.activeEnrolment = vm.enrolments[vm.enrolments.length-1].studyYear.id == 5;           
             },
             function error(error) {
               console.log("Oh no...", error);

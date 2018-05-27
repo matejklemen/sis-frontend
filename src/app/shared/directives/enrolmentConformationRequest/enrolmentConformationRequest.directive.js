@@ -5,6 +5,7 @@
       restrict: 'EC',
       scope: {
         id: '=',
+        enroled: "=",
       },
       controller: "enrolmentConformationRequestCtrl",
       controllerAs:'vm',

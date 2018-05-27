@@ -9,7 +9,7 @@
     </div>
 </div>
 <div ng-if="!vm.toggle">
-  <a class="btn btn-primary btn-sm" type="button" ng-click="vm.toggle = !vm.toggle">
+  <a class="btn btn-primary btn-sm" type="button" ng-click="!enroled || (vm.toggle = !vm.toggle)" ng-disabled="!enroled">
       <span class="glyphicon glyphicon-duplicate"></span> Naroči potrdila o vpisu
   </a>
 </div>

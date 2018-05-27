@@ -14,7 +14,7 @@
             console.log("notr")
             vm.toggle = false
             vm.successPut = false;
-          }, 1500)
+          }, 500)
         },
         function error(error){
           console.log("Oh no...",error)
