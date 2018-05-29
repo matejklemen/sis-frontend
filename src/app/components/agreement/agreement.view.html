@@ -1,0 +1,83 @@
+<sis-navbar></sis-navbar>
+
+<div class="container">
+  <div>
+    <h2>{{ vm.updateMode ? 'Urejanje' : 'Vnos' }} sklepa</h2>
+  </div>
+
+  <!-- Osebni podatki -->
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"><span class="glyphicon glyphicon-blackboard"></span> Sklep</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Name and surname -->
+          <label for="i1"> Izdajatelj*: </label>
+          <input class="form-control input-sm" type="text" ng-model="vm.agreement.issuer" ng-required="true">
+        </div>
+        <div class="col-md-6">
+          <!-- Course ID -->
+          <div class="form-group">
+            <label>Prejemnik*: </label>
+            <select ng-model="vm.agreement.student" class="form-control input-sm" ng-options="stud as stud.name+' '+stud.surname+' (' + stud.registerNumber + ')' for stud in vm.selectableStudents" ng-required="true"></select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Date of issuing the agreement -->
+          <div class="form-group">
+            <label>Datum izdaje sklepa*: </label>
+            <div class="input-group">
+              <input type="text" class="form-control input-sm" uib-datepicker-popup ng-model="vm.agreement.issueDate" is-open="vm.popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Zapri" current-text="Danes" clear-text="Počisti" placeholder="YYYY-MM-DD" alt-input-formats="['d!.M!.yyyy']" ng-change="vm.validateDate()" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-sm btn-default" style="line-height: inherit;" ng-click="vm.open1()"><span class="glyphicon glyphicon-calendar"></span></button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Agreement valid until... -->
+          <div class="form-group">
+            <label>Sklep veljaven do: </label>
+            <div class="input-group">
+              <input type="text" class="form-control input-sm" uib-datepicker-popup ng-model="vm.agreement.validUntil" is-open="vm.popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Zapri" current-text="Danes" clear-text="Počisti" placeholder="YYYY-MM-DD" alt-input-formats="['d!.M!.yyyy']" ng-change="vm.validateDate()" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-sm btn-default" style="line-height: inherit;" ng-click="vm.open2()"><span class="glyphicon glyphicon-calendar"></span></button>
+              </span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-12">
+          <!-- Content (Slovene) -->
+          <div class="form-group">
+            <label>Vsebina sklepa (v slovenščini)*: </label>
+            <textarea class="form-control input-sm" type="text" min="0" id="i3" ng-model="vm.agreement.contentSlovene">
+            </textarea>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <!-- Content (English) -->
+          <div class="form-group">
+            <label>Vsebina sklepa (v angleščini): </label>
+            <textarea class="form-control input-sm" type="text" min="0" id="i3" ng-model="vm.agreement.contentEnglish">
+            </textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Potrdi || preklici -->
+  <div>
+    <div style="text-align: right;margin-bottom: 100px;">
+      <div class="alert alert-danger" ng-show="vm.finalizeError">
+        <strong>Napaka!</strong> {{ vm.finalizeError | formatError }}
+      </div>
+      <a ng-click="vm.cancelEdit()" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Prekliči {{ vm.updateMode ? 'urejanje' : 'vnos' }}</a>
+      <a ng-click="vm.finalizeInsertingAgreement()" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> {{ vm.updateMode ? 'Posodobi' : 'Dodaj' }} sklep</a>
+    </div>
+  </div>
+</div>
