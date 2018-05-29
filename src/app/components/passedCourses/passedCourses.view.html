@@ -1,0 +1,37 @@
+<sis-navbar></sis-navbar>
+
+<div class="container">
+  <h4>Potrdilo o opravljenih obveznostih</h4>
+  <h5>Študent: {{ vm.student.name }} {{ vm.student.surname }}</h5>
+  <h5>Vpisan številka: {{ vm.student.registerNumber }}</h5>
+
+  <table class="table table-striped table-hover">
+      <thead>
+        <tr class="success">
+          <th>#</th>
+          <th>Predmet</th>
+          <th>Letnik</th>
+          <th>KT</th>
+          <th>Datum</th>
+          <th>Ocena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="course in vm.passedCourses">
+          <td>{{ $index + 1 }}</td>
+          <td>{{ course.course.name }}</td>
+          <td>year</td>
+          <td>{{ course.course.creditPoints }}</td>
+          <td>{{ course.dateOfGrade }}</td>
+          <td>{{ course.grade }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="width: 100%; text-align: center; font-size: 1.2em;">
+      <img ng-if="vm.passedCourses == undefined" src="public/images/progress.gif" class="loading-gif">
+      <div ng-if="vm.passedCourses.length == 0">
+        <span class="glyphicon glyphicon-remove"></span><br />Ni opravljenih predmetov
+      </div>
+    </div>
+
+</div>

@@ -45,6 +45,11 @@
         controller: 'signedUpListCtrl',
         controllerAs: 'vm'
       })
+      .when('/passedCourses/:studentId', {
+        templateUrl: 'components/passedCourses/passedCourses.view.html',
+        controller: 'passedCoursesCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({redirectTo: '/login'});
 
     $locationProvider.html5Mode(true);
