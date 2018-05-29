@@ -80,7 +80,7 @@
           <div>
             <small>({{ vm.searched.year }}. letnik, {{ vm.searched.studyProgram.name }})</small>
           </div>
-          <export-buttons ng-show="vm.searchResult && vm.numberOfStudentsForEachCourse" exp-data="vm.searchResult" exp-head="['Število vpisanih v predmete v študijskem letu ' + vm.searched.studyYear.name, 'Letnik: ' + vm.searched.year, 'Študijski program: ' + vm.searched.studyProgram.name]", exp-col-names="['#','Šifra predmeta', 'Ime predmeta','Število vpisanih v predmet']", exp-col-values="['course.id', 'course.name','numberOfEnrolledStudents']"></export-buttons>
+          <export-buttons ng-show="vm.searchResult && vm.numberOfStudentsForEachCourse" exp-data="vm.searchResult" exp-head="['Število vpisanih v predmete', 'Študijsko leto: ' + vm.searched.studyYear.name, 'Letnik: ' + vm.searched.year, 'Študijski program: ' + vm.searched.studyProgram.name]", exp-col-names="['#','Šifra predmeta', 'Ime predmeta','Število vpisanih v predmet']", exp-col-values="['course.id', 'course.name','numberOfEnrolledStudents']"></export-buttons>
         </h3>
         <table ng-show="vm.searchResult && vm.numberOfStudentsForEachCourse" class="table table-striped table-hover">
           <thead>
