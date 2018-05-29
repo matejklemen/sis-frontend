@@ -77,6 +77,12 @@ tbody > tr.vertical-center-rows, tbody > tr.vertical-center-rows td, tr.vertical
   vertical-align: middle;
 }
 
+/* maintenancecourses.css */
+.poc-obv { color: #283593; }
+.poc-piz { color: #558b2f; }
+.poc-siz { color: #00838f; }
+.poc-mod { color: #ad1457; }
+
 /* Pagination bar */
 .pagination>.disabled>span,
 .pagination>.disabled>span:hover,
