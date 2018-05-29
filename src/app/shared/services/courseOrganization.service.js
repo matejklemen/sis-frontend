@@ -12,10 +12,17 @@
       return $http.get(apiBaseRoute + '/api/course-organization' + orderPart);
     };
 
+    var getCourseOrganizationsByQuery = function(query) {
+      var orderPart = '?order=course.name ASC';
+      var query = (query.studyYear.id ? '&study_year='+query.studyYear.id : "")+(query.studyProgram.id ? '&study_program='+query.studyProgram.id : "")+(query.year ? '&year='+query.year : "");
+      return $http.get(apiBaseRoute + '/api/course-organization' + orderPart+query);
+    };
+
 
     return {
       getCourseOrganizationsForProfessor: getCourseOrganizationsForProfessor,
-      getAllCourseOrganizations: getAllCourseOrganizations
+      getAllCourseOrganizations: getAllCourseOrganizations,
+      getCourseOrganizationsByQuery: getCourseOrganizationsByQuery
     };
   };
 
