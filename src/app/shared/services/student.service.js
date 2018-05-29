@@ -36,12 +36,17 @@
       return $http.get(apiBaseRoute + '/api/students/' + studentId);
     };
 
+    var getEnrolledForCurrentYear = function() {
+      return $http.get(apiBaseRoute + '/api/students/currently-enrolled');
+    }
+
     return {
       searchStudents: searchStudents,
       getByRegisterNumber: getByRegisterNumber,
       getByStudentId: getByStudentId,
       getByCourse: getByCourse,
-      getNumberOfStudentsForEachCourse: getNumberOfStudentsForEachCourse
+      getNumberOfStudentsForEachCourse: getNumberOfStudentsForEachCourse,
+      getEnrolledForCurrentYear: getEnrolledForCurrentYear
     };
   };
 
