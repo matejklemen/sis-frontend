@@ -13,12 +13,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="request in vm.requests">
-        <td>{{ ((vm.currentPage-1)*20) + $index+1 }}</td>
+      <tr ng-repeat="request in vm.enrolmentRequests">
+        <td>{{ ((vm.currentPageEnrolment-1)*20) + $index+1 }}</td>
         <td>{{ request.nameAndSurname }}</td>
         <td>{{ request.numberOfCopies }}</td>
         <td>
-          <a class="btn btn-danger btn-xs pull-right" style="margin-left:12px" ng-click="vm.deleteRequest(request,$index)"> 
+          <a class="btn btn-danger btn-xs pull-right" style="margin-left:12px" ng-click="vm.deleteRequest(request,$index,'enrolment')"> 
             <span class="glyphicon glyphicon-trash"></span>  Izbriši
           </a>
           <a class="btn btn-primary btn-xs pull-right" ng-click="vm.getEnrolmentConformation(request)"> 
@@ -29,14 +29,53 @@
     </tbody>
   </table>
   <div style="width: 100%; text-align: center; font-size: 1.2em;">
-    <img ng-if="vm.requests == undefined" src="public/images/progress.gif" class="loading-gif">
-    <div ng-if="vm.requests.length == 0">
+    <img ng-if="vm.enrolmentRequests == undefined" src="public/images/progress.gif" class="loading-gif">
+    <div ng-if="vm.enrolmentRequests.length == 0">
       <span class="glyphicon glyphicon-remove"></span><br />Ni zahtev
     </div>
   </div>
 
-  <div ng-if="vm.requests.length > 0" style="text-align: center;">
-    <ul uib-pagination first-text="Prva" last-text="Zadnja" next-text="Naprej" previous-text="Nazaj" boundary-links=true max-size=15 items-per-page="20" total-items="vm.totalCount" ng-model="vm.currentPage" ng-change="vm.changedPage()"></ul>
+  <div ng-if="vm.enrolmentRequests.length > 0" style="text-align: center;">
+    <ul uib-pagination first-text="Prva" last-text="Zadnja" next-text="Naprej" previous-text="Nazaj" boundary-links=true max-size=15 items-per-page="20" total-items="vm.enrolmentTotalCount" ng-model="vm.currentPageEnrolment" ng-change="vm.changedPageEnrolment()"></ul>
+  </div>
+
+  <div style="height:150px"></div>
+
+  <h4>Potrdilo o opravljenih izpitih</h4>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr class="success">
+        <th>#</th>
+        <th>Študent</th>
+        <th>Število kopij</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="request in vm.coursesRequests">
+        <td>{{ ((vm.currentPageCourses-1)*20) + $index+1 }}</td>
+        <td>{{ request.nameAndSurname }}</td>
+        <td>{{ request.numberOfCopies }}</td>
+        <td>
+          <a class="btn btn-danger btn-xs pull-right" style="margin-left:12px" ng-click="vm.deleteRequest(request,$index,'courses')"> 
+            <span class="glyphicon glyphicon-trash"></span>  Izbriši
+          </a>
+          <a class="btn btn-primary btn-xs pull-right" ng-click="vm.getDigitalIndex(request)"> 
+            <span class="glyphicon glyphicon-print"></span>  Natisni
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="width: 100%; text-align: center; font-size: 1.2em;">
+    <img ng-if="vm.coursesRequests == undefined" src="public/images/progress.gif" class="loading-gif">
+    <div ng-if="vm.coursesRequests.length == 0">
+      <span class="glyphicon glyphicon-remove"></span><br />Ni zahtev
+    </div>
+  </div>
+
+  <div ng-if="vm.coursesRequests.length > 0" style="text-align: center;">
+    <ul uib-pagination first-text="Prva" last-text="Zadnja" next-text="Naprej" previous-text="Nazaj" boundary-links=true max-size=15 items-per-page="20" total-items="vm.coursesTotalCount" ng-model="vm.currentPageCourses" ng-change="vm.changedPageCourses()"></ul>
   </div>
 
 </div>

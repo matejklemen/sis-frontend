@@ -146,17 +146,50 @@
       );
     };
 
-    var putEnrolmentConfirmationRequest = function(studentId, copies){
-      return $http.put(apiBaseRoute + "/api/dataexporter/requests/" + studentId + "/" + copies);
+    var putRequest = function(studentId, copies, type){
+      return $http.put(apiBaseRoute + "/api/dataexporter/requests/" + studentId +
+      "?copies=" + copies +
+      "&type="+ type);
     }
 
-    var getAllRequsts = function(offset, limit){
-      return $http.get(apiBaseRoute + '/api/dataexporter/requests?offset=' + offset + '&limit=' + limit + '&order=id ASC');
+    var getAllRequsts = function(offset, limit, type){
+      return $http.get(apiBaseRoute + '/api/dataexporter/requests?' + 
+        'offset=' + offset +
+        '&limit=' + limit +
+        '&order=id ASC' +
+        '&type='+ type
+      );
     }
 
     var deleteRequest = function(requestId){
       return $http.delete(apiBaseRoute + "/api/dataexporter/requests/" + requestId);
     }
+
+    var getDigitalIndexPdf = function(id){
+      return $http.get(apiBaseRoute+"/api/dataexporter/courses/pdf/"+id, {responseType: 'arraybuffer'}).then(
+        function onSuccess(result) {
+          var file = new Blob([result.data], {type: 'application/pdf'});
+          console.log(result.headers());
+          initiateFileDownload(file, result.headers("X-Export-Filename"));
+        },
+        function onFailure(error) {
+          console.log(error);
+        }
+      );
+    };
+
+    var getDigitalIndexCsv = function(id){
+      return $http.get(apiBaseRoute+"/api/dataexporter/courses/csv/"+id, {responseType: 'arraybuffer'}).then(
+        function onSuccess(result) {
+          var file = new Blob([result.data], {type: 'text/csv'});
+          console.log(result.headers());
+          initiateFileDownload(file, result.headers("X-Export-Filename"));
+        },
+        function onFailure(error) {
+          console.log(error);
+        }
+      );
+    };
 
     return {
       getFile: getFile,
@@ -164,9 +197,11 @@
       getPdfEnrolmentConformation: getPdfEnrolmentConformation,
       getPdfIndexPdf: getPdfIndexPdf,
       getPdfIndexCsv: getPdfIndexCsv,
-      putEnrolmentConfirmationRequest: putEnrolmentConfirmationRequest,
+      putRequest: putRequest,
       getAllRequsts: getAllRequsts,
       deleteRequest: deleteRequest,
+      getDigitalIndexPdf: getDigitalIndexPdf,
+      getDigitalIndexCsv: getDigitalIndexCsv,
     };
   };
 

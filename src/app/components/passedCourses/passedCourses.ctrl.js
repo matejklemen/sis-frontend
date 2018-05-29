@@ -1,13 +1,15 @@
 (function() {
   var passedCoursesCtrl = function($scope, studentCoursesService, studentService, $routeParams) {
     var vm = this;
+    vm.id = $routeParams.studentId
 
     //pridobi id iz urlja (ce je student more biti njegov, 4 in 3 je ok) [!!!!!!!!!!!!]
 
-    studentCoursesService.getPassedCourses(1).then(
+    studentCoursesService.getPassedCourses($routeParams.studentId).then(
       function success(response){
         console.log(response.data)
-        vm.passedCourses = response.data;
+        vm.passedCourses = response.data.passedCourses;
+        vm.statistics = response.data.statistics;
       },
       function error(error){
         console.log("Oh no...",error)

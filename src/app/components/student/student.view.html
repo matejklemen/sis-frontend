@@ -9,7 +9,9 @@
 
   <h3>{{ vm.student.name }} {{ vm.student.surname }} ({{ vm.student.registerNumber }})
     <student-index-button class=" pull-right" id="vm.student.id"></student-index-button>
-    <enrolment-conformation-request ng-if="vm.role.id == 2" enroled="vm.activeEnrolment" class=" pull-right" style="margin-right:20px;height: 20px;" id="vm.student.id"></enrolment-conformation-request>
+    <electronic-index class=" pull-right" id="vm.student.id" style="margin-right:12px"></electronic-index>
+    <enrolment-conformation-request ng-if="vm.role.id == 2" enroled="vm.activeEnrolment" class="pull-right" style="margin-right:20px;height: 20px;" id="vm.student.id"></enrolment-conformation-request>
+    <passed-courses-request ng-if="vm.role.id == 2" class="pull-right" style="margin-right:20px;height: 20px;" id="vm.student.id"></passed-courses-request>
   </h3>
   <hr/>
 
