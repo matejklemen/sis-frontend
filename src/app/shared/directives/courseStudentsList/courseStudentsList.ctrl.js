@@ -43,32 +43,51 @@
     )
 
     vm.performQuery = function() {
-      vm.error.course = (typeof vm.search.course !== 'object' || !vm.search.course);
+      vm.numberOfStudentsForEachCourse = (typeof vm.search.course !== 'object' || !vm.search.course);
+
+      if(vm.numberOfStudentsForEachCourse) {
+        vm.error.studyProgram = (vm.search.studyProgram.name == "" || !vm.search.studyProgram);
+        vm.error.year = (!vm.search.year);
+      }
       vm.error.studyYear = (vm.search.studyYear == undefined || vm.search.studyYear == "");
+
+      if(vm.error.studyProgram || vm.error.year || vm.error.studyYear) return;
 
       vm.searched = {
         course: vm.search.course,
         studyYear: vm.search.studyYear,
         studyProgram: vm.search.studyProgram,
-        year: vm.search.year
+        year: vm.search.year 
       };
-
-      if(vm.error.course || vm.error.studyYear) return;
 
       vm.error = {};
       vm.queryInProgress = true;
 
-      studentService.getByCourse(vm.search).then(
-        function success(response) {
-          vm.searchResult = response.data;
-          vm.queryInProgress = false;
-          getEnrolmentTypesForStudents();
-        },
-        function error(response) {
-          console.error("Oh no... ", response);
-          vm.queryInProgress = false;
-        }
-      );
+      if(vm.numberOfStudentsForEachCourse) {
+        studentService.getNumberOfStudentsForEachCourse({studyYear: vm.search.studyYear, studyProgram: vm.search.studyProgram, year: vm.search.year}).then(
+          function success(response) {
+            vm.searchResult = response.data;
+            console.log(vm.searchResult);
+            vm.queryInProgress = false;
+          },
+          function error(response) {
+            console.error("Oh no... ", response);
+            vm.queryInProgress = false;
+          }
+        );
+      } else {
+        studentService.getByCourse(vm.search).then(
+          function success(response) {
+            vm.searchResult = response.data;
+            vm.queryInProgress = false;
+            getEnrolmentTypesForStudents();
+          },
+          function error(response) {
+            console.error("Oh no... ", response);
+            vm.queryInProgress = false;
+          }
+        );
+      }
     };
 
     function getEnrolmentTypesForStudents() {

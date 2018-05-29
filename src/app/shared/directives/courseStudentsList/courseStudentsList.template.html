@@ -11,11 +11,11 @@
             <label for="" class="control-label">Študijsko leto</label>
             <select class="form-control" ng-model="vm.search.studyYear" ng-options="sy as sy.name for sy in vm.studyYears"></select>
           </div>
-          <div class="form-group">
+          <div class="form-group" ng-class="vm.error.studyProgram ? 'has-error' : ''">
             <label for="" class="control-label">Študijski program</label>
             <select class="form-control" ng-model="vm.search.studyProgram" ng-options="sp as sp.name for sp in vm.studyPrograms"></select>
           </div>
-          <div class="form-group">
+          <div class="form-group" ng-class="vm.error.year ? 'has-error' : ''">
             <label for="year" class="control-label">Letnik</label>
             <select class="form-control input-sm" ng-model="vm.search.year">
               <option value=""></option>
@@ -27,7 +27,7 @@
 
           <div class="form-group">
             <label for="orderStudent" class="control-label">Sortiranje</label>
-            <select class="form-control input-sm" ng-model="vm.search.order">
+            <select ng-disabled="!vm.search.course" class="form-control input-sm" ng-model="vm.search.order">
               <option value="registerNumber DESC">Vpisna številka - padajoče</option>
               <option value="registerNumber ASC">Vpisna številka - naraščajoče</option>
               <option value="surname DESC,name DESC">Priimek in Ime - padajoče</option>
@@ -36,17 +36,17 @@
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon" ng-class="vm.queryInProgress ? 'glyphicon-refresh' : 'glyphicon-search'"></span> Iskanje</button>
-            <p class="help-block">Izpišete lahko seznam študentov glede na predmet in študijsko leto.<br />Za izpis rezultatov pritisnite na gumb.</p>
+            <p class="help-block">Izpišete lahko seznam študentov glede na predmet, študijsko leto, študijski program in letnik. Če predmeta ne navedete se vam prikaže število vpisanihih v posamezne predmete za študijsko leto in letnik.<br />Za izpis rezultatov pritisnite na gumb.</p>
           </div>
         </form>
 
       </div>
       <div class="col-md-9">
-        <h3 ng-show="vm.searchResult">
+        <h3 ng-show="vm.searchResult && !vm.numberOfStudentsForEachCourse">
           Seznam študentov za <i>{{ vm.searched.course.name }}</i> <small>({{ vm.searched.studyYear.name }})</small><small ng-if="vm.searchResult.length > 0"> ({{ vm.searchResult.length }})</small>
-          <export-buttons ng-show="vm.searchResult" exp-data="vm.searchResult" exp-head="['Seznam študentov za ' + vm.searched.course.id + '-' + vm.searched.course.name, 'Študijsko leto: ' + vm.searched.studyYear.name]", exp-col-names="['#','Vpisna številka','Ime','Priimek']", exp-col-values="['registerNumber','name','surname']"></export-buttons>
+          <export-buttons ng-show="vm.searchResult && !vm.numberOfStudentsForEachCourse" exp-data="vm.searchResult" exp-head="['Seznam študentov za ' + vm.searched.course.id + '-' + vm.searched.course.name, 'Študijsko leto: ' + vm.searched.studyYear.name]", exp-col-names="['#','Vpisna številka','Ime','Priimek']", exp-col-values="['registerNumber','name','surname']"></export-buttons>
         </h3>
-        <table ng-show="vm.searchResult" class="table table-striped table-hover">
+        <table ng-show="vm.searchResult && !vm.numberOfStudentsForEachCourse" class="table table-striped table-hover">
           <thead>
             <tr class="success">
               <th>#</th>
@@ -71,6 +71,32 @@
                 </div>
               </td>
               <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 ng-show="vm.searchResult && vm.numberOfStudentsForEachCourse">
+          Število vpisanih v predmete v študijskem letu <i>{{ vm.searched.studyYear.name }}</i>
+          <div>
+            <small>({{ vm.searched.year }}. letnik, {{ vm.searched.studyProgram.name }})</small>
+          </div>
+          <export-buttons ng-show="vm.searchResult && vm.numberOfStudentsForEachCourse" exp-data="vm.searchResult" exp-head="['Število vpisanih v predmete v študijskem letu ' + vm.searched.studyYear.name, 'Letnik: ' + vm.searched.year, 'Študijski program: ' + vm.searched.studyProgram.name]", exp-col-names="['#','Šifra predmeta', 'Ime predmeta','Število vpisanih v predmet']", exp-col-values="['course.id', 'course.name','numberOfEnrolledStudents']"></export-buttons>
+        </h3>
+        <table ng-show="vm.searchResult && vm.numberOfStudentsForEachCourse" class="table table-striped table-hover">
+          <thead>
+            <tr class="success">
+              <th>#</th>
+              <th>Šifra predmeta</th>
+              <th>Ime predmeta</th>
+              <th>Število vpisanih v predmet</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="result in vm.searchResult">
+              <td>{{ $index+1 }}</td>
+              <td>{{ result.course.id }}</td>
+              <td>{{ result.course.name }}</td>
+              <td>{{ result.numberOfEnrolledStudents }}</td>
             </tr>
           </tbody>
         </table>
