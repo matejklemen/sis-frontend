@@ -1,69 +1,53 @@
 <div class="container">
-  <div class="row">
-      <div class="col-md-3">
-        <form class="form" ng-submit="vm.performQuery()">
-
-          <div class="form-group">
-            <label for="" class="control-label">Študijsko leto</label>
-            <select class="form-control" ng-model="vm.search.studyYear" ng-options="sy as sy.name for sy in vm.studyYears"></select>
-          </div>
-          <div class="form-group">
-            <label for="" class="control-label">Študijski program</label>
-            <select class="form-control" ng-model="vm.search.studyProgram" ng-options="sp as sp.name for sp in vm.studyPrograms"></select>
-          </div>
-          <div class="form-group">
-            <label for="year" class="control-label">Letnik</label>
-            <select class="form-control input-sm" ng-model="vm.search.year">
-              <option value=""></option>
-              <option value="1">Prvi</option>
-              <option value="2">Drugi</option>
-              <option value="3">Tretji</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon" ng-class="vm.queryInProgress ? 'glyphicon-refresh' : 'glyphicon-search'"></span> Iskanje</button>
-            <p class="help-block">Izpišete, urejate in brišete lahko seznam predmetov in njihovih izvajalcev glede na študijsko leto, študijski program in letnik.<br />Za izpis rezultatov pritisnite na gumb.</p>
-          </div>
-        </form>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Izbira študijskega leta</h3>
       </div>
-      <div class="col-md-9" ng-show="vm.codelistData">
-        <h3>Urejanje šifranta: {{ vm.currentCodelist.displayName }}</h3>
-    
-        <form class="form-inline margin-4px" ng-submit="vm.getCodelistDataPage()">
-          <div class="form-group">
-            <label for="filterList" class="control-label">Iskanje vnosov:</label>
-            <input type="text" class="form-control" id="filterList" placeholder="Iskalni niz..." ng-model="vm.searchValue" ng-model-options="{ debounce: 1000 }" ng-change="vm.performSearch()" autocomplete="off" />
-            <button type="submit" class="btn btn-primary"><span class="glyphicon" ng-class="vm.searchInProgress ? 'glyphicon-refresh' : 'glyphicon-search'"></span> Iskanje</button>
-          </div>
-          <div class="form-group" style="float:right;">
-            <button class="btn btn-success btn-sm" ng-click="vm.openAddEntryModal()">Dodaj vnos v: {{ vm.currentCodelist.displayName }}</button>
-          </div>
-        </form> 
-        
-        <table ng-show="vm.codelists" class="table table-striped table-hover">
+      <div class="col-md-3">
+        <div class="form-group" ng-class="{'has-error' : (vm.selection.studyYear === null && vm.selectionError)}">
+          <select id="sy" class="form-control input-sm" ng-model="vm.search.studyYear" ng-options="sy.name for sy in vm.studyYears"></select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <button class="form-control input-sm btn btn-sm btn-primary" ng-click="vm.getCourseOrganizations()">Dobi izvajalce</button>
+        </div>
+      </div>
+      <div ng-show="vm.courseOrganizations" class="col-md-12">
+  
+        <h3>Seznam izvajalcev predmetov v študijskem letu {{ vm.search.studyYear.name }}</h3>
+        <div class="form-group">
+          <label for="filterList" class="control-label">Iskanje vnosov:</label>
+          <input type="text" class="form-control" id="filterList" placeholder="Iskalni niz..." ng-model="filterList">
+        </div>
+        <table class="table table-striped table-hover">
           <thead>
             <tr class="success">
               <th>#</th>
-              <th ng-repeat="key in vm.codelistCols" ng-if="key !== 'deleted' && key !== 'fresh' && key !== 'loginData'">{{ key }}</th>
-              <th></th>
+              <th>Šifra predmeta</th>
+              <th>Ime predmeta</th>
+              <th>1. izvajalec</th>
+              <th>2. izvajalec</th>
+              <th>3. izvajalec</th>
+              <th><!-- uredi/izbriši --></th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="entry in vm.codelistData" ng-class="{'text-danger': entry.deleted, 'text-info': entry.fresh}">
-              <td>{{ ((vm.currentPage-1)*20) + $index+1 }}</td>
-              <td ng-repeat="(key, val) in entry" ng-if="key !== 'deleted' && key !== 'fresh' && key !== 'loginData'">{{ val | formatDisplayName }}</td>
+            <tr ng-repeat="courseOrganization in vm.courseOrganizations | filter:filterList">
+              <td>{{ $index + 1 }}</td>
+              <td>{{ courseOrganization.course.id }}</td>
+              <td>{{ courseOrganization.course.name }}</td>
+              <td>{{ courseOrganization.organizer1.firstName }} {{ courseOrganization.organizer1.lastName1 }} {{ courseOrganization.organizer1.lastName2 }}</td>
+              <td>{{ courseOrganization.organizer2.firstName }} {{ courseOrganization.organizer2.lastName1 }} {{ courseOrganization.organizer2.lastName2 }}</td>
+              <td>{{ courseOrganization.organizer3.firstName }} {{ courseOrganization.organizer3.lastName1 }} {{ courseOrganization.organizer3.lastName2 }}</td>
               <td>
-                <a href="" class="btn btn-primary btn-xs" ng-click="vm.openEditEntryModal(entry, $index)">Uredi ...</a>
-                <span class="label label-danger" ng-show="entry.deleted">Zbrisano</span>
-                <span class="label label-info" ng-show="entry.fresh">Dodano</span>
+                <a class="btn btn-primary btn-xs" ng-click="vm.openEditEntryModal(courseOrganization, $index)">Uredi ...</a>
               </td>
             </tr>
           </tbody>
         </table>
-    
-        <div style="text-align: center;">
-          <ul uib-pagination first-text="Prva" last-text="Zadnja" next-text="Naprej" previous-text="Nazaj" boundary-links=true max-size=15 items-per-page="20" total-items="vm.totalCount" ng-model="vm.currentPage" ng-change="vm.changedPage()"></ul>
-        </div>
+        <div style="margin-bottom: 30px;"></div>
       </div>
+    </div>
   </div>
-</div>
+  

@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="vm.close()">&times;</button>
+  <h4 class="modal-title">Urejanje izvajalcev predmeta</h4>
+</div>
+
+<div class="modal-body">
+
+  <form class="form-horizontal" id="entryForm" ng-submit="vm.saveEntry()">
+      <label for="izvajalec1" class="col-sm-3 control-label" style="text-align:left;padding-left:0;">1. izvajalec</label>
+      <select id="izvajalec1" class="form-control input-sm" ng-model="vm.selected.organizer1" ng-options="(izvajalec1.firstName ? izvajalec1.firstName : '') + ' ' + (izvajalec1.lastName1 ? izvajalec1.lastName1 : '') + ' ' + (izvajalec1.lastName2 ? izvajalec1.lastName2 : '') for izvajalec1 in vm.organizers"></select>
+      <label for="izvajalec2" class="col-sm-3 control-label" style="text-align:left;padding-left:0;">2. izvajalec</label>
+      <select id="izvajalec2" class="form-control input-sm" ng-model="vm.selected.organizer2" ng-options="(izvajalec2.firstName ? izvajalec2.firstName : '') + ' ' + (izvajalec2.lastName1 ? izvajalec2.lastName1 : '') + ' ' + (izvajalec2.lastName2 ? izvajalec2.lastName2 : '') for izvajalec2 in vm.organizers"></select>
+      <label for="izvajalec3" class="col-sm-3 control-label" style="text-align:left;padding-left:0;">3. izvajalec</label>
+      <select id="izvajalec3" class="form-control input-sm" ng-model="vm.selected.organizer3" ng-options="(izvajalec3.firstName ? izvajalec3.firstName : '') + ' ' + (izvajalec3.lastName1 ? izvajalec3.lastName1 : '') + ' ' + (izvajalec3.lastName2 ? izvajalec3.lastName2 : '') for izvajalec3 in vm.organizers"></select>
+  </form>
+</div>
+
+
+<div class="modal-footer">
+  
+  <div ng-show="vm.error" class="alert alert-danger" style="display: block; text-align: left;">
+    <strong>{{ vm.error }}</strong>
+  </div>
+
+  <button type="submit" class="btn btn-success" form="entryForm"><span class="glyphicon glyphicon-floppy-disk"></span> Shrani</button>
+  <button type="button" class="btn btn-default" ng-click="vm.close()">Zapri</button>
+</div>
