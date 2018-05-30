@@ -29,7 +29,7 @@
           <div class="form-group">
             <label>Datum izdaje sklepa*: </label>
             <div class="input-group">
-              <input type="text" class="form-control input-sm" uib-datepicker-popup ng-model="vm.agreement.issueDate" is-open="vm.popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Zapri" current-text="Danes" clear-text="Počisti" placeholder="YYYY-MM-DD" alt-input-formats="['d!.M!.yyyy']" ng-change="vm.validateDate()" />
+              <input type="date" class="form-control input-sm" uib-datepicker-popup ng-model="vm.agreement.issueDate" is-open="vm.popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Zapri" current-text="Danes" clear-text="Počisti" placeholder="YYYY-MM-DD" alt-input-formats="['d!.M!.yyyy']" ng-change="vm.validateDate()" />
               <span class="input-group-btn">
                 <button type="button" class="btn btn-sm btn-default" style="line-height: inherit;" ng-click="vm.open1()"><span class="glyphicon glyphicon-calendar"></span></button>
               </span>
@@ -41,7 +41,7 @@
           <div class="form-group">
             <label>Sklep veljaven do: </label>
             <div class="input-group">
-              <input type="text" class="form-control input-sm" uib-datepicker-popup ng-model="vm.agreement.validUntil" is-open="vm.popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Zapri" current-text="Danes" clear-text="Počisti" placeholder="YYYY-MM-DD" alt-input-formats="['d!.M!.yyyy']" ng-change="vm.validateDate()" />
+              <input type="date" class="form-control input-sm" uib-datepicker-popup ng-model="vm.agreement.validUntil" is-open="vm.popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Zapri" current-text="Danes" clear-text="Počisti" alt-input-formats="['d!.M!.yyyy']" ng-change="vm.validateDate()" />
               <span class="input-group-btn">
                 <button type="button" class="btn btn-sm btn-default" style="line-height: inherit;" ng-click="vm.open2()"><span class="glyphicon glyphicon-calendar"></span></button>
               </span>

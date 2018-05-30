@@ -18,6 +18,7 @@
         function success(response) {
           vm.totalCount = response.headers('X-total-count');
           vm.searchResult = response.data;
+          console.log(vm.searchResult);
         },
         function error(error) {
           console.log('Error loading agreements...');

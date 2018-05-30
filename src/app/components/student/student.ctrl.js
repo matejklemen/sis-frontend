@@ -1,5 +1,5 @@
 (function() {
-  var studentCtrl = function($scope, $location, $routeParams, $uibModal, studentService, enrolmentService, tokenService, $filter, $window, authenticationService, examTermService,gradeData, exporterService) {
+  var studentCtrl = function($scope, $location, $routeParams, $uibModal, studentService, enrolmentService, tokenService, agreementService, $filter, $window, authenticationService, examTermService,gradeData, exporterService) {
     var vm = this;
 
     vm.role = authenticationService.getRole();
@@ -10,8 +10,7 @@
       studentService.getByRegisterNumber($routeParams.registerNumber).then(
         function success(response) {
           vm.student = response.data[0];
-          //console.log(response.data);
-
+          
           tokenService.getTokenByStudentId(vm.student.id).then(
             function success(response) {
               //console.log(response.data);
@@ -68,10 +67,22 @@
               vm.studentCourses = response.data;
               console.log(response.data)
             },
-            function error(error){
+            function error(error) {
               console.log("Oh no...",error);
             }
           );
+
+          agreementService.getAgreementsForStudent(vm.student.id).then(
+            function success(response) {
+              vm.agreements = response.data;
+
+              vm.hasAgreements = true;
+            },
+            function error(error) {
+              console.log("Error obtaining agreements for student...");
+              console.log(error);
+            })
+
         },
         function error(response) {
           console.error("Oh no... ", response);

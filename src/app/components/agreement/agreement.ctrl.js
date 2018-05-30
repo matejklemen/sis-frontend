@@ -27,15 +27,10 @@
       agreementService.getAgreementById($routeParams.agreementId).then(
         function success(response) {
           vm.agreement = response.data;
-          console.log(response.data);
+          vm.agreement.issueDate = new Date(vm.agreement.issueDate); 
 
-          vm.agreement.issueDate = new Date(vm.agreement.issueDateString); 
-          
-          if(vm.agreement.validUntilString != null)
-            vm.agreement.validUntil = new Date(vm.agreement.validUntilString);
-
-          delete vm.agreement.validUntilString;
-          delete vm.agreement.issueDateString;
+          if(vm.agreement.validUntil != null)
+            vm.agreement.validUntil = new Date(vm.agreement.validUntil);
 
           studentService.getEnrolledForCurrentYear().then(
             function success(response) {
@@ -109,8 +104,7 @@
             return;
         }
 
-        console.log("validUntil: ", vm.agreement.validUntil);
-        if(vm.agreement.validUntil !== undefined)
+        if(vm.agreement.validUntil != undefined && vm.agreement.validUntil != null)
           vm.agreement.validUntil = new Date(vm.agreement.validUntil);
 
         // We are making a copy of the object (model) to send so we can put date and time into a single field,
@@ -121,6 +115,7 @@
         console.log(objectToSend);
         if(vm.updateMode) {
           console.log("Update mode!");
+          console.log(objectToSend)
           agreementService.updateAgreement(objectToSend).then(
             function success(response) {
               $location.path("/control");
