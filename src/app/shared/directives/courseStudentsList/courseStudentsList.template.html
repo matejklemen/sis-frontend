@@ -89,6 +89,7 @@
               <th>Šifra predmeta</th>
               <th>Ime predmeta</th>
               <th>Število vpisanih v predmet</th>
+              <th><!-- več... --></th>
             </tr>
           </thead>
           <tbody>
@@ -97,6 +98,7 @@
               <td>{{ result.course.id }}</td>
               <td>{{ result.course.name }}</td>
               <td>{{ result.numberOfEnrolledStudents }}</td>
+              <td><a class="btn btn-primary btn-xs" ng-click="vm.courseMore(result.course)">Več...</a></td>
             </tr>
           </tbody>
         </table>
