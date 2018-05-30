@@ -1,5 +1,5 @@
 (function() {
-  var agreementCtrl = function($scope, $routeParams, $location, studentService, authenticationService, courseOrganizationService, examTermService) {
+  var agreementCtrl = function($scope, $routeParams, $location, studentService, authenticationService, agreementService) {
     var vm = this;
 
     /* Get role */
@@ -20,43 +20,45 @@
       });
 
 
+    if(vm.updateMode)
+      selectSavedOptions();
+
     function selectSavedOptions() {
-      examTermService.getExamTermById($routeParams.examTermId).then(
+      agreementService.getAgreementById($routeParams.agreementId).then(
         function success(response) {
-          vm.examTerm = response.data;
+          vm.agreement = response.data;
+          console.log(response.data);
 
-          // only allow professors to see exams for their own courses
-          if(vm.role.id == 3 && vm.examTerm.organizer.id !== profIdentity)
-            vm.cancelEnrolment();
+          vm.agreement.issueDate = new Date(vm.agreement.issueDateString); 
+          
+          if(vm.agreement.validUntilString != null)
+            vm.agreement.validUntil = new Date(vm.agreement.validUntilString);
 
-          // assign temporary date and time from datetime
-          vm.examTerm.date = new Date(vm.examTerm.datetime);
-          vm.examTerm.time = new Date(vm.examTerm.datetime);
+          delete vm.agreement.validUntilString;
+          delete vm.agreement.issueDateString;
 
-          var selectableProfessors = [vm.examTerm.courseOrganization.organizer1];
-          if(vm.examTerm.courseOrganization.organizer2 !== null)
-            selectableProfessors.push(vm.examTerm.courseOrganization.organizer2);
-          if(vm.examTerm.courseOrganization.organizer3 !== null)
-            selectableProfessors.push(vm.examTerm.courseOrganization.organizer3);
+          studentService.getEnrolledForCurrentYear().then(
+            function success(response) {
+              vm.selectableStudents = response.data;
+              vm.selectableStudents.some(function(elem, index) {
+                  if(elem.id == vm.agreement.student.id) {
+                    vm.agreement.student = elem;
+                    return;
+                  }
+              });
+            },
+            function error(error) {
+              console.log("Error getting enrolled students for current year (inside update)...");
+              console.log(error);
+            })
 
-          vm.professor = selectableProfessors;
-          vm.professor.some(function(elem, index) {
-              if(elem.id == vm.examTerm.organizer.id) {
-                vm.examTerm.organizer = elem;
-                return;
-              }
-          });
 
-          vm.availableCourses.some(function(elem, index) {
-            if(elem.id == vm.examTerm.courseOrganization.id) {
-              vm.examTerm.courseOrganization = elem;
-              return;
-            }
-          });
+        
         },
         function error(error) {
+          console.log("Error when trying to get selected options from existing agreement...");
           console.log(error);
-          vm.cancelEnrolment();
+          vm.cancelEdit();
         });      
     }
 
@@ -93,17 +95,23 @@
         }
 
         // send only the ID to prevent possible hardly traceable errors
-        vm.agreement.student = vm.agreement.student.id;
+        vm.agreement.student = {"id": vm.agreement.student.id};
 
         if(vm.agreement.issueDate === undefined) {
             vm.finalizeError = "datum izdaje sklepa je neizpolnjen!";
             return;
         }
 
+        vm.agreement.issueDate = new Date(vm.agreement.issueDate);
+
         if(vm.agreement.contentSlovene === undefined) {
             vm.finalizeError = "vsebina sklepa je prazna!";
             return;
         }
+
+        console.log("validUntil: ", vm.agreement.validUntil);
+        if(vm.agreement.validUntil !== undefined)
+          vm.agreement.validUntil = new Date(vm.agreement.validUntil);
 
         // We are making a copy of the object (model) to send so we can put date and time into a single field,
         // without affecting the model displayed.
@@ -113,9 +121,35 @@
         console.log(objectToSend);
         if(vm.updateMode) {
           console.log("Update mode!");
+          agreementService.updateAgreement(objectToSend).then(
+            function success(response) {
+              $location.path("/control");
+            },
+            function error(error) {
+              console.log("Error when updating...");
+              if(error.data.status == 400)
+                vm.finalizeError += error.data.messages[0];
+              else
+                vm.finalizeError += "neznana napaka";
+
+              console.log(error);
+            });
         }
         else {
           console.log("Insert mode!");
+          agreementService.insertAgreement(objectToSend).then(
+            function(success) {
+              $location.path("/control");
+            },
+            function error(error) {
+              console.log("Error when inserting...");
+              if(error.data.status == 400)
+                vm.finalizeError += error.data.messages[0];
+              else
+                vm.finalizeError += "neznana napaka";
+
+              console.log(error);
+            });
         }
     };
 
