@@ -95,6 +95,31 @@
       </div>
     </div>
 
+    <!-- Sklepi -->
+    <div class="col-md-12" style="margin-bottom:50px">
+      <h4><span class="glyphicon glyphicon-list-alt"></span> Sklepi</h4>
+  
+      <table class="table table-striped">
+        <thead>
+          <tr class="success">
+            <th>Datum izdaje</th>
+            <th>Veljaven do</th>
+            <th>Besedilo</th>
+            <th>Besedilo (angleško)</th>
+            <th style="text-align:center;">Izdajatelj</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="agreement in vm.agreements">
+            <td>{{ agreement.issueDateString | formatDateNoHour }}</td>
+            <td>{{ agreement.validUntilString | formatDateNoHour }}</td>
+            <td>{{ agreement.contentSlovene }}</td>
+            <td>{{ agreement.contentEnglish }}</td>
+            <td style="text-align:center;">{{ agreement.issuer }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
 
     <!-- Vpisi -->

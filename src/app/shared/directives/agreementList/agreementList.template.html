@@ -20,7 +20,7 @@
               <th>Veljaven do</th>
               <th>Besedilo</th>
               <th>Besedilo (angleško)</th>
-              <th>Izdajatelj</th>
+              <th style="text-align:center;">Izdajatelj</th>
               <th><!-- uredi/izbriši / vnos ocen --></th>
               <th><!-- seznam prijavljenih --></th>
             </tr>
@@ -29,11 +29,10 @@
             <tr ng-repeat="agreement in vm.searchResult">
               <td>{{ $index + 1 + (vm.limit * (vm.currentPage - 1)) }}</td>
               <td>{{ agreement.issueDateString | formatDateNoHour }}</td>
-              <td> {{ agreement.validUntil | formatDateNoHour }} </td>
+              <td> {{ agreement.validUntilString | formatDateNoHour }} </td>
               <td>{{ agreement.contentSlovene }}</td> <!-- TODO: truncate text if it's too long -->
               <td>{{ agreement.contentEnglish }}</td> <!-- TODO: truncate text if it's too long -->
-              <td>{{ agreement.type }}</td>
-              <td>{{ agreement.issuer }}</td>
+              <td style="text-align:center;">{{ agreement.issuer }}</td>
               <td>
                 <a class="btn btn-primary btn-xs" href="/agreement/{{ agreement.idAgreement }}">Uredi</a>
                 <a class="btn btn-danger btn-xs" ng-click="vm.deleteAgreement(agreement, $index)">Izbriši</a>
