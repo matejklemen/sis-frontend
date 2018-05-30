@@ -39,6 +39,10 @@
         vm.error = "Prvi izvajalec je obvezen";
         return;
       }
+      if(vm.selected.organizer1.firstName == "" && vm.selected.organizer2.firstName != "") {
+        vm.error = "Tretji izvajalec ne more biti izbran pred drugim";
+        return;
+      }
       if(vm.selected.organizer1.firstName != "" && vm.selected.organizer2.firstName != "" && vm.selected.organizer1.id == vm.selected.organizer2.id) {
         vm.error = "Prvi in drugi izvajalec ne moreta biti enaka";
         return;

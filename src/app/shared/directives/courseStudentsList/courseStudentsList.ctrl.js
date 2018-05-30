@@ -63,6 +63,7 @@
       vm.error = {};
       vm.queryInProgress = true;
 
+      console.log(vm.search)
       if(vm.numberOfStudentsForEachCourse) {
         studentService.getNumberOfStudentsForEachCourse({studyYear: vm.search.studyYear, studyProgram: vm.search.studyProgram, year: vm.search.year}).then(
           function success(response) {
@@ -88,7 +89,15 @@
           }
         );
       }
-    };
+    }
+
+    vm.courseMore = function(course) {
+      vm.search.course =  vm.courses[getIndexOfCourse(vm.courses, course)];
+      vm.search.studyYear = vm.searched.studyYear;
+      vm.search.studyProgram = vm.searched.studyProgram;
+      vm.search.year = vm.searched.year;
+      vm.performQuery();
+    }
 
     function getEnrolmentTypesForStudents() {
       vm.searchResult.forEach(function(elem, index) {
@@ -100,6 +109,14 @@
             console.log("Woopsie poopsie~~~", error);
           });
       });
+    }
+
+    function getIndexOfCourse(courses, course) {
+      for(var i = 0; i < courses.length; i++) {
+        if(courses[i].id == course.id) {
+          return i;
+        }
+      }
     }
 
   };
