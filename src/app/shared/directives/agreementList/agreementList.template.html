@@ -30,10 +30,10 @@
             <tr ng-repeat="agreement in vm.searchResult">
               <td>{{ $index + 1 + (vm.limit * (vm.currentPage - 1)) }}</td>
               <td>{{ agreement.issueDate | formatDateNoHour }}</td>
-              <td>{{ agreement.validUntil | formatDateNoHour }}</td>
-              <td>{{ agreement.student.name + ' ' + agreement.student.surname }}</td>
+              <td>{{ agreement.validUntil == null? '/': (agreement.validUntil | formatDateNoHour) }}</td>
+              <td>{{ agreement.studentName + ' ' + agreement.studentSurname }}</td>
               <td>{{ agreement.contentSlovene }}</td>
-              <td>{{ agreement.contentEnglish }}</td>
+              <td>{{ agreement.contentEnglish == null? '/': agreement.contentEnglish }}</td>
               <td style="text-align:center;">{{ agreement.issuer }}</td>
               <td>
                 <a class="btn btn-primary btn-xs" href="/agreement/{{ agreement.idAgreement }}">Uredi</a>

@@ -104,17 +104,17 @@
           <tr class="success">
             <th>Datum izdaje</th>
             <th>Veljaven do</th>
-            <th>Besedilo</th>
-            <th>Besedilo (angleško)</th>
+            <th style="text-align:center;">Besedilo</th>
+            <th style="text-align:center;">Besedilo (angleško)</th>
             <th style="text-align:center;">Izdajatelj</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="agreement in vm.agreements">
             <td>{{ agreement.issueDate | formatDateNoHour }}</td>
-            <td>{{ agreement.validUntil | formatDateNoHour }}</td>
-            <td>{{ agreement.contentSlovene }}</td>
-            <td>{{ agreement.contentEnglish }}</td>
+            <td>{{ agreement.validUntil == null? '/': (agreement.validUntil | formatDateNoHour) }}</td>
+            <td style="text-align:center;">{{ agreement.contentSlovene }}</td>
+            <td style="text-align:center;">{{ agreement.contentEnglish == null? '/': (agreement.contentEnglish) }}</td>
             <td style="text-align:center;">{{ agreement.issuer }}</td>
           </tr>
         </tbody>
