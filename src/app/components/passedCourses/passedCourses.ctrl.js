@@ -8,8 +8,7 @@
     studentCoursesService.getPassedCourses($routeParams.studentId).then(
       function success(response){
         console.log(response.data)
-        vm.passedCourses = response.data.passedCourses;
-        vm.statistics = response.data.statistics;
+        vm.DigitalIndex = response.data.indexList;
       },
       function error(error){
         console.log("Oh no...",error)
@@ -25,6 +24,14 @@
         console.log("Oh no...",error)
       }
     );
+
+    vm.sum = function(stats){
+      var sum = 0;
+      for(var i = 0; i < stats.length; i++){
+        sum += stats[i].avg
+      }
+      return Math.round(sum/stats.length * 100) / 100;
+    }
   };
 
   angular

@@ -13,37 +13,43 @@
     
   </div>
 
-  <table class="table table-striped table-hover">
-      <thead>
-        <tr class="success">
-          <th>#</th>
-          <th>Predmet</th>
-          <th>Letnik</th>
-          <th>KT</th>
-          <th>Datum</th>
-          <th>Ocena</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="course in vm.passedCourses">
-          <td>{{ $index + 1 }}</td>
-          <td>{{ course.course.name}}</td>
-          <td>{{ course.year}}</td>
-          <td>{{ course.course.creditPoints }}</td>
-          <td>{{ course.dateOfGrade  | formatDateNoHour }}</td>
-          <td>{{ course.grade }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div style="width: 100%; text-align: center; font-size: 1.2em;">
-      <img ng-if="vm.passedCourses == undefined" src="public/images/progress.gif" class="loading-gif">
-      <div ng-if="vm.passedCourses.length == 0">
+  <div ng-repeat="digIndex in vm.DigitalIndex">
+    <h4>{{ digIndex.studyProgram }}</h4>
+      <table class="table table-striped table-hover">
+          <thead>
+            <tr class="success">
+              <th>#</th>
+              <th>Predmet</th>
+              <th>Letnik</th>
+              <th>KT</th>
+              <th>Datum</th>
+              <th>Ocena</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="course in digIndex.passedCourses">
+              <td>{{ $index + 1 }}</td>
+              <td>{{ course.course.name}}</td>
+              <td>{{ course.year}}</td>
+              <td>{{ course.course.creditPoints }}</td>
+              <td>{{ course.dateOfGrade  | formatDateNoHour }}</td>
+              <td>{{ course.grade }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div ng-repeat="stats in digIndex.statistics">
+          <h5>Letnik {{ stats.year }} ({{ stats.schoolYear }}): opravljenih {{ stats.passedCourses }} od {{ stats.totalCourses }} predmetov s povprečno oceno {{ stats.avg }}.</h5>
+        </div>
+        <h5>Skupna povprečna ocena je: {{ vm.sum(digIndex.statistics) }}</h5>
+        <div style="height:70px"></div>
+  </div>
+
+  <div style="width: 100%; text-align: center; font-size: 1.2em;">
+      <img ng-if="vm.DigitalIndex == undefined" src="public/images/progress.gif" class="loading-gif">
+      <div ng-if="vm.DigitalIndex.length == 0">
         <span class="glyphicon glyphicon-remove"></span><br />Ni opravljenih predmetov
       </div>
     </div>
-
-    <div ng-repeat="stats in vm.statistics">
-      <h5>Letnik {{ stats.year }} ({{ stats.schoolYear }}): opravljenih {{ stats.passedCourses }} od {{ stats.totalCourses }} predmetov s povprečno oceno {{ stats.avg }}.</h5>
-    </div>
+  
   
 </div>
