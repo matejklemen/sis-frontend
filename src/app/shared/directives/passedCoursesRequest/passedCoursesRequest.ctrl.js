@@ -4,21 +4,48 @@
 
     vm.toggle = false;
     vm.copies = 1
-    vm.successPut = false
+    vm.statusInput = "";
+    vm.statusButton = "btn-primary";
+
+    var successInput = "has-success"
+    var successButton = "btn-success"
+    var errorInput = "has-error"
+    var errorButton = "btn-danger"
+    var primaryInput = ""
+    var primaryButton = "btn-primary"
 
     vm.makeRequest = function(){
-      exporterService.putRequest($scope.id,vm.copies,"courses").then(
-        function success(response){
-          vm.successPut = true;
+      if(vm.copies < 1 || vm.copies > 6){
+        vm.statusInput = errorInput
+        vm.statusButton = errorButton
           $timeout(function(){
-            vm.toggle = false
-            vm.successPut = false;
+            vm.statusInput = primaryInput
+            vm.statusButton = primaryButton
           }, 500)
-        },
-        function error(error){
-          console.log("Oh no...",error)
-        }
-      )
+      }
+      else{
+        exporterService.putRequest($scope.id,vm.copies,"courses").then(
+          function success(response){
+            vm.statusInput = successInput
+            vm.statusButton = successButton
+            $timeout(function(){
+              vm.toggle = false
+              vm.statusInput = primaryInput
+              vm.statusButton = primaryButton
+            }, 500)
+          },
+          function error(error){
+            console.log("Oh no...",error)
+          }
+        )
+      }
+    }
+
+    vm.applyClassToInput= function(){
+      return "input-group " + vm.statusInput
+    }
+    vm.applyClassToButton= function(){
+      return "btn btn-sm " + vm.statusButton
     }
   };
 
