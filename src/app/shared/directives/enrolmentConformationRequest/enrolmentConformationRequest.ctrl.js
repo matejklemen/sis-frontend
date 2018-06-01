@@ -37,6 +37,17 @@
           },
           function error(error){
             console.log("Oh no...",error)
+            vm.statusInput = errorInput
+            vm.statusButton = errorButton
+            vm.adderErrorPopoverIsOpen = true
+            vm.adderErrorPopoverContent = error.data
+            $timeout(function(){
+              vm.toggle = false
+              vm.statusInput = primaryInput
+              vm.statusButton = primaryButton
+              vm.adderErrorPopoverIsOpen = false
+            }, 2000)
+
           }
         )
       }
