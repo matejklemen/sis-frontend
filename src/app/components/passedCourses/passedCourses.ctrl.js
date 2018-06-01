@@ -28,6 +28,8 @@
     vm.sum = function(stats){
       var sum = 0;
       for(var i = 0; i < stats.length; i++){
+        if(stats[i].avg <= 0)
+          continue;
         sum += stats[i].avg
       }
       return Math.round(sum/stats.length * 100) / 100;
