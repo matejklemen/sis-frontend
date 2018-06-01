@@ -40,13 +40,18 @@
       return $http.get(apiBaseRoute + '/api/students/currently-enrolled');
     }
 
+    var getAllStudents = function() {
+      return $http.get(apiBaseRoute + '/api/students?order=surname ASC,name ASC');
+    }
+
     return {
       searchStudents: searchStudents,
       getByRegisterNumber: getByRegisterNumber,
       getByStudentId: getByStudentId,
       getByCourse: getByCourse,
       getNumberOfStudentsForEachCourse: getNumberOfStudentsForEachCourse,
-      getEnrolledForCurrentYear: getEnrolledForCurrentYear
+      getEnrolledForCurrentYear: getEnrolledForCurrentYear,
+      getAllStudents: getAllStudents
     };
   };
 

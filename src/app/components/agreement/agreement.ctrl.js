@@ -32,7 +32,7 @@
           if(vm.agreement.validUntil != null)
             vm.agreement.validUntil = new Date(vm.agreement.validUntil);
 
-          studentService.getEnrolledForCurrentYear().then(
+          studentService.getAllStudents().then(
             function success(response) {
               vm.selectableStudents = response.data;
               vm.selectableStudents.some(function(elem, index) {
