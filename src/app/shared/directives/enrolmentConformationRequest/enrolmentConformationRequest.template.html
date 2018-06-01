@@ -1,8 +1,8 @@
 <div ng-if="vm.toggle" class="form-group" style="width:130px;">
-    <div ng-class="vm.successPut? 'input-group has-success': 'input-group'">
+    <div ng-class="vm.applyClassToInput()">
       <input type="text" class="form-control" ng-model="vm.copies" style="height:35.5px;">
       <span class="input-group-btn">
-        <a ng-class="vm.successPut? 'btn btn-success btn-sm': 'btn btn-primary btn-sm'" ng-click="vm.makeRequest()">
+        <a ng-class="vm.applyClassToButton()" ng-click="vm.makeRequest()" uib-popover="{{ vm.adderErrorPopoverContent }}" popover-trigger="'none'" type="button" popover-is-open="vm.adderErrorPopoverIsOpen">
           <span class="glyphicon glyphicon-open-file"></span> Naroči
         </a>
       </span>
