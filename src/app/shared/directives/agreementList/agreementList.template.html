@@ -32,9 +32,9 @@
               <td>{{ agreement.issueDate | formatDateNoHour }}</td>
               <td>{{ agreement.validUntil == null? '/': (agreement.validUntil | formatDateNoHour) }}</td>
               <td>{{ agreement.studentName + ' ' + agreement.studentSurname }}</td>
-              <td>{{ agreement.contentSlovene }}</td>
-              <td>{{ agreement.contentEnglish == null? '/': agreement.contentEnglish }}</td>
-              <td style="text-align:center;">{{ agreement.issuer }}</td>
+              <td>{{ agreement.toggleSlo? agreement.fullContentSlovene: agreement.contentSlovene }} <a ng-if="agreement.hasMoreSlo" ng-click="vm.toggleShowSlo($index)" style="text-decoration:none;"> {{ agreement.toggleMessageSlo }}</a></td>
+              <td>{{ agreement.contentEnglish == null? '/': (agreement.toggleEng? agreement.fullContentEnglish: agreement.contentEnglish) }}<a ng-if="agreement.hasMoreEng" ng-click="vm.toggleShowEng($index)" style="text-decoration:none;">{{ agreement.toggleMessageEng }}</a></td>
+              <td style="text-align:center;"> {{ agreement.issuer }}</td>
               <td>
                 <a class="btn btn-primary btn-xs" href="/agreement/{{ agreement.idAgreement }}">Uredi</a>
                 <a class="btn btn-danger btn-xs" ng-click="vm.deleteAgreement(agreement, $index)">Izbriši</a>
