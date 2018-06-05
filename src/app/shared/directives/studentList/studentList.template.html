@@ -43,12 +43,12 @@
         <tbody>
           <tr ng-repeat="result in vm.searchResult">
             <td>{{ $index+1 }}</td>
-            <td>{{ result.registerNumber }}</td>
-            <td>{{ result.name }}</td>
-            <td>{{ result.surname }}</td>
-            <td ng-if="vm.role.id == 4"><enrolment-token-button id="result.id"></enrolment-token-button></td>
-            <td ng-if="vm.role.id == 4"><enrolment-confirmation-button id="result.id"></enrolment-confirmation-button></td>
-            <td><a class="btn btn-primary btn-xs" href="/student/{{ result.registerNumber }}">Več...</a></td>
+            <td>{{ result.student.registerNumber }}</td>
+            <td>{{ result.student.name }}</td>
+            <td>{{ result.student.surname }}</td>
+            <td ng-if="vm.role.id == 4"><enrolment-token-button id="result.student.id" token="result.token" enrolment="result.enrolment"></enrolment-token-button></td>
+            <td ng-if="vm.role.id == 4"><enrolment-confirmation-button id="result.student.id" enrolment="result.enrolment"></enrolment-confirmation-button></td>
+            <td><a class="btn btn-primary btn-xs" href="/student/{{ result.student.registerNumber }}">Več...</a></td>
           </tr>
         </tbody>
       </table>

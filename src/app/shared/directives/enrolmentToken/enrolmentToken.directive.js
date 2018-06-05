@@ -4,7 +4,9 @@
     return {
       restrict: 'EC',
       scope: {
-        id: "="
+        id: "=",
+        token: "=",
+        enrolment: "="
       },
       controller: "enrTokenCtrl",
       controllerAs:'vm',

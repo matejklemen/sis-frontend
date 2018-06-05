@@ -3,25 +3,12 @@
   var confirmCtrl = function($scope, exporterService, enrolmentService, $window) {
     var vm = this;
    
-    vm.enrolmentConfirmed=null;
-    vm.enrolment;
+    vm.enrolment = $scope.enrolment;
 
-    checkIfValidEnrolment();
-
-
-    /* Methods */
-    function checkIfValidEnrolment(){
-      enrolmentService.getLastEnrolment($scope.id).then(
-        function success(response){
-          vm.enrolmentConfirmed = response.data.confirmed;
-          vm.enrolment = response.data;
-          //console.log(response.data);
-        },
-        function error(error){
-          //console.log("Oh no...",error);
-          vm.enrolmentConfirmed = null;
-        }
-      );
+    if(vm.enrolment) {
+      vm.enrolmentConfirmed = vm.enrolment.confirmed;
+    } else {
+      vm.enrolmentConfirmed = null;
     }
 
     vm.viewEnrolmentConformationPdf = function(){

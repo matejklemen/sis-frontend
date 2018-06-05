@@ -1,17 +1,44 @@
-
 (function() {
-  var enrTokenCtrl = function($scope,tokenService,$uibModal,enrolmentService) {
+  var enrTokenCtrl = function($scope, tokenService,$uibModal,enrolmentService) {
     var vm = this;
 
-    getEnrolmentToken($scope.id);
+    vm.studentId = $scope.id;
+    vm.enrolmentToken = $scope.token;
+    vm.enrolment = $scope.enrolment;
 
     vm.edit = false;
     vm.editDisable = false;
     vm.currentStudent = undefined;
 
+    //console.log("Token", vm.enrolmentToken);
+    //console.log("Enrolment", vm.enrolment);
+
+    if(vm.enrolmentToken) {
+      vm.enrolled = true;
+      vm.edit = true;
+      if(vm.enrolmentToken.used) {
+        vm.editDisable = true;
+
+        // ----- getLastEnrolment(vm.studentId);
+        if(!vm.enrolment.confirmed) {
+          //console.log("ima nepotrjen enrolment,", vm.studentId);
+          vm.edit = true;
+          vm.editDisable = true;
+        } else {
+          //console.log("ima potrjen enrolment,", vm.studentId);
+          vm.edit = false;
+        }
+        // -----
+
+      }
+      
+    } else {
+      vm.edit = false;
+    }
+
     vm.NewEnrolmentToken = function(){
       if(vm.enrolled){
-        tokenService.putToken($scope.id).then(
+        tokenService.putToken(vm.studentId).then(
           function success(response){
             vm.enrolmentToken = response.data;
             vm.edit = true;
@@ -24,7 +51,7 @@
           }
         );
       }else{
-        tokenService.putTokenForFirstEnrolment($scope.id).then(
+        tokenService.putTokenForFirstEnrolment(vm.studentId).then(
           function success(response){
             vm.enrolmentToken = response.data;
             vm.edit = true;
@@ -54,47 +81,6 @@
       }
     };
 
-
-    /* Helpers */
-    function getEnrolmentToken(studentId){
-      tokenService.getTokenByStudentId(studentId).then(
-        function success(response){
-          vm.enrolled = true;
-          vm.enrolmentToken = response.data;
-          if(vm.enrolmentToken.used){
-            vm.editDisable = true;
-            getLastEnrolment($scope.id);
-          }
-          vm.edit = true;
-        },
-        function error(error){
-          vm.edit = false;
-          //console.log("Oh no...",error);
-        }
-      );
-    }
-
-    function getLastEnrolment(id){
-      enrolmentService.getLastEnrolment(id).then(
-        function success(response){
-          //console.log("ima enrolment: ",id," data: ",response.data);
-          if(!response.data.confirmed){
-            //console.log("ima nepotrjen enrolment: ",id);
-            vm.edit = true;
-            vm.editDisable = true;
-          }
-          else{
-            //console.log("ima potrjen enrolment: ",id);
-            vm.edit = false;
-          }
-        },
-        function error(error){
-          //console.log("Oh no...",error);
-        }
-      );
-    }
-
-
     /* Modal */
     vm.openEditModal = function(enrolmentToken) {
       // create a modal instance and open it
@@ -122,8 +108,6 @@
     };
 
   };
-
-  enrTokenCtrl.$Inject = ["$scope","tokenService"];
 
   angular
     .module('sis')
