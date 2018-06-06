@@ -102,7 +102,7 @@
           <!-- e-mail -->
           <div class="form-group">
             <label for="i10">E-pošta: </label>
-            <input class="form-control input-sm" type="text" id="i10" ng-model="vm.student.email">
+            <input class="form-control input-sm" type="text" id="i10" ng-model="vm.student.email" ng-disabled="vm.role.id == 2">
           </div>
         </div>
         <div class="col-md-6">
