@@ -2,7 +2,7 @@
   /* global angular*/
   
   var formatOrganizers = function() {
-    return function(courseOrganization) {
+    return function(courseOrganization, makeNewLines) {
       var format = "";
 
       if(courseOrganization == null){
@@ -32,6 +32,10 @@
         if(courseOrganization.organizer3.lastName2 != null){
           format += " " +courseOrganization.organizer3.lastName2 + " ";
         }
+      }
+
+      if(makeNewLines) {
+        format = format.replace(/(, )/g, ",\n");
       }
 
       return format;

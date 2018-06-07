@@ -33,7 +33,7 @@
               <td>{{ term.courseName }}</td>
               <td>{{ term.duration }}</td>
               <td>{{ term.type }}</td>
-              <td>{{ term.organizerFullName }}</td>
+              <td style="font-size: 0.85em; white-space: pre-wrap;">{{ term.courseOrganization | formatOrganizers:true }}</td>
               <td>
                 <div ng-show="term.isValid">
                   <a class="btn btn-primary btn-xs" href="/examterm/{{ term.id }}">Uredi</a>

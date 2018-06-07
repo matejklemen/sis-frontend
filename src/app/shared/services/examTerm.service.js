@@ -31,11 +31,10 @@
 
       var offsetPart = offset != 0? '&offset=' + offset: '';
       var limitPart = limit != 0? '&limit=' + limit: '';
-      var organizerPart = idOrganizer != 0? ' organizer.id:EQ:' + idOrganizer: '';
       var studyYearPart = idStudyYear != 0? ' courseOrganization.studyYear.id:EQ:' + idStudyYear: '';
       var orderPart = '&order=datetime DESC';
 
-      return $http.get(apiBaseRoute + '/api/course-exam-term?filter=deleted:EQ:false' + organizerPart + studyYearPart + offsetPart + limitPart + orderPart);
+      return $http.get(apiBaseRoute + '/api/course-exam-term?organizerId=' + idOrganizer + '&filter=deleted:EQ:false' + studyYearPart + offsetPart + limitPart + orderPart);
     };
 
     var deleteExamTerm = function(idCourseExamTerm) {
