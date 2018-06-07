@@ -22,7 +22,7 @@
               <th>Vrsta</th>
               <th>Organizator</th>
               <th><!-- uredi/izbriši --></th>
-              <th><!-- FOR TESTING PURPOSE vnos ocen --></th>
+              <th><!-- vnos ocen --></th>
               <th><!-- seznam prijavljenih --></th>
             </tr>
           </thead>
@@ -34,16 +34,19 @@
               <td>{{ term.duration }}</td>
               <td>{{ term.type }}</td>
               <td>{{ term.organizerFullName }}</td>
-              <td ng-show="term.isValid">
-                <a class="btn btn-primary btn-xs" href="/examterm/{{ term.id }}">Uredi</a>
-                <a class="btn btn-danger btn-xs" ng-click="vm.deleteExamTerm(term, $index)">Izbriši</a>
+              <td>
+                <div ng-show="term.isValid">
+                  <a class="btn btn-primary btn-xs" href="/examterm/{{ term.id }}">Uredi</a>
+                  <a class="btn btn-danger btn-xs" ng-click="vm.deleteExamTerm(term, $index)">Izbriši</a>
+                </div>
               </td>
-              <!-- FOR TESTIN PURPOSE -->
-              <td><a class="btn btn-primary btn-xs" href="/signeduplist/{{ term.id }}?edit"><span class="glyphicon glyphicon-chevron-right"></span> Vnos ocen</a></td>
-              <!-- FOR TESTING PURPOSE
-                <td ng-hide="term.isValid"><a class="btn btn-primary btn-xs" href="/signeduplist/{{ term.id }}?edit"><span class="glyphicon glyphicon-chevron-right"></span> Vnos ocen</a></td>
-              -->
-              <td><a class="btn btn-primary btn-xs" href="/signeduplist/{{ term.id }}"><span class="glyphicon glyphicon-list"></span> Seznam prijavljenih ({{ term.signedUpCount }})</a></td>
+              <td>
+              <!--td ng-hide="term.isValid"-->
+                <a class="btn btn-primary btn-xs" href="/signeduplist/{{ term.id }}?edit"><span class="glyphicon glyphicon-chevron-right"></span> Vnos ocen</a>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-xs" href="/signeduplist/{{ term.id }}"><span class="glyphicon glyphicon-list"></span> Seznam prijavljenih ({{ term.signedUpCount }})</a>
+              </td>
             </tr>
           </tbody>
         </table>

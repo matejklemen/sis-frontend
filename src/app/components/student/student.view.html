@@ -15,9 +15,9 @@
   </h3>
   <hr/>
 
-  <!-- Izpitni roki -->
   <div class="row">
-    <div class="col-md-12" style="margin-bottom:50px">
+    <!-- Izpitni roki -->
+    <div class="col-md-12" style="margin-bottom:50px" ng-hide="vm.role.id == 3">
       <h4><span class="glyphicon glyphicon-calendar"></span> Izpitni roki</h4>
       <table class="table table-striped">
         <thead>
@@ -64,7 +64,7 @@
 
 
     <!-- Ocene -->
-    <div class="col-md-12" style="margin-bottom:50px">
+    <div class="col-md-12" style="margin-bottom:50px" ng-hide="vm.role.id == 3">
       <h4><span class="glyphicon glyphicon-list-alt"></span> Ocene</h4>
   
       <table class="table table-striped">
