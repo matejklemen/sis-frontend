@@ -89,8 +89,8 @@
       </table>
       <div style="width: 100%; text-align: center; font-size: 1.2em;">
         <img ng-if="vm.studentCourses == undefined" src="public/images/progress.gif" class="loading-gif">
-        <div ng-if="response.data.length == 0">
-          <span class="glyphicon glyphicon-road"></span><br />Ni predmetov
+        <div ng-if="vm.studentCourses.length == 0">
+          <span class="glyphicon glyphicon-warning-sign"></span><br />Ni predmetov
         </div>
       </div>
     </div>

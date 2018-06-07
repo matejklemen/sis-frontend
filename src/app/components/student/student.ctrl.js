@@ -24,8 +24,9 @@
           enrolmentService.getEnrolmentsForStudent(vm.student.id).then(
             function success(response) {
               vm.enrolments = response.data;
-              console.log(vm.enrolments);
-              vm.activeEnrolment = vm.enrolments[vm.enrolments.length-1].studyYear.id == 5;           
+              if(vm.enrolments.length > 0) {
+                vm.activeEnrolment = vm.enrolments[vm.enrolments.length-1].studyYear.id == 5;
+              }     
             },
             function error(error) {
               console.log("Oh no...", error);
@@ -68,6 +69,7 @@
               console.log(response.data)
             },
             function error(error) {
+              vm.studentCourses = [];
               console.log("Oh no...",error);
             }
           );
