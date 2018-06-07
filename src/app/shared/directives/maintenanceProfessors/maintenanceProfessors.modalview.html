@@ -7,11 +7,11 @@
 
   <form class="form-horizontal" id="entryForm" ng-submit="vm.saveEntry()">
       <label for="izvajalec1" class="col-sm-3 control-label" style="text-align:left;padding-left:0;">1. izvajalec</label>
-      <select id="izvajalec1" class="form-control input-sm" ng-model="vm.selected.organizer1" ng-options="(izvajalec1.firstName ? izvajalec1.firstName : '') + ' ' + (izvajalec1.lastName1 ? izvajalec1.lastName1 : '') + ' ' + (izvajalec1.lastName2 ? izvajalec1.lastName2 : '') for izvajalec1 in vm.organizers"></select>
+      <select id="izvajalec1" class="form-control input-sm" ng-model="vm.selected.organizer1" ng-options="(izvajalec1.lastName1 ? izvajalec1.lastName1 : '') + ' ' + (izvajalec1.lastName2 ? izvajalec1.lastName2 : '') + ' ' + (izvajalec1.firstName ? izvajalec1.firstName : '') for izvajalec1 in vm.organizers | orderBy:'lastName1'"></select>
       <label for="izvajalec2" class="col-sm-3 control-label" style="text-align:left;padding-left:0;">2. izvajalec</label>
-      <select id="izvajalec2" class="form-control input-sm" ng-model="vm.selected.organizer2" ng-options="(izvajalec2.firstName ? izvajalec2.firstName : '') + ' ' + (izvajalec2.lastName1 ? izvajalec2.lastName1 : '') + ' ' + (izvajalec2.lastName2 ? izvajalec2.lastName2 : '') for izvajalec2 in vm.organizers"></select>
+      <select id="izvajalec2" class="form-control input-sm" ng-model="vm.selected.organizer2" ng-options="(izvajalec2.lastName1 ? izvajalec2.lastName1 : '') + ' ' + (izvajalec2.lastName2 ? izvajalec2.lastName2 : '') + ' ' + (izvajalec2.firstName ? izvajalec2.firstName : '') for izvajalec2 in vm.organizers | orderBy:'lastName1'"></select>
       <label for="izvajalec3" class="col-sm-3 control-label" style="text-align:left;padding-left:0;">3. izvajalec</label>
-      <select id="izvajalec3" class="form-control input-sm" ng-model="vm.selected.organizer3" ng-options="(izvajalec3.firstName ? izvajalec3.firstName : '') + ' ' + (izvajalec3.lastName1 ? izvajalec3.lastName1 : '') + ' ' + (izvajalec3.lastName2 ? izvajalec3.lastName2 : '') for izvajalec3 in vm.organizers"></select>
+      <select id="izvajalec3" class="form-control input-sm" ng-model="vm.selected.organizer3" ng-options="(izvajalec3.lastName1 ? izvajalec3.lastName1 : '') + ' ' + (izvajalec3.lastName2 ? izvajalec3.lastName2 : '') + ' ' + (izvajalec3.firstName ? izvajalec3.firstName : '') for izvajalec3 in vm.organizers | orderBy:'lastName1'"></select>
   </form>
 </div>
 
