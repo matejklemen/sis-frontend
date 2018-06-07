@@ -8,7 +8,7 @@
       - order (column name and type to sort by, i.e. "column ASC, column2 DESC")
     */
     var searchStudents = function(searchObj) {
-      return $http.get(apiBaseRoute+'/api/students/search/' + searchObj.value + '?order=' + searchObj.order);
+      return $http.get(apiBaseRoute+'/api/students/search/' + (searchObj.value ? searchObj.value : "no_search") + '?order=' + searchObj.order + (searchObj.studyYear.name ? '&study_year='+searchObj.studyYear.id : '') + (searchObj.studyProgram.name ? '&study_program='+searchObj.studyProgram.id : '') + (searchObj.year ? '&year='+searchObj.year : ''));
     };
 
     /*

@@ -3,9 +3,26 @@
     <div class="col-md-3">
 
       <form class="form" ng-submit="vm.performSearch()">
-        <div class="form-group" ng-class="vm.searchIsEmpty ? 'has-error' : ''">
+        <div class="form-group">
           <label for="searchStudent" class="control-label">Iskanje študentov</label>
           <input type="text" class="form-control" id="searchStudent" placeholder="Iskanje..." ng-model="vm.search.value" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Študijsko leto zadnjega vpisa</label>
+          <select class="form-control" ng-model="vm.search.studyYear" ng-options="sy as sy.name for sy in vm.studyYears"></select>
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Študijski program zadnjega vpisa</label>
+          <select class="form-control" ng-model="vm.search.studyProgram" ng-options="sp as sp.name for sp in vm.studyPrograms"></select>
+        </div>
+        <div class="form-group">
+          <label for="year" class="control-label">Letnik zadnjega vpisa</label>
+          <select class="form-control input-sm" ng-model="vm.search.year">
+            <option value=""></option>
+            <option value="1">Prvi</option>
+            <option value="2">Drugi</option>
+            <option value="3">Tretji</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="orderStudent" class="control-label">Sortiranje</label>
@@ -18,7 +35,7 @@
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon" ng-class="vm.searchInProgress ? 'glyphicon-refresh' : 'glyphicon-search'"></span> Iskanje</button>
-          <p class="help-block">Iščete lahko po imenu in priimku ali po vpisni številki.<br />Za iskanje pritisnite na gumb ali tipko Enter.</p>
+          <p class="help-block">Iščete lahko po imenu in priimku ali po vpisni številki. Če pustite polje prazno vam vrne vse študente<br />Za iskanje pritisnite na gumb ali tipko Enter.</p>
         </div>
       </form>
 
@@ -26,7 +43,7 @@
     <div class="col-md-9">
       <h3>
         Rezultati iskanja
-        <export-buttons ng-show="vm.searchResult" exp-data="vm.searchResult" exp-head="['Seznam študentov']", exp-col-names="['#','Vpisna številka','Ime','Priimek']", exp-col-values="['registerNumber','name','surname']"></export-buttons>
+        <export-buttons ng-show="vm.searchResult" exp-data="vm.searchResult" exp-head="['Seznam študentov']", exp-col-names="['#','Vpisna številka','Ime','Priimek']", exp-col-values="['student.registerNumber','student.name','student.surname']"></export-buttons>
       </h3>
       <table ng-show="vm.searchResult" class="table table-striped table-hover">
         <thead>
